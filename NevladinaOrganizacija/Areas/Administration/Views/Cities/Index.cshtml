@@ -4,13 +4,17 @@
     ViewData["Title"] = "Cities";
 }
 <div class="">
-    <a href="Administration/Cities/Add" class="btn btn-info glyphicon glyphicon-plus">New City</a>
+    <div class="row">
+        <div class="col-lg-12">
+            <a href="/Administration/Cities/Add" class="btn btn-brand ">New City</a>
+        </div>
+    </div>
     @foreach (var item in Model)
     {
-    <div class="body-content table-bordered row">
-        <span class="text-info col-lg-10">@item.Id .@item.Name</span>
-        <span class="col-lg-1"><a href="/Administration/Cities/edit/@item.Id" class="btn btn-warning btn-sm">Edit</a></span>
-        <span class="col-lg-1"><a href="/Administration/Cities/Delete/@item.Id" class="btn btn-danger btn-sm">Delete</a></span>
-    </div>
+        <div class="body-content table-bordered row">
+            <span class="text-info col-lg-10">@item.Id .@item.Name</span>
+            <span class="col-lg-1"><a href="/Administration/Cities/edit/@item.Id" class="btn btn-warning btn-sm">Edit</a></span>
+            <span class="col-lg-1"><a href="/Administration/Cities/Delete/@item.Id" class="btn btn-danger btn-sm">Delete</a></span>
+        </div>
     }
 </div>

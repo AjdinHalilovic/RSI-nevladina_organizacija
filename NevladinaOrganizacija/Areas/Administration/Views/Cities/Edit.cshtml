@@ -1,0 +1,19 @@
+﻿@model City
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Edit City";
+}
+<form asp-action="Edit" asp-controller="Cities" asp-area="Administration" method="post">
+    <div class="form-group m-form__group row">
+        <div class="col-lg-12">
+            <label class="form-control-label">* Name</label>
+            <input type="text" asp-for="Name" class="form-control m-input" placeholder="Name">
+        </div>
+    </div>
+    <div class="form-group m-form__group row">
+        <div class="form-actions right">
+            <a href="Administration/Cities/Index" class="btn btn-secondary" data-dismiss="modal">Close</a>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+    </div>
+</form>

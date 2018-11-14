@@ -12,11 +12,11 @@ namespace NevladinaOrganizacija.Areas.Administration
     {
         [Key]
         public int Id { get; set; }
-        [Required(ErrorMessage="Country field is required!"),StringLenght(30,MinimumLenght = 2,ErrorMessage="Country name range is from 2 to 30 characters!")]
+        [Required(ErrorMessage="Country field is required!"),StringLength(30,MinimumLength = 2,ErrorMessage="Country name range is from 2 to 30 characters!")]
         public string Country { get; set; }
-        [Required(ErrorMessage="Name field is required!"),StringLenght(30)]
+        [Required(ErrorMessage="Name field is required!"), StringLength(30)]
         public string Name { get; set; }
-        [Required(ErrorMessage="Nationality field is required!"),StringLenght(40)]
+        [Required(ErrorMessage="Nationality field is required!"), StringLength(40)]
         public string Nationality { get; set; }
     }
 }

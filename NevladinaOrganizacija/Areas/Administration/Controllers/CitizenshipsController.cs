@@ -7,9 +7,9 @@ using NevladinaOrganizacija.Models.Context;
 
 namespace NevladinaOrganizacija.Areas.Administration.Controllers
 {
+    [Area("Administration")]
     public class CitizenshipController : Controller
     {
-        [Area("Administration")]
         private myContext _dbContext;
 
         public CitizenshipController(myContext dbContext)
@@ -30,7 +30,7 @@ namespace NevladinaOrganizacija.Areas.Administration.Controllers
             return View(citizenship);
         }
 
-        [HttpPost,ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken]
         public IActionResult Edit(Citizenship citizenship)
         {
             if (!ModelState.IsValid)
