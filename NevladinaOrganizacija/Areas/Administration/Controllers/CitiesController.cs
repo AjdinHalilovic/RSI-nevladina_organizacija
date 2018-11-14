@@ -60,7 +60,5 @@ namespace NevladinaOrganizacija.Areas.Administration.Controllers
             _myContext.SaveChanges();
             return RedirectToAction("Index");
         }
-
- 
     }
 }
