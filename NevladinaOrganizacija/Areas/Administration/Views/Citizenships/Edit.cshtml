@@ -1,10 +1,10 @@
-@model NevladinaOrganizacija.Areas.Administration.Models.Citizenship
+@model Citizenship
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Edit";
 }
 <h2>Edit</h2>
-@using(Html.BeginForm("Edit","Citizenship",FormMethod.Post))
+@using(Html.BeginForm("Edit","Citizenships",FormMethod.Post))
 {
     @Html.AntiForgeryToken();
     @Html.HiddenFor(item=>Model.Id)

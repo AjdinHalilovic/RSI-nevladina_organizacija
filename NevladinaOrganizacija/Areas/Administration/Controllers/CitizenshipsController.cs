@@ -8,11 +8,11 @@ using NevladinaOrganizacija.Models.Context;
 namespace NevladinaOrganizacija.Areas.Administration.Controllers
 {
     [Area("Administration")]
-    public class CitizenshipController : Controller
+    public class CitizenshipsController : Controller
     {
         private myContext _dbContext;
 
-        public CitizenshipController(myContext dbContext)
+        public CitizenshipsController(myContext dbContext)
         {
             _dbContext = dbContext;
         }
