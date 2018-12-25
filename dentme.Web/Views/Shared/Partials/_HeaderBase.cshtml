@@ -1,0 +1,13 @@
+﻿<!-- BEGIN: Header -->
+<header id="m_header" class="m-grid__item m-header " m-minimize-offset="200" m-minimize-mobile-offset="200">
+    <div class="m-container m-container--fluid m-container--full-height">
+        <div class="m-stack m-stack--ver m-stack--desktop">
+            @{ await Html.RenderPartialAsync("Partials/_HeaderBrand"); }
+            <div class="m-stack__item m-stack__item--fluid m-header-head" id="m_header_nav">
+                @{ await Html.RenderPartialAsync("Partials/_HeaderHorMenu"); }
+                @{ await Html.RenderPartialAsync("Partials/_HeaderTopbar"); }
+            </div>
+        </div>
+    </div>
+</header>
+<!-- END: Header -->

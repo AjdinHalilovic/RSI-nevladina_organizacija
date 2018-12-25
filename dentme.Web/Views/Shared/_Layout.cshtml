@@ -1,0 +1,180 @@
+﻿@inject Localizer Localizer
+<!DOCTYPE html>
+<html lang="en">
+<!-- begin::Head -->
+<head>
+    <meta charset="utf-8" />
+    <title>
+        @(string.IsNullOrEmpty(ViewBag.Title) ? Localizer.ApplicationName : ViewBag.Title)
+    </title>
+    <meta name="description" content="Latest updates and statistic charts">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+    <!--begin::Web font -->
+    @*<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>*@
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
+    <script>WebFont.load({ google: { "families": ["Poppins:300,400,500,600,700", "Roboto:300,400,500,600,700"] }, active: function () { sessionStorage.fonts = true; } });</script>
+    <!--end::Web font -->        
+    <!--begin::Base Styles -->                           
+    <link href="~/vendors/base/vendors.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="~/demo/default/base/style.bundle.min.css" rel="stylesheet" type="text/css" />
+    <!--<link href="~/demo/default/base/style.bundle.css" rel="stylesheet" type="text/css" />-->
+    <!--end::Base Styles -->
+    <link rel="shortcut icon" href="~/demo/default/media/img/logo/favicon.ico" />
+    <link href="~/app/css/custom.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.min.css">
+    <style>
+        .m-topbar .m-topbar__nav.m-nav > .m-nav__item > .m-nav__link .m-nav__link-icon > i:before {
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(25%, #36b1a5), color-stop(50%, #3bbf9d), color-stop(75%, #36b1a5), to(green));
+            background: linear-gradient(180deg, #36b1a5 25%, #3bbf9d 50%, #36b1a5 75%, #3bbf9d 100%);
+            background-clip: text;
+            text-fill-color: transparent;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<!-- end::Head -->        <!-- end::Body -->
+
+<body class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-light m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
+    <!-- begin:: Page -->
+    <div class="m-grid m-grid--hor m-grid--root m-page">
+        @{ await Html.RenderPartialAsync("Partials/_HeaderBase"); }
+        <!-- begin::Body -->
+        <div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body">
+            @{ await Html.RenderPartialAsync("Partials/_AsideLeft"); }
+            <div class="m-grid__item m-grid__item--fluid m-wrapper">
+                @{ await Html.RenderPartialAsync("Partials/_Subheader"); }
+                <div id="main-page" class="m-content">
+                    <span id="m_js__notification" style="display: none;">@((TempData["jsNotifications"] as JsonResult)?.Value)</span>
+                    
+                    @RenderBody()
+
+                    <!-- begin: Basic modal -->
+                    <div id="modal-container" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="Basic modal" style="display: none;" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close-modal" style="display: none;"></button>
+                            <div class="modal-content" id="update-modal"></div>
+                        </div>
+                    </div>
+                    <!-- end: Basic modal -->
+                    <!-- begin: Large modal -->
+                    <div id="modal-container-lg" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="Large modal" style="display: none;" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close-modal-lg" style="display: none;"></button>
+                            <div class="modal-content modal-content-lg" id="update-modal-lg"></div>
+                        </div>
+                    </div>
+                    <!-- end: Large modal-->
+                </div>
+            </div>
+        </div>
+        @{ await Html.RenderPartialAsync("_DateTimePickerLayout"); }
+        <span id="sweetAlertDeleted" hidden>@Localizer.ThisRecordWillBeDeleted</span>
+        <span id="sweetAlertDeactivatedLicense" hidden>@Localizer.SweetAlertDeactivatePermanentLicense</span>
+        <script>
+        var SweetAlert2Delete = {
+            init: function () {
+                $("body").on("click", "a[data-behavior='delete']", function (e) {
+                    e.preventDefault()
+                    var target = e.target;
+                    swal({
+                        title: "@Localizer.AreYouSure",
+                        text: $("#sweetAlertDeleted").text(),
+                        type: "warning",
+                        showCancelButton: !0,
+                        confirmButtonText: "@Localizer.YesDeleteIt",
+                        cancelButtonText: "@Localizer.NoCancel",
+                        reverseButtons: !0
+                    }).then(function (e) {
+                        e.value ? $(function () {
+                            $.ajax({
+                                url: $(target.parentElement).attr("href"),
+                                dataType: "JSON",
+                                method: "GET",
+                                success: function (data) {
+                                    NotificationHandler(data.value);
+                                    if (JSON.parse(data.value).Type != @Convert.ToInt32(NotificationTypes.Error) && JSON.parse(data.value).Type != @Convert.ToInt32(NotificationTypes.Warning))
+                                        $(target).parents("tr").remove();
+                                }
+                            });
+                        })
+                            : "cancel" === e.dismiss;
+                    })
+                });
+            }
+        }
+            SweetAlert2Delete.init();
+            var SweetAlert2DeactiveteLicense = {
+            init: function () {
+                $("body").on("click", "#DeactivateLicense", function (e) {
+                    e.preventDefault()
+                    var target = e.target;
+                    swal({
+                        title: "@Localizer.AreYouSure",
+                        text: $("#sweetAlertDeactivatedLicense").text(),
+                        type: "warning",
+                        showCancelButton: !0,
+                        confirmButtonText: "@Localizer.Deactivate",
+                        cancelButtonText: "@Localizer.NoCancel",
+                        reverseButtons: !0
+                    }).then(function (e) {
+                        e.value ? $(function () {
+                            $.ajax({
+                                url: $(target).attr("href"),
+                                dataType: "JSON",
+                                method: "GET",
+                                success: function (data) {
+                                    NotificationHandler(data.value);
+                                    $("#DeactivateLicense").attr('hidden','');
+                                    $("#inactiveLicence").text("@Localizer.Inactive.ToUpper()");
+                                    $("#prolongLicenseBtn").attr('hidden', '');
+                                    $("#m_license_index__datatable").mDatatable().destroy();
+                                    LicensesDraw();
+                                }
+                            });
+                        })
+                            : "cancel" === e.dismiss;
+                    })
+                });
+            }
+        }
+            SweetAlert2DeactiveteLicense.init();
+            $("body").on("click", ".dm--custom-radio-click", function (e) {
+                $(this).find("input").click();
+            });
+        </script>
+        <!-- end:: Body -->
+        @{ await Html.RenderPartialAsync("Partials/_Footer"); }
+    </div>
+    <!-- end:: Page -->
+    @{ await Html.RenderPartialAsync("Partials/_QuickSidebar"); }
+    @{ await Html.RenderPartialAsync("Partials/_ScrollTop"); }
+    @{ await Html.RenderPartialAsync("Partials/_Tooltips"); }
+    <!--begin::Base Scripts -->
+    <script src="~/vendors/base/vendors.bundle.js" type="text/javascript"></script>
+    <script src="~/demo/default/base/scripts.bundle.js" type="text/javascript"></script>
+    @*@{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }*@
+    <script src="~/demo/default/custom/crud/forms/validation/form-controls.js" type="text/javascript"></script>
+    <script src="~/demo/default/custom/crud/forms/widgets/bootstrap-markdown.js" type="text/javascript"></script>
+    <script src="~/demo/default/custom/crud/forms/widgets/bootstrap-select.js" type="text/javascript"></script>
+    <script src="~/app/js/jquery.unobtrusive-ajax.min.js" asp-append-version="true"></script>
+    <script src="~/app/js/site.js" asp-append-version="true"></script>
+    <!--end::Base Scripts -->
+    <!--begin::Page Vendors -->
+    <script src="~/demo/default/custom/components/base/toastr.js" type="text/javascript"></script>
+    <script src="~/app/js/notification.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.min.js"></script>
+    <!--end::Page Vendors -->
+    <!--begin::Page Snippets -->
+    <script src="~/app/js/dashboard.js" type="text/javascript"></script>
+    <!--end::Page Snippets -->
+    <!--begin::Page Resources -->
+    @RenderSection("scripts", required: false)
+    <!--end::Page Resources -->
+
+</body>
+<!-- end::Body -->
+</html>
