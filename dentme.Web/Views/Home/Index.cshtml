@@ -1,0 +1,12 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    var loggedUser = Context.GetLoggedUserData();
+}
+
+<h2 class="text-center">
+    Welcome, @loggedUser.PersonUser.FirstAndLastName!<br /><br />
+</h2>
+
+<script>
+    $(function () { NotificationHandler(); });
+</script>

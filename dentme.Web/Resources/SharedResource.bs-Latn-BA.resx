@@ -1,0 +1,2007 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ApplicationName" xml:space="preserve">
+    <value>nevladinaOrg</value>
+  </data>
+  <data name="ForgotPassword" xml:space="preserve">
+    <value>Zaboravili ste lozinku?</value>
+  </data>
+  <data name="HomePage" xml:space="preserve">
+    <value>Početna</value>
+  </data>
+  <data name="IncorrectUsernameOrPassword" xml:space="preserve">
+    <value>Pogrešno korisničko ime i/ili lozinka.</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Prijava</value>
+  </data>
+  <data name="LogOutSuccess" xml:space="preserve">
+    <value>Uspješno ste se odjavili.</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Lozinka</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Zapamti me</value>
+  </data>
+  <data name="SignIn" xml:space="preserve">
+    <value>Prijavite se</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Korisničko ime</value>
+  </data>
+  <data name="TimeIsAlreadyBooked" xml:space="preserve">
+    <value>Termin je zauzet</value>
+  </data>
+  <data name="PasswordIsRequired" xml:space="preserve">
+    <value>Lozinka je obavezna.</value>
+  </data>
+  <data name="UsernameIsRequired" xml:space="preserve">
+    <value>Korisničko ime je obavezno.</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Odustani</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+  <data name="ForgotPasswordShortInfo" xml:space="preserve">
+    <value>Unesite Vašu e-mail adresu da resetujete lozinku:</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>Potvrdi</value>
+  </data>
+  <data name="GetAnAccount" xml:space="preserve">
+    <value>Napravite svoj račun</value>
+  </data>
+  <data name="LoginDescription" xml:space="preserve">
+    <value>Rastuća zajednica posvećenih ljudi</value>
+  </data>
+  <data name="LoginTitle" xml:space="preserve">
+    <value>PRIDRUŽITE SE NAŠOJ nevladinaOrg ZAJEDNICI. NAPRAVITE BESPLATAN KORISNIČKI RAČUN</value>
+  </data>
+  <data name="SignUp" xml:space="preserve">
+    <value>Registracija</value>
+  </data>
+  <data name="SignUpShortInfo" xml:space="preserve">
+    <value>Unesite Vaše podatke za registraciju:</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Greška</value>
+  </data>
+  <data name="NewCity" xml:space="preserve">
+    <value>Dodaj novi grad</value>
+  </data>
+  <data name="ChooseCountry" xml:space="preserve">
+    <value>Odaberite državu</value>
+  </data>
+  <data name="ErrAddRegion" xml:space="preserve">
+    <value>Region već postoji ili je došlo do greške</value>
+  </data>
+  <data name="SuccessAddRegion" xml:space="preserve">
+    <value>Uspješno dodan novi region</value>
+  </data>
+  <data name="ErrUpdateRegion" xml:space="preserve">
+    <value>Došlo je do greške pri modifikovanju regiona</value>
+  </data>
+  <data name="SuccessUpdateRegion" xml:space="preserve">
+    <value>Region je uspješno modifikovan</value>
+  </data>
+  <data name="Action" xml:space="preserve">
+    <value>Akcija</value>
+  </data>
+  <data name="AddNewRegion" xml:space="preserve">
+    <value>Dodajte novi region</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Izađi</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>Država</value>
+  </data>
+  <data name="EditRegion" xml:space="preserve">
+    <value>Izmjeni region</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Naziv</value>
+  </data>
+  <data name="NewRegion" xml:space="preserve">
+    <value>Novi region</value>
+  </data>
+  <data name="RegionID" xml:space="preserve">
+    <value>Region ID</value>
+  </data>
+  <data name="Regions" xml:space="preserve">
+    <value>Regioni</value>
+  </data>
+  <data name="SaveChanges" xml:space="preserve">
+    <value>Spasi izmjene</value>
+  </data>
+  <data name="AddCountry" xml:space="preserve">
+    <value>Dodaj državu</value>
+  </data>
+  <data name="Cities" xml:space="preserve">
+    <value>Gradovi</value>
+  </data>
+  <data name="Countries" xml:space="preserve">
+    <value>Države</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Uredi</value>
+  </data>
+  <data name="EditCountry" xml:space="preserve">
+    <value>Uredi državu</value>
+  </data>
+  <data name="NameOfCountry" xml:space="preserve">
+    <value>Naziv države</value>
+  </data>
+  <data name="NewCountry" xml:space="preserve">
+    <value>Nova država</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Sačuvaj</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Postavke</value>
+  </data>
+  <data name="Citizenship" xml:space="preserve">
+    <value>Državljanstvo</value>
+  </data>
+  <data name="Nationalitiy" xml:space="preserve">
+    <value>Nacionalnost</value>
+  </data>
+  <data name="AddCitizenship" xml:space="preserve">
+    <value>Dodaj državljanstvo</value>
+  </data>
+  <data name="AddNationality" xml:space="preserve">
+    <value>Dodaj nacionalnost</value>
+  </data>
+  <data name="EditCitizenship" xml:space="preserve">
+    <value>Uredi državljanstvo</value>
+  </data>
+  <data name="EditNationality" xml:space="preserve">
+    <value>Uredi nacionalnost</value>
+  </data>
+  <data name="NameOfCitizenship" xml:space="preserve">
+    <value>Naziv državljanstva</value>
+  </data>
+  <data name="NameOfNationality" xml:space="preserve">
+    <value>Naziv nacionalnosti</value>
+  </data>
+  <data name="NewCitizenship" xml:space="preserve">
+    <value>Novo državljanstvo</value>
+  </data>
+  <data name="NewNationality" xml:space="preserve">
+    <value>Nova nacionalnost</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>Grad</value>
+  </data>
+  <data name="Region" xml:space="preserve">
+    <value>Region</value>
+  </data>
+  <data name="PostalCode" xml:space="preserve">
+    <value>Poštanski broj</value>
+  </data>
+  <data name="GeneralSettings" xml:space="preserve">
+    <value>Opšte postavke</value>
+  </data>
+  <data name="RegionalSettings" xml:space="preserve">
+    <value>Regionalne postavke</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Obriši</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Ukloni</value>
+  </data>
+  <data name="DisplayingNumberOfRecords" xml:space="preserve">
+    <value>Prikazujem {{start}} - {{end}} od {{total}} zapisa</value>
+  </data>
+  <data name="First" xml:space="preserve">
+    <value>Prvi</value>
+  </data>
+  <data name="Last" xml:space="preserve">
+    <value>Posljednji</value>
+  </data>
+  <data name="LoadingDots" xml:space="preserve">
+    <value>Učitavanje...</value>
+  </data>
+  <data name="MorePages" xml:space="preserve">
+    <value>Više stranica</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Sljedeći</value>
+  </data>
+  <data name="NoRecordsFound" xml:space="preserve">
+    <value>Nema zapisa.</value>
+  </data>
+  <data name="PageNumber" xml:space="preserve">
+    <value>Broj stranice</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>Prethodni</value>
+  </data>
+  <data name="SelectPageSize" xml:space="preserve">
+    <value>Odaberite veličinu stranice</value>
+  </data>
+  <data name="SelectCity" xml:space="preserve">
+    <value>Odaberite grad</value>
+  </data>
+  <data name="SelectCountry" xml:space="preserve">
+    <value>Odaberite državu</value>
+  </data>
+  <data name="SelectRegion" xml:space="preserve">
+    <value>Odaberite regiju</value>
+  </data>
+  <data name="AddCity" xml:space="preserve">
+    <value>Dodaj grad</value>
+  </data>
+  <data name="SaveAndClose" xml:space="preserve">
+    <value>Sačuvaj &amp; Zatvori</value>
+  </data>
+  <data name="SaveAndDuplicate" xml:space="preserve">
+    <value>Sačuvaj &amp; Dupliciraj</value>
+  </data>
+  <data name="SaveAndNew" xml:space="preserve">
+    <value>Sačuvaj &amp; Napravi novi</value>
+  </data>
+  <data name="SearchDots" xml:space="preserve">
+    <value>Pretraži...</value>
+  </data>
+  <data name="SuccessfullySavedAndRecordName" xml:space="preserve">
+    <value>'{0}' je &lt;strong&gt;uspješno spremljen&lt;/strong&gt;.</value>
+  </data>
+  <data name="RecordAlreadyExists" xml:space="preserve">
+    <value>Zapis već postoji.</value>
+  </data>
+  <data name="AddInstitutionType" xml:space="preserve">
+    <value>Dodaj tip institucije</value>
+  </data>
+  <data name="EditInstitutionType" xml:space="preserve">
+    <value>Uredi tip institucije</value>
+  </data>
+  <data name="InstitutionType" xml:space="preserve">
+    <value>Tip institucije</value>
+  </data>
+  <data name="InstitutionTypes" xml:space="preserve">
+    <value>Tipovi institucija</value>
+  </data>
+  <data name="NameOfInstitutionType" xml:space="preserve">
+    <value>Naziv tipa institucije</value>
+  </data>
+  <data name="NewInstitutionType" xml:space="preserve">
+    <value>Novi tip institucije</value>
+  </data>
+  <data name="ErrorMessageCountryReq" xml:space="preserve">
+    <value>Država je obavezna.</value>
+  </data>
+  <data name="ErrorMessageNameLen100" xml:space="preserve">
+    <value>Maksimalna dužina naziva je 100 karaktera.</value>
+  </data>
+  <data name="ErrorMessageNameReq" xml:space="preserve">
+    <value>Naziv je obavezan.</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Početna</value>
+  </data>
+  <data name="Saved" xml:space="preserve">
+    <value>Spremljeno!</value>
+  </data>
+  <data name="AcademicDegrees" xml:space="preserve">
+    <value>Akademska zvanja</value>
+  </data>
+  <data name="AcademicTitles" xml:space="preserve">
+    <value>Akademske titule</value>
+  </data>
+  <data name="AddAcademicDegrees" xml:space="preserve">
+    <value>Dodaj akademsko zvanje</value>
+  </data>
+  <data name="AddOrganization" xml:space="preserve">
+    <value>Dodaj organizaciju</value>
+  </data>
+  <data name="ChooseCity" xml:space="preserve">
+    <value>Odaberite grad</value>
+  </data>
+  <data name="ChooseInstitution" xml:space="preserve">
+    <value>Odaberite instituciju</value>
+  </data>
+  <data name="ChooseOrganization" xml:space="preserve">
+    <value>Odaberite organizaciju</value>
+  </data>
+  <data name="ChooseOrganizationType" xml:space="preserve">
+    <value>Odaberite tip organizacije</value>
+  </data>
+  <data name="ChooseRegion" xml:space="preserve">
+    <value>Odaberite region</value>
+  </data>
+  <data name="Institution" xml:space="preserve">
+    <value>Institucija</value>
+  </data>
+  <data name="NameOfOrganization" xml:space="preserve">
+    <value>Naziv organizacije</value>
+  </data>
+  <data name="Organizations" xml:space="preserve">
+    <value>Organizacije</value>
+  </data>
+  <data name="ParentOrganization" xml:space="preserve">
+    <value>Nadređena organizacija</value>
+  </data>
+  <data name="Place" xml:space="preserve">
+    <value>Mjesto</value>
+  </data>
+  <data name="AdditionalInformation" xml:space="preserve">
+    <value>Dodatne informacije</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Adresa</value>
+  </data>
+  <data name="NewOrganization" xml:space="preserve">
+    <value>Nova organizacija</value>
+  </data>
+  <data name="SelectInstitutionType" xml:space="preserve">
+    <value>Odaberite tip institucije</value>
+  </data>
+  <data name="SuccessfullyRemovedName" xml:space="preserve">
+    <value>'{0}' je &lt;strong&gt;uspješno izbrisan&lt;/strong&gt;.</value>
+  </data>
+  <data name="Nationalities" xml:space="preserve">
+    <value>Nacionalnosti</value>
+  </data>
+  <data name="Citizenships" xml:space="preserve">
+    <value>Državljanstva</value>
+  </data>
+  <data name="ErrorMessageAddressLen100" xml:space="preserve">
+    <value>Maksimalna dužina adrese je 100 karaktera</value>
+  </data>
+  <data name="ErrorMessageAddressReq" xml:space="preserve">
+    <value>Adresa je obavezna.</value>
+  </data>
+  <data name="ErrorMessageCityReq" xml:space="preserve">
+    <value>Grad je obavezan.</value>
+  </data>
+  <data name="ErrorMessageContactPhoneLen20" xml:space="preserve">
+    <value>Maksimalna dužna kontakta je 20 karaktera.</value>
+  </data>
+  <data name="ErrorMessageContactPhoneReq" xml:space="preserve">
+    <value>Kontakt je obavezan.</value>
+  </data>
+  <data name="ErrorMessageEmailLen20" xml:space="preserve">
+    <value>Maksimalna dužina email-a je 20 karaktera.</value>
+  </data>
+  <data name="ErrorMessageEmailReq" xml:space="preserve">
+    <value>Email je obavezan.</value>
+  </data>
+  <data name="ErrorMessageIntitutionTypeReq" xml:space="preserve">
+    <value>Tip institucije je obavezan.</value>
+  </data>
+  <data name="Institutions" xml:space="preserve">
+    <value>Institucije</value>
+  </data>
+  <data name="AddInstitution" xml:space="preserve">
+    <value>Dodaj instituciju</value>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>Aktivno</value>
+  </data>
+  <data name="AdditionalInfo" xml:space="preserve">
+    <value>Dodatne informacije</value>
+  </data>
+  <data name="ContactPhone" xml:space="preserve">
+    <value>Kontakt telefon</value>
+  </data>
+  <data name="ParentInstitution" xml:space="preserve">
+    <value>Nadređena institucija</value>
+  </data>
+  <data name="SocialURL" xml:space="preserve">
+    <value>Društvena mreža URL</value>
+  </data>
+  <data name="WebsiteURL" xml:space="preserve">
+    <value>Web stranica URL</value>
+  </data>
+  <data name="EditInstitution" xml:space="preserve">
+    <value>Uredi instituciju</value>
+  </data>
+  <data name="AddRegion" xml:space="preserve">
+    <value>Dodaj region</value>
+  </data>
+  <data name="AcademicDegree" xml:space="preserve">
+    <value>Akademska diploma</value>
+  </data>
+  <data name="AddAcademicTitle" xml:space="preserve">
+    <value>Dodaj akademsku titulu</value>
+  </data>
+  <data name="EditOrganizationType" xml:space="preserve">
+    <value>Uredi organizacijski tip</value>
+  </data>
+  <data name="AddOrganizations" xml:space="preserve">
+    <value>Dodaj organizaciju</value>
+  </data>
+  <data name="Reload" xml:space="preserve">
+    <value>Osvježi</value>
+  </data>
+  <data name="AddBloodType" xml:space="preserve">
+    <value>Dodaj krvnu grupu</value>
+  </data>
+  <data name="BloodType" xml:space="preserve">
+    <value>Krvna grupa</value>
+  </data>
+  <data name="BloodTypes" xml:space="preserve">
+    <value>Krvne grupe</value>
+  </data>
+  <data name="EditBloodType" xml:space="preserve">
+    <value>Uredi krvnu grupu</value>
+  </data>
+  <data name="ErrorMessageRhReq" xml:space="preserve">
+    <value>Rh je obavezan.</value>
+  </data>
+  <data name="Rh" xml:space="preserve">
+    <value>Rh</value>
+  </data>
+  <data name="Removed" xml:space="preserve">
+    <value>Izbrisano!</value>
+  </data>
+  <data name="NotSuccessfullyRemovedName" xml:space="preserve">
+    <value>'{0}' nije &lt;strong&gt;uspješno izbrisan&lt;/strong&gt;.</value>
+  </data>
+  <data name="ActivityCode" xml:space="preserve">
+    <value>Šifra djelatnosti</value>
+  </data>
+  <data name="AddTaxpayer" xml:space="preserve">
+    <value>Dodaj poreskog obveznika</value>
+  </data>
+  <data name="EditTaxpayer" xml:space="preserve">
+    <value>Uredi poreskog obveznika</value>
+  </data>
+  <data name="ErrorMessageActivityCodeLen100" xml:space="preserve">
+    <value>Maksimalna dužina šifre djelatnosti je 100 karaktera.</value>
+  </data>
+  <data name="ErrorMessageActivityCodeReq" xml:space="preserve">
+    <value>Šifra djelatnosti je obavezna</value>
+  </data>
+  <data name="ErrorMessageRegistrationNumberLen100" xml:space="preserve">
+    <value>Maksimalna dužina registracijskog broja je 100 karaktera.</value>
+  </data>
+  <data name="ErrorMessageRegistrationNumberReq" xml:space="preserve">
+    <value>Registracijski broj je obavezan.</value>
+  </data>
+  <data name="RegistrationNumber" xml:space="preserve">
+    <value>Registracijski broj</value>
+  </data>
+  <data name="Taxpayer" xml:space="preserve">
+    <value>Poreski obveznik</value>
+  </data>
+  <data name="Taxpayers" xml:space="preserve">
+    <value>Poreski obveznici</value>
+  </data>
+  <data name="AnErrorOccurredFriendly" xml:space="preserve">
+    <value>Žao nam je, nešto je krenulo po zlu. Radimo na tome da ovo popravimo što prije.</value>
+  </data>
+  <data name="ErrorFriendly" xml:space="preserve">
+    <value>Greška ! :(</value>
+  </data>
+  <data name="AreYouSure" xml:space="preserve">
+    <value>Da li ste sigurni?</value>
+  </data>
+  <data name="NoCancel" xml:space="preserve">
+    <value>Ne, odustani.</value>
+  </data>
+  <data name="ThisRecordWillBeDeleted" xml:space="preserve">
+    <value>Ovaj zapis će biti izbrisan.</value>
+  </data>
+  <data name="YesDeleteIt" xml:space="preserve">
+    <value>Da, obriši.</value>
+  </data>
+  <data name="Appointments" xml:space="preserve">
+    <value>Termini</value>
+  </data>
+  <data name="DeleteAll" xml:space="preserve">
+    <value>Obriši sve</value>
+  </data>
+  <data name="Roles" xml:space="preserve">
+    <value>Uloge</value>
+  </data>
+  <data name="ErrorMessageActiveReq" xml:space="preserve">
+    <value>Aktivan je obavezno polje.</value>
+  </data>
+  <data name="ErrorMessageControllerNameLen100" xml:space="preserve">
+    <value>Maksimalna duzina naziva kontrolera je 100 karaktera.</value>
+  </data>
+  <data name="ErrorMessageControllerNameReq" xml:space="preserve">
+    <value>Naziv kontrolera je obavezan.</value>
+  </data>
+  <data name="ErrorMessageFunctionNumberRange1_100" xml:space="preserve">
+    <value>Broj funkcije mora biti u rasponu od 1 do 100.</value>
+  </data>
+  <data name="ErrorMessageFunctionNumberReq" xml:space="preserve">
+    <value>Broj funkcije je obavezan.</value>
+  </data>
+  <data name="Desription" xml:space="preserve">
+    <value>Opis</value>
+  </data>
+  <data name="AddRole" xml:space="preserve">
+    <value>Dodaj ulogu</value>
+  </data>
+  <data name="Functionalities" xml:space="preserve">
+    <value>Funkcionalnosti</value>
+  </data>
+  <data name="EditRole" xml:space="preserve">
+    <value>Uredi ulogu</value>
+  </data>
+  <data name="ErrorMessageIconPathReq" xml:space="preserve">
+    <value>Ikona je obavezna.</value>
+  </data>
+  <data name="ErrorMessageShortNameLen5" xml:space="preserve">
+    <value>Maksimalna dužina skraćenice je 5 karaktera.</value>
+  </data>
+  <data name="ErrorMessageShortNameReq" xml:space="preserve">
+    <value>Skraćenica je obavezna.</value>
+  </data>
+  <data name="AddLanguage" xml:space="preserve">
+    <value>Dodaj jezik</value>
+  </data>
+  <data name="EditLanguage" xml:space="preserve">
+    <value>Uredi jezik</value>
+  </data>
+  <data name="Icon" xml:space="preserve">
+    <value>Ikona</value>
+  </data>
+  <data name="Languages" xml:space="preserve">
+    <value>Jezici</value>
+  </data>
+  <data name="ShortName" xml:space="preserve">
+    <value>Skraćenica</value>
+  </data>
+  <data name="AddAppointment" xml:space="preserve">
+    <value>Zakaži termin</value>
+  </data>
+  <data name="MaritalStatus" xml:space="preserve">
+    <value>Bračni status</value>
+  </data>
+  <data name="AddMaritalStatus" xml:space="preserve">
+    <value>Dodaj bračni status</value>
+  </data>
+  <data name="EditMaritalStatus" xml:space="preserve">
+    <value>Uredi bračni status</value>
+  </data>
+  <data name="MaritalStatuses" xml:space="preserve">
+    <value>Bračni statusi</value>
+  </data>
+  <data name="AddContactTypes" xml:space="preserve">
+    <value>Dodaj tip kontakta</value>
+  </data>
+  <data name="ContactType" xml:space="preserve">
+    <value>Tip kontakta</value>
+  </data>
+  <data name="ContactTypes" xml:space="preserve">
+    <value>Tipovi kontakta</value>
+  </data>
+  <data name="EditContactType" xml:space="preserve">
+    <value>Uredi tip kontakta</value>
+  </data>
+  <data name="ErrorMessageOrganizationTypeReq" xml:space="preserve">
+    <value>Tip organizacije je obavezan</value>
+  </data>
+  <data name="AnnouncementType" xml:space="preserve">
+    <value>Tip najave</value>
+  </data>
+  <data name="AddAnnouncementType" xml:space="preserve">
+    <value>Dodaj tip najave</value>
+  </data>
+  <data name="AddAnnouncementTypes" xml:space="preserve">
+    <value>Dodaj tip najave</value>
+  </data>
+  <data name="EditAnnouncementTypes" xml:space="preserve">
+    <value>Uredi tip najave</value>
+  </data>
+  <data name="ErrorMessageTypeReq" xml:space="preserve">
+    <value>Polje tip je potrebno unijeti</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Tip</value>
+  </data>
+  <data name="AddTreatment" xml:space="preserve">
+    <value>Dodaj tretman</value>
+  </data>
+  <data name="EditTreatment" xml:space="preserve">
+    <value>Uredi tretman</value>
+  </data>
+  <data name="EditTreatments" xml:space="preserve">
+    <value>UrediTretmane</value>
+  </data>
+  <data name="Treatment" xml:space="preserve">
+    <value>Tretman</value>
+  </data>
+  <data name="Treatments" xml:space="preserve">
+    <value>Tretmani</value>
+  </data>
+  <data name="AddAppointmentStatus" xml:space="preserve">
+    <value>Dodaj status termina</value>
+  </data>
+  <data name="AddBugType" xml:space="preserve">
+    <value>Dodaj tip greške</value>
+  </data>
+  <data name="AppointmentStatuses" xml:space="preserve">
+    <value>Status termina</value>
+  </data>
+  <data name="BugTypes" xml:space="preserve">
+    <value>Tip greške</value>
+  </data>
+  <data name="EditAppointmentStatus" xml:space="preserve">
+    <value>Uredi status termina</value>
+  </data>
+  <data name="EditBugType" xml:space="preserve">
+    <value>Uredi tip greške</value>
+  </data>
+  <data name="BugReports" xml:space="preserve">
+    <value>Prijava problema u softveru</value>
+  </data>
+  <data name="FeatureRecommendations" xml:space="preserve">
+    <value>Prijedlog novih funkcionalnosti</value>
+  </data>
+  <data name="Issues" xml:space="preserve">
+    <value>Problemi</value>
+  </data>
+  <data name="Bugs" xml:space="preserve">
+    <value>Greške</value>
+  </data>
+  <data name="ErrorMessageDescriptionReq" xml:space="preserve">
+    <value>Potrebno je unijeti opis</value>
+  </data>
+  <data name="ErrorMessageImageReq" xml:space="preserve">
+    <value>Potrebno je unijeti sliku</value>
+  </data>
+  <data name="ErrorMessageTitleLen100" xml:space="preserve">
+    <value>Dužina naslova mora biti manja od 100</value>
+  </data>
+  <data name="ErrorMessageTitleReq" xml:space="preserve">
+    <value>Naslov je obavezan.</value>
+  </data>
+  <data name="Bug" xml:space="preserve">
+    <value>Greška</value>
+  </data>
+  <data name="EnterDescription" xml:space="preserve">
+    <value>Unesite opis greške koju ste uočili</value>
+  </data>
+  <data name="GetNotifiedEmail" xml:space="preserve">
+    <value>Obavjesti me putem emaila kada problem bude riješen</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Naslov</value>
+  </data>
+  <data name="EditBug" xml:space="preserve">
+    <value>Uredi grešku</value>
+  </data>
+  <data name="BugStatus" xml:space="preserve">
+    <value>Status greške</value>
+  </data>
+  <data name="BugType" xml:space="preserve">
+    <value>Tip greške</value>
+  </data>
+  <data name="SelectBugStatus" xml:space="preserve">
+    <value>Odaberite status greške</value>
+  </data>
+  <data name="SelectBugType" xml:space="preserve">
+    <value>Odaberite tip greške</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Opis</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Detalji</value>
+  </data>
+  <data name="DateTimeCreated" xml:space="preserve">
+    <value>Datum kreiranja</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>Korisnik</value>
+  </data>
+  <data name="Features" xml:space="preserve">
+    <value>Funkcionalnosti</value>
+  </data>
+  <data name="SelectStatus" xml:space="preserve">
+    <value>Odaberite status</value>
+  </data>
+  <data name="Pending" xml:space="preserve">
+    <value>Na čekanju</value>
+  </data>
+  <data name="UploadTypeFileNotSupported" xml:space="preserve">
+    <value>'{0}' tip fajla nije moguce dodati.</value>
+  </data>
+  <data name="AddAnnouncement" xml:space="preserve">
+    <value>Dodaj obavijest</value>
+  </data>
+  <data name="Announcements" xml:space="preserve">
+    <value>Obavijesti</value>
+  </data>
+  <data name="AnnouncementsFor" xml:space="preserve">
+    <value>Obavijest za</value>
+  </data>
+  <data name="Content" xml:space="preserve">
+    <value>Sadržaj</value>
+  </data>
+  <data name="Documents" xml:space="preserve">
+    <value>Dokumenti</value>
+  </data>
+  <data name="ErrorMessageAnnouncementTypeReq" xml:space="preserve">
+    <value>Tip obavijesti je obavezan.</value>
+  </data>
+  <data name="ErrorMessageContentReq" xml:space="preserve">
+    <value>Sadržaj je obavezan.</value>
+  </data>
+  <data name="ErrorMessageSubtitleLen80" xml:space="preserve">
+    <value>Maksimalna dužina podnaslova je 80 karaktera.</value>
+  </data>
+  <data name="ErrorMessageTitleLen80" xml:space="preserve">
+    <value>Maksimalna dužina naslova je 80 karaktera.</value>
+  </data>
+  <data name="Images" xml:space="preserve">
+    <value>Slike</value>
+  </data>
+  <data name="Posted" xml:space="preserve">
+    <value>Objavljeno</value>
+  </data>
+  <data name="SelectAnnouncementTypes" xml:space="preserve">
+    <value>Odaberi tip obavijesti</value>
+  </data>
+  <data name="Subtitle" xml:space="preserve">
+    <value>Podnaslov</value>
+  </data>
+  <data name="WhoWillSeeAnnouncement" xml:space="preserve">
+    <value>Ko će vidjeti obavijest?</value>
+  </data>
+  <data name="EditAnnouncement" xml:space="preserve">
+    <value>Uredi obavijest</value>
+  </data>
+  <data name="Files" xml:space="preserve">
+    <value>Fajlovi</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Preuzimanje</value>
+  </data>
+  <data name="DownloadAll" xml:space="preserve">
+    <value>Preuzmi sve</value>
+  </data>
+  <data name="DropzoneMsgDesc" xml:space="preserve">
+    <value>Samo slike i dokumenti su dozvoljeni za prijenos.</value>
+  </data>
+  <data name="DropzoneMsgTitle" xml:space="preserve">
+    <value>Prevucite fajlove ovdje ili kliknite za prijenos.</value>
+  </data>
+  <data name="ErrorMessageCheckSendToReq" xml:space="preserve">
+    <value>Izaberite ko će vidjeti obavijest.</value>
+  </data>
+  <data name="SendOnlyToCertainOrganizations" xml:space="preserve">
+    <value>Pošalji samo određenim organizacijama.</value>
+  </data>
+  <data name="SendToAllOrganizations" xml:space="preserve">
+    <value>Pošalji svim organizacijama.</value>
+  </data>
+  <data name="NotFoundAnyInstitutionAsRecipient" xml:space="preserve">
+    <value>Nije pronađena niti jedna institucija kao primalac obavijesti.</value>
+  </data>
+  <data name="Events" xml:space="preserve">
+    <value>Događaji</value>
+  </data>
+  <data name="ErrorMessageFunctionalityReq" xml:space="preserve">
+    <value>Rola mora imati najmanje 1 funkcionalnost.</value>
+  </data>
+  <data name="AddEvent" xml:space="preserve">
+    <value>Dodaj događaj</value>
+  </data>
+  <data name="PaymentsRegistrations" xml:space="preserve">
+    <value>Uplate / registracije</value>
+  </data>
+  <data name="Duration" xml:space="preserve">
+    <value>Trajanje</value>
+  </data>
+  <data name="EventItems" xml:space="preserve">
+    <value>Stavke događaja</value>
+  </data>
+  <data name="Registrations" xml:space="preserve">
+    <value>Registracije</value>
+  </data>
+  <data name="Sponsors" xml:space="preserve">
+    <value>Sponzori</value>
+  </data>
+  <data name="Surname" xml:space="preserve">
+    <value>Prezime</value>
+  </data>
+  <data name="DateOfRegistration" xml:space="preserve">
+    <value>Datum registracije</value>
+  </data>
+  <data name="Paid" xml:space="preserve">
+    <value>Plaćeno</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>Ime</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Potvrdi</value>
+  </data>
+  <data name="EndEvent" xml:space="preserve">
+    <value>Kraj događaja</value>
+  </data>
+  <data name="ErrorMessageEndDateReq" xml:space="preserve">
+    <value>Datum završetka je obavezan.</value>
+  </data>
+  <data name="ErrorMessagePlaceLen100" xml:space="preserve">
+    <value>Maksimalna dužina mjesta je 100 karaktera.</value>
+  </data>
+  <data name="ErrorMessagePlaceReq" xml:space="preserve">
+    <value>Mjesto je obavezno.</value>
+  </data>
+  <data name="ErrorMessageStartDateReq" xml:space="preserve">
+    <value>Datum početka je obavezan.</value>
+  </data>
+  <data name="StartEvent" xml:space="preserve">
+    <value>Početak događaja</value>
+  </data>
+  <data name="EditEvent" xml:space="preserve">
+    <value>Uredi događaj</value>
+  </data>
+  <data name="Registration" xml:space="preserve">
+    <value>Registracija</value>
+  </data>
+  <data name="Amount" xml:space="preserve">
+    <value>Iznos</value>
+  </data>
+  <data name="ErrorMessageAmountReq" xml:space="preserve">
+    <value>Iznos je obavezan.</value>
+  </data>
+  <data name="SuccessfullyConfirmedRegistration" xml:space="preserve">
+    <value>Registracija za '{0}' je uspiješno potvrđena.</value>
+  </data>
+  <data name="SelectSponsor" xml:space="preserve">
+    <value>Odaberi sponzora</value>
+  </data>
+  <data name="SelectSponsorType" xml:space="preserve">
+    <value>Odaberi tip sponzora</value>
+  </data>
+  <data name="SponsorType" xml:space="preserve">
+    <value>Tip sponzora</value>
+  </data>
+  <data name="AddSponsor" xml:space="preserve">
+    <value>Dodaj sponzora</value>
+  </data>
+  <data name="ErrorMessageNewSponsorReq" xml:space="preserve">
+    <value>Izaberi novog ili postojeceg sponzora.</value>
+  </data>
+  <data name="ErrormessageSponsorReq" xml:space="preserve">
+    <value>Sponzor je obavezan.</value>
+  </data>
+  <data name="ErrorMessageSponsorTypeReq" xml:space="preserve">
+    <value>Tip sponzora je obavezan.</value>
+  </data>
+  <data name="ErrorMessageWebUrlReq" xml:space="preserve">
+    <value>Website URL je obavezan.</value>
+  </data>
+  <data name="Sponsor" xml:space="preserve">
+    <value>Sponzor</value>
+  </data>
+  <data name="EditSponsor" xml:space="preserve">
+    <value>Uredi sponzora</value>
+  </data>
+  <data name="AddNewSponsor" xml:space="preserve">
+    <value>Dodaj novog sponzora</value>
+  </data>
+  <data name="SelectAnExistingSponsor" xml:space="preserve">
+    <value>Odaberi postojećeg sponzora</value>
+  </data>
+  <data name="ErrorMessageStartTimeReq" xml:space="preserve">
+    <value>Vrijeme početka je obavezno.</value>
+  </data>
+  <data name="AddEventItem" xml:space="preserve">
+    <value>Dodaj stavku dogđaja</value>
+  </data>
+  <data name="ConfereneRoom" xml:space="preserve">
+    <value>Konferencijska sala</value>
+  </data>
+  <data name="StartEndTime" xml:space="preserve">
+    <value>Početak/Kraj</value>
+  </data>
+  <data name="EventItemType" xml:space="preserve">
+    <value>Tip stavke događaja</value>
+  </data>
+  <data name="ErrorMessageEventItemTypeReq" xml:space="preserve">
+    <value>Tip stavke događaja je obavezan.</value>
+  </data>
+  <data name="SelectEventItemTypes" xml:space="preserve">
+    <value>Odaberi tip/tipove stavke eventa</value>
+  </data>
+  <data name="SelectLecturers" xml:space="preserve">
+    <value>Odaberi predavača-e.</value>
+  </data>
+  <data name="StartTime" xml:space="preserve">
+    <value>Vrijeme početka</value>
+  </data>
+  <data name="ErrorMessageAboutLectureReq" xml:space="preserve">
+    <value>Opis predavanja je obavezan.</value>
+  </data>
+  <data name="ErrorMessageDurationReq" xml:space="preserve">
+    <value>Trajanje je obavezno.</value>
+  </data>
+  <data name="ErrorMessageLecturerReq" xml:space="preserve">
+    <value>Predavač je obavezan.</value>
+  </data>
+  <data name="Map" xml:space="preserve">
+    <value>Mapa</value>
+  </data>
+  <data name="EditEventItem" xml:space="preserve">
+    <value>Uredi stavku događaja</value>
+  </data>
+  <data name="DateFormat" xml:space="preserve">
+    <value>dd.MM.yyyy</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Registruj se</value>
+  </data>
+  <data name="SuccessfullyAddedRegistration" xml:space="preserve">
+    <value>Registracija za '{0}' je uspiješno dodana.</value>
+  </data>
+  <data name="RegistrationAlreadyExists" xml:space="preserve">
+    <value>Registracija već postoji.</value>
+  </data>
+  <data name="AddLectureAndLecturer" xml:space="preserve">
+    <value>Dodaj predavanje i predavača</value>
+  </data>
+  <data name="Ends" xml:space="preserve">
+    <value>Kraj</value>
+  </data>
+  <data name="ErrorMessageSelectOrganizationAsRecipientMin1" xml:space="preserve">
+    <value>Odaberite minimalno jednu organizaciju za primaoca.</value>
+  </data>
+  <data name="EditOrganization" xml:space="preserve">
+    <value>Uredi organizaciju</value>
+  </data>
+  <data name="NotFoundAnyOrganizationAsRecipient" xml:space="preserve">
+    <value>Nije pronađena niti jedna organizacija kao primalac obavijesti.</value>
+  </data>
+  <data name="ErrorMessageDateFromBeforeDateTo" xml:space="preserve">
+    <value>Početak eventa mora biti prije kraja.</value>
+  </data>
+  <data name="ErrorMessageStartTimeBetweenDateFromDateTo" xml:space="preserve">
+    <value>Vrijeme početka mora biti izmedju {0} i {1}.</value>
+  </data>
+  <data name="EventHasAlreadyBegun" xml:space="preserve">
+    <value>Događaj je već počeo.</value>
+  </data>
+  <data name="AddAcademicDegree" xml:space="preserve">
+    <value>Dodaj akademsko zvanje</value>
+  </data>
+  <data name="AddOrganizationType" xml:space="preserve">
+    <value>Dodaj tip organizacije</value>
+  </data>
+  <data name="AnnouncementTypes" xml:space="preserve">
+    <value>Tipovi obavijesti</value>
+  </data>
+  <data name="OrganizationTypes" xml:space="preserve">
+    <value>Tipovi organizacije</value>
+  </data>
+  <data name="records" xml:space="preserve">
+    <value>zapisa</value>
+  </data>
+  <data name="Selected" xml:space="preserve">
+    <value>Odabrano</value>
+  </data>
+  <data name="PatientName" xml:space="preserve">
+    <value>Ime pacijenta</value>
+  </data>
+  <data name="SelectYourLanguage" xml:space="preserve">
+    <value>Odaberite jezik</value>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>Vrijeme</value>
+  </data>
+  <data name="FilterAppointmentByDate" xml:space="preserve">
+    <value>Filtriraj termine po datumu</value>
+  </data>
+  <data name="DateTime" xml:space="preserve">
+    <value>Datum i vrijeme</value>
+  </data>
+  <data name="EnterDurationInMinutes" xml:space="preserve">
+    <value>Unesite trajanje u minutama</value>
+  </data>
+  <data name="AllTreatments" xml:space="preserve">
+    <value>Svi tretmani</value>
+  </data>
+  <data name="AddBug" xml:space="preserve">
+    <value>Dodaj grešku</value>
+  </data>
+  <data name="ErrorMessageConferenceRoomReq" xml:space="preserve">
+    <value>Konferencijska sala je obavezna.</value>
+  </data>
+  <data name="Continue" xml:space="preserve">
+    <value>Nastavi</value>
+  </data>
+  <data name="Allergies" xml:space="preserve">
+    <value>Alergije</value>
+  </data>
+  <data name="Diseases" xml:space="preserve">
+    <value>Bolesti</value>
+  </data>
+  <data name="Medicines" xml:space="preserve">
+    <value>Lijekovi</value>
+  </data>
+  <data name="PlansAndTerapies" xml:space="preserve">
+    <value>Planovi i terapije</value>
+  </data>
+  <data name="TreatmentHistory" xml:space="preserve">
+    <value>Historija liječenja</value>
+  </data>
+  <data name="Anamnesis" xml:space="preserve">
+    <value>Anamneza</value>
+  </data>
+  <data name="Diagnosis" xml:space="preserve">
+    <value>Dijagnoza</value>
+  </data>
+  <data name="Operations" xml:space="preserve">
+    <value>Operacije</value>
+  </data>
+  <data name="EmergencyLowercased" xml:space="preserve">
+    <value>hitni</value>
+  </data>
+  <data name="RegularLowercased" xml:space="preserve">
+    <value>redovni</value>
+  </data>
+  <data name="TotalLowercased" xml:space="preserve">
+    <value>ukupno</value>
+  </data>
+  <data name="TreatmentsInNumbers" xml:space="preserve">
+    <value>Tretmani u brojkama</value>
+  </data>
+  <data name="Patients" xml:space="preserve">
+    <value>Pacijetni</value>
+  </data>
+  <data name="AddressIsRequired" xml:space="preserve">
+    <value>Adresa je obavezna.</value>
+  </data>
+  <data name="CityIsRequired" xml:space="preserve">
+    <value>Grad je obavezan.</value>
+  </data>
+  <data name="CountryIsRequired" xml:space="preserve">
+    <value>Država je obavezna.</value>
+  </data>
+  <data name="DateOfBirth" xml:space="preserve">
+    <value>Datum rođenja</value>
+  </data>
+  <data name="DateOfBirthIsRequired" xml:space="preserve">
+    <value>Datum rođenja je obavezan.</value>
+  </data>
+  <data name="FirstNameIsRquired" xml:space="preserve">
+    <value>Ime je obavezno.</value>
+  </data>
+  <data name="Gender" xml:space="preserve">
+    <value>Spol</value>
+  </data>
+  <data name="GenderIsRequired" xml:space="preserve">
+    <value>Spol je obavezan.</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Prezime</value>
+  </data>
+  <data name="LastNameIsRequired" xml:space="preserve">
+    <value>Prezime je obavezno.</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Telefon</value>
+  </data>
+  <data name="RegionIsRequired" xml:space="preserve">
+    <value>Regija je obavezna.</value>
+  </data>
+  <data name="Residence" xml:space="preserve">
+    <value>Prebivalište</value>
+  </data>
+  <data name="ResidenceAddress" xml:space="preserve">
+    <value>Adresa prebivališta</value>
+  </data>
+  <data name="Student" xml:space="preserve">
+    <value>Student</value>
+  </data>
+  <data name="AddPatient" xml:space="preserve">
+    <value>Dodaj pacijenta</value>
+  </data>
+  <data name="ChooseGender" xml:space="preserve">
+    <value>Odaberite spol</value>
+  </data>
+  <data name="ContactDetails" xml:space="preserve">
+    <value>Kontakt podaci</value>
+  </data>
+  <data name="Female" xml:space="preserve">
+    <value>Žensko</value>
+  </data>
+  <data name="FemaleShort" xml:space="preserve">
+    <value>Ž</value>
+  </data>
+  <data name="Male" xml:space="preserve">
+    <value>Muško</value>
+  </data>
+  <data name="MaleShort" xml:space="preserve">
+    <value>M</value>
+  </data>
+  <data name="PatientAdd" xml:space="preserve">
+    <value>Dodavanje pacijenta</value>
+  </data>
+  <data name="PatientAddError" xml:space="preserve">
+    <value>Došlo je do greške prilikom dodavanja pacijenta.</value>
+  </data>
+  <data name="PatientAddSuccess" xml:space="preserve">
+    <value>Pacijent uspješno dodan.</value>
+  </data>
+  <data name="PersonalDetails" xml:space="preserve">
+    <value>Lični podaci</value>
+  </data>
+  <data name="UserDetails" xml:space="preserve">
+    <value>Korisnički podaci</value>
+  </data>
+  <data name="ErrorMessageSelectUserAsRecipientMin1" xml:space="preserve">
+    <value>Odaberiti minimalno jednog korisnika za primaoca.</value>
+  </data>
+  <data name="NotFoundAnyUsersAsRecipient" xml:space="preserve">
+    <value>Nije pronađen niti jedan korisnik kao primalac obavijesti.</value>
+  </data>
+  <data name="SendOnlyToCertainUsers" xml:space="preserve">
+    <value>Pošalji samo određenim korisnicima</value>
+  </data>
+  <data name="SendToAllUsers" xml:space="preserve">
+    <value>Pošalji svim korisnicima</value>
+  </data>
+  <data name="ErrorMessagePaymentForRegistrationExists" xml:space="preserve">
+    <value>Uplata za odabranu registraciju već postoji.</value>
+  </data>
+  <data name="And" xml:space="preserve">
+    <value>I</value>
+  </data>
+  <data name="SelectDate" xml:space="preserve">
+    <value>Odaberi datum</value>
+  </data>
+  <data name="NotSuccessfullyRemovedEvent" xml:space="preserve">
+    <value>Događaj &lt;strong&gt;nije uspijesno&lt;/strong&gt; izbrisan jer postoji &lt;strong&gt;{0}&lt;/strong&gt; aktivnih uplata.</value>
+  </data>
+  <data name="EditAcademicDegree" xml:space="preserve">
+    <value>Uredi akademsko zvanje</value>
+  </data>
+  <data name="EditAcademicTitle" xml:space="preserve">
+    <value>Uredi akademsku titulu</value>
+  </data>
+  <data name="EditAppointment" xml:space="preserve">
+    <value>Izmjni termin</value>
+  </data>
+  <data name="TimeFormat" xml:space="preserve">
+    <value>HH:mm</value>
+  </data>
+  <data name="Minutes" xml:space="preserve">
+    <value>Minuta</value>
+  </data>
+  <data name="RequiredField" xml:space="preserve">
+    <value>Obavezno polje</value>
+  </data>
+  <data name="YouHaveAvailable" xml:space="preserve">
+    <value>Imate slobodnih</value>
+  </data>
+  <data name="AddNewLecturer" xml:space="preserve">
+    <value>Dodaj novog predavača</value>
+  </data>
+  <data name="SelectExistingLecturer" xml:space="preserve">
+    <value>Odaberi postojećeg predavača</value>
+  </data>
+  <data name="ErrorMessageSelectNewOrExistsLecturer" xml:space="preserve">
+    <value>Odaberite postojećeg predavača ili unestie novog.</value>
+  </data>
+  <data name="ErrorMessageBugTypeReq" xml:space="preserve">
+    <value>Tip greške je obavezan.</value>
+  </data>
+  <data name="ReportedFrom" xml:space="preserve">
+    <value>Prijavljeno od: </value>
+  </data>
+  <data name="GetNotifiedEmailFeature" xml:space="preserve">
+    <value>Obavijesti me putem email-a kada funkctionalnost bude implementirana.</value>
+  </data>
+  <data name="AddLicenceType" xml:space="preserve">
+    <value>Dodaj tip licence</value>
+  </data>
+  <data name="AddLicenceTypes" xml:space="preserve">
+    <value>Dodaj tipove licenci</value>
+  </data>
+  <data name="ChooseLicenceType" xml:space="preserve">
+    <value>Odaberi tip licence</value>
+  </data>
+  <data name="EditLicenceType" xml:space="preserve">
+    <value>Uredi tip licence</value>
+  </data>
+  <data name="ErrorMessageLicenceTypeReq" xml:space="preserve">
+    <value>Tip licence je obavezan!</value>
+  </data>
+  <data name="LicenceType" xml:space="preserve">
+    <value>Tip licence</value>
+  </data>
+  <data name="LicenceTypes" xml:space="preserve">
+    <value>Tipovi licenci</value>
+  </data>
+  <data name="NameOfLicenceType" xml:space="preserve">
+    <value>Naziv tipa licence</value>
+  </data>
+  <data name="NewLicenceType" xml:space="preserve">
+    <value>Novi tip licence</value>
+  </data>
+  <data name="SelectLicenceType" xml:space="preserve">
+    <value>Odaberi tip licence</value>
+  </data>
+  <data name="AddEmployeeStatus" xml:space="preserve">
+    <value>Dodaj status zaposlenika</value>
+  </data>
+  <data name="ChooseEmployeeStatus" xml:space="preserve">
+    <value>Odaberi status zaposlenika</value>
+  </data>
+  <data name="DeleteEmployeeStatus" xml:space="preserve">
+    <value>Izbrisi status zaposlenika</value>
+  </data>
+  <data name="EditEmployeeStatus" xml:space="preserve">
+    <value>Uredi status zaposlenika</value>
+  </data>
+  <data name="SelectEmployeeStatus" xml:space="preserve">
+    <value>Oznaci status zaposlenika</value>
+  </data>
+  <data name="AddOperation" xml:space="preserve">
+    <value>Dodaj operaciju</value>
+  </data>
+  <data name="DeleteOperation" xml:space="preserve">
+    <value>Izbriši operaciju</value>
+  </data>
+  <data name="EditOperation" xml:space="preserve">
+    <value>Uredi operaciju</value>
+  </data>
+  <data name="AppointmentTypes" xml:space="preserve">
+    <value>Tipovi termina</value>
+  </data>
+  <data name="Disease" xml:space="preserve">
+    <value>Bolest</value>
+  </data>
+  <data name="General" xml:space="preserve">
+    <value>Opšte postavke</value>
+  </data>
+  <data name="Materials" xml:space="preserve">
+    <value>Materijali</value>
+  </data>
+  <data name="MeasurementUnits" xml:space="preserve">
+    <value>Mjerne jedinice</value>
+  </data>
+  <data name="Medical" xml:space="preserve">
+    <value>Medicinske</value>
+  </data>
+  <data name="Ordinations" xml:space="preserve">
+    <value>Ordinacije</value>
+  </data>
+  <data name="Sectors" xml:space="preserve">
+    <value>Sektori</value>
+  </data>
+  <data name="Substances" xml:space="preserve">
+    <value>Supstance</value>
+  </data>
+  <data name="System" xml:space="preserve">
+    <value>Postavke sistema</value>
+  </data>
+  <data name="Teeth" xml:space="preserve">
+    <value>Zubi</value>
+  </data>
+  <data name="ToothStates" xml:space="preserve">
+    <value>Stanje zuba</value>
+  </data>
+  <data name="Work" xml:space="preserve">
+    <value>Radne</value>
+  </data>
+  <data name="AddMaterials" xml:space="preserve">
+    <value>Dodaj materijal</value>
+  </data>
+  <data name="AddOperations" xml:space="preserve">
+    <value>Dodaj operacije</value>
+  </data>
+  <data name="MeasurementUnit" xml:space="preserve">
+    <value>Mjerna jedinica</value>
+  </data>
+  <data name="MeasurementUnitId" xml:space="preserve">
+    <value>Mjerna jedinica</value>
+  </data>
+  <data name="AtLeastOneContactIsRequired" xml:space="preserve">
+    <value>Najmanje jedan tip kontakta je obavezan.</value>
+  </data>
+  <data name="FullName" xml:space="preserve">
+    <value>Ime i prezime</value>
+  </data>
+  <data name="Years" xml:space="preserve">
+    <value>god.</value>
+  </data>
+  <data name="SelectPatient" xml:space="preserve">
+    <value>Odaberite pacijenta</value>
+  </data>
+  <data name="AddSurvey" xml:space="preserve">
+    <value>Dodaj anketu</value>
+  </data>
+  <data name="ExpiredDate" xml:space="preserve">
+    <value>Datum isteka važenja</value>
+  </data>
+  <data name="Surveys" xml:space="preserve">
+    <value>Ankete</value>
+  </data>
+  <data name="Questions" xml:space="preserve">
+    <value>Pitanja</value>
+  </data>
+  <data name="Activations" xml:space="preserve">
+    <value>Aktivacije</value>
+  </data>
+  <data name="AddActivation" xml:space="preserve">
+    <value>Dodaj aktivaciju</value>
+  </data>
+  <data name="AddAnswer" xml:space="preserve">
+    <value>Dodaj odgovor</value>
+  </data>
+  <data name="AddExistingQuestions" xml:space="preserve">
+    <value>Dodaj postojeća pitanja</value>
+  </data>
+  <data name="AddNewQuestion" xml:space="preserve">
+    <value>Dodaj novo pitanje</value>
+  </data>
+  <data name="Answer" xml:space="preserve">
+    <value>Odgovor</value>
+  </data>
+  <data name="Answers" xml:space="preserve">
+    <value>Odgovori</value>
+  </data>
+  <data name="EditSurvey" xml:space="preserve">
+    <value>Uredi anketu</value>
+  </data>
+  <data name="ErrorMessageAnswerReq" xml:space="preserve">
+    <value>Odgovor je obavezan.</value>
+  </data>
+  <data name="ErrorMessageQuestionLen200" xml:space="preserve">
+    <value>Maksimalna dužina pitanja je 200 karaktera.</value>
+  </data>
+  <data name="ErrorMessageQuestionReq" xml:space="preserve">
+    <value>Pitanje je obavezno.</value>
+  </data>
+  <data name="ErrorMessageQuestionTypeReq" xml:space="preserve">
+    <value>Tip pitanja je obavezan.</value>
+  </data>
+  <data name="ErrorMessageSelectMin1QuestionGender" xml:space="preserve">
+    <value>Odaberite minimalno jedan spol.</value>
+  </data>
+  <data name="ErrorMessageSurveyQuestionReq" xml:space="preserve">
+    <value>Anketa mora sadržavati pitanja.</value>
+  </data>
+  <data name="EssayQuestionNote" xml:space="preserve">
+    <value>Za odabrani tip pitanja nije moguće definisati odgovore!</value>
+  </data>
+  <data name="ExpiredActivation" xml:space="preserve">
+    <value>Istek aktivacije</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Ne</value>
+  </data>
+  <data name="Question" xml:space="preserve">
+    <value>Pitanje</value>
+  </data>
+  <data name="QuestionType" xml:space="preserve">
+    <value>Tip pitanja</value>
+  </data>
+  <data name="SelectExistingQuestionNote" xml:space="preserve">
+    <value>U ovoj sekciji možete odabrati već kreirana pitanja, te ih dodjeliti anketi.</value>
+  </data>
+  <data name="SelectPerson" xml:space="preserve">
+    <value>Odaberite osobu</value>
+  </data>
+  <data name="SelectQuestionType" xml:space="preserve">
+    <value>Odaberi tip pitanja</value>
+  </data>
+  <data name="Staff" xml:space="preserve">
+    <value>Osoblje</value>
+  </data>
+  <data name="StartActivation" xml:space="preserve">
+    <value>Početak aktivacije</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Da</value>
+  </data>
+  <data name="AssignToAllPatients" xml:space="preserve">
+    <value>Dodjeli svim pacijentima</value>
+  </data>
+  <data name="AssignToAllStaff" xml:space="preserve">
+    <value>Dodjeli svim zaposlenima</value>
+  </data>
+  <data name="AssignToCertainPatients" xml:space="preserve">
+    <value>Dodjeli određenim pacijentima</value>
+  </data>
+  <data name="AssignToCertainStaff" xml:space="preserve">
+    <value>Dodjeli određenim zaposlenima</value>
+  </data>
+  <data name="Editable" xml:space="preserve">
+    <value>Omogući izmjenu</value>
+  </data>
+  <data name="ErrorMessageAssignMinOnePatientToActivation" xml:space="preserve">
+    <value>Dodjelite aktivaciju minimalno jednom pacijentu.</value>
+  </data>
+  <data name="ErrorMessageAssignMinOneStaffToActivation" xml:space="preserve">
+    <value>Dodjelite aktivaciju minimalno jednom članu osoblja.</value>
+  </data>
+  <data name="ErrorMessageExpiredActivationReq" xml:space="preserve">
+    <value>Istek aktivacije je obavezan.</value>
+  </data>
+  <data name="ErrorMessageSelectWhomAssignActivation" xml:space="preserve">
+    <value>Označite kome dodjeljujete aktivaciju</value>
+  </data>
+  <data name="ErrorMessageStartActivationReq" xml:space="preserve">
+    <value>Početak aktivacije je obavezan.</value>
+  </data>
+  <data name="WhomYouAssignActivation" xml:space="preserve">
+    <value>Kome dodjeljujete aktivaciju?</value>
+  </data>
+  <data name="ActivationContainsActiveAnswers" xml:space="preserve">
+    <value>Aktivacija sadrži aktivne odgovore</value>
+  </data>
+  <data name="DateTimeFormat" xml:space="preserve">
+    <value>dd.MM.yyyy HH:mm</value>
+  </data>
+  <data name="DropHereYourProfileImage" xml:space="preserve">
+    <value>Prevucite ovdje vašu profilnu sliku!</value>
+  </data>
+  <data name="DropzoneMsgDesc1" xml:space="preserve">
+    <value>Samo slike su dozvoljene za prijenos.</value>
+  </data>
+  <data name="AccountSetup" xml:space="preserve">
+    <value>Postavke profila</value>
+  </data>
+  <data name="Confirmation" xml:space="preserve">
+    <value>Potvrda</value>
+  </data>
+  <data name="GeneralInfo" xml:space="preserve">
+    <value>Opšte informacije</value>
+  </data>
+  <data name="StatusInfo" xml:space="preserve">
+    <value>Statusne informacije</value>
+  </data>
+  <data name="AreYouStudent" xml:space="preserve">
+    <value>Da li ste student?</value>
+  </data>
+  <data name="CityOfBirth" xml:space="preserve">
+    <value>Grad rođenja</value>
+  </data>
+  <data name="CountryOfBirth" xml:space="preserve">
+    <value>Država rođenja</value>
+  </data>
+  <data name="InThisSectionTypeYourContactInfo" xml:space="preserve">
+    <value>U ovoj sekciji upišite svoje kontakt podatke</value>
+  </data>
+  <data name="NumberOfMobile" xml:space="preserve">
+    <value>Broj mobitela</value>
+  </data>
+  <data name="NumberOfPhone" xml:space="preserve">
+    <value>Broj telefona</value>
+  </data>
+  <data name="ParentName" xml:space="preserve">
+    <value>Ime roditelja</value>
+  </data>
+  <data name="PrimaryEmail" xml:space="preserve">
+    <value>Primarna e-mail adresa</value>
+  </data>
+  <data name="ProfileImage" xml:space="preserve">
+    <value>Profilna slika</value>
+  </data>
+  <data name="SecondaryEmail" xml:space="preserve">
+    <value>Sporedna e-mail adresa</value>
+  </data>
+  <data name="SelectCitizenship" xml:space="preserve">
+    <value>Odaberite državljanstvo</value>
+  </data>
+  <data name="SocialSecurityNumber" xml:space="preserve">
+    <value>Broj socialnog osiguranja</value>
+  </data>
+  <data name="AcademicTitle" xml:space="preserve">
+    <value>Akademska titula</value>
+  </data>
+  <data name="AccessDetails" xml:space="preserve">
+    <value>Pristupni podaci</value>
+  </data>
+  <data name="CreatedDate" xml:space="preserve">
+    <value>Datum izdavanja</value>
+  </data>
+  <data name="CultureName" xml:space="preserve">
+    <value>Naziv kulture</value>
+  </data>
+  <data name="EmploymentStatus" xml:space="preserve">
+    <value>Status zaposlenosti</value>
+  </data>
+  <data name="ErrorMessageAcademicDegreeReq" xml:space="preserve">
+    <value>Akademska diploma je obavezna.</value>
+  </data>
+  <data name="ErrorMessageAcademicTitleReq" xml:space="preserve">
+    <value>Akademska titula je obavezna.</value>
+  </data>
+  <data name="ErrorMessageDateOfBirthReq" xml:space="preserve">
+    <value>Datum rođenja je obavezan.</value>
+  </data>
+  <data name="ErrorMessageEmploymentStatusReq" xml:space="preserve">
+    <value>Status zaposlenosti je obavezan.</value>
+  </data>
+  <data name="ErrorMessageLastNameReq" xml:space="preserve">
+    <value>Prezime je obavezno.</value>
+  </data>
+  <data name="ErrorMessageMartialStatusReq" xml:space="preserve">
+    <value>Bračni status je obavezan.</value>
+  </data>
+  <data name="ErrorMessageNationalIDNumberMinLen13" xml:space="preserve">
+    <value>Minimalna dužina jedinstvenog matičnog broja je 13 karaktera.</value>
+  </data>
+  <data name="ErrorMessageNationalIDNumberReq" xml:space="preserve">
+    <value>Jedinstveni matični broj je obavezan.</value>
+  </data>
+  <data name="ErrorMessageNumberOfMobileReq" xml:space="preserve">
+    <value>Broj mobitela je obavezan.</value>
+  </data>
+  <data name="ErrorMessageParentNameReq" xml:space="preserve">
+    <value>Ime roditelja je obavezno.</value>
+  </data>
+  <data name="ErrorMessagePrimaryEmailReq" xml:space="preserve">
+    <value>Primarna email adresa je obavezna.</value>
+  </data>
+  <data name="ErrorMesssageSocialSecurityNumberReq" xml:space="preserve">
+    <value>Broj socialnog osiguranja je obavezan.</value>
+  </data>
+  <data name="IsLicensePermanent" xml:space="preserve">
+    <value>Da li je licenca stalna?</value>
+  </data>
+  <data name="LicenseDetails" xml:space="preserve">
+    <value>Podaci o licenci</value>
+  </data>
+  <data name="LicenseNumber" xml:space="preserve">
+    <value>Broj licence</value>
+  </data>
+  <data name="LicensePerPeriod" xml:space="preserve">
+    <value>Licenca na određeni period</value>
+  </data>
+  <data name="NewMember" xml:space="preserve">
+    <value>Novi član</value>
+  </data>
+  <data name="PasswordConfirmation" xml:space="preserve">
+    <value>Potvrda lozinke</value>
+  </data>
+  <data name="PermanentLicense" xml:space="preserve">
+    <value>Stalna licenca</value>
+  </data>
+  <data name="SelectAcademicDegree" xml:space="preserve">
+    <value>Odaberi akademsku diplomu</value>
+  </data>
+  <data name="SelectAcademicTitle" xml:space="preserve">
+    <value>Odaberi akadamsku titulu</value>
+  </data>
+  <data name="SelectEmployementStatus" xml:space="preserve">
+    <value>Odaberi status zaposlenja</value>
+  </data>
+  <data name="SelectMartialStatus" xml:space="preserve">
+    <value>Odaberi bračni status</value>
+  </data>
+  <data name="SelectRoles" xml:space="preserve">
+    <value>Odaberi uloge</value>
+  </data>
+  <data name="SelectTypeOfLicense" xml:space="preserve">
+    <value>Odaberite tip licence</value>
+  </data>
+  <data name="StatusDetails" xml:space="preserve">
+    <value>Statusni podaci</value>
+  </data>
+  <data name="UserRoles" xml:space="preserve">
+    <value>Korisničke uloge</value>
+  </data>
+  <data name="ErrorMessageGenderReq" xml:space="preserve">
+    <value>Spol je obavezan.</value>
+  </data>
+  <data name="ErrorMessageUsernameReq" xml:space="preserve">
+    <value>Korisničko ime je obavezno.</value>
+  </data>
+  <data name="ErrorMessagePasswordReq" xml:space="preserve">
+    <value>Lozinka je obavezna.</value>
+  </data>
+  <data name="ErrorMessageFirstNameReq" xml:space="preserve">
+    <value>Ime je obavezno.</value>
+  </data>
+  <data name="ErrorMessageBirthCityReq" xml:space="preserve">
+    <value>Grad  rođenja je obavezan.</value>
+  </data>
+  <data name="ErrorMessageBirthCountryReq" xml:space="preserve">
+    <value>Država rođenja je obavezna.</value>
+  </data>
+  <data name="ErrorMessageCitizenshipReq" xml:space="preserve">
+    <value>Državljanstvo je obavezno.</value>
+  </data>
+  <data name="ErrorMessageLicenseNumberReq" xml:space="preserve">
+    <value>Broj licence je obavezan.</value>
+  </data>
+  <data name="Doctor" xml:space="preserve">
+    <value>Doktor</value>
+  </data>
+  <data name="Employer" xml:space="preserve">
+    <value>Zaposlenik</value>
+  </data>
+  <data name="MedicialTehnician" xml:space="preserve">
+    <value>Medicinski tehničar</value>
+  </data>
+  <data name="SelectMembershipType" xml:space="preserve">
+    <value>Odaberi tip/tipove članstva</value>
+  </data>
+  <data name="GeneratePassword" xml:space="preserve">
+    <value>Generiši lozinku</value>
+  </data>
+  <data name="PasswordsDoNotMatch" xml:space="preserve">
+    <value>Lozinke se ne poklapaju.</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Profil</value>
+  </data>
+  <data name="AddStaff" xml:space="preserve">
+    <value>Dodaj osoblje</value>
+  </data>
+  <data name="TypeOfLicense" xml:space="preserve">
+    <value>Tip licence</value>
+  </data>
+  <data name="MemberOfChember" xml:space="preserve">
+    <value>Član komore</value>
+  </data>
+  <data name="InThisSectionTypeYourLicenseInfo" xml:space="preserve">
+    <value>U ovoj sekciji unesite informacije o dozvoli.</value>
+  </data>
+  <data name="InThisSectionTypeInfoAboutRolesInstitution" xml:space="preserve">
+    <value>U ovoj sekciji unesite uloge korisnika koje će važiti na nivou institucije.</value>
+  </data>
+  <data name="ErrorMessagePasswordLen6" xml:space="preserve">
+    <value>Minimalna dužina lozinke je 6 karaktera.</value>
+  </data>
+  <data name="ErrorMessagePasswordReqContainLettersAndNumbers" xml:space="preserve">
+    <value>Lozinka mora sadržavati slova i brojeve.</value>
+  </data>
+  <data name="UsernameAlreadyExists" xml:space="preserve">
+    <value>Korisničko ime već postoji.</value>
+  </data>
+  <data name="AddLicense" xml:space="preserve">
+    <value>Dodaj licencu</value>
+  </data>
+  <data name="ActiveLicenseNumber" xml:space="preserve">
+    <value>Broj aktivne license</value>
+  </data>
+  <data name="AddLicensePeriod" xml:space="preserve">
+    <value>Dodaj period za licencu</value>
+  </data>
+  <data name="Licenses" xml:space="preserve">
+    <value>Licence</value>
+  </data>
+  <data name="ProlongActiveLicense" xml:space="preserve">
+    <value>Produži aktivnu licencu</value>
+  </data>
+  <data name="ErrorMessageTypeOfLiceseReq" xml:space="preserve">
+    <value>Tip licence je obavezan.</value>
+  </data>
+  <data name="License" xml:space="preserve">
+    <value>Licenca</value>
+  </data>
+  <data name="Inactive" xml:space="preserve">
+    <value>Neaktivna</value>
+  </data>
+  <data name="Deactivate" xml:space="preserve">
+    <value>Deaktiviraj</value>
+  </data>
+  <data name="SweetAlertDeactivatePermanentLicense" xml:space="preserve">
+    <value>Korisnik može istovremeno imati samo jednu aktivnu licencu, te ukoliko deaktivirate odabranu, korisnik više neće posjedovati niti jednu.</value>
+  </data>
+  <data name="Deactivated" xml:space="preserve">
+    <value>Deaktivirano</value>
+  </data>
+  <data name="SuccessfullyDeactivated" xml:space="preserve">
+    <value>'{0}' je &lt;strong&gt;uspješno deaktivirana&lt;/strong&gt;.</value>
+  </data>
+  <data name="ErrorMessageCreatedDateBeforeExpiredDate" xml:space="preserve">
+    <value>Datum izdavanje treba biti prije datuma isteka važenja.</value>
+  </data>
+  <data name="EditLicensePeriod" xml:space="preserve">
+    <value>Uredi period važenja licence</value>
+  </data>
+  <data name="InstitutionStaff" xml:space="preserve">
+    <value>Osoblje institucije</value>
+  </data>
+  <data name="OrganizationStaff" xml:space="preserve">
+    <value>Osoblje organizacije</value>
+  </data>
+  <data name="NewStaff" xml:space="preserve">
+    <value>Novo osoblje</value>
+  </data>
+  <data name="SuccessfullyChanged" xml:space="preserve">
+    <value>'{0}' je &lt;strong&gt;uspješno promjenjena&lt;/strong&gt;. </value>
+  </data>
+  <data name="ErrorMessagePhoneFormat" xml:space="preserve">
+    <value>Format telefona: 0xxXXXxxx(x)</value>
+  </data>
+  <data name="ActiveLicense" xml:space="preserve">
+    <value>Aktivna licenca</value>
+  </data>
+  <data name="AddQuestion" xml:space="preserve">
+    <value>Dodaj pitanje</value>
+  </data>
+  <data name="EditQuestion" xml:space="preserve">
+    <value>Uredi pitanje</value>
+  </data>
+  <data name="ErrorMessageQuestionEditable" xml:space="preserve">
+    <value>Pitanje nije moguće uređivati jer postoje korisnici koji su već odgovorili na ovo pitanje.</value>
+  </data>
+  <data name="ErrorMessageQuestionErasable" xml:space="preserve">
+    <value>Pitanje nije moguće obrisati jer postoje korisnici koji su već odgovorili na ovo pitanje.</value>
+  </data>
+  <data name="AboutPatient" xml:space="preserve">
+    <value>O pacijentu</value>
+  </data>
+  <data name="BirthCity" xml:space="preserve">
+    <value>Grad rođenja</value>
+  </data>
+  <data name="BirthCountry" xml:space="preserve">
+    <value>Država rođenja</value>
+  </data>
+  <data name="NationalIDNumber" xml:space="preserve">
+    <value>Jedinstveni matični broj</value>
+  </data>
+  <data name="PasswordComplexityInfo" xml:space="preserve">
+    <value>Lozinka mora biti duga najmanje 8 karatera i mora sadržavati najmanje jedno malo slovo, jedno veliko slovo, jedan specijalni znak i jedan broj.</value>
+  </data>
+  <data name="PasswordConfirmationIsRequired" xml:space="preserve">
+    <value>Potvrda lozinke je obavezna.</value>
+  </data>
+  <data name="PasswordsDontMatch" xml:space="preserve">
+    <value>Lozinke se ne podudaraju.</value>
+  </data>
+  <data name="AddAllergy" xml:space="preserve">
+    <value>Dodaj alergiju</value>
+  </data>
+  <data name="AddDisease" xml:space="preserve">
+    <value>Dodaj bolest</value>
+  </data>
+  <data name="AddMedicine" xml:space="preserve">
+    <value>Dodaj lijek</value>
+  </data>
+  <data name="Allergy" xml:space="preserve">
+    <value>Alergija</value>
+  </data>
+  <data name="AllergyAdd" xml:space="preserve">
+    <value>Dodavanje alergije</value>
+  </data>
+  <data name="AllergyIsRequired" xml:space="preserve">
+    <value>Najmanje jedna alergija je obavezna.</value>
+  </data>
+  <data name="DiseaseIsRequired" xml:space="preserve">
+    <value>Najmanje jedna bolest je obavezna.</value>
+  </data>
+  <data name="Medicine" xml:space="preserve">
+    <value>Lijek</value>
+  </data>
+  <data name="MedicineAdd" xml:space="preserve">
+    <value>Dodavanje lijeka</value>
+  </data>
+  <data name="MedicineIsRequired" xml:space="preserve">
+    <value>Najmanje jedan lijek je obavezan.</value>
+  </data>
+  <data name="SelectAllergy" xml:space="preserve">
+    <value>Odaberi alergiju</value>
+  </data>
+  <data name="SelectDisease" xml:space="preserve">
+    <value>Odaberi bolest</value>
+  </data>
+  <data name="SelectMedicine" xml:space="preserve">
+    <value>Odaberi lijek</value>
+  </data>
+  <data name="DiseaseAdd" xml:space="preserve">
+    <value>Dodavanje bolesti</value>
+  </data>
+  <data name="AddMeasurementUnit" xml:space="preserve">
+    <value>Dodaj mjernu jedinicu</value>
+  </data>
+  <data name="EditMeasurementUnit" xml:space="preserve">
+    <value>Uredi mjernu jedinicu</value>
+  </data>
+  <data name="SelectMeasurementUnit" xml:space="preserve">
+    <value>Odaberite mjernu jedinicu</value>
+  </data>
+  <data name="AddDiscount" xml:space="preserve">
+    <value>Dodaj popust</value>
+  </data>
+  <data name="AddPricelistItem" xml:space="preserve">
+    <value>Dodaj stavku cjenovnika</value>
+  </data>
+  <data name="Discounts" xml:space="preserve">
+    <value>Popusti</value>
+  </data>
+  <data name="EditPricelistItem" xml:space="preserve">
+    <value>Uredite stavku cjenovnika</value>
+  </data>
+  <data name="ErrorMessageGroupOrSingleDiscountReq" xml:space="preserve">
+    <value>Grupni ili minimalno jedan pojedinacni popust je obavezan.</value>
+  </data>
+  <data name="ErrorMessageMaterialReq" xml:space="preserve">
+    <value>Materijal je obavezan.</value>
+  </data>
+  <data name="ErrorMessageOperationReq" xml:space="preserve">
+    <value>Operacija je obavezna.</value>
+  </data>
+  <data name="ErrorMessagePriceWithoutVATReq" xml:space="preserve">
+    <value>Cijena (bez PDV-a) je obavezna.</value>
+  </data>
+  <data name="GroupDiscount" xml:space="preserve">
+    <value>Grupni popust</value>
+  </data>
+  <data name="Material" xml:space="preserve">
+    <value>Materijal</value>
+  </data>
+  <data name="Operation" xml:space="preserve">
+    <value>Operacija</value>
+  </data>
+  <data name="Pricelist" xml:space="preserve">
+    <value>Cjenovnik</value>
+  </data>
+  <data name="PricelistItems" xml:space="preserve">
+    <value>Stavke cjenovnika</value>
+  </data>
+  <data name="PriceWithoutVAT" xml:space="preserve">
+    <value>Cijena (bez PDV-a)</value>
+  </data>
+  <data name="SelectMaterial" xml:space="preserve">
+    <value>Odaberite materijal</value>
+  </data>
+  <data name="SelectOperation" xml:space="preserve">
+    <value>Odaberite operaciju</value>
+  </data>
+  <data name="SelectPricelistItemsForDiscount" xml:space="preserve">
+    <value>U tabeli ispod mozete definisati pojedinacne popuste stavkama cjenovnika. Samo označene stavke će biti spremljene, a ostale će biti ignorisane.</value>
+  </data>
+  <data name="StartDate" xml:space="preserve">
+    <value>Datum početka važenja</value>
+  </data>
+  <data name="ErrorMessageAlreadyExistsActiveDiscountInDate" xml:space="preserve">
+    <value>Već postoji aktivan popust za odabrani period.</value>
+  </data>
+  <data name="ErrorMessageCheckDiscountPricelistItemMin1" xml:space="preserve">
+    <value>Označite minimalno jednu stavku kojoj želite dodjeliti popust.</value>
+  </data>
+  <data name="Regional" xml:space="preserve">
+    <value>Regionalne postavke</value>
+  </data>
+  <data name="ErrorMessageEmailLen50" xml:space="preserve">
+    <value>Maksimalna dužina emaila je 50 karaktera.</value>
+  </data>
+  <data name="SelectTreatment" xml:space="preserve">
+    <value>Odaberite tretman</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value>Odaberite državljanstvo</value>
+  </data>
+  <data name="AssignToAllMembers" xml:space="preserve">
+    <value>Dodjeli svim članovima</value>
+  </data>
+  <data name="AssignToCertainMembers" xml:space="preserve">
+    <value>Dodjeli određenim članovima</value>
+  </data>
+  <data name="Members" xml:space="preserve">
+    <value>Članovi</value>
+  </data>
+</root>
