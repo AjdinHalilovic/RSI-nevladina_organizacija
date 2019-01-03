@@ -1,0 +1,111 @@
+﻿
+@inject Localizer Localizer
+
+@{
+    ViewData["Title"] = Localizer.InstitutionalSettings;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/app/css/custom.css" rel="stylesheet" type="text/css" />
+
+<div class="m-portlet m-portlet--head-sm m-portlet--tabs" m-portlet="true" style="">
+    <div class="m-portlet__head">
+        <div class="m-portlet__head-caption">
+            <div class="m-portlet__head-title">
+                <span class="m-portlet__head-icon">
+                    <i class="flaticon-cogwheel-1"></i>
+                </span>
+                <h3 class="m-portlet__head-text">
+                    @Localizer.Institution
+                </h3>
+            </div>
+        </div>
+        <div class="m-portlet__head-tools">
+            <ul class="m-portlet__nav">
+                <li class="m-portlet__nav-item">
+                    @*m-portlet-tool="reload"*@
+                    <a href="@Url.Action("General", "InstitutionalSettings", new { area = "Administration" })" class="m-portlet__nav-link m-portlet__nav-link--icon">
+                        <i class="la la-refresh"></i>
+                    </a>
+                    <div class="m-tooltip m-tooltip--portlet tooltip bs-tooltip-top" role="tooltip" id="tooltip_96nmbb2r8k" aria-hidden="true" x-placement="bottom" style="position: absolute; will-change: transform; display: none; top: 0px; left: 0px; transform: translate3d(650px, 42px, 0px);">                            <div class="tooltip-arrow arrow" style="left: 0px;"></div>                            <div class="tooltip-inner">@Localizer.Reload</div>                        </div>
+                </li>
+                <li class="m-portlet__nav-item">
+                    <a href="" m-portlet-tool="fullscreen" class="m-portlet__nav-link m-portlet__nav-link--icon">
+                        <i class="la la-expand"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!--begin::Tab content-->
+    <div class="m-portlet__body">
+        <div class="row">
+            <div class="col-xl-3 col-lg-4">
+                <div class="m-tabs" data-tabs="true" data-tabs-contents="#m_sections">
+                    <ul class="m-nav m-nav--active-bg m-nav--active-bg-padding-lg m-nav--font-lg m-nav--font-bold m--margin-bottom-20 m--margin-top-10 m--margin-right-40" id="m_nav" role="tablist">
+                        <li class="m-nav__item">
+                            <a class="m-nav__link m-tabs__item m-tabs__item--active" data-tab-target="#subtab_2_2_1" href="#">
+                                <span class="m-nav__link-text"><i class="fa flaticon-file margin-right-10"></i> @Localizer.OrganizationTypes </span>
+                            </a>
+                        </li>
+                        <li class="m-nav__item">
+                            <a class="m-nav__link m-tabs__item" data-tab-target="#subtab_2_2_2" href="#">
+                                <span class="m-nav__link-text"><i class="fa flaticon-profile margin-right-10"></i> @Localizer.InstitutionTypes </span>
+                            </a>
+                        </li>
+                        <li class="m-nav__item">
+                            <a class="m-nav__link m-tabs__item" data-tab-target="#subtab_2_2_3" href="#">
+                                <span class="m-nav__link-text"><i class="fa flaticon-notes margin-right-10"></i> @Localizer.Institution </span>
+                            </a>
+                        </li>
+                        <li class="m-nav__item">
+                            <a class="m-nav__link m-tabs__item" data-tab-target="#subtab_2_2_4" href="#">
+                                <span class="m-nav__link-text"><i class="fa flaticon-notes margin-right-10"></i> @Localizer.Organizations </span>
+                            </a>
+                        </li>
+                        <li class="m-nav__item">
+                            <a class="m-nav__link m-tabs__item" data-tab-target="#subtab_2_2_5" href="#">
+                                <span class="m-nav__link-text"><i class="fa flaticon-notes margin-right-10"></i> @Localizer.AnnouncementTypes </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <div class="col-xl-9 col-lg-8">
+                <div class="m-tabs-content" id="m_sections">
+                    @*<div class="m-tabs-content__item" id="subtab_2_2_1">
+                        @{ await Html.RenderPartialAsync("../OrganizationTypes/_Index"); }
+                    </div>
+                    <div class="m-tabs-content__item" id="subtab_2_2_2">
+                        @{ await Html.RenderPartialAsync("../InstitutionTypes/_Index"); }
+                    </div>
+                    <div class="m-tabs-content__item" id="subtab_2_2_3">
+                        @{ await Html.RenderPartialAsync("../Institutions/_Index"); }
+                    </div>
+                    <div class="m-tabs-content__item" id="subtab_2_2_4">
+                        @{ await Html.RenderPartialAsync("../Organizations/_Index"); }
+                    </div>
+                    <div class="m-tabs-content__item" id="subtab_2_2_5">
+                        @{ await Html.RenderPartialAsync("../AnnouncementTypes/_Index"); }
+                    </div>*@
+
+                    @*<div class="m-tabs-content__item" id="subtab_2_15_1">
+                            @{ await Html.RenderPartialAsync("../BugTypes/_Index"); }
+                        </div>*@
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end::Tab content-->
+</div>
+<script src="~/demo/default/custom/crud/metronic-datatable/base/record-selection.js" type="text/javascript"></script>
+<script>
+    $('.m-tabs__item').on('click', function (e) {
+        $(document).ready(function () {
+            $(".m-tabs-content__item--active .m_datatable").mDatatable("redraw");
+        });
+    });
+</script>

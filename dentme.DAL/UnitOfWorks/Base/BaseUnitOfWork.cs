@@ -27,6 +27,12 @@ namespace DAL
         public IUsersDTORepository UsersDTORepository => _usersDTORepository = _usersDTORepository ?? new UsersDTORepository(_nevladinaOrgContext);
         private IPersonUsersDTORepository _personUsersDTORepository;
         public IPersonUsersDTORepository PersonUsersDTORepository => _personUsersDTORepository = _personUsersDTORepository ?? new PersonUsersDTORepository(_nevladinaOrgContext);
+
+        private ICitiesDTORepository _citiesDTORepository;
+        public ICitiesDTORepository CitiesDTORepository => _citiesDTORepository = _citiesDTORepository ?? new CitiesDTORepository(_nevladinaOrgContext);
+
+        private IRegionsDTORepository _regionsDTORepository;
+        public IRegionsDTORepository RegionsDTORepository => _regionsDTORepository = _regionsDTORepository ?? new RegionsDTORepository(_nevladinaOrgContext);
         #endregion
 
         #region Entities
@@ -41,6 +47,21 @@ namespace DAL
 
         private IUsersRepository _usersRepository;
         public IUsersRepository UsersRepository => _usersRepository = _usersRepository ?? new UsersRepository(_nevladinaOrgContext);
+
+        private ICitiesRepository _citiesRepository;
+        public ICitiesRepository CitiesRepository => _citiesRepository = _citiesRepository ?? new CitiesRepository(_nevladinaOrgContext);
+
+        private ICountriesRepository _countriesRepository;
+        public ICountriesRepository CountriesRepository => _countriesRepository = _countriesRepository ?? new CountriesRepository(_nevladinaOrgContext);
+
+        private IRegionsRepository _regionsRepository;
+        public IRegionsRepository RegionsRepository => _regionsRepository = _regionsRepository ?? new RegionsRepository(_nevladinaOrgContext);
+
+        private ICitizenshipsRepository _citizenshipsRepository;
+        public ICitizenshipsRepository CitizenshipsRepository => _citizenshipsRepository = _citizenshipsRepository ?? new CitizenshipsRepository(_nevladinaOrgContext);
+
+        private INationalitiesRepository _nationalitiesRepository;
+        public INationalitiesRepository NationalitiesRepository => _nationalitiesRepository = _nationalitiesRepository ?? new NationalitiesRepository(_nevladinaOrgContext);
         #endregion
         #endregion
 

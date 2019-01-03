@@ -35,6 +35,22 @@
                                 <span class="m-menu__link-text">@Localizer.System</span>
                             </span>
                         </li>
+                        <li class="m-menu__item " aria-haspopup="true">
+                            <a href="@Url.Action("General", "SystemSettings", new { area = nameof(nevladinaOrg.Web.Areas.Administration) })" class="m-menu__link ">
+                                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                                    <span></span>
+                                </i>
+                                <span class="m-menu__link-text">@Localizer.General</span>
+                            </a>
+                        </li>
+                        <li class="m-menu__item " aria-haspopup="true">
+                            <a href="@Url.Action("Regional", "SystemSettings", new { area = nameof(nevladinaOrg.Web.Areas.Administration) })" class="m-menu__link ">
+                                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                                    <span></span>
+                                </i>
+                                <span class="m-menu__link-text">@Localizer.Regional</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </li>
