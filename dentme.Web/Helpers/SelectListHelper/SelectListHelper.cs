@@ -178,6 +178,59 @@ namespace nevladinaOrg.Web.Helpers.SelectListHelper
 
         #endregion
 
+        #region AcademicDegrees
+
+        public List<SelectListItem> AcademicDegrees(bool includeEmpty = false)
+        {
+            List<AcademicDegree> list = _dataUnitOfWork.BaseUow.AcademicDegreesRepository.GetAll().ToList();
+
+            var academicDegrees = new List<SelectListItem>();
+
+            if (includeEmpty)
+                academicDegrees.Add(new SelectListItem { Value = string.Empty, Text = _localizer.SelectAcademicDegree });
+
+            academicDegrees.AddRange(list.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Name }));
+
+            return academicDegrees;
+        }
+
+        #endregion
+
+        #region AcademicTitles
+
+        public List<SelectListItem> AcademicTitles(bool includeEmpty = false)
+        {
+            List<AcademicTitle> list = _dataUnitOfWork.BaseUow.AcademicTitlesRepository.GetAll().ToList();
+
+            var academicTitles = new List<SelectListItem>();
+
+            if (includeEmpty)
+                academicTitles.Add(new SelectListItem { Value = string.Empty, Text = _localizer.SelectAcademicTitle });
+
+            academicTitles.AddRange(list.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Name }));
+
+            return academicTitles;
+        }
+
+        #endregion
+
+        #region Roles
+        public List<SelectListItem> Roles(bool includeEmpty = false)
+        {
+            List<Role> list = _dataUnitOfWork.BaseUow.RolesRepository.GetAll().ToList();
+
+            var roles = new List<SelectListItem>();
+
+            if (includeEmpty)
+                roles.Add(new SelectListItem { Value = string.Empty, Text = _localizer.SelectRoles });
+
+            roles.AddRange(list.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Name }));
+
+            return roles;
+        }
+
+        #endregion
+
 
 
     }

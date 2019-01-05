@@ -28,6 +28,11 @@ namespace DAL
         IRegionsRepository RegionsRepository { get; }
         ICitizenshipsRepository CitizenshipsRepository { get; }
         INationalitiesRepository NationalitiesRepository { get; }
+        IAcademicDegreesRepository AcademicDegreesRepository { get; }
+        IAcademicTitlesRepository AcademicTitlesRepository { get; }
+        IMartialStatusesRepository MartialStatusesRepository { get; }
+        IContactTypesRepository ContactTypesRepository { get; }
+        IRolesRepository RolesRepository { get; }
 
         #endregion
         #endregion

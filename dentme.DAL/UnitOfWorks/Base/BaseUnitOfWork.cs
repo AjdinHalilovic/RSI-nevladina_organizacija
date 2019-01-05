@@ -62,6 +62,21 @@ namespace DAL
 
         private INationalitiesRepository _nationalitiesRepository;
         public INationalitiesRepository NationalitiesRepository => _nationalitiesRepository = _nationalitiesRepository ?? new NationalitiesRepository(_nevladinaOrgContext);
+
+        private IAcademicDegreesRepository _academicDegreesRepository;
+        public IAcademicDegreesRepository AcademicDegreesRepository => _academicDegreesRepository = _academicDegreesRepository ?? new AcademicDegreesRepository(_nevladinaOrgContext);
+
+        private IAcademicTitlesRepository _academicTitlesRepository;
+        public IAcademicTitlesRepository AcademicTitlesRepository => _academicTitlesRepository = _academicTitlesRepository ?? new AcademicTitlesRepository(_nevladinaOrgContext);
+
+        private IMartialStatusesRepository _martialStatusesRepository;
+        public IMartialStatusesRepository MartialStatusesRepository => _martialStatusesRepository = _martialStatusesRepository ?? new MartialStatusesRepository(_nevladinaOrgContext);
+
+        private IContactTypesRepository _contactTypesRepository;
+        public IContactTypesRepository ContactTypesRepository => _contactTypesRepository = _contactTypesRepository ?? new ContactTypesRepository(_nevladinaOrgContext);
+
+        private IRolesRepository _rolesRepository;
+        public IRolesRepository RolesRepository => _rolesRepository = _rolesRepository ?? new RolesRepository(_nevladinaOrgContext);
         #endregion
         #endregion
 
