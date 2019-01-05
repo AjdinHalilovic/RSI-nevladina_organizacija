@@ -14,6 +14,8 @@ namespace DAL
         IPersonUsersDTORepository PersonUsersDTORepository { get; }
 
         #region Dto's
+        ICitiesDTORepository CitiesDTORepository { get; }
+        IRegionsDTORepository RegionsDTORepository { get; }
         #endregion
 
         #region Entities
@@ -21,6 +23,16 @@ namespace DAL
         IUsersRepository UsersRepository{ get; }
         IInstitutionUsersRepository InstitutionUsersRepository{ get; }
         IOrganizationInstitutionUsersRepository OrganizationInstitutionUsersRepository{ get; }
+        ICitiesRepository CitiesRepository{ get; }
+        ICountriesRepository CountriesRepository { get; }
+        IRegionsRepository RegionsRepository { get; }
+        ICitizenshipsRepository CitizenshipsRepository { get; }
+        INationalitiesRepository NationalitiesRepository { get; }
+        IAcademicDegreesRepository AcademicDegreesRepository { get; }
+        IAcademicTitlesRepository AcademicTitlesRepository { get; }
+        IMartialStatusesRepository MartialStatusesRepository { get; }
+        IContactTypesRepository ContactTypesRepository { get; }
+        IRolesRepository RolesRepository { get; }
 
         #endregion
         #endregion

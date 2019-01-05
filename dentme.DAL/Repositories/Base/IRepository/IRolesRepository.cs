@@ -1,0 +1,11 @@
+﻿using Core.Entities.Base;
+using System.Collections.Generic;
+
+
+namespace DAL.Repositories.Base.IRepository
+{
+    public interface IRolesRepository:IRepository<Role,int>
+    {
+        bool GetExists(string name);
+    }
+}

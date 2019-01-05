@@ -35,6 +35,7 @@ namespace DAL.Contexts
         public virtual DbSet<Citizenship> Citizenships{ get; set; }
         public virtual DbSet<OrganizationType> OrganizationTypes{ get; set; }
         public virtual DbSet<Member> Members{ get; set; }
+        public virtual DbSet<Nationality> Nationalities { get; set; }
         #endregion
 
         public NevladinaOrgContext(DbContextOptions<NevladinaOrgContext> options) : base(options)

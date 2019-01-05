@@ -1,0 +1,110 @@
+﻿
+@inject Localizer Localizer
+
+@{
+    ViewData["Title"] = Localizer.Regional;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/app/css/custom.css" rel="stylesheet" type="text/css" />
+
+<div class="m-portlet m-portlet--head-sm m-portlet--tabs" m-portlet="true" style="">
+    <div class="m-portlet__head">
+        <div class="m-portlet__head-caption">
+            <div class="m-portlet__head-title">
+                <span class="m-portlet__head-icon">
+                    <i class="flaticon-map-location"></i>
+                </span>
+                <h3 class="m-portlet__head-text">
+                    @Localizer.Regional
+                </h3>
+            </div>
+        </div>
+        <div class="m-portlet__head-tools">
+            <ul class="m-portlet__nav">
+                <li class="m-portlet__nav-item">
+                    @*m-portlet-tool="reload"*@
+                    <a href="@Url.Action("Regional", "SystemSettings", new { area = "Administration" })" class="m-portlet__nav-link m-portlet__nav-link--icon">
+                        <i class="la la-refresh"></i>
+                    </a>
+                    <div class="m-tooltip m-tooltip--portlet tooltip bs-tooltip-top" role="tooltip" id="tooltip_96nmbb2r8k" aria-hidden="true" x-placement="bottom" style="position: absolute; will-change: transform; display: none; top: 0px; left: 0px; transform: translate3d(650px, 42px, 0px);">                            <div class="tooltip-arrow arrow" style="left: 0px;"></div>                            <div class="tooltip-inner">@Localizer.Reload</div>                        </div>
+                </li>
+                <li class="m-portlet__nav-item">
+                    <a href="" m-portlet-tool="fullscreen" class="m-portlet__nav-link m-portlet__nav-link--icon">
+                        <i class="la la-expand"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!--begin::Tab content-->
+    <div class="m-portlet__body">
+        <div class="row">
+            <div class="col-xl-3 col-lg-4 p-0">
+                <div class="m-tabs" data-tabs="true" data-tabs-contents="#m_sections">
+                    <ul class="m-nav m-nav--active-bg m-nav--active-bg-padding-lg m-nav--font-lg m-nav--font-bold m--margin-bottom-20 m--margin-top-10" id="m_nav" role="tablist">
+                        <li class="m-nav__item">
+                            <a class="m-nav__link m-tabs__item m-tabs__item--active" data-tab-target="#subtab_2_8_1" href="#">
+                                <span class="m-nav__link-text"><i class="fa flaticon-placeholder-2 margin-right-10"></i> @Localizer.Countries </span>
+                            </a>
+                        <li class="m-nav__item">
+                            <a class="m-nav__link m-tabs__item" data-tab-target="#subtab_2_8_2" href="#">
+                                <span class="m-nav__link-text"><i class="fa flaticon-placeholder-1 margin-right-10"></i> @Localizer.Regions </span>
+                            </a>
+                        </li>
+                        <li class="m-nav__item">
+                            <a class="m-nav__link m-tabs__item" data-tab-target="#subtab_2_8_3" href="#">
+                                <span class="m-nav__link-text"><i class="fa flaticon-placeholder margin-right-10"></i> @Localizer.Cities </span>
+                            </a>
+                        </li>
+                        <li class="m-nav__item">
+                            <a class="m-nav__link m-tabs__item" data-tab-target="#subtab_2_8_4" href="#">
+                                <span class="m-nav__link-text"><i class="fa flaticon-paper-plane margin-right-10"></i> @Localizer.Citizenships </span>
+                            </a>
+                        </li>
+                        <li class="m-nav__item">
+                            <a class="m-nav__link m-tabs__item" data-tab-target="#subtab_2_8_5" href="#">
+                                <span class="m-nav__link-text"><i class="fa flaticon-network margin-right-10"></i> @Localizer.Nationalities </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <div class="col-xl-9 col-lg-8">
+                <div class="m-tabs-content" id="m_sections">
+                    <div class="m-tabs-content__item m-tabs-content__item--active" id="subtab_2_8_1">
+                        @{ await Html.RenderPartialAsync("../Countries/_Index"); }
+                    </div>
+
+                    <div class="m-tabs-content__item" id="subtab_2_8_2">
+                        @{ await Html.RenderPartialAsync("../Regions/_Index"); }
+                    </div>
+
+                    <div class="m-tabs-content__item" id="subtab_2_8_3">
+                        @{ await Html.RenderPartialAsync("../Cities/_Index"); }
+                    </div>
+
+                    <div class="m-tabs-content__item" id="subtab_2_8_4">
+                        @{ await Html.RenderPartialAsync("../Citizenships/_Index"); }
+                    </div>
+
+                    <div class="m-tabs-content__item" id="subtab_2_8_5">
+                        @{ await Html.RenderPartialAsync("../Nationalities/_Index"); }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end::Tab content-->
+</div>
+
+<script>
+    $('.m-tabs__item').on('click', function (e) {
+        $(document).ready(function () {
+            $(".m-tabs-content__item--active .m_datatable").mDatatable("redraw");
+        });
+    });
+</script>
