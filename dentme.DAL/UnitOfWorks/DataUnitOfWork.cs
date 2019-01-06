@@ -10,17 +10,17 @@ namespace DAL
     public class DataUnitOfWork : IDataUnitOfWork
     {
         #region Contexts
-        private readonly NevladinaOrgContext _nevladinaOrgContext;
+        private readonly NevladinaOrgContext _NevladinaOrgContext;
         #endregion
 
-        public DataUnitOfWork(NevladinaOrgContext nevladinaOrgContext)
+        public DataUnitOfWork(NevladinaOrgContext NevladinaOrgContext)
         {
-            _nevladinaOrgContext = nevladinaOrgContext;
+            _NevladinaOrgContext = NevladinaOrgContext;
         }
         
         #region Uow's
         private IBaseUnitOfWork _baseUnitOfWork;
-        public IBaseUnitOfWork BaseUow => _baseUnitOfWork = _baseUnitOfWork ?? new BaseUnitOfWork(_nevladinaOrgContext);
+        public IBaseUnitOfWork BaseUow => _baseUnitOfWork = _baseUnitOfWork ?? new BaseUnitOfWork(_NevladinaOrgContext);
         #endregion
 
  

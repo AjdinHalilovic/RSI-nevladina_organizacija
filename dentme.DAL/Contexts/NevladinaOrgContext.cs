@@ -36,6 +36,25 @@ namespace DAL.Contexts
         public virtual DbSet<OrganizationType> OrganizationTypes{ get; set; }
         public virtual DbSet<Member> Members{ get; set; }
         public virtual DbSet<Nationality> Nationalities { get; set; }
+
+
+
+        public virtual DbSet<Event> Events { get; set; }
+        public virtual DbSet<EventDocument> EventDocuments{ get; set; }
+        public virtual DbSet<EventImage> EventImages{ get; set; }
+        public virtual DbSet<EventItem> EventItems{ get; set; }
+        public virtual DbSet<EventItemType> EventItemTypes { get; set; }
+        public virtual DbSet<EventItemEventType> EventItemEventTypes { get; set; }
+        public virtual DbSet<EventRegistration> EventRegistrations { get; set; }
+        public virtual DbSet<EventSponsor> EventSponsors { get; set; }
+        public virtual DbSet<EventUser> EventUsers { get; set; }
+        public virtual DbSet<Lecture> Lectures{ get; set; }
+        public virtual DbSet<Lecturer> Lecturers{ get; set; }
+        public virtual DbSet<LectureLecturer> LectureLecturers{ get; set; }
+        public virtual DbSet<Payment> Payments{ get; set; }
+        public virtual DbSet<Sponsor> Sponsors{ get; set; }
+        public virtual DbSet<SponsorType> SponsorTypes{ get; set; }
+
         #endregion
 
         public NevladinaOrgContext(DbContextOptions<NevladinaOrgContext> options) : base(options)
