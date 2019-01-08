@@ -1,0 +1,402 @@
+﻿@model EventPreviewViewModel
+@inject Localizer Localizer
+
+@{
+    ViewData["Title"] = Model.EventDTO.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/app/css/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+<link href="~/app/css/slick.css" rel="stylesheet" type="text/css" />
+<link href="~/app/css/slick-theme.css" rel="stylesheet" type="text/css" />
+<style>
+    .slick-prev:before, .slick-next:before{
+        color:black;
+    }
+</style>
+<div class="m-portlet m-portlet--full-height m-0 p-4">
+    <div class="modal-header justify-content-center flex-column">
+        <div class="m-portlet__head justify-content-center p-0 pb-4 w-100 border-0" style="box-sizing:content-box;">
+            <div class="m-portlet__head-caption ">
+                <div class="m-portlet__head-title flex-column">
+                    <h3 class="font-weight-bold">
+                        @Model.EventDTO.Name
+                    </h3>
+                    <h3 class="m-portlet__head-text">
+                        <i class="fa flaticon-placeholder-2"></i> &nbsp; @Model.EventDTO.Place <span>&nbsp;&#183;&nbsp;</span> @Model.EventDTO.City <span>&nbsp;&#183;&nbsp;</span> @Model.EventDTO.Country
+                    </h3>
+                    <h3 class="m-portlet__head-text">
+                        <i class="flaticon-calendar"></i>&nbsp; @Model.EventDTO.DateFrom - @Model.EventDTO.DateTo
+                    </h3>
+                </div>
+            </div>
+                <button type="button" id="AddRegistration" href="@Url.Action("AddRegistration", "Events", new { area = "Administration" })/?eventId=@Model.EventDTO.Id" class="bg-secondary border btn btn-outline-metal m-btn m-btn--custom m-btn--outline-2x position-absolute right" style="right: 0;">
+                    <h5 class="m-portlet__head-text m-0">
+                        @if (Model.UserAlreadyRegistred == true)
+                        {
+                            @:<i class="fa fa-check text-success"></i>&nbsp;
+                        }
+                        @Localizer.Register
+                    </h5>
+                </button>
+        </div>
+    </div>
+    <div class="">
+        <div class="tab-content">
+            <div class="tab-pane active" id="m_widget2_tab1_content" aria-expanded="true">
+                <!--begin:Timeline 1-->
+                <div class="m-timeline-1 m-timeline-1--fixed">
+                    <div class="m-timeline-1__items p-0" style="margin-bottom: 15px;">
+                        <div class="m-timeline-1__marker"></div>
+                        @{
+                            for (var i = 0; i < Model.EventItemsDTO.Count; i++)
+                            {
+                                var itemClass = string.Empty;
+                                if (i == 0)
+                                {
+                                    itemClass = "m-timeline-1__item m-timeline-1__item--left m-timeline-1__item--first";
+                                }
+                                else if (i % 2 != 0)
+                                {
+                                    itemClass = "m-timeline-1__item m-timeline-1__item--right";
+                                }
+                                else
+                                {
+                                    itemClass = "m-timeline-1__item m-timeline-1__item--left";
+                                }
+                                <div class="@itemClass">
+                                    <div class="m-timeline-1__item-circle"><div class="m--bg-danger"></div></div>
+                                    <div class="m-timeline-1__item-arrow"></div>
+                                    <span class="m-timeline-1__item-time d-flex w-100" style="right: 0;">
+                                        <span class="col-lg-4"><i class="fa flaticon-placeholder "></i>&nbsp; @Model.EventItemsDTO[i].ConferenceRoom</span>
+                                        <span class="col-lg-4"><i class="fa flaticon-calendar-2 "></i>&nbsp; @Model.EventItemsDTO[i].StartTime.Value.ToShortDateString()</span>
+                                        <span class="col-lg-4"><i class="fa flaticon-clock-2"></i>&nbsp; @Model.EventItemsDTO[i].StartTime.Value.ToShortTimeString() - @Model.EventItemsDTO[i].EndTime.Value.ToShortTimeString()</span>
+                                    </span>
+                                    <div class="m-timeline-1__item-content">
+                                        <div class="m-timeline-1__item-title">
+                                            @Model.EventItemsDTO[i].Name
+                                        </div>
+                                        <span class="text-primary font-weight-light">@Model.EventItemsDTO[i].EventItemTypeName</span>
+                                        <div class="m-timeline-1__item-body">
+                                            <div class="m-timeline-1__item-body m--margin-top-15">
+                                                @Html.Raw(Model.EventItemsDTO[i].AboutLecture)
+                                            </div>
+                                            <span class="text-primary font-weight-light">@Model.EventItemsDTO[i].Lecturers</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+                <div class=" justify-content-center p-0 w-100 border-top border-bottom" style="box-sizing:content-box;">
+                    <div class="m-portlet__head-caption col-lg-10 offset-lg-1 pt-4">
+                        <div class="m-portlet__head-title flex-column">
+                            <h5 class="text-center p-4">@Html.Raw(Model.EventDTO.Description)</h5>
+                        </div>
+                    </div>
+                </div>
+                @if (Model.SponsorsDTO.Count > 0)
+                {
+                    @:<div class="m-portlet__head justify-content-center p-0 border border-0" style="box-sizing:content-box;">
+                        <div class="m-portlet__head-caption ">
+                            <div class="m-portlet__head-title flex-column">
+                                <h3 class="m-portlet__head-text">
+                                    @Localizer.Sponsors
+                                </h3>
+                            </div>
+                        </div>
+                    @:</div>
+                    <div class="m-4 row justify-content-around">
+                        @if (Model.SponsorsDTO.Select(x => x.SponsorType).Contains("GOLD SPONSOR"))
+                        {
+                            <div class="col-lg-12 pb-4">
+                                <h4 class="text-warning rounded font-weight-bold mb-2 p-1 col-lg-4 offset-lg-4 text-center shadow bg-white">GOLD SPONSORS</h4>
+                            </div>
+                            <div class="row w-100" style="justify-content: space-evenly;">
+                                @foreach (var item in Model.SponsorsDTO)
+                                {
+                                    if (item.SponsorType == "GOLD SPONSOR")
+                                    {
+                                        <div class="col-lg-1 m-0 p-0">
+                                            @if (item.LogoBase64 != string.Empty)
+                                            {
+                                                <div class=" rounded shadow">
+                                                    <a href="@item.WebUrl" target="_blank"><img src="@item.LogoBase64" alt="Alternate Text" class="img-thumbnail border border-0 p-0 w-100" /></a>
+                                                </div>
+                                            }
+                                            <p class="font-weight-bold text-center p-2">@item.Name</p>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        }
+                        @if (Model.SponsorsDTO.Select(x => x.SponsorType).Contains("PLATINUM SPONSOR"))
+                        {
+                            <div class="col-lg-12 pb-4">
+                                <h4 class="text-info rounded font-weight-bold mb-2 p-1 col-lg-4 offset-lg-4 text-center shadow bg-white">PLATINUM SPONSORS</h4>
+                            </div>
+                            <div class="row w-100" style="justify-content: space-evenly;">
+                                @foreach (var item in Model.SponsorsDTO)
+                                {
+                                    if (item.SponsorType == "PLATINUM SPONSOR")
+                                    {
+                                        <div class="col-lg-1 m-0 p-0">
+                                            @if (item.LogoBase64 != string.Empty)
+                                            {
+                                                <div class=" rounded shadow">
+                                                    <a href="@item.WebUrl" target="_blank"><img src="@item.LogoBase64" alt="Alternate Text" class="img-thumbnail border border-0 p-0 w-100" /></a>
+                                                </div>
+                                            }
+                                            <p class="font-weight-bold text-center p-2">@item.Name</p>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        }
+                        @if (Model.SponsorsDTO.Select(x => x.SponsorType).Contains("MEDIA SPONSOR"))
+                        {
+                            <div class="col-lg-12 pb-4">
+                                <h4 class="text-danger rounded font-weight-bold mb-2 p-1 col-lg-4 offset-lg-4 text-center shadow bg-white">MEDIA SPONSORS</h4>
+                            </div>
+                            <div class="row w-100" style="justify-content: space-evenly;">
+                                @foreach (var item in Model.SponsorsDTO)
+                                {
+                                    if (item.SponsorType == "MEDIA SPONSOR")
+                                    {
+                                        <div class="col-lg-1 m-4 p-0">
+                                            @if (item.LogoBase64 != string.Empty)
+                                            {
+                                                <div class=" rounded shadow">
+                                                    <a href="@item.WebUrl" target="_blank"><img src="@item.LogoBase64" alt="Alternate Text" class="img-thumbnail border border-0 p-0 w-100" /></a>
+                                                </div>
+                                            }
+                                            <p class="font-weight-bold text-center p-2">@item.Name</p>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        }
+                    </div>
+                }
+
+                @if (Model.SrcImages.Count > 0 || Model.Documents.Count > 0)
+                {
+                    <div class="p-4">
+                        @*@if (Model.SrcImages.Count > 0)
+                            {
+                                <div class=" justify-content-center p-0 w-100 border-0" style="box-sizing:content-box;">
+                                    <div class="m-portlet__head-caption ">
+                                        <div class="m-portlet__head-title">
+                                            <h6 class="text-white p-4">@Localizer.Images</h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 pl-4 pr-4">
+                                        @foreach (var item in Model.SrcImages)
+                                        {
+                                            <a href="@item.Key" data-fancybox="gallery" data-caption="Caption ">
+                                                <img class="pr-4 pb-3" src="@item.Value" alt="" />
+                                            </a>
+                                        }
+                                    </div>
+                                </div>
+
+                            }*@
+                        @{
+                            if (Model.SrcImages.Count > 0)
+                            {
+                                <div class=" justify-content-center p-0 w-100 border-0" style="box-sizing:content-box;">
+                                    <div class="m-portlet__head-caption ">
+                                        <div class="m-portlet__head-title">
+                                            <h6 class=" text-center p-4">@Localizer.Images</h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-10 offset-lg-1 pl-4 pr-4">
+                                        <div class="responsive mr-4 ml-4 mb-0 pl-4 pr-4">
+                                            @foreach (var item in Model.SrcImages)
+                                            {
+                                                <div>
+                                                    <a href="@item.Key" data-fancybox="gallery" data-caption="Caption ">
+                                                        <img class="pl-2 pr-2 pb-3 mr-1 ml-2 shadow" src="@item.Value" alt="" />
+                                                    </a>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        @if (Model.Documents.Count > 0)
+                        {
+                            <div class=" justify-content-center p-0 w-100 border-0" style="box-sizing:content-box;">
+                                <div class="m-portlet__head-caption ">
+                                    <div class="m-portlet__head-title">
+                                        <h6 class="text-center p-4">@Localizer.Documents</h6>
+                                    </div>
+                                </div>
+
+                                <div class="m-widget4 col-lg-10 offset-lg-1">
+                                    @foreach (var item in Model.Documents)
+                                    {
+                                        <div class="m-widget4__item p-2">
+                                            <div class="m-widget4__img m-widget4__img--icon">
+                                                @if (item.Type == ".doc" || item.Type == ".docx")
+                                                {
+                                                    <img src="~/app/media/img/files/doc.svg" alt="">
+                                                }
+                                                else if (item.Type == ".xls" || item.Type == ".xlsx")
+                                                {
+                                                    <img src="~/app/media/img/files/xls.svg" alt="">
+                                                }
+                                                else if (item.Type == ".ppt" || item.Type == ".pptx")
+                                                {
+                                                    <img src="~/app/media/img/files/ppt.svg" alt="">
+                                                }
+                                                else if (item.Type == ".txt")
+                                                {
+                                                    <img src="~/app/media/img/files/txt.svg" alt="">
+                                                }
+                                                else if (item.Type == ".pdf")
+                                                {
+                                                    <img src="~/app/media/img/files/pdf.svg" alt="">
+                                                }
+
+                                            </div>
+                                            <div class="m-widget4__info">
+                                                <span class="">
+                                                    @item.Name
+                                                </span>
+                                            </div>
+                                            <div class="m-widget4__ext">
+                                                <a href="@Url.Action("DownloadEventDocument", "Downloads", new { area = "Administration" })/@item.Id" class="m-widget4__icon">
+                                                    <i class="la la-download"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    }
+
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                @if (Model.SrcImages.Count > 0 || Model.Documents.Count > 0)
+                {
+                    <div  class=" row justify-content-md-start">
+                        @if (Model.Documents.Count > 0 && Model.SrcImages.Count > 0)
+                        {
+                            <span class="col-lg-4">
+                                <a href="@Url.Action("DownloadAllEventFiles", "Downloads", new { area = "Administration" })/@Model.EventDTO.Id" class="col-lg-12 btn btn-sm m-btn border btn-outline-dark">@Localizer.DownloadAll</a>
+                            </span>
+                        }
+                        @if (Model.Documents.Count > 0)
+                        {
+                            <span class="col-lg-4">
+
+                                <a href="@Url.Action("DownloadAllEventDocuments", "Downloads", new { area = "Administration" })/@Model.EventDTO.Id" class="col-lg-12 btn m-btn btn-sm border btn-outline-dark">@Localizer.DownloadAll @Localizer.Documents</a>
+                            </span>
+
+                        }
+                        @if (Model.SrcImages.Count > 0)
+                        {
+                            <span class="col-lg-4">
+
+                                <a href="@Url.Action("DownloadAllEventImages", "Downloads", new { area = "Administration" })/@Model.EventDTO.Id" class=" col-lg-12 btn m-btn btn-sm border btn-outline-dark">@Localizer.DownloadAll @Localizer.Images</a>
+                            </span>
+
+                        }
+                    </div>
+                }
+
+
+                <!--End:Timeline 1-->
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+
+    <script src="~/app/js/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/app/js/slick.min.js"></script>
+    <script src="~/app/js/jquery.fancybox.min.js"></script>
+
+    <script>
+    $(document).ready(function () {
+        $('[data-fancybox="gallery"]').fancybox({
+            caption: function () { return ''; },
+            buttons: [
+                "zoom",
+                //"share",
+                //"slideShow",
+                "fullScreen",
+                //"download",
+                "thumbs",
+                "close"
+            ]
+        });
+        $('.responsive').slick({
+            lazyLoad: 'progressive',
+            dots: true,
+            infinite: true,
+            speed: 300,
+            slidesToShow: 5,
+            swipeToSlide: true,
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        infinite: true,
+                        dots: true
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                }
+                // You can unslick at a given breakpoint now by adding:
+                // settings: "unslick"
+                // instead of a settings object
+            ]
+        });
+
+        })
+        $('.slick-prev:before').css("color", "black");
+    $('img').bind('contextmenu', function (e) {
+        return false;
+    });
+    $('img').on('click', function (e) {
+        if (e.which == 3) {
+            return false;
+        }
+    });
+    $("body").on("mouseover", ".fancybox-container", function () {
+        $('img').bind('contextmenu', function (e) {
+            return false;
+        });
+    })
+    $("#AddRegistration").on("click", function () {
+        $.ajax({
+            url: "@Url.Action("AddRegistration", "Events", new { area = "Administration" })/?eventId=@Model.EventDTO.Id",
+            dataType: "JSON",
+            method: "GET",
+            success: function (data) {
+                NotificationHandler(data.value);
+                if (JSON.parse(data.value).Type != 3)
+                    closeModal();
+            }
+        });
+    })
+    </script>
+}

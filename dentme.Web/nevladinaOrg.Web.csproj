@@ -42,10 +42,16 @@
     <Compile Include="Areas\Administration\ViewModels\CityViewModel.cs" />
     <Compile Include="Areas\Administration\ViewModels\ContactTypeViewModel.cs" />
     <Compile Include="Areas\Administration\ViewModels\CountryViewModel.cs" />
+    <Compile Include="Areas\Administration\ViewModels\EventItemViewModel.cs" />
+    <Compile Include="Areas\Administration\ViewModels\EventPreviewViewModel.cs" />
+    <Compile Include="Areas\Administration\ViewModels\EventRegistrationViewModel.cs" />
     <Compile Include="Areas\Administration\ViewModels\EventViewModel.cs" />
     <Compile Include="Areas\Administration\ViewModels\MaritalStatusViewModel.cs" />
     <Compile Include="Areas\Administration\ViewModels\NationalityViewModel.cs" />
+    <Compile Include="Areas\Administration\ViewModels\PaymentViewModel.cs" />
     <Compile Include="Areas\Administration\ViewModels\RegionViewModel.cs" />
+    <Compile Include="Areas\Administration\ViewModels\RegistrationViewModel.cs" />
+    <Compile Include="Areas\Administration\ViewModels\SponsorViewModel.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -97,9 +103,18 @@
     <None Include="Areas\Administration\Views\Countries\_Add.cshtml" />
     <None Include="Areas\Administration\Views\Countries\_Edit.cshtml" />
     <None Include="Areas\Administration\Views\Countries\_Index.cshtml" />
+    <None Include="Areas\Administration\Views\Events\EventItems.cshtml" />
     <None Include="Areas\Administration\Views\Events\Index.cshtml" />
+    <None Include="Areas\Administration\Views\Events\Preview.cshtml" />
+    <None Include="Areas\Administration\Views\Events\Registrations.cshtml" />
+    <None Include="Areas\Administration\Views\Events\Sponsors.cshtml" />
     <None Include="Areas\Administration\Views\Events\_Add.cshtml" />
+    <None Include="Areas\Administration\Views\Events\_AddEventItem.cshtml" />
+    <None Include="Areas\Administration\Views\Events\_AddSponsor.cshtml" />
+    <None Include="Areas\Administration\Views\Events\_Confirm.cshtml" />
     <None Include="Areas\Administration\Views\Events\_Edit.cshtml" />
+    <None Include="Areas\Administration\Views\Events\_EditEventItem.cshtml" />
+    <None Include="Areas\Administration\Views\Events\_EditSponsor.cshtml" />
     <None Include="Areas\Administration\Views\InstitutionalSettings\General.cshtml" />
     <None Include="Areas\Administration\Views\InstitutionalSettings\Index.cshtml" />
     <None Include="Areas\Administration\Views\MaritalStatuses\_Add.cshtml" />

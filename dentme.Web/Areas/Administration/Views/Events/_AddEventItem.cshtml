@@ -1,0 +1,229 @@
+﻿@model EventItemViewModel
+
+@inject ISelectListHelper SelectList
+@inject Localizer Localizer
+@{
+    Layout = "~/Views/Shared/_ModalLayout.cshtml";
+}
+
+<div class="modal-header">
+    <h5 class="modal-title">@Localizer.AddEventItem</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>
+<form asp-antiforgery="true" enctype="multipart/form-data" data-ajax-url="@Url.Action("AddEventItem", "Events", new { area = "Administration" })" data-ajax="true" data-ajax-method="post" data-ajax-success="hideModal" data-ajax-update="#update-modal-lg">
+    <div class="modal-body pb-0">
+        <input hidden asp-for="SaveAndOptions" />
+        <input hidden asp-for="EventId" />
+
+
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="m-alert m-alert--icon m-alert--outline alert alert-danger alert-dismissible animated fadeIn" role="alert">
+                <div class="m-alert__icon">
+                    <i class="la la-warning"></i>
+                </div>
+                <div class="m-alert__text">
+                    @Html.ValidationSummary()
+                </div>
+                <div class="m-alert__close">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        }
+        <div class="form-group m-form__group row">
+            <div class="col-lg-12">
+                <label class="form-control-label">* @Localizer.Name</label>
+                <input type="text" class="form-control m-input" asp-for="Name" placeholder="@Localizer.Name">
+            </div>
+        </div>
+        <div class="form-group m-form__group row" data-select2-id="340">
+            <div class="col-lg-12 col-md-12 col-sm-12" data-select2-id="80">
+                <label class="form-control-label"> @Localizer.EventItemType</label>
+                <select asp-for="EventItemTypeIds" asp-items="@SelectList.EventItemTypes(false)" class="form-control m-select2 select2-hidden-accessible" id="m_select2_3" multiple="" data-select2-id="m_select2_3" tabindex="-1" aria-hidden="true"></select>
+            </div>
+        </div>
+        <div class="form-group m-form__group row">
+            <div class="col-lg-12">
+                <label class="form-control-label">* @Localizer.ConfereneRoom</label>
+                <input type="text" class="form-control m-input" asp-for="ConferenceRoom" placeholder="@Localizer.ConfereneRoom">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group m-form__group row">
+                    <div class="col-lg-12">
+                        <label class="form-control-label">* @Localizer.StartTime</label>
+                        <input type="text" class="datetime-picker form-control" id="m_datetimepicker_1" asp-for="StartTime" readonly="" placeholder="@Localizer.StartTime">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group m-form__group row">
+                    <div class="col-lg-12">
+                        <label class="form-control-label"> @Localizer.Duration</label>
+                        <input type="number" class="form-control m-input" asp-for="Duration" placeholder="@Localizer.Duration">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="m-radio-list pb-2 row">
+                    <div class="col-lg-6">
+                        <label class="m-checkbox">
+                            <input type="checkbox" class="isLecture" asp-for="IsLecture"> @Localizer.AddLectureAndLecturer
+                            <span></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" hidden id="NewOrExistsLecturer" >
+            <div class="row col-lg-12 pb-3 pr-0">
+                <div class="col-lg-6 text-center">
+                    <a href="#" class="btn btn-secondary btn-sm col-lg-12 dm--custom-radio-click">
+                        <label class="m-radio m-radio--air m-radio--state-success m-0">
+                            <input type="radio" asp-for="NewLecturer" class="NewLecturer" value="ExistsLecturer" />  @Localizer.SelectExistingLecturer
+                            <span></span>
+                        </label>
+                    </a>
+                </div>
+                <div class="col-lg-6 pr-0 text-center">
+                    <a href="#" class="btn btn-secondary btn-sm col-lg-12 dm--custom-radio-click">
+                        <label class="m-radio m-radio--air m-radio--state-success m-0">
+                            <input type="radio" asp-for="NewLecturer" class="NewLecturer" value="NewLecturer" />  @Localizer.AddNewLecturer
+                            <span></span>
+                        </label>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="LecturerArea" hidden>
+            <div id="ExistsLectureLecturer" hidden>
+                <div class="form-group m-form__group row" data-select2-id="340">
+                    <div class="col-lg-12 col-md-12 col-sm-12" data-select2-id="80">
+                        <label class="form-control-label"> @Localizer.SelectLecturers  </label>
+                        <select asp-for="LecturerIds" asp-items="@SelectList.Persons(false)" class="form-control m-select2 select2-hidden-accessible" id="m_select2_3_1" multiple="" data-select2-id="m_select2_3_1" tabindex="-1" aria-hidden="true"></select>
+
+                    </div>
+                </div>
+            </div>
+            <div id="LectureLecturer" hidden>
+                <div class="form-group m-form__group row" data-select2-id="340">
+                    <div class="col-lg-6 col-md-6 col-sm-6" data-select2-id="80">
+                        <label class="form-control-label"> @Localizer.FirstName  </label>
+                        <input type="text" class="form-control m-input" asp-for="LecturerFirstName" placeholder="@Localizer.FirstName">
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6" data-select2-id="80">
+                        <label class="form-control-label"> @Localizer.Surname  </label>
+                        <input type="text" class="form-control m-input" asp-for="LecturerLastName" placeholder="@Localizer.Surname">
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <div class="col-lg-12">
+                        <label class="form-control-label">* @Localizer.Details</label>
+                        <textarea class="summernote" asp-for="LecturerBiography" id="m_summernote_2" style="display: none;"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group m-form__group row" id="AboutLecutre" hidden>
+            <div class="col-lg-12">
+                <label class="form-control-label">* @Localizer.Desription</label>
+                <textarea class="summernote" asp-for="AboutLecture" id="m_summernote_2" style="display: none;"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="modal-footer">
+        <div class="form-actions right">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">@Localizer.Close</button>
+            <button type="submit" id="save" class="btn btn-primary">@Localizer.Save</button>
+        </div>
+    </div>
+</form>
+<span id="addItemSelectLecturersPlaceholder" hidden>@Localizer.SelectLecturers</span>
+@section scripts {
+    <script src="~/demo/default/custom/crud/forms/widgets/summernote.js" type="text/javascript"></script>
+    <script src="~/demo/default/custom/crud/forms/widgets/dropzone.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        function hideModal(data) {
+            if (data.success) {
+                closeModal();
+
+                NotificationHandler(data.notification.value);
+            }
+        }
+        $(document).ready(function () {
+            $('#m_summernote_2').summernote({ height: 100 });
+
+            var Select2 = {
+                init: function () {
+                    $("#m_select2_3, #m_select2_3_validate").select2({
+                        placeholder: "@Localizer.SelectEventItemTypes"
+                    })
+                    $("#m_select2_3_1, #m_select2_3_1_validate").select2({
+                        placeholder: $("#addItemSelectLecturersPlaceholder").text()
+                    })
+                }
+            }
+            Select2.init();
+            $(".select2-container, .select2-search, .select2-search__field").css("width", "100%");
+
+            function hideShowLecture() {
+                if ($(".isLecture").attr('checked') === "checked") {
+                    $('#NewOrExistsLecturer').attr('hidden', '');
+                    $(".isLecture").removeAttr('checked');
+                    $("#AboutLecutre").attr('hidden', '');
+                    $("#LecturerArea").attr('hidden', '');
+                }
+                else if ($(".isLecture").attr('checked')===undefined) {
+                    $('#NewOrExistsLecturer').removeAttr('hidden');
+                    $(".isLecture").attr('checked', 'checked');
+                    $("#AboutLecutre").removeAttr('hidden');
+                    $("#LecturerArea").removeAttr('hidden');
+                }
+            }
+            function initHideShowLecture() {
+                if ($(".isLecture").attr('checked') === "checked") {
+                    $('#NewOrExistsLecturer').removeAttr('hidden');
+                    $("#AboutLecutre").removeAttr('hidden');
+                    $("#LecturerArea").removeAttr('hidden');
+                    $(".isLecture").attr('checked', 'checked');
+                }
+                else if ($(".isLecture").attr('checked') === undefined) {
+                    $('#NewOrExistsLecturer').attr('hidden', '');
+                    $("#AboutLecutre").attr('hidden', '');
+                    $("#LecturerArea").attr('hidden', '');
+                    $(".isLecture").removeAttr('checked');
+                }
+            }
+            function HideShowNewOrExistsLecturer() {
+                console.log($(".NewLecturer:checked").val());
+                if ($(".NewLecturer:checked").val() == "ExistsLecturer") {
+                    $("#ExistsLectureLecturer").removeAttr('hidden');
+                    $("#LectureLecturer").attr('hidden', '');
+                }
+                else if ($(".NewLecturer:checked").val() == "NewLecturer") {
+                    $("#LectureLecturer").removeAttr('hidden');
+                    $("#ExistsLectureLecturer").attr('hidden', '');
+                }
+                else {
+                    $("#ExistsLectureLecturer").attr('hidden');
+                    $("#LectureLecturer").attr('hidden');
+                }
+            }
+            HideShowNewOrExistsLecturer();
+            initHideShowLecture();
+            $(".isLecture").on("click", function (e) {
+                hideShowLecture();
+            })
+            $(".NewLecturer").on("change", function () {
+                HideShowNewOrExistsLecturer();
+            })
+        })
+    </script>
+}

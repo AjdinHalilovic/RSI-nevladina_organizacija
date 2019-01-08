@@ -696,7 +696,973 @@ namespace nevladinaOrg.Web.Areas.Administration.Controllers
         }
         #endregion
 
-       
+        #region Registrations
+
+  #region Index
+        public IActionResult Registrations(int id)
+        {
+            var registrationsModel = new RegistrationViewModel
+            {
+                EventId = id,
+                EventName = _dataUnitOfWork.BaseUow.EventsRepository.GetById(id).Name
+            };
+
+            return View(MagicStrings.ViewNames.Registrations, registrationsModel);
+        }
+        public JsonResult JsonRegistrations(int id)
+        {
+            var registrationsModel = new RegistrationViewModel
+            {
+                EventName = _dataUnitOfWork.BaseUow.EventsRepository.GetById(id).Name,
+                eventRegistrations = _dataUnitOfWork.BaseUow.EventRegistrationsRepository.GetByEventId(id),
+                registrations = new List<EventRegistrationViewModel>()
+            };
+
+            foreach (var item in registrationsModel.eventRegistrations)
+            {
+                var obj = new EventRegistrationViewModel
+                {
+                    registration = item,
+                    UserFirstName = _dataUnitOfWork.BaseUow.PersonsRepository.GetById(item.UserId).FirstName,
+                    UserLastName = _dataUnitOfWork.BaseUow.PersonsRepository.GetById(item.UserId).LastName
+                };
+
+                registrationsModel.registrations.Add(obj);
+            }
+
+            var registrationsJson = JsonConvert.SerializeObject(registrationsModel.registrations);
+
+            return new JsonResult(registrationsJson);
+        }
+        #endregion
+
+        #region Add
+
+        public IActionResult AddRegistration(int eventId)
+        {
+            Notification notification = null;
+            var loggedUser = LoggedUserIds.UserId;
+            if (_dataUnitOfWork.BaseUow.EventRegistrationsRepository.GetExists(eventId, loggedUser))
+            {
+                notification = new Notification(NotificationTypes.Error, _localizer.Error, _localizer.RegistrationAlreadyExists);
+                return Json(notification.ConvertToJson());
+            }
+            var _event = _dataUnitOfWork.BaseUow.EventsRepository.GetById(eventId);
+            if (DateTime.Now > _event.DateFrom)
+            {
+                notification = new Notification(NotificationTypes.Error, _localizer.Error, _localizer.EventHasAlreadyBegun);
+                return Json(notification.ConvertToJson());
+            }
+            var registration = new EventRegistration()
+            {
+                EventId = eventId,
+                UserId = loggedUser,
+                DateOfRegistration = DateTime.Now,
+                Paid = false
+            };
+            try
+            {
+                _dataUnitOfWork.BaseUow.EventRegistrationsRepository.Add(registration);
+                _dataUnitOfWork.BaseUow.EventRegistrationsRepository.SaveChanges();
+
+                notification = new Notification(NotificationTypes.Success, _localizer.Register, string.Format(_localizer.SuccessfullyAddedRegistration, _dataUnitOfWork.BaseUow.EventsRepository.GetById(eventId).Name));
+                _logger.Log(Enumerations.LogTypes.Info, Enumerations.LogActivity.Add, Tables.Base.EventRegistrations, registration.Id, GetControllerName(), GetActionName(), null);
+            }
+            catch (Exception ex)
+            {
+                notification = new Notification(NotificationTypes.Error, Localizer.ErrorFriendly, Localizer.AnErrorOccurredFriendly);
+                _logger.Log(Enumerations.LogTypes.Error, Enumerations.LogActivity.Add, Tables.Base.EventRegistrations, registration.Id, GetControllerName(), GetActionName(), ex);
+            }
+            return Json(notification.ConvertToJson());
+        }
+
+        #endregion
+
+        #region Delete
+        public JsonResult DeleteRegistration(int Id)
+        {
+            Notification notification = null;
+            using (IDbContextTransaction contextTransaction = _dataUnitOfWork.BaseUow.EventRegistrationsRepository.BeginTransaction())
+            {
+                try
+                {
+                    var model = _dataUnitOfWork.BaseUow.EventRegistrationsRepository.GetById(Id);
+
+                    _dataUnitOfWork.BaseUow.EventRegistrationsRepository.Remove(model);
+                    var payment = _dataUnitOfWork.BaseUow.PaymentsRepository.Remove(Id);
+                    _dataUnitOfWork.BaseUow.EventRegistrationsRepository.SaveChanges();
+
+                    contextTransaction.Commit();
+                    if (payment != null)
+                    {
+                        _logger.Log(Enumerations.LogTypes.Info, Enumerations.LogActivity.Delete, Tables.Base.Payments, payment.Value, GetControllerName(), GetActionName(), null);
+                    }
+                    _logger.Log(Enumerations.LogTypes.Info, Enumerations.LogActivity.Delete, Tables.Base.EventRegistrations, Id, GetControllerName(), GetActionName(), null);
+                    notification = new Notification(NotificationTypes.Success, _localizer.Removed, string.Format(_localizer.SuccessfullyRemovedName, _localizer.Registration));
+                }
+                catch (Exception ex)
+                {
+                    contextTransaction.Rollback();
+                    notification = new Notification(NotificationTypes.Error, Localizer.ErrorFriendly, Localizer.AnErrorOccurredFriendly);
+                    _logger.Log(Enumerations.LogTypes.Error, Enumerations.LogActivity.Delete, Tables.Base.EventRegistrations, Id, GetControllerName(), GetActionName(), ex);
+                }
+            }
+            return Json(notification.ConvertToJson());
+
+        }
+        public JsonResult DeleteAllRegistrations(List<int> list)
+        {
+            var removedEventRegistrations = new List<int>();
+            var removedEventPayments = new List<int>();
+
+            Notification notification = null;
+            using (IDbContextTransaction contextTransaction = _dataUnitOfWork.BaseUow.EventRegistrationsRepository.BeginTransaction())
+            {
+                try
+                {
+                    foreach (var item in list)
+                    {
+                        _dataUnitOfWork.BaseUow.EventRegistrationsRepository.Remove(_dataUnitOfWork.BaseUow.EventRegistrationsRepository.GetById(item));
+                        removedEventRegistrations.Add(item);
+                        if (_dataUnitOfWork.BaseUow.PaymentsRepository.Remove(item) != null)
+                        {
+                            removedEventPayments.Add(_dataUnitOfWork.BaseUow.PaymentsRepository.Remove(item).Value);
+                        }
+                    }
+                    _dataUnitOfWork.BaseUow.PaymentsRepository.SaveChanges();
+                    _dataUnitOfWork.BaseUow.EventRegistrationsRepository.SaveChanges();
+
+                    contextTransaction.Commit();
+                    foreach (var item in removedEventPayments)
+                    {
+                        if (item != 0)
+                        {
+                            _logger.Log(Enumerations.LogTypes.Info, Enumerations.LogActivity.Delete, Tables.Base.Payments, item, GetControllerName(), GetActionName(), null);
+                        }
+                    }
+                    foreach (var item in removedEventRegistrations)
+                    {
+                        _logger.Log(Enumerations.LogTypes.Info, Enumerations.LogActivity.Delete, Tables.Base.EventRegistrations, item, GetControllerName(), GetActionName(), null);
+                    }
+                    notification = new Notification(NotificationTypes.Success, Localizer.Removed, string.Format(Localizer.SuccessfullyRemovedName, Localizer.Registrations));
+                }
+                catch (Exception ex)
+                {
+                    contextTransaction.Rollback();
+                    notification = new Notification(NotificationTypes.Error, Localizer.ErrorFriendly, Localizer.AnErrorOccurredFriendly);
+                    foreach (var item in list)
+                    {
+                        _logger.Log(Enumerations.LogTypes.Error, Enumerations.LogActivity.Delete, Tables.Base.EventRegistrations, item, GetControllerName(), GetActionName(), ex);
+                    }
+                }
+            }
+            return Json(notification.ConvertToJson());
+
+        }
+        #endregion
+
+        #region Confirm registration
+        public IActionResult Confirm(int id)
+        {
+            var model = new PaymentViewModel
+            {
+                eventRegistration = _dataUnitOfWork.BaseUow.EventRegistrationsRepository.GetById(id)
+            };
+
+            model.UserFirstName = _dataUnitOfWork.BaseUow.PersonsRepository.GetById(model.eventRegistration.UserId).FirstName;
+            model.UserLastName = _dataUnitOfWork.BaseUow.PersonsRepository.GetById(model.eventRegistration.UserId).LastName;
+            return PartialView(MagicStrings.ViewNames._Confirm, model);
+        }
+        [HttpPost, ValidateAntiForgeryToken]
+        public IActionResult Confirm(PaymentViewModel model)
+        {
+            if (model.Amount == default(int))
+                ModelState.AddModelError(nameof(Localizer.ErrorMessageAmountReq), Localizer.ErrorMessageAmountReq);
+
+            if (_dataUnitOfWork.BaseUow.PaymentsRepository.GetExists(model.eventRegistration.Id))
+                ModelState.AddModelError(nameof(Localizer.ErrorMessagePaymentForRegistrationExists), Localizer.ErrorMessagePaymentForRegistrationExists);
+
+            if (!ModelState.IsValid)
+                return PartialView(MagicStrings.ViewNames._Confirm, model);
+            using (IDbContextTransaction contextTransaction = _dataUnitOfWork.BaseUow.EventRegistrationsRepository.BeginTransaction())
+            {
+                try
+                {
+                    var _model = new Payment();
+                    _model = model;
+                    _model.DateOfPayment = DateTime.Now;
+                    _model.RegistrationId = model.eventRegistration.Id;
+                    _dataUnitOfWork.BaseUow.PaymentsRepository.Add(_model);
+
+                    var registration = _dataUnitOfWork.BaseUow.EventRegistrationsRepository.GetById(model.eventRegistration.Id);
+                    registration.Paid = true;
+                    _dataUnitOfWork.BaseUow.EventRegistrationsRepository.Update(registration);
+
+                    _dataUnitOfWork.BaseUow.PaymentsRepository.SaveChanges();
+                    _dataUnitOfWork.BaseUow.EventRegistrationsRepository.SaveChanges();
+
+                    contextTransaction.Commit();
+                    _logger.Log(Enumerations.LogTypes.Info, Enumerations.LogActivity.Edit, Tables.Base.EventRegistrations, registration.Id, GetControllerName(), GetActionName(), null);
+                    _logger.Log(Enumerations.LogTypes.Info, Enumerations.LogActivity.Add, Tables.Base.Payments, _model.Id, GetControllerName(), GetActionName(), null);
+
+                    return Json(new { success = true, notification = new Notification(NotificationTypes.Success, Localizer.Saved, string.Format(Localizer.SuccessfullyConfirmedRegistration, model.UserFirstName + " " + model.UserLastName)).ConvertToJson() });
+                }
+                catch (Exception ex)
+                {
+                    contextTransaction.Rollback();
+                    ModelState.AddModelError(nameof(Localizer.Error), Localizer.Error);
+                    _logger.Log(Enumerations.LogTypes.Error, Enumerations.LogActivity.Edit, Tables.Base.EventRegistrations, model.eventRegistration.Id, GetControllerName(), GetActionName(), ex);
+                }
+            }
+            return PartialView(MagicStrings.ViewNames._Confirm, model);
+        }
+        #endregion
+
+        #endregion
+
+        #region Sponsors
+
+        #region Index
+        public IActionResult Sponsors(int id)
+        {
+            var model = new SponsorViewModel
+            {
+                EventId = id,
+                EventName = _dataUnitOfWork.BaseUow.EventsRepository.GetById(id).Name
+            };
+
+            return View(MagicStrings.ViewNames.Sponsors, model);
+        }
+        public JsonResult JsonSponsors(int id)
+        {
+            var sponsors = _dataUnitOfWork.BaseUow.SponsorsDTORepository.GetByEventId(id);
+            var sponsorsJson = JsonConvert.SerializeObject(sponsors);
+
+            return new JsonResult(sponsorsJson);
+        }
+        #endregion
+
+        #region Add
+
+        public IActionResult AddSponsor(Enumerations.SaveAndOptions option, int eventId)
+        {
+            return PartialView(MagicStrings.ViewNames._AddSponsor, new SponsorViewModel() { SaveAndOptions = option, EventId = eventId });
+        }
+        [HttpPost, ValidateAntiForgeryToken]
+        public IActionResult AddSponsor(SponsorViewModel model)
+        {
+            if (model.NewSponsor == "exists" && model.SponsorId < 1)
+                ModelState.AddModelError(nameof(Localizer.ErrormessageSponsorReq), Localizer.ErrormessageSponsorReq);
+            else if (model.NewSponsor == "new")
+            {
+                if (model.Name == null)
+                    ModelState.AddModelError(nameof(Localizer.ErrorMessageNameReq), Localizer.ErrorMessageNameReq);
+                if (model.WebUrl == null)
+                    ModelState.AddModelError(nameof(Localizer.ErrorMessageWebUrlReq), Localizer.ErrorMessageWebUrlReq);
+                if (_dataUnitOfWork.BaseUow.SponsorsRepository.GetExists(model.Name))
+                    ModelState.AddModelError(nameof(Localizer.RecordAlreadyExists), Localizer.RecordAlreadyExists);
+            }
+            if (!ModelState.IsValid)
+                return PartialView(MagicStrings.ViewNames._AddSponsor, model);
+            if (model.NewSponsor == "exists" && _dataUnitOfWork.BaseUow.EventSponsorsRepository.GetExists(model.SponsorId, model.EventId))
+                ModelState.AddModelError(nameof(Localizer.RecordAlreadyExists), Localizer.RecordAlreadyExists);
+
+            DirectoryInfo di = new DirectoryInfo(_hostingEnvironment.WebRootPath + "\\uploads\\dropzone-temp\\");
+            foreach (var formFile in di.GetFiles())
+            {
+                if (formFile.Length > 0)
+                {
+                    if (!Data.PhotoFormats.Contains(System.IO.Path.GetExtension(formFile.Extension).ToLower()))
+                    {
+                        ModelState.AddModelError(nameof(Localizer.UploadTypeFileNotSupported), string.Format(Localizer.UploadTypeFileNotSupported, System.IO.Path.GetExtension(formFile.Extension)));
+                    }
+                }
+            }
+            if (ModelState.IsValid)
+            {
+
+                var sponsor = new Sponsor();
+                var eventSponsor = new EventSponsor { SponsorTypeId = model.SponsorTypeId, EventId = model.EventId };
+                using (IDbContextTransaction contextTransaction = _dataUnitOfWork.BaseUow.SponsorsRepository.BeginTransaction())
+                {
+                    try
+                    {
+                        if (model.NewSponsor == "new")
+                        {
+                            sponsor = model;
+                            var file = di.GetFiles();
+                            if (file.Count() > 0)
+                            {
+                                sponsor.Logo = System.IO.File.ReadAllBytes(file[0].FullName);
+                            }
+                            _dataUnitOfWork.BaseUow.SponsorsRepository.Add(sponsor);
+                            _dataUnitOfWork.BaseUow.SponsorsRepository.SaveChanges();
+                            _logger.Log(Enumerations.LogTypes.Info, Enumerations.LogActivity.Add, Tables.Base.Sponsors, sponsor.Id, GetControllerName(), GetActionName(), null);
+
+                            eventSponsor.SponsorId = sponsor.Id;
+                        }
+                        else
+                            eventSponsor.SponsorId = model.SponsorId;
+
+                        _dataUnitOfWork.BaseUow.EventSponsorsRepository.Add(eventSponsor);
+                        _dataUnitOfWork.BaseUow.EventSponsorsRepository.SaveChanges();
+
+                        contextTransaction.Commit();
+                        _imageHelper.DropzoneCleaner();
+                        _logger.Log(Enumerations.LogTypes.Info, Enumerations.LogActivity.Add, Tables.Base.EventSponsors, eventSponsor.Id, GetControllerName(), GetActionName(), null);
+                        return Json(new { success = true, notification = new Notification(NotificationTypes.Success, Localizer.Saved, string.Format(Localizer.SuccessfullySavedAndRecordName, Localizer.Sponsor)).ConvertToJson() });
+                    }
+                    catch (Exception ex)
+                    {
+                        contextTransaction.Rollback();
+                        foreach (FileInfo file in di.GetFiles())
+                        {
+                            file.Delete();
+                        }
+                        ModelState.AddModelError(nameof(Localizer.Error), Localizer.Error);
+
+                        _logger.Log(Enumerations.LogTypes.Error, Enumerations.LogActivity.Add, Tables.Base.EventSponsors, sponsor.Id, GetControllerName(), GetActionName(), ex);
+                    }
+                }
+            }
+            return PartialView(MagicStrings.ViewNames._AddSponsor, model);
+        }
+
+        #endregion
+
+        #region Edit
+
+        public IActionResult EditSponsor(int Id)
+        {
+            EventSponsor eventSponsor = _dataUnitOfWork.BaseUow.EventSponsorsRepository.GetById(Id);
+            SponsorViewModel model = _dataUnitOfWork.BaseUow.SponsorsRepository.GetById(eventSponsor.SponsorId);
+            model.SponsorTypeId = eventSponsor.SponsorTypeId;
+            model.EventId = eventSponsor.EventId;
+            model.NewSponsor = "none";
+            model.Id = Id;
+            return PartialView(MagicStrings.ViewNames._EditSponsor, model);
+        }
+        [HttpPost, ValidateAntiForgeryToken]
+        public IActionResult EditSponsor(SponsorViewModel model)
+        {
+            if (model.Name == null)
+                ModelState.AddModelError(nameof(Localizer.ErrorMessageNameReq), Localizer.ErrorMessageNameReq);
+            if (model.WebUrl == null)
+                ModelState.AddModelError(nameof(Localizer.ErrorMessageWebUrlReq), Localizer.ErrorMessageWebUrlReq);
+            DirectoryInfo di = new DirectoryInfo(_hostingEnvironment.WebRootPath + "\\uploads\\dropzone-temp\\");
+            foreach (var formFile in di.GetFiles())
+            {
+                if (formFile.Length > 0)
+                {
+                    if (!Data.PhotoFormats.Contains(System.IO.Path.GetExtension(formFile.Extension)))
+                    {
+                        ModelState.AddModelError(nameof(Localizer.UploadTypeFileNotSupported), string.Format(Localizer.UploadTypeFileNotSupported, System.IO.Path.GetExtension(formFile.Extension)));
+                    }
+                }
+            }
+            if (!ModelState.IsValid)
+                return PartialView(MagicStrings.ViewNames._EditSponsor, model);
+            using (IDbContextTransaction contextTransaction = _dataUnitOfWork.BaseUow.SponsorsRepository.BeginTransaction())
+            {
+                try
+                {
+                    Sponsor sponsor = new Sponsor();
+                    sponsor = _dataUnitOfWork.BaseUow.SponsorsRepository.GetById(model.SponsorId);
+                    sponsor.Name = model.Name;
+                    sponsor.WebUrl = model.WebUrl;
+                    sponsor.Description = model.Description;
+                    var file = di.GetFiles();
+                    if (file.Count() > 0)
+                    {
+                        sponsor.Logo = System.IO.File.ReadAllBytes(file[0].FullName);
+                    }
+                    else if (_dataUnitOfWork.BaseUow.SponsorsRepository.GetById(sponsor.Id).Logo != null)
+                    {
+                        sponsor.Logo = _dataUnitOfWork.BaseUow.SponsorsRepository.GetById(sponsor.Id).Logo;
+                    }
+                    _dataUnitOfWork.BaseUow.SponsorsRepository.Update(sponsor);
+                    _dataUnitOfWork.BaseUow.SponsorsRepository.SaveChanges();
+                    _logger.Log(Enumerations.LogTypes.Info, Enumerations.LogActivity.Edit, Tables.Base.Sponsors, model.SponsorId, GetControllerName(), GetActionName(), null);
+
+                    var eventSponsor = new EventSponsor { Id = model.Id, SponsorId = sponsor.Id, EventId = model.EventId, SponsorTypeId = model.SponsorTypeId };
+                    _dataUnitOfWork.BaseUow.EventSponsorsRepository.Update(eventSponsor);
+                    _dataUnitOfWork.BaseUow.EventSponsorsRepository.SaveChanges();
+
+                    contextTransaction.Commit();
+                    _logger.Log(Enumerations.LogTypes.Info, Enumerations.LogActivity.Edit, Tables.Base.EventSponsors, eventSponsor.Id, GetControllerName(), GetActionName(), null);
+                    foreach (FileInfo files in di.GetFiles())
+                    {
+                        files.Delete();
+                    }
+                    return Json(new { success = true, notification = new Notification(NotificationTypes.Success, _localizer.Saved, string.Format(_localizer.SuccessfullySavedAndRecordName, model.Name)).ConvertToJson() });
+                }
+                catch (Exception ex)
+                {
+                    contextTransaction.Rollback();
+                    foreach (FileInfo file in di.GetFiles())
+                    {
+                        file.Delete();
+                    }
+                    ModelState.AddModelError(nameof(_localizer.Error), _localizer.Error);
+                    _logger.Log(Enumerations.LogTypes.Error, Enumerations.LogActivity.Edit, Tables.Base.EventSponsors, model.Id, GetControllerName(), GetActionName(), ex);
+                }
+            }
+
+            return PartialView(MagicStrings.ViewNames._EditSponsor, model);
+        }
+        #endregion
+
+        #region Delete
+
+        public JsonResult DeleteEventSponsor(int Id)
+        {
+            Notification notification = null;
+            try
+            {
+                var model = _dataUnitOfWork.BaseUow.EventSponsorsRepository.GetById(Id);
+
+                _dataUnitOfWork.BaseUow.EventSponsorsRepository.Remove(model);
+                _dataUnitOfWork.BaseUow.EventSponsorsRepository.SaveChanges();
+                _logger.Log(Enumerations.LogTypes.Info, Enumerations.LogActivity.Delete, Tables.Base.EventSponsors, Id, GetControllerName(), GetActionName(), null);
+                notification = new Notification(NotificationTypes.Success, _localizer.Removed, string.Format(_localizer.SuccessfullyRemovedName, _localizer.Sponsor));
+            }
+            catch (Exception ex)
+            {
+                notification = new Notification(NotificationTypes.Error, Localizer.ErrorFriendly, Localizer.AnErrorOccurredFriendly);
+                _logger.Log(Enumerations.LogTypes.Error, Enumerations.LogActivity.Delete, Tables.Base.EventSponsors, Id, GetControllerName(), GetActionName(), ex);
+            }
+            return Json(notification.ConvertToJson());
+
+        }
+        public JsonResult DeleteAllEventSponsors(List<int> list)
+        {
+            var removedEventSponsors = new List<int>();
+            Notification notification = null;
+            try
+            {
+                foreach (var item in list)
+                {
+                    _dataUnitOfWork.BaseUow.EventSponsorsRepository.Remove(_dataUnitOfWork.BaseUow.EventSponsorsRepository.GetById(item));
+                }
+                foreach (var item in list)
+                {
+                    _logger.Log(Enumerations.LogTypes.Info, Enumerations.LogActivity.Delete, Tables.Base.EventSponsors, item, GetControllerName(), GetActionName(), null);
+                }
+                notification = new Notification(NotificationTypes.Success, Localizer.Removed, string.Format(Localizer.SuccessfullyRemovedName, Localizer.Sponsors));
+            }
+            catch (Exception ex)
+            {
+                notification = new Notification(NotificationTypes.Error, Localizer.ErrorFriendly, Localizer.AnErrorOccurredFriendly);
+                foreach (var item in list)
+                {
+                    _logger.Log(Enumerations.LogTypes.Error, Enumerations.LogActivity.Delete, Tables.Base.EventRegistrations, item, GetControllerName(), GetActionName(), ex);
+                }
+            }
+            return Json(notification.ConvertToJson());
+
+        }
+
+        #endregion
+
+        #endregion
+
+        #region Event Items
+
+        #region Index
+        public IActionResult EventItems(int id)
+        {
+            var model = new EventItemViewModel
+            {
+                EventId = id,
+                EventName = _dataUnitOfWork.BaseUow.EventsRepository.GetById(id).Name
+            };
+
+            return View(MagicStrings.ViewNames.EventItems, model);
+        }
+        public JsonResult JsonEventItems(int id)
+        {
+            var eventItems = _dataUnitOfWork.BaseUow.EventItemsRepository.GetByEventId(id);
+            var eventItemsJson = JsonConvert.SerializeObject(eventItems);
+
+            return new JsonResult(eventItemsJson);
+        }
+        #endregion
+
+        #region Add
+
+        public IActionResult AddEventItem(Enumerations.SaveAndOptions option, int eventId)
+        {
+            return PartialView(MagicStrings.ViewNames._AddEventItem, new EventItemViewModel() { SaveAndOptions = option, EventId = eventId });
+        }
+        [HttpPost, ValidateAntiForgeryToken]
+        public IActionResult AddEventItem(EventItemViewModel model)
+        {
+            if (model.IsLecture)
+            {
+                if (model.AboutLecture == null)
+                {
+                    ModelState.AddModelError(nameof(Localizer.ErrorMessageAboutLectureReq), Localizer.ErrorMessageAboutLectureReq);
+                }
+                if (model.NewLecturer == "ExistsLecturer")
+                {
+                    if (model.LecturerIds == null)
+                    {
+                        ModelState.AddModelError(nameof(Localizer.ErrorMessageLecturerReq), Localizer.ErrorMessageLecturerReq);
+                    }
+                }
+                else if (model.NewLecturer == "NewLecturer")
+                {
+                    if (model.LecturerFirstName == null || model.LecturerLastName == null)
+                    {
+                        ModelState.AddModelError(nameof(Localizer.ErrorMessageLecturerReq), Localizer.ErrorMessageLecturerReq);
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError(nameof(Localizer.ErrorMessageSelectNewOrExistsLecturer), Localizer.ErrorMessageSelectNewOrExistsLecturer);
+                }
+            }
+            var _event = _dataUnitOfWork.BaseUow.EventsRepository.GetById(model.EventId);
+            if (model.StartTime < _event.DateFrom || model.StartTime > _event.DateTo)
+                ModelState.AddModelError(nameof(Localizer.ErrorMessageStartTimeBetweenDateFromDateTo), string.Format(Localizer.ErrorMessageStartTimeBetweenDateFromDateTo, _event.DateFrom.Value.ToShortDateString(), _event.DateTo.Value.ToShortDateString()));
+
+            if (!ModelState.IsValid)
+                return PartialView(MagicStrings.ViewNames._AddEventItem, model);
+
+            if (_dataUnitOfWork.BaseUow.EventItemsRepository.GetExists(model.Name, model.EventId))
+                ModelState.AddModelError(nameof(Localizer.RecordAlreadyExists), Localizer.RecordAlreadyExists);
+
+            if (ModelState.IsValid)
+            {
+                var eventItem = new EventItem();
+                using (IDbContextTransaction contextTransaction = _dataUnitOfWork.BaseUow.EventItemsRepository.BeginTransaction())
+                {
+                    try
+                    {
+                        model.EndTime = model.StartTime.Value.AddMinutes(model.Duration);
+                        eventItem = model;
+
+                        _dataUnitOfWork.BaseUow.EventItemsRepository.Add(eventItem);
+                        _dataUnitOfWork.BaseUow.EventItemsRepository.SaveChanges();
+                        _logger.Log(Enumerations.LogTypes.Info, Enumerations.LogActivity.Add, Tables.Base.EventItems, eventItem.Id, GetControllerName(), GetActionName(), null);
+
+                        foreach (var item in model.EventItemTypeIds)
+                        {
+                            var eventItemEventType = new EventItemEventType { EventItemId = eventItem.Id, EventItemTypeId = int.Parse(item) };
+                            _dataUnitOfWork.BaseUow.EventItemEventTypesRepository.Add(eventItemEventType);
+                            _dataUnitOfWork.BaseUow.EventItemEventTypesRepository.SaveChanges();
+                            _logger.Log(Enumerations.LogTypes.Info, Enumerations.LogActivity.Add, Tables.Base.EventItemEventTypes, eventItemEventType.Id, GetControllerName(), GetActionName(), null);
+                        }
+                        if (model.IsLecture)
+                        {
+                            var lecture = new Lecture { Id = eventItem.Id, AboutLecture = model.AboutLecture };
+                            _dataUnitOfWork.BaseUow.LecturesRepository.Add(lecture);
+                            _dataUnitOfWork.BaseUow.LecturesRepository.SaveChanges();
+                            _logger.Log(Enumerations.LogTypes.Info, Enumerations.LogActivity.Add, Tables.Base.Lectures, lecture.Id, GetControllerName(), GetActionName(), null);
+                            if (model.NewLecturer == "ExistsLecturer")
+                            {
+                                foreach (var item in model.LecturerIds)
+                                {
+                                    Lecturer lecturer = _dataUnitOfWork.BaseUow.LecturersRepository.GetByUserId(int.Parse(item));
+                                    if (lecturer == null)
+                                    {
+                                        lecturer = new Lecturer() { UserId = int.Parse(item) };
+                                        _dataUnitOfWork.BaseUow.LecturersRepository.Add(lecturer);
+                                        _dataUnitOfWork.BaseUow.LecturersRepository.SaveChanges();
+                                    }
+                                    var lectureLecturer = new LectureLecturer { LectureId = lecture.Id, LecturerId = lecturer.Id };
+                                    _dataUnitOfWork.BaseUow.LectureLecturersRepository.Add(lectureLecturer);
+                                    _dataUnitOfWork.BaseUow.LectureLecturersRepository.SaveChanges();
+                                    _logger.Log(Enumerations.LogTypes.Info, Enumerations.LogActivity.Add, Tables.Base.LectureLecturers, lectureLecturer.Id, GetControllerName(), GetActionName(), null);
+                                }
+                            }
+                            else
+                            {
+                                var lecturer = new Lecturer() { FirstName = model.LecturerFirstName, LastName = model.LecturerLastName, Biography = model.LecturerBiography };
+                                _dataUnitOfWork.BaseUow.LecturersRepository.Add(lecturer);
+                                _dataUnitOfWork.BaseUow.LecturersRepository.SaveChanges();
+
+                                var lectureLecturer = new LectureLecturer { LectureId = lecture.Id, LecturerId = lecturer.Id };
+                                _dataUnitOfWork.BaseUow.LectureLecturersRepository.Add(lectureLecturer);
+                                _dataUnitOfWork.BaseUow.LectureLecturersRepository.SaveChanges();
+                                _logger.Log(Enumerations.LogTypes.Info, Enumerations.LogActivity.Add, Tables.Base.LectureLecturers, lectureLecturer.Id, GetControllerName(), GetActionName(), null);
+                            }
+
+                        }
+                        var reviews = _dataUnitOfWork.BaseUow.EventUsersRepository.GetEventUsers(LoggedUserIds.UserId, _event.Id);
+                        _dataUnitOfWork.BaseUow.EventUsersRepository.SetEventReviews(LoggedUserIds.UserId, _event.Id, false);
+
+                        contextTransaction.Commit();
+                        foreach (var item in reviews)
+                        {
+                            _logger.Log(Enumerations.LogTypes.Info, Enumerations.LogActivity.Edit, Tables.Base.EventUsers, item.Id, GetControllerName(), GetActionName(), null);
+                        }
+                        return Json(new { success = true, notification = new Notification(NotificationTypes.Success, Localizer.Saved, string.Format(Localizer.SuccessfullySavedAndRecordName, model.Name)).ConvertToJson() });
+                    }
+                    catch (Exception ex)
+                    {
+                        contextTransaction.Rollback();
+                        ModelState.AddModelError(nameof(Localizer.Error), Localizer.Error);
+                        _logger.Log(Enumerations.LogTypes.Error, Enumerations.LogActivity.Add, Tables.Base.EventItems, eventItem.Id, GetControllerName(), GetActionName(), ex);
+                    }
+                }
+            }
+            return PartialView(MagicStrings.ViewNames._AddEventItem, model);
+        }
+
+        #endregion
+
+        #region Edit
+
+        public IActionResult EditEventItem(int Id)
+        {
+            var model = new EventItemViewModel();
+            model = _dataUnitOfWork.BaseUow.EventItemsRepository.GetById(Id);
+            model.EventItemTypeIds = _dataUnitOfWork.BaseUow.EventItemEventTypesRepository.GetByEventItemId(Id).Select(x => x.EventItemTypeId.ToString());
+            model.Duration = Convert.ToInt32((model.EndTime - model.StartTime).Value.TotalMinutes);
+            if (_dataUnitOfWork.BaseUow.LecturesRepository.GetById(Id) != null)
+            {
+                model.AboutLecture = _dataUnitOfWork.BaseUow.LecturesRepository.GetById(Id).AboutLecture;
+                model.IsLecture = true;
+
+                var lecturers = _dataUnitOfWork.BaseUow.LectureLecturersRepository.GetByLectureId(Id).ToList();
+
+                var lecturer = _dataUnitOfWork.BaseUow.LecturersRepository.GetById(lecturers.Select(x => x.LecturerId).FirstOrDefault());
+                if (lecturer.FirstName != null)
+                {
+                    model.NewLecturer = "NewLecturer";
+                    model.LecturerFirstName = lecturer.FirstName;
+                    model.LecturerLastName = lecturer.LastName;
+                    model.LecturerBiography = lecturer.Biography;
+                }
+                else
+                {
+                    model.NewLecturer = "ExistsLecturer";
+                    model.LecturerIds = lecturers.Select(x => x.LecturerId.ToString());
+                }
+            }
+            return PartialView(MagicStrings.ViewNames._EditEventItem, model);
+        }
+        [HttpPost, ValidateAntiForgeryToken]
+        public IActionResult EditEventItem(EventItemViewModel model)
+        {
+            if (model.IsLecture)
+            {
+                if (model.AboutLecture == null)
+                {
+                    ModelState.AddModelError(nameof(Localizer.ErrorMessageAboutLectureReq), Localizer.ErrorMessageAboutLectureReq);
+                }
+                if (model.NewLecturer == "ExistsLecturer")
+                {
+                    if (model.LecturerIds == null)
+                    {
+                        ModelState.AddModelError(nameof(Localizer.ErrorMessageLecturerReq), Localizer.ErrorMessageLecturerReq);
+                    }
+                }
+                else if (model.NewLecturer == "NewLecturer")
+                {
+                    if (model.LecturerFirstName == null || model.LecturerLastName == null)
+                    {
+                        ModelState.AddModelError(nameof(Localizer.ErrorMessageLecturerReq), Localizer.ErrorMessageLecturerReq);
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError(nameof(Localizer.ErrorMessageSelectNewOrExistsLecturer), Localizer.ErrorMessageSelectNewOrExistsLecturer);
+                }
+            }
+            if (!ModelState.IsValid)
+                return PartialView(MagicStrings.ViewNames._EditEventItem, model);
+
+            var eventItem = new EventItem();
+            using (IDbContextTransaction contextTransaction = _dataUnitOfWork.BaseUow.EventItemsRepository.BeginTransaction())
+            {
+                try
+                {
+                    model.EndTime = model.StartTime.Value.AddMinutes(model.Duration);
+                    eventItem = model;
+
+                    _dataUnitOfWork.BaseUow.EventItemsRepository.Update(eventItem);
+                    _dataUnitOfWork.BaseUow.EventItemsRepository.SaveChanges();
+                    _logger.Log(Enumerations.LogTypes.Info, Enumerations.LogActivity.Edit, Tables.Base.EventItems, eventItem.Id, GetControllerName(), GetActionName(), null);
+
+                    var existingEventItemEventTypes = _dataUnitOfWork.BaseUow.EventItemEventTypesRepository.GetByEventItemId(model.Id).Select(x => x.EventItemTypeId.ToString());
+                    var removedEventItemEventTypes = existingEventItemEventTypes.Where(x => !model.EventItemTypeIds.Contains(x));
+
+                    var newItemTypes = model.EventItemTypeIds.Where(x => !existingEventItemEventTypes.Contains(x)).Select(x => new EventItemEventType { EventItemId = model.Id, EventItemTypeId = int.Parse(x) });
+                    _dataUnitOfWork.BaseUow.EventItemEventTypesRepository.AddRange(newItemTypes);
+                    _dataUnitOfWork.BaseUow.EventItemEventTypesRepository.RemoveRange(_dataUnitOfWork.BaseUow.EventItemEventTypesRepository.GetByEventItemId(model.Id).Where(x => removedEventItemEventTypes.Contains(x.EventItemTypeId.ToString())));
+                    _dataUnitOfWork.BaseUow.EventItemEventTypesRepository.SaveChanges();
+
+                    foreach (var item in newItemTypes)
+                    {
+                        _logger.Log(Enumerations.LogTypes.Info, Enumerations.LogActivity.Add, Tables.Base.EventItemEventTypes, item.Id, GetControllerName(), GetActionName(), null);
+                    }
+                    foreach (var item in removedEventItemEventTypes)
+                    {
+                        _logger.Log(Enumerations.LogTypes.Info, Enumerations.LogActivity.Delete, Tables.Base.EventItemEventTypes, int.Parse(item), GetControllerName(), GetActionName(), null);
+                    }
+
+
+
+                    if (model.IsLecture)
+                    {
+                        var lecture = _dataUnitOfWork.BaseUow.LecturesRepository.GetById(model.Id);
+                        if (lecture != null)
+                        {
+                            lecture.AboutLecture = model.AboutLecture;
+                            _dataUnitOfWork.BaseUow.LecturesRepository.Update(lecture);
+                            _dataUnitOfWork.BaseUow.LecturesRepository.SaveChanges();
+                        }
+                        else
+                        {
+                            lecture = new Lecture { Id = eventItem.Id, AboutLecture = model.AboutLecture };
+                            _dataUnitOfWork.BaseUow.LecturesRepository.Add(lecture);
+                            _dataUnitOfWork.BaseUow.LecturesRepository.SaveChanges();
+                        }
+
+                        IEnumerable<LectureLecturer> newLectureLecturers = null;
+                        IEnumerable<int> removedLectureLecturers = null;
+                        var existingLectureLecturers = _dataUnitOfWork.BaseUow.LectureLecturersRepository.GetByLectureId(lecture.Id).Select(x => x.LecturerId).ToList();
+                        if (model.NewLecturer == "ExistsLecturer")
+                        {
+                            removedLectureLecturers = existingLectureLecturers.Where(x => !model.LecturerIds.Contains(x.ToString())).ToList();
+
+                            newLectureLecturers = model.LecturerIds.Where(x => !existingLectureLecturers.Contains(int.Parse(x))).Select(x => new LectureLecturer { LectureId = lecture.Id, LecturerId = int.Parse(x) });
+                            foreach (var lectureLecturer in newLectureLecturers)
+                            {
+                                var newLecturer = new Lecturer() { UserId = lectureLecturer.LecturerId };
+                                _dataUnitOfWork.BaseUow.LecturersRepository.Add(newLecturer);
+                                _dataUnitOfWork.BaseUow.LecturersRepository.SaveChanges();
+                            }
+                            _dataUnitOfWork.BaseUow.LectureLecturersRepository.AddRange(newLectureLecturers);
+                            _dataUnitOfWork.BaseUow.LectureLecturersRepository.RemoveRange(_dataUnitOfWork.BaseUow.LectureLecturersRepository.GetByLectureId(lecture.Id).Where(x => removedLectureLecturers.Contains(x.LecturerId)));
+                            _dataUnitOfWork.BaseUow.LectureLecturersRepository.SaveChanges();
+                            foreach (var item in newLectureLecturers)
+                            {
+                                _logger.Log(Enumerations.LogTypes.Info, Enumerations.LogActivity.Add, Tables.Base.LectureLecturers, item.Id, GetControllerName(), GetActionName(), null);
+                            }
+                        }
+                        else
+                        {
+                            var lecturer = new Lecturer() { FirstName = model.LecturerFirstName, LastName = model.LecturerLastName, Biography = model.LecturerBiography };
+                            _dataUnitOfWork.BaseUow.LecturersRepository.Add(lecturer);
+                            _dataUnitOfWork.BaseUow.LecturersRepository.SaveChanges();
+
+                            removedLectureLecturers = existingLectureLecturers.Where(x => lecturer.Id != x);
+                            var lectureLecturer = new LectureLecturer() { LectureId = lecture.Id, LecturerId = lecturer.Id };
+                            _dataUnitOfWork.BaseUow.LectureLecturersRepository.Add(lectureLecturer);
+                            _dataUnitOfWork.BaseUow.LectureLecturersRepository.RemoveRange(_dataUnitOfWork.BaseUow.LectureLecturersRepository.GetByLectureId(lecture.Id).Where(x => removedLectureLecturers.Contains(x.LecturerId)));
+                            _dataUnitOfWork.BaseUow.LectureLecturersRepository.SaveChanges();
+                            _logger.Log(Enumerations.LogTypes.Info, Enumerations.LogActivity.Add, Tables.Base.LectureLecturers, lectureLecturer.Id, GetControllerName(), GetActionName(), null);
+
+                        }
+
+                        _logger.Log(Enumerations.LogTypes.Info, Enumerations.LogActivity.Edit, Tables.Base.Lectures, lecture.Id, GetControllerName(), GetActionName(), null);
+                        foreach (var item in removedLectureLecturers)
+                        {
+                            _logger.Log(Enumerations.LogTypes.Info, Enumerations.LogActivity.Delete, Tables.Base.LectureLecturers, item, GetControllerName(), GetActionName(), null);
+                        }
+                    }
+                    else if (_dataUnitOfWork.BaseUow.LecturesRepository.GetById(model.Id) != null)
+                    {
+                        var existingLectureLecturers = _dataUnitOfWork.BaseUow.LectureLecturersRepository.GetByLectureId(model.Id);
+                        _dataUnitOfWork.BaseUow.LectureLecturersRepository.RemoveRange(existingLectureLecturers, false);
+                        _dataUnitOfWork.BaseUow.LectureLecturersRepository.SaveChanges();
+
+                        var lecture = _dataUnitOfWork.BaseUow.LecturesRepository.GetById(model.Id);
+                        _dataUnitOfWork.BaseUow.LecturesRepository.Remove(lecture);
+                        _dataUnitOfWork.BaseUow.LecturesRepository.SaveChanges();
+
+
+                        foreach (var item in existingLectureLecturers)
+                        {
+                            _logger.Log(Enumerations.LogTypes.Info, Enumerations.LogActivity.Delete, Tables.Base.LectureLecturers, item.Id, GetControllerName(), GetActionName(), null);
+                        }
+                        _logger.Log(Enumerations.LogTypes.Info, Enumerations.LogActivity.Delete, Tables.Base.Lectures, model.Id, GetControllerName(), GetActionName(), null);
+
+                    }
+                    var reviews = _dataUnitOfWork.BaseUow.EventUsersRepository.GetEventUsers(LoggedUserIds.UserId, model.EventId);
+                    _dataUnitOfWork.BaseUow.EventUsersRepository.SetEventReviews(LoggedUserIds.UserId, model.EventId, false);
+
+                    contextTransaction.Commit();
+                    foreach (var item in reviews)
+                    {
+                        _logger.Log(Enumerations.LogTypes.Info, Enumerations.LogActivity.Edit, Tables.Base.EventUsers, item.Id, GetControllerName(), GetActionName(), null);
+                    }
+                    return Json(new { success = true, notification = new Notification(NotificationTypes.Success, Localizer.Saved, string.Format(Localizer.SuccessfullySavedAndRecordName, model.Name)).ConvertToJson() });
+                }
+                catch (Exception ex)
+                {
+                    contextTransaction.Rollback();
+                    ModelState.AddModelError(nameof(Localizer.Error), Localizer.Error);
+                    _logger.Log(Enumerations.LogTypes.Error, Enumerations.LogActivity.Edit, Tables.Base.EventItems, eventItem.Id, GetControllerName(), GetActionName(), ex);
+                }
+            }
+            return PartialView(MagicStrings.ViewNames._EditEventItem, model);
+        }
+
+        #endregion
+
+        #region Delete
+
+        public JsonResult DeleteEventItem(int Id)
+        {
+            Notification notification = null;
+            using (IDbContextTransaction contextTransaction = _dataUnitOfWork.BaseUow.EventItemsRepository.BeginTransaction())
+            {
+                try
+                {
+                    var removedEventItemEventTypes = _dataUnitOfWork.BaseUow.EventItemEventTypesRepository.RemoveByEventItemId(Id);
+                    var removedLectureLecturers = _dataUnitOfWork.BaseUow.LectureLecturersRepository.RemoveByLectureId(Id);
+                    if (_dataUnitOfWork.BaseUow.LecturesRepository.GetById(Id) != null)
+                    {
+                        _dataUnitOfWork.BaseUow.LecturesRepository.Remove(_dataUnitOfWork.BaseUow.LecturesRepository.GetById(Id));
+                    }
+
+                    var eventItem = _dataUnitOfWork.BaseUow.EventItemsRepository.GetById(Id);
+                    _dataUnitOfWork.BaseUow.EventItemsRepository.Remove(eventItem);
+
+                    _dataUnitOfWork.BaseUow.EventItemsRepository.SaveChanges();
+
+                    contextTransaction.Commit();
+                    foreach (var item in removedEventItemEventTypes)
+                    {
+                        _logger.Log(Enumerations.LogTypes.Info, Enumerations.LogActivity.Delete, Tables.Base.EventItemEventTypes, item, GetControllerName(), GetActionName(), null);
+                    }
+                    foreach (var item in removedLectureLecturers)
+                    {
+                        _logger.Log(Enumerations.LogTypes.Info, Enumerations.LogActivity.Delete, Tables.Base.LectureLecturers, item, GetControllerName(), GetActionName(), null);
+                    }
+                    _logger.Log(Enumerations.LogTypes.Info, Enumerations.LogActivity.Delete, Tables.Base.Lectures, Id, GetControllerName(), GetActionName(), null);
+                    _logger.Log(Enumerations.LogTypes.Info, Enumerations.LogActivity.Delete, Tables.Base.EventItems, Id, GetControllerName(), GetActionName(), null);
+
+                    notification = new Notification(NotificationTypes.Success, _localizer.Removed, string.Format(_localizer.SuccessfullyRemovedName, eventItem.Name));
+                }
+                catch (Exception ex)
+                {
+                    contextTransaction.Rollback();
+                    notification = new Notification(NotificationTypes.Error, Localizer.ErrorFriendly, Localizer.AnErrorOccurredFriendly);
+                    _logger.Log(Enumerations.LogTypes.Error, Enumerations.LogActivity.Delete, Tables.Base.EventItems, Id, GetControllerName(), GetActionName(), ex);
+                }
+            }
+            return Json(notification.ConvertToJson());
+
+        }
+        public JsonResult DeleteAllEventItems(List<int> list)
+        {
+            var removedEventItemEventTypes = new List<List<int>>();
+            var removedLectureLecturers = new List<List<int>>();
+
+            Notification notification = null;
+            using (IDbContextTransaction contextTransaction = _dataUnitOfWork.BaseUow.EventItemsRepository.BeginTransaction())
+            {
+                try
+                {
+                    foreach (var item in list)
+                    {
+                        removedEventItemEventTypes.Add(_dataUnitOfWork.BaseUow.EventItemEventTypesRepository.RemoveByEventItemId(item));
+                        removedLectureLecturers.Add(_dataUnitOfWork.BaseUow.LectureLecturersRepository.RemoveByLectureId(item));
+                        if (_dataUnitOfWork.BaseUow.LecturesRepository.GetById(item) != null)
+                        {
+                            _dataUnitOfWork.BaseUow.LecturesRepository.Remove(_dataUnitOfWork.BaseUow.LecturesRepository.GetById(item));
+                        }
+                        _dataUnitOfWork.BaseUow.EventItemsRepository.Remove(_dataUnitOfWork.BaseUow.EventItemsRepository.GetById(item));
+                    }
+                    _dataUnitOfWork.BaseUow.EventItemsRepository.SaveChanges();
+
+                    contextTransaction.Commit();
+                    foreach (var item in removedEventItemEventTypes)
+                    {
+                        foreach (var item1 in item)
+                        {
+                            _logger.Log(Enumerations.LogTypes.Info, Enumerations.LogActivity.Delete, Tables.Base.EventItemEventTypes, item1, GetControllerName(), GetActionName(), null);
+                        }
+                    }
+                    foreach (var item in removedLectureLecturers)
+                    {
+                        foreach (var item1 in item)
+                        {
+                            _logger.Log(Enumerations.LogTypes.Info, Enumerations.LogActivity.Delete, Tables.Base.LectureLecturers, item1, GetControllerName(), GetActionName(), null);
+                        }
+                    }
+                    foreach (var item in list)
+                    {
+                        _logger.Log(Enumerations.LogTypes.Info, Enumerations.LogActivity.Delete, Tables.Base.EventItems, item, GetControllerName(), GetActionName(), null);
+                        _logger.Log(Enumerations.LogTypes.Info, Enumerations.LogActivity.Delete, Tables.Base.Lectures, item, GetControllerName(), GetActionName(), null);
+                    }
+                    notification = new Notification(NotificationTypes.Success, Localizer.Removed, string.Format(Localizer.SuccessfullyRemovedName, Localizer.EventItems));
+                }
+                catch (Exception ex)
+                {
+                    contextTransaction.Rollback();
+                    notification = new Notification(NotificationTypes.Error, Localizer.ErrorFriendly, Localizer.AnErrorOccurredFriendly);
+                    foreach (var item in list)
+                    {
+                        _logger.Log(Enumerations.LogTypes.Error, Enumerations.LogActivity.Delete, Tables.Base.EventItems, item, GetControllerName(), GetActionName(), ex);
+                    }
+                }
+            }
+            return Json(notification.ConvertToJson());
+
+        }
+
+        #endregion
+
+
+        #endregion
+
+        #region Preview
+        public IActionResult Preview(int Id)
+        {
+            EventPreviewViewModel model = new EventPreviewViewModel
+            {
+                UserAlreadyRegistred = _dataUnitOfWork.BaseUow.EventRegistrationsRepository.GetExists(Id, LoggedUserIds.InstitutionUserId),
+                EventDTO = _dataUnitOfWork.BaseUow.EventsDTORepository.GetByEventId(Id),
+                EventItemsDTO = _dataUnitOfWork.BaseUow.EventItemsDTORepository.GetByEventId(Id).ToList()
+            };
+
+            foreach (var item in model.EventItemsDTO)
+            {
+                if (item.Lecturers.Length == 1)
+                {
+                    var person = _dataUnitOfWork.BaseUow.PersonsRepository.GetById(int.Parse(item.Lecturers));
+                    item.Lecturers = person.FirstName + " " + person.LastName;
+                }
+            }
+            model.SponsorsDTO = _dataUnitOfWork.BaseUow.SponsorsDTORepository.GetByEventId(Id).ToList();
+            model.Documents = _dataUnitOfWork.BaseUow.EventDocumentsRepository.GetByEventId(Id).ToList();
+            model.SrcImages = new Dictionary<string, string>();
+            List<EventImage> byteFiles = new List<EventImage>(_dataUnitOfWork.BaseUow.EventImagesRepository.GetByEventId(Id).ToList());
+            foreach (var item in byteFiles)
+            {
+                var base64Thumbnail = Convert.ToBase64String(_imageHelper.GetThumbnail(item.Image, 130, 130));
+                var base64Image = Convert.ToBase64String(item.Image);
+                model.SrcImages[string.Format("data:image/png|jpg;base64,{0}", base64Image)] = (string.Format("data:image/png|jpg;base64,{0}", base64Thumbnail));
+            }
+
+            var review = _dataUnitOfWork.BaseUow.EventUsersRepository.GetReview(LoggedUserIds.UserId, Id);
+            if (review != null)
+            {
+                review.OccurredAt = DateTime.Now;
+                review.Seen = true;
+                _dataUnitOfWork.BaseUow.EventUsersRepository.Update(review);
+                _dataUnitOfWork.BaseUow.EventUsersRepository.SaveChanges();
+                _logger.Log(Enumerations.LogTypes.Info, Enumerations.LogActivity.Edit, Tables.Base.EventUsers, review.Id, GetControllerName(), GetActionName(), null);
+            }
+            else
+            {
+                var eventUser = new EventUser { EventId = Id, UserId = LoggedUserIds.UserId, OccurredAt = DateTime.Now, Seen = true };
+                _dataUnitOfWork.BaseUow.EventUsersRepository.Add(eventUser);
+                _dataUnitOfWork.BaseUow.EventUsersRepository.SaveChanges();
+                _logger.Log(Enumerations.LogTypes.Info, Enumerations.LogActivity.Add, Tables.Base.EventUsers, eventUser.Id, GetControllerName(), GetActionName(), null);
+            }
+
+            return PartialView(MagicStrings.ViewNames.Preview, model);
+        }
+
+        #endregion
+
 
         #region DropzoneUpload
         [HttpPost]

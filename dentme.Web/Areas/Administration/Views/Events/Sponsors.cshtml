@@ -1,0 +1,239 @@
+﻿@model SponsorViewModel
+
+@inject ISelectListHelper SelectList
+@inject Localizer Localizer
+@{
+    ViewData["Title"] = Localizer.Sponsors;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="m-portlet m-portlet--responsive-mobile">
+    <div class="m-portlet__head" style="">
+        <div class="m-portlet__head-progress">
+            <!-- here can place a progress bar-->
+        </div>
+        <div class="m-portlet__head-wrapper">
+            <div class="m-portlet__head-caption">
+                <div class="m-portlet__head-title">
+                    <span class="m-portlet__head-icon">
+                        <i class="flaticon-placeholder-1"></i>
+                    </span>
+                    <h3 class="m-portlet__head-text">
+                        @Model.EventName - @Localizer.Sponsors
+                    </h3>
+                </div>
+            </div>
+            <div class="m-portlet__head-tools">
+                <div class="btn-group dropleft">
+                    <a href="@Url.Action("AddSponsor", "Events", new { area = "Administration" })/?option=@((int)Enumerations.SaveAndOptions.SaveAndClose)&eventId=@Model.EventId" class="btn btn-brand m-btn--icon m-btn--wide modal-link-lg">
+                        <span>
+                            <i class="la la-plus"></i>
+                            <span>@Localizer.AddSponsor</span>
+                        </span>
+                    </a>
+                    <button type="button" class="btn btn-outline-brand dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                    <div class="dropdown-menu" x-placement="left-start">
+                        <a class="dropdown-item modal-link-lg" href="@Url.Action("AddSponsor", "Events", new { area = "Administration" })/?option=@((int)Enumerations.SaveAndOptions.SaveAndNew)">
+                            <i class="la la-plus"></i> @Localizer.SaveAndNew
+                        </a>
+                        <a class="dropdown-item modal-link-lg" href="@Url.Action("AddSponsor", "Events", new { area = "Administration" })/?option=@((int)Enumerations.SaveAndOptions.SaveAndDuplicate)">
+                            <i class="la la-copy"></i> @Localizer.SaveAndDuplicate
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item modal-link-lg" href="@Url.Action("AddSponsor", "Events", new { area = "Administration" })/?option=@((int)Enumerations.SaveAndOptions.SaveAndClose)">
+                            <i class="la la-undo"></i> @Localizer.SaveAndClose
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="m-portlet__body">
+        <!--begin: Search Form -->
+        <div class="m-form m-form--label-align-right m--margin-top-10 m--margin-bottom-30">
+            <div class="row align-items-center">
+                <div class="col-xl-8"></div>
+                <div class="col-xl-4 order-1 order-xl-2 m--align-right">
+                    <div class="m-input-icon m-input-icon--left">
+                        <input type="text" class="form-control m-icon" placeholder="@Localizer.SearchDots" id="m_eventSponsors_index_generalSearch">
+                        <span class="m-input-icon__icon m-input-icon__icon--left">
+                            <span>
+                                <i class="la la-search"></i>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--end: Search Form -->
+        <!--begin: Selected Rows Group Action Form -->
+        <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30 collapse" id="m_datatable_group_action_eventSponsors" style="">
+            <div class="row align-items-center">
+                <div class="col-xl-12">
+                    <div class="m-form__group m-form__group--inline">
+                        <div class="m-form__label m-form__label-no-wrap">
+                            <label class="m--font-bold m--font-danger-">
+                                Selected
+                                <span id="m_datatable_selected_number_eventSponsors"></span> records:
+                            </label>
+                        </div>
+                        <div class="m-form__control">
+                            <div class="btn-toolbar">
+                                &nbsp;&nbsp;&nbsp;
+                                <button class="btn btn-sm btn-danger" type="button" id="m_datatable_delete_all_eventSponsors">@Localizer.DeleteAll</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--end: Selected Rows Group Action Form -->
+        <!--begin: Datatable -->
+        <div class="m_datatable" id="m_eventSponsors_index_datatable"></div>
+        <!--end: Datatable -->
+    </div>
+</div>
+<script>
+        $(document).ready(function () {
+            //WITH SELECTION ----------------
+            const jedan = true; // varijable za metronic datatable true i false umjesto 1 i 0
+            const nula = false;
+            var id = @Model.EventId;
+            var DatatableDataLocal, DatatableDatasource, DatatableOptions;
+            $.ajax({
+                url: "@Url.Action("JsonSponsors", "Events", new { area = "Administration" })",
+                type: "GET",
+                data: { id: id },
+                success: function (data) {
+                    console.log(JSON.parse(data));
+                    DatatableDatasource = JSON.parse(data);
+                    var DatatableDataLocal = function () {
+                        var DatatableOptions = {
+                            data: {
+                                type: "local",
+                                source: DatatableDatasource,
+                                pageSize: 10
+                            },
+                            layout: {
+                                theme: "default",
+                                class: "",
+                                scroll: !jedan,
+                                footer: !jedan
+                            },
+                            sortable: !jedan,
+                            pagination: !nula,
+                            columns: [{
+                                field: "@nameof(Core.Entities.Base.DTO.SponsorDTO.Id)",
+                                title: "#",
+                                sortable: !jedan,
+                                width: 35,
+                                textAlign: "center",
+                                selector: {
+                                    class: "m-checkbox--solid m-checkbox--brand"
+                                }
+
+                            }, {
+                                field: "SponsorType",
+                                title: "@Localizer.SponsorType",
+                                filterable: !nula,
+                                    textAlign: "center",
+                                    width:210,
+                                    template: function (DatatableDatasource) {
+                                        var text, border;
+                                        if (DatatableDatasource.SponsorType == "GOLD SPONSOR") {
+                                            text = " text-warning ";
+                                            border = " border border-warning ";
+                                        }
+                                        else if (DatatableDatasource.SponsorType == "PLATINUM SPONSOR") {
+                                            text = " text-info ";
+                                            border = " border border-info ";
+                                        }
+                                        else if (DatatableDatasource.SponsorType == "MEDIA SPONSOR") {
+                                            text = " text-danger ";
+                                            border = " border border-danger ";
+                                        }
+                                        return '<div class="m-0 pl-4 pr-4 bg-secondary text-center ' +border+ text +' font-weight-bold" style="if;">'+DatatableDatasource.SponsorType+'</div>';
+                                    }
+                                            }, {
+                                field: "@nameof(Core.Entities.Base.DTO.SponsorDTO.Name)",
+                                title: "@Localizer.Name",
+                                filterable: !jedan
+                                        }, {
+                                field: "@nameof(Core.Entities.Base.DTO.SponsorDTO.WebUrl)",
+                                title: "@Localizer.WebsiteURL",
+                                filterable: !jedan
+                            },{
+                                field: "Actions",
+                                title: "@Localizer.Action",
+                                textAlign: "right",
+                                sortable: !jedan,
+                                overflow: "visible",
+                                    template: function (DatatableDatasource, DatatableOptions) {
+                                            return '<span style = "overflow: visible; position: relative; width: 70px;" > <a href="@Url.Action("EditSponsor", "Events", new { area = "Administration" })/' + DatatableDatasource.Id + '" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill modal-link-lg" title="Edit">							<i class="la la-edit"></i>						</a>  <a data-id="' + DatatableDatasource.Id + '" data-behavior="delete" href="@Url.Action("DeleteEventSponsor", "Events", new { area = "Administration" })/' + DatatableDatasource.Id + '" class="m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill" title="Delete">							<i class="la la-trash"></i>						</a></span >';
+                                        }
+                            }],
+                            translate: {
+                                records: {
+                                    processing: '@Localizer.LoadingDots',
+                                    noRecords: '@Localizer.NoRecordsFound'
+                                },
+                                toolbar: {
+                                    pagination: {
+                                        items: {
+                                            default: {
+                                                first: '@Localizer.First',
+                                                prev: '@Localizer.Previous',
+                                                next: '@Localizer.Next',
+                                                last: '@Localizer.Last',
+                                                more: '@Localizer.MorePages',
+                                                input: '@Localizer.PageNumber',
+                                                select: '@Localizer.SelectPageSize'
+                                            },
+                                            info: '@Localizer.DisplayingNumberOfRecords'
+                                        }
+                                    }
+                                }
+                            }
+                        };
+                        return {
+                            init: function () {
+                                            ! function () {
+                                                DatatableOptions.search = {
+                                                    input: $("#m_eventSponsors_index_generalSearch")
+                                                };
+                                                var e = $("#m_eventSponsors_index_datatable").mDatatable(DatatableOptions);
+                                                e.on("m-datatable--on-check m-datatable--on-uncheck m-datatable--on-layout-updated", function (t) {
+                                                    var a = e.rows(".m-datatable__row--active").nodes().length;
+                                                    $("#m_datatable_selected_number_eventSponsors").html(a), a > 0 ? $("#m_datatable_group_action_eventSponsors").collapse("show") : $("#m_datatable_group_action_eventSponsors").collapse("hide");
+                                                    a = 0;
+                                                })
+                                                $("#m_datatable_delete_all_eventSponsors").on('click', function () {
+                                                    var list = [];
+                                                    for (var i = 0; i < e.rows(".m-datatable__row--active").nodes().length; i++) {
+                                                        list.push((parseInt($(e.rows(".m-datatable__row--active").nodes()[i]).find("input[type=checkbox]").val())));
+                                                    }
+                                                    console.log(list);
+                                                    $.ajax({
+                                                        url: "@Url.Action("DeleteAllEventSponsors", "Events", new { area = "Administration" })",
+                                                        type: "GET",
+                                                        data: { list: list },
+                                                        traditional: true,
+                                                        success: function (data) {
+                                                            NotificationHandler(data.value);
+                                                            if (JSON.parse(data.value).Type != @Convert.ToInt32(NotificationTypes.Error) && JSON.parse(data.value).Type != @Convert.ToInt32(NotificationTypes.Warning)) {
+                                                                e.rows(".m-datatable__row--active").nodes().html("");
+                                                                $("#m_datatable_group_action_eventSponsors").collapse("hide");
+                                                            }
+                                                        }
+                                                    })
+                                                })
+                                }()
+                            }
+                        }
+                    }();
+                    jQuery(document).ready(function () {
+                                            DatatableDataLocal.init()
+                    });
+                }
+            })
+        })
+</script>
