@@ -30,6 +30,7 @@
     <Compile Include="Areas\Administration\Controllers\CitizenshipsController.cs" />
     <Compile Include="Areas\Administration\Controllers\ContactTypesController.cs" />
     <Compile Include="Areas\Administration\Controllers\CountriesController.cs" />
+    <Compile Include="Areas\Administration\Controllers\EventsController.cs" />
     <Compile Include="Areas\Administration\Controllers\InstitutionalSettingsController.cs" />
     <Compile Include="Areas\Administration\Controllers\MaritalStatusesController.cs" />
     <Compile Include="Areas\Administration\Controllers\NationalitiesController.cs" />
@@ -41,6 +42,7 @@
     <Compile Include="Areas\Administration\ViewModels\CityViewModel.cs" />
     <Compile Include="Areas\Administration\ViewModels\ContactTypeViewModel.cs" />
     <Compile Include="Areas\Administration\ViewModels\CountryViewModel.cs" />
+    <Compile Include="Areas\Administration\ViewModels\EventViewModel.cs" />
     <Compile Include="Areas\Administration\ViewModels\MaritalStatusViewModel.cs" />
     <Compile Include="Areas\Administration\ViewModels\NationalityViewModel.cs" />
     <Compile Include="Areas\Administration\ViewModels\RegionViewModel.cs" />
@@ -95,6 +97,9 @@
     <None Include="Areas\Administration\Views\Countries\_Add.cshtml" />
     <None Include="Areas\Administration\Views\Countries\_Edit.cshtml" />
     <None Include="Areas\Administration\Views\Countries\_Index.cshtml" />
+    <None Include="Areas\Administration\Views\Events\Index.cshtml" />
+    <None Include="Areas\Administration\Views\Events\_Add.cshtml" />
+    <None Include="Areas\Administration\Views\Events\_Edit.cshtml" />
     <None Include="Areas\Administration\Views\InstitutionalSettings\General.cshtml" />
     <None Include="Areas\Administration\Views\InstitutionalSettings\Index.cshtml" />
     <None Include="Areas\Administration\Views\MaritalStatuses\_Add.cshtml" />

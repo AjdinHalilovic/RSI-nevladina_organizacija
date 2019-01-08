@@ -25,14 +25,27 @@ namespace DAL
         #region Dto's
         private IUsersDTORepository _usersDTORepository;
         public IUsersDTORepository UsersDTORepository => _usersDTORepository = _usersDTORepository ?? new UsersDTORepository(_NevladinaOrgContext);
+
         private IPersonUsersDTORepository _personUsersDTORepository;
         public IPersonUsersDTORepository PersonUsersDTORepository => _personUsersDTORepository = _personUsersDTORepository ?? new PersonUsersDTORepository(_NevladinaOrgContext);
+
+        private IPersonsDTORepository _personsDTORepository;
+        public IPersonsDTORepository PersonsDTORepository => _personsDTORepository = _personsDTORepository ?? new PersonsDTORepository(_NevladinaOrgContext);
 
         private ICitiesDTORepository _citiesDTORepository;
         public ICitiesDTORepository CitiesDTORepository => _citiesDTORepository = _citiesDTORepository ?? new CitiesDTORepository(_NevladinaOrgContext);
 
         private IRegionsDTORepository _regionsDTORepository;
         public IRegionsDTORepository RegionsDTORepository => _regionsDTORepository = _regionsDTORepository ?? new RegionsDTORepository(_NevladinaOrgContext);
+
+        private IEventItemsDTORepository _eventItemsDTORepository;
+        public IEventItemsDTORepository EventItemsDTORepository => _eventItemsDTORepository = _eventItemsDTORepository ?? new EventItemsDTORepository(_NevladinaOrgContext);
+
+        private IEventsDTORepository _eventsDTORepository;
+        public IEventsDTORepository EventsDTORepository => _eventsDTORepository = _eventsDTORepository ?? new EventsDTORepository(_NevladinaOrgContext);
+
+        private ISponsorsDTORepository _sponsorsDTORepository;
+        public ISponsorsDTORepository SponsorsDTORepository => _sponsorsDTORepository = _sponsorsDTORepository ?? new SponsorsDTORepository(_NevladinaOrgContext);
         #endregion
 
         #region Entities
@@ -47,6 +60,9 @@ namespace DAL
 
         private IUsersRepository _usersRepository;
         public IUsersRepository UsersRepository => _usersRepository = _usersRepository ?? new UsersRepository(_NevladinaOrgContext);
+
+        private IPersonsRepository _personsRepository;
+        public IPersonsRepository PersonsRepository => _personsRepository = _personsRepository ?? new PersonsRepository(_NevladinaOrgContext);
 
         private ICitiesRepository _citiesRepository;
         public ICitiesRepository CitiesRepository => _citiesRepository = _citiesRepository ?? new CitiesRepository(_NevladinaOrgContext);
@@ -77,6 +93,59 @@ namespace DAL
 
         private IRolesRepository _rolesRepository;
         public IRolesRepository RolesRepository => _rolesRepository = _rolesRepository ?? new RolesRepository(_NevladinaOrgContext);
+
+
+
+        private IEventsRepository _eventsRepository;
+        public IEventsRepository EventsRepository => _eventsRepository = _eventsRepository ?? new EventsRepository(_NevladinaOrgContext);
+
+        private IEventDocumentsRepository _eventDocumentsRepository;
+        public IEventDocumentsRepository EventDocumentsRepository => _eventDocumentsRepository = _eventDocumentsRepository ?? new EventDocumentsRepository(_NevladinaOrgContext);
+
+        private IEventImagesRepository _eventImagesRepository;
+        public IEventImagesRepository EventImagesRepository => _eventImagesRepository = _eventImagesRepository ?? new EventImagesRepository(_NevladinaOrgContext);
+
+        private IEventItemsRepository _eventItemsRepository;
+        public IEventItemsRepository EventItemsRepository => _eventItemsRepository = _eventItemsRepository ?? new EventItemsRepository(_NevladinaOrgContext);
+
+        private IEventItemEventTypesRepository _eventItemEventTypesRepository;
+        public IEventItemEventTypesRepository EventItemEventTypesRepository => _eventItemEventTypesRepository = _eventItemEventTypesRepository ?? new EventItemEventTypesRepository(_NevladinaOrgContext);
+
+        private IEventItemTypesRepository _eventItemTypesRepository;
+        public IEventItemTypesRepository EventItemTypesRepository => _eventItemTypesRepository = _eventItemTypesRepository ?? new EventItemTypesRepository(_NevladinaOrgContext);
+
+        private IEventRegistrationsRepository _eventRegistrationsRepository;
+        public IEventRegistrationsRepository EventRegistrationsRepository => _eventRegistrationsRepository = _eventRegistrationsRepository ?? new EventRegistrationsRepository(_NevladinaOrgContext);
+
+        private IEventSponsorsRepository _eventSponsorsRepository;
+        public IEventSponsorsRepository EventSponsorsRepository => _eventSponsorsRepository = _eventSponsorsRepository ?? new EventSponsorsRepository(_NevladinaOrgContext);
+
+        private IEventUsersRepository _eventUsersRepository;
+        public IEventUsersRepository EventUsersRepository => _eventUsersRepository = _eventUsersRepository ?? new EventUsersRepository(_NevladinaOrgContext);
+
+        private ILecturesRepository _lecturesRepository;
+        public ILecturesRepository LecturesRepository => _lecturesRepository = _lecturesRepository ?? new LecturesRepository(_NevladinaOrgContext);
+
+        private ILecturersRepository _lecturersRepository;
+        public ILecturersRepository LecturersRepository => _lecturersRepository = _lecturersRepository ?? new LecturersRepository(_NevladinaOrgContext);
+
+        private ILectureLecturersRepository _lectureLecturersRepository;
+        public ILectureLecturersRepository LectureLecturersRepository => _lectureLecturersRepository = _lectureLecturersRepository ?? new LectureLecturersRepository(_NevladinaOrgContext);
+
+        private IPaymentsRepository _paymentsRepository;
+        public IPaymentsRepository PaymentsRepository => _paymentsRepository = _paymentsRepository ?? new PaymentsRepository(_NevladinaOrgContext);
+
+        private ISponsorsRepository _sponsorsRepository;
+        public ISponsorsRepository SponsorsRepository => _sponsorsRepository = _sponsorsRepository ?? new SponsorsRepository(_NevladinaOrgContext);
+
+        private ISponsorTypesRepository _sponsorTypesRepository;
+        public ISponsorTypesRepository SponsorTypesRepository => _sponsorTypesRepository = _sponsorTypesRepository ?? new SponsorTypesRepository(_NevladinaOrgContext);
+
+
+
+
+
+
         #endregion
         #endregion
 
