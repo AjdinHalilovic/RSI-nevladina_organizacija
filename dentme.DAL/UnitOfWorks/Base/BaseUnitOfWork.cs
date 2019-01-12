@@ -26,6 +26,13 @@ namespace DAL
         private IUsersDTORepository _usersDTORepository;
         public IUsersDTORepository UsersDTORepository => _usersDTORepository = _usersDTORepository ?? new UsersDTORepository(_NevladinaOrgContext);
 
+        private IInstitutionUsersDTORepository _institutionUsersDTORepository;
+        public IInstitutionUsersDTORepository InstitutionUsersDTORepository => _institutionUsersDTORepository = _institutionUsersDTORepository ?? new InstitutionUsersDTORepository(_NevladinaOrgContext);
+
+        private IOrganizationInstitutionUsersDTORepository _organizationInstitutionUsersDTORepository;
+        public IOrganizationInstitutionUsersDTORepository OrganizationInstitutionUsersDTORepository => _organizationInstitutionUsersDTORepository = _organizationInstitutionUsersDTORepository ?? new OrganizationInstitutionUsersDTORepository(_NevladinaOrgContext);
+
+
         private IPersonUsersDTORepository _personUsersDTORepository;
         public IPersonUsersDTORepository PersonUsersDTORepository => _personUsersDTORepository = _personUsersDTORepository ?? new PersonUsersDTORepository(_NevladinaOrgContext);
 
@@ -46,6 +53,9 @@ namespace DAL
 
         private ISponsorsDTORepository _sponsorsDTORepository;
         public ISponsorsDTORepository SponsorsDTORepository => _sponsorsDTORepository = _sponsorsDTORepository ?? new SponsorsDTORepository(_NevladinaOrgContext);
+
+        private ILicenseDTORepository _licenseDTORepository;
+        public ILicenseDTORepository LicenseDTORepository => _licenseDTORepository = _licenseDTORepository ?? new LicenseDTORepository(_NevladinaOrgContext);
         #endregion
 
         #region Entities
@@ -141,9 +151,33 @@ namespace DAL
         private ISponsorTypesRepository _sponsorTypesRepository;
         public ISponsorTypesRepository SponsorTypesRepository => _sponsorTypesRepository = _sponsorTypesRepository ?? new SponsorTypesRepository(_NevladinaOrgContext);
 
+        private ILicensePeriodsRepository _licensePeriodsRepository;
+        public ILicensePeriodsRepository LicensePeriodsRepository => _licensePeriodsRepository = _licensePeriodsRepository ?? new LicensePeriodsRepository(_NevladinaOrgContext);
+
+        private ILicenseTypesRepository _licenseTypesRepository;
+        public ILicenseTypesRepository LicenseTypesRepository => _licenseTypesRepository = _licenseTypesRepository ?? new LicenseTypesRepository(_NevladinaOrgContext);
+
+        private IMembersRepository _membersRepository;
+        public IMembersRepository MembersRepository => _membersRepository = _membersRepository ?? new MembersRepository(_NevladinaOrgContext);
+
+        private IMemberLicensesRepository _memberLicensesRepository;
+        public IMemberLicensesRepository MemberLicensesRepository => _memberLicensesRepository = _memberLicensesRepository ?? new MemberLicensesRepository(_NevladinaOrgContext);
 
 
+        private IPersonContactsRepository _personContactsRepository;
+        public IPersonContactsRepository PersonContactsRepository => _personContactsRepository = _personContactsRepository ?? new PersonContactsRepository(_NevladinaOrgContext);
 
+        private IPersonDetailsRepository _personDetailsRepository;
+        public IPersonDetailsRepository PersonDetailsRepository => _personDetailsRepository = _personDetailsRepository ?? new PersonDetailsRepository(_NevladinaOrgContext);
+
+        private IPersonPhotosRepository _personPhotosRepository;
+        public IPersonPhotosRepository PersonPhotosRepository => _personPhotosRepository = _personPhotosRepository ?? new PersonPhotosRepository(_NevladinaOrgContext);
+
+        private IUserRolesRepository _userRolesRepository;
+        public IUserRolesRepository UserRolesRepository => _userRolesRepository = _userRolesRepository ?? new UserRolesRepository(_NevladinaOrgContext);
+
+        private IEmployeeStatusesRepository _employeeStatusesRepository;
+        public IEmployeeStatusesRepository EmployeeStatusesRepository => _employeeStatusesRepository = _employeeStatusesRepository ?? new EmployeeStatusesRepository(_NevladinaOrgContext);
 
 
         #endregion

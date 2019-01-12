@@ -12,15 +12,18 @@ namespace DAL
         #region Repositories
         IUsersDTORepository UsersDTORepository { get; }
         IPersonUsersDTORepository PersonUsersDTORepository { get; }
+        IInstitutionUsersDTORepository InstitutionUsersDTORepository { get; }
 
         #region Dto's
         ICitiesDTORepository CitiesDTORepository { get; }
         IRegionsDTORepository RegionsDTORepository { get; }
+        ILicenseDTORepository LicenseDTORepository{ get; }
 
         IEventItemsDTORepository EventItemsDTORepository{ get; }
         IEventsDTORepository EventsDTORepository{ get; }
         ISponsorsDTORepository SponsorsDTORepository{ get; }
         IPersonsDTORepository PersonsDTORepository{ get; }
+        IOrganizationInstitutionUsersDTORepository OrganizationInstitutionUsersDTORepository{ get; }
 
 
         #endregion
@@ -36,6 +39,7 @@ namespace DAL
         IRegionsRepository RegionsRepository { get; }
         ICitizenshipsRepository CitizenshipsRepository { get; }
         INationalitiesRepository NationalitiesRepository { get; }
+        IEmployeeStatusesRepository EmployeeStatusesRepository{ get; }
         IAcademicDegreesRepository AcademicDegreesRepository { get; }
         IAcademicTitlesRepository AcademicTitlesRepository { get; }
         IMartialStatusesRepository MartialStatusesRepository { get; }
@@ -57,6 +61,14 @@ namespace DAL
         IPaymentsRepository PaymentsRepository{ get; }
         ISponsorsRepository SponsorsRepository{ get; }
         ISponsorTypesRepository SponsorTypesRepository{ get; }
+        ILicensePeriodsRepository LicensePeriodsRepository { get; }
+        ILicenseTypesRepository LicenseTypesRepository { get; }
+        IMemberLicensesRepository MemberLicensesRepository{ get; }
+        IMembersRepository MembersRepository{ get; }
+        IPersonContactsRepository PersonContactsRepository{ get; }
+        IPersonDetailsRepository PersonDetailsRepository{ get; }
+        IPersonPhotosRepository PersonPhotosRepository{ get; }
+        IUserRolesRepository UserRolesRepository{ get; }
 
 
         #endregion

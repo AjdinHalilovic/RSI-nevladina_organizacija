@@ -1,0 +1,75 @@
+﻿@model PersonViewModel
+@inject Localizer Localizer
+@{
+    Layout = "~/Views/Shared/_ModalLayout.cshtml";
+}
+
+<div class="modal-header">
+    <h5 class="modal-title">@Localizer.ProfileImage</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>
+<input id="PersonId" name="Id" value="@Model.Id" hidden />
+<div style="height:550px">
+
+    <div class="container text-center pt-5" style="height:480px">
+        @*<input id="croppie-file" class="mb-5" type="file" accept="image/*" />*@
+        <div id="croppie-container" style="display:none"></div>
+        <button id="croppie-crop" class="btn btn-primary mb-5" style="display:none">@Localizer.Save</button>
+    </div>
+</div>
+@section Scripts
+    {
+    <script>
+
+
+		var croppieOriginalFile = null,
+			$croppieResult = $('#croppie-result'),
+			$croppieFileInput = $('#croppie-file'),
+			$croppieCropButton = $('#croppie-crop'),
+			$croppieContainer = $('#croppie-container'),
+			croppieInstance = $croppieContainer.croppie({
+                viewport: { width: 320, height: 320 },
+                boundary: { width: 370, height: 370 }
+			});
+
+		$croppieFileInput.on('change', function (e) {
+			croppieOriginalFile = e.currentTarget.files[0];
+
+			getImageFilePreview(croppieOriginalFile, function (url) {
+				croppieInstance.croppie('bind', { url });
+				$croppieContainer.show();
+				$croppieCropButton.show();
+			});
+		});
+
+		$croppieCropButton.on('click', function () {
+			croppieInstance.croppie('result', { type: 'blob', format: 'jpeg', quality: '0.85' }).then(function (croppieThumbnailFile) {
+				var formData = new FormData();
+				formData.append('Id', $("#PersonId").val());
+                formData.append('profilePhoto', croppieThumbnailFile);
+                console.log(formData);
+
+				$.ajax({
+					url: "@Url.Action("EditProfileImage", "Members", new { area = "Organizations" })",
+					data: formData,
+					processData: false,
+					contentType: false,
+					type: 'POST',
+					success: function (result) {
+                        $("#profileImage").attr("src", result.thumbnailFileBase64);
+                        NotificationHandler(result.notification.value);
+                        closeModal();
+					}
+				});
+			});
+		});
+
+		function getImageFilePreview(file, callback) {
+			var reader = new FileReader();
+			reader.onload = (event) => callback(event.target.result);
+			reader.readAsDataURL(file);
+		}
+    </script>
+}

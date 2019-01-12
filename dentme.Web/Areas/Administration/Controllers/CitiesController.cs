@@ -196,37 +196,37 @@ namespace nevladinaOrg.Web.Areas.Administration.Controllers
 
         #region Helpers - JSON
 
-        //public JsonResult GetRegions()
-        //{
-        //    List<SelectListItem> regions = _selectList.Regions();
+        public JsonResult GetRegions()
+        {
+            List<SelectListItem> regions = _selectList.Regions();
 
-        //    return new JsonResult(regions);
-        //}
+            return new JsonResult(regions);
+        }
 
-        //public JsonResult GetRegionsByCountryId(int countryId)
-        //{
-        //    List<SelectListItem> regions = _selectList.RegionsByCountryID(countryId);
+        public JsonResult GetRegionsByCountryId(int countryId)
+        {
+            List<SelectListItem> regions = _selectList.RegionsByCountryID(countryId);
 
-        //    return new JsonResult(regions);
-        //}
-        //public JsonResult GetCitiesByCountryId(int countryId)
-        //{
-        //    List<SelectListItem> cities = _selectList.CitiesByCountryID(countryId);
+            return new JsonResult(regions);
+        }
+        public JsonResult GetCitiesByCountryId(int countryId)
+        {
+            List<SelectListItem> cities = _selectList.CitiesByCountryID(countryId);
 
-        //    return new JsonResult(cities);
-        //}
-        //public JsonResult GetCitiesSelectListByRegionId(int regionId)
-        //{
-        //    List<SelectListItem> cities = _selectList.CitiesByRegionID(regionId);
+            return new JsonResult(cities);
+        }
+        public JsonResult GetCitiesSelectListByRegionId(int regionId)
+        {
+            List<SelectListItem> cities = _selectList.CitiesByRegionID(regionId);
 
-        //    return new JsonResult(cities);
-        //}
-        //public JsonResult GetCities(int countryId)
-        //{
-        //    List<SelectListItem> cities = _selectList.Cities();
+            return new JsonResult(cities);
+        }
+        public JsonResult GetCities(int countryId)
+        {
+            List<SelectListItem> cities = _selectList.Cities();
 
-        //    return new JsonResult(cities);
-        //}
+            return new JsonResult(cities);
+        }
 
         #endregion
     }

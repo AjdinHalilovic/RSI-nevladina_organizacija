@@ -1,0 +1,1012 @@
+﻿@model StaffViewModel
+
+@inject ISelectListHelper SelectList
+@inject Localizer Localizer
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="m-portlet m-portlet--full-height">
+
+    <div class="m-portlet__head" style="">
+        <div class="m-portlet__head-progress">
+            <!-- here can place a progress bar-->
+        </div>
+        <div class="m-portlet__head-wrapper">
+            <div class="m-portlet__head-caption">
+                <div class="m-portlet__head-title">
+                    <span class="m-portlet__head-icon">
+                        <i class="flaticon-user"></i>
+                    </span>
+                    <h3 class="m-portlet__head-text">
+                        @Localizer.NewStaff
+                    </h3>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="m-portlet__body">
+        <div class="m-wizard m-wizard--2 m-wizard--success m-wizard--step-first" id="m_wizard">
+            <div class="m-portlet__padding-x">
+                <!-- Here you can put a message or alert -->
+            </div>
+
+            <div class="m-wizard__head m-portlet__padding-x p-0 pt-4 mt-4">
+                <!--begin: Form Wizard Progress -->
+                <div class="m-wizard__progress">
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
+                    </div>
+                </div>
+                <!--end: Form Wizard Progress -->
+                <!--begin: Form Wizard Nav -->
+                <div class="m-wizard__nav">
+                    <div class="m-wizard__steps">
+                        <div class="m-wizard__step m-wizard__step--current" m-wizard-target="m_wizard_form_step_1">
+                            <a href="#" class="m-wizard__step-number">
+                                <span><i class="fa  flaticon-layers"></i></span>
+                            </a>
+                            <div class="m-wizard__step-info">
+                                <div class="m-wizard__step-title">
+                                    1. @Localizer.GeneralInfo
+                                </div>
+                                <div class="m-wizard__step-desc">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="m-wizard__step" m-wizard-target="m_wizard_form_step_2">
+                            <a href="#" class="m-wizard__step-number">
+                                <span><i class="fa  flaticon-user-ok"></i></span>
+                            </a>
+                            <div class="m-wizard__step-info">
+                                <div class="m-wizard__step-title">
+                                    2. @Localizer.StatusInfo
+                                </div>
+                                <div class="m-wizard__step-desc">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="m-wizard__step" m-wizard-target="m_wizard_form_step_3">
+                            <a href="#" class="m-wizard__step-number">
+                                <span><i class="fa  flaticon-user-settings"></i></span>
+                            </a>
+                            <div class="m-wizard__step-info">
+                                <div class="m-wizard__step-title">
+                                    3. @Localizer.AccountSetup
+                                </div>
+                                <div class="m-wizard__step-desc">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="m-wizard__step" m-wizard-target="m_wizard_form_step_4">
+                            <a href="#" class="m-wizard__step-number">
+                                <span><i class="fa fa-check"></i></span>
+                            </a>
+                            <div class="m-wizard__step-info">
+                                <div class="m-wizard__step-title">
+                                    4. @Localizer.Confirmation
+                                </div>
+                                <div class="m-wizard__step-desc">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end: Form Wizard Nav -->
+            </div>
+
+            <div class="m-wizard__form">
+                <!--
+                1) Use m-form--label-align-left class to alight the form input lables to the right
+                2) Use m-form--state class to highlight input control borders on form validation
+                -->
+
+                <form asp-antiforgery="true" id="myForm" class="m-form m-form--label-align-left- m-form--state-" enctype="multipart/form-data" asp-controller="Staff" asp-action="Add" asp-area="Institutions" method="POST">
+                    <!--begin: Form Body -->
+                    <div class="m-portlet__body">
+                        <input hidden asp-for="GeneralInfo.PersonMobile.ContactTypeId" />
+                        <input hidden asp-for="GeneralInfo.PersonPhone.ContactTypeId" />
+                        <input hidden asp-for="GeneralInfo.PersonPrimaryEmail.ContactTypeId" />
+                        <input hidden asp-for="GeneralInfo.PersonSecondaryEmail.ContactTypeId" />
+                        <!--begin: Form Wizard Step 1-->
+                        <div class="m-wizard__form-step m-wizard__form-step--current" id="m_wizard_form_step_1">
+                            @if (!ViewData.ModelState.IsValid)
+                            {
+                                <div class="m-alert m-alert--icon m-alert--outline alert alert-danger alert-dismissible animated fadeIn" role="alert">
+                                    <div class="m-alert__icon">
+                                        <i class="la la-warning"></i>
+                                    </div>
+                                    <div class="m-alert__text">
+                                        @Html.ValidationSummary()
+                                    </div>
+                                    <div class="m-alert__close">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                </div>
+                            }
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <div class="m-form__section m-form__section--first">
+                                        <div class="m-form__heading">
+                                            <h3 class="m-form__heading-title">@Localizer.PersonalDetails</h3>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group m-form__group col-lg-6 pt-0">
+                                                <label class="form-control-label">* @Localizer.FirstName</label>
+                                                <input type="text" asp-for="GeneralInfo.Person.FirstName" class="form-control m-input" placeholder="@Localizer.FirstName">
+                                            </div>
+                                            <div class="form-group m-form__group col-lg-6 pt-0">
+                                                <label class="form-control-label">* @Localizer.Surname</label>
+                                                <input type="text" asp-for="GeneralInfo.Person.LastName" class="form-control m-input" placeholder="@Localizer.Surname">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group m-form__group col-lg-6 pt-0">
+                                                <label class="form-control-label">* @Localizer.ParentName</label>
+                                                <input type="text" asp-for="GeneralInfo.Person.ParentName" class="form-control m-input" placeholder="@Localizer.ParentName">
+                                            </div>
+                                            <div class="form-group m-form__group col-lg-6 pt-0">
+                                                <label class="form-control-label">* @Localizer.DateOfBirth</label>
+                                                <input type="text" asp-for="GeneralInfo.Person.DateOfBirth" class="date-picker form-control m-input" readonly="" placeholder="@Localizer.SelectDate">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group m-form__group col-lg-6 pt-0">
+                                                <label class="form-control-label"> @Localizer.CountryOfBirth</label>
+                                                <select class="form-control m-bootstrap-select m_selectpicker" asp-for="GeneralInfo.Person.BirthCountryId" asp-items="@SelectList.Countries(true)" onchange="MembersAdd_FillBirthCities()"></select>
+                                            </div>
+                                            <div class="form-group m-form__group col-lg-6 pt-0">
+                                                <label class="form-control-label"> @Localizer.CityOfBirth </label>
+                                                <select class="form-control m-bootstrap-select m_selectpicker" asp-for="GeneralInfo.Person.BirthCityId" asp-items="@SelectList.CitiesByCountryID(Model.GeneralInfo.Person.BirthCountryId,true)"></select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group m-form__group col-lg-6 pt-0">
+                                                <label class="form-control-label"> @Localizer.SocialSecurityNumber</label>
+                                                <input type="text" asp-for="GeneralInfo.Person.SocialSecurityNumber" class="form-control m-input" placeholder="@Localizer.SocialSecurityNumber">
+                                            </div>
+                                            <div class="form-group m-form__group col-lg-6 pt-0">
+                                                <label class="form-control-label"> @Localizer.NationalIdNumber</label>
+                                                <input type="text" asp-for="GeneralInfo.Person.NationalIDNumber" class="form-control m-input" placeholder="@Localizer.NationalIdNumber">
+                                            </div>
+                                          
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group m-form__group col-lg-12 pt-0 pb-0">
+                                                <label class="form-control-label">* @Localizer.Gender:</label>
+                                            </div>
+                                            <div class="form-group m-form__group col-lg-3 pt-0">
+                                                <div class="text-center" id="maleGenderDiv">
+                                                    <a class="btn btn-secondary btn-sm col-lg-12 dm--custom-radio-click">
+                                                        <label class="m-radio m-radio--air m-radio--state-success m-0">
+                                                            <input type="radio" id="genderM" asp-for="GeneralInfo.Person.Gender" value="M"> @Localizer.Male
+                                                            <span></span>
+                                                        </label>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="form-group m-form__group col-lg-3 pt-0">
+                                                <div class="text-center">
+                                                    <a class="btn btn-secondary btn-sm col-lg-12 dm--custom-radio-click">
+                                                        <label class="m-radio m-radio--air m-radio--state-success m-0">
+                                                            <input type="radio" id="genderF" asp-for="GeneralInfo.Person.Gender" value="F"> @Localizer.Female
+                                                            <span></span>
+                                                        </label>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="m-separator m-separator--dashed m-separator--lg m-1"></div>
+                                    <div class="m-form__section">
+                                        <div class="m-form__heading">
+                                            <h3 class="m-form__heading-title">
+                                                @Localizer.ContactDetails
+                                            </h3>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-6 form-group m-form__group pt-0">
+                                                <label class="form-control-label">* @Localizer.Country</label>
+                                                <select class="form-control m-bootstrap-select m_selectpicker" asp-for="GeneralInfo.Person.CountryId" asp-items="@SelectList.Countries(true)" onchange="MembersAdd__FillRegions(); MembersAdd__FillCities()"></select>
+                                            </div>
+                                            <div class="col-lg-6 form-group m-form__group pt-0">
+                                                <label class="form-control-label"> @Localizer.Region</label>
+                                                <select class="form-control m-bootstrap-select m_selectpicker" asp-for="GeneralInfo.Person.RegionId" asp-items="@SelectList.RegionsByCountryID(Model.GeneralInfo.Person.RegionId,true)" onchange="MembersAdd__FillCitiesByRegion()"></select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6 form-group m-form__group pt-0">
+                                                <label class="form-control-label">* @Localizer.City</label>
+                                                <select class="form-control m-bootstrap-select m_selectpicker" asp-for="GeneralInfo.Person.CityId" asp-items="@SelectList.CitiesByCountryID(Model.GeneralInfo.Person.CountryId,true)"></select>
+                                            </div>
+                                            <div class="col-lg-6 form-group m-form__group pt-0">
+                                                <label class="form-control-label"> @Localizer.Place</label>
+                                                <input type="text" asp-for="GeneralInfo.Person.Place" class="form-control m-input" placeholder="@Localizer.Place">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6 form-group m-form__group pt-0">
+                                                <label class="form-control-label"> @Localizer.Address</label>
+                                                <input type="text" asp-for="GeneralInfo.Person.Address" class="form-control m-input" placeholder="@Localizer.Address">
+                                            </div>
+                                            <div class="col-lg-6 form-group m-form__group pt-0">
+                                                <label class="form-control-label"> @Localizer.Citizenship</label>
+                                                <select class="form-control m-bootstrap-select m_selectpicker" asp-for="GeneralInfo.Person.CitizenshipId" asp-items="@SelectList.Citizenships(true)"></select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6 form-group m-form__group pt-0">
+                                                <label class="form-control-label"> @Localizer.Residence</label>
+                                                <select class="form-control m-bootstrap-select m_selectpicker" asp-for="GeneralInfo.Person.ResidenceId" asp-items="@SelectList.Cities(true)"></select>
+                                            </div>
+                                            <div class="col-lg-6 form-group m-form__group pt-0">
+                                                <label class="form-control-label"> @Localizer.ResidenceAddress</label>
+                                                <input type="text" asp-for="GeneralInfo.Person.ResidenceAddress" class="form-control m-input" placeholder="@Localizer.ResidenceAddress">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6 form-group m-form__group pt-0">
+                                                <label class="form-control-label">* @Localizer.NumberOfPhone</label>
+                                                <input type="text" asp-for="GeneralInfo.PersonPhone.Contact" class="form-control m-input" placeholder="@Localizer.NumberOfPhone">
+                                            </div>
+                                            <div class="col-lg-6 form-group m-form__group pt-0">
+                                                <label class="form-control-label"> @Localizer.NumberOfMobile</label>
+                                                <input type="text" asp-for="GeneralInfo.PersonMobile.Contact" class="form-control m-input" placeholder="@Localizer.NumberOfMobile">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6 form-group m-form__group pt-0">
+                                                <label class="form-control-label">* @Localizer.PrimaryEmail</label>
+                                                <input type="text" asp-for="GeneralInfo.PersonPrimaryEmail.Contact" class="form-control m-input" placeholder="@Localizer.PrimaryEmail">
+                                            </div>
+                                            <div class="col-lg-6 form-group m-form__group pt-0">
+                                                <label class="form-control-label"> @Localizer.SecondaryEmail</label>
+                                                <input type="text" asp-for="GeneralInfo.PersonSecondaryEmail.Contact" class="form-control m-input" placeholder="@Localizer.SecondaryEmail">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--end: Form Wizard Step 1-->
+                        <!--begin: Form Wizard Step 2-->
+                        <div class="m-wizard__form-step" id="m_wizard_form_step_2">
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <div class="m-form__section m-form__section--first">
+                                        <div class="m-form__heading">
+                                            <h3 class="m-form__heading-title">@Localizer.StatusDetails</h3>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-6 form-group m-form__group pt-0">
+                                                <label class="form-control-label"> @Localizer.MaritalStatus</label>
+                                                <select class="form-control m-bootstrap-select m_selectpicker" asp-for="StatusInfo.PersonDetail.MartialStatusId" asp-items="@SelectList.MartialStatuses(true)"></select>
+                                            </div>
+                                            <div class="col-lg-6 form-group m-form__group pt-0">
+                                                <label class="form-control-label"> @Localizer.EmploymentStatus</label>
+                                                <select class="form-control m-bootstrap-select m_selectpicker" asp-for="StatusInfo.PersonDetail.EmploymentStatusId" asp-items="@SelectList.EmployementStatuses(true)"></select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6 form-group m-form__group pt-0">
+                                                <label class="form-control-label">* @Localizer.AcademicDegree:</label>
+                                                <select class="form-control m-bootstrap-select m_selectpicker" asp-for="StatusInfo.PersonDetail.AcademicDegreeId" asp-items="@SelectList.AcademicDegrees(true)"></select>
+                                            </div>
+                                            <div class="col-lg-6 form-group m-form__group pt-0">
+                                                <label class="form-control-label"> @Localizer.AcademicTitle:</label>
+                                                <select class="form-control m-bootstrap-select m_selectpicker" asp-for="StatusInfo.PersonDetail.AcademicTitleId" asp-items="@SelectList.AcademicTitles(true)"></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--end: Form Wizard Step 2-->
+                        <!--begin: Form Wizard Step 3-->
+                        <div class="m-wizard__form-step" id="m_wizard_form_step_3">
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <div class="m-form__section m-form__section--first">
+                                        <div class="m-form__heading">
+                                            <h3 class="m-form__heading-title">@Localizer.AccessDetails</h3>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6 form-group m-form__group pt-0">
+                                                <label class="form-control-label">* @Localizer.Username</label>
+                                                <input type="text" asp-for="AccountInfo.User.Username" class="form-control m-input" placeholder="@Localizer.Username">
+                                            </div>
+                                            <div class="col-lg-6 form-group m-form__group pt-0">
+                                                <label class="form-control-label">* @Localizer.Password</label>
+                                                <div class="input-group">
+                                                    <input type="text" asp-for="AccountInfo.User.Password" class="form-control m-input" placeholder="@Localizer.Password">
+                                                    <div class="input-group-append">
+                                                        <button class="btn btn-secondary" id="passwordGenerator" type="button"><i data-toggle="m-tooltip" data-width="auto" class="m-form__heading-help-icon fa flaticon-refresh" title="" data-original-title="@Localizer.GeneratePassword"></i></button>
+                                                    </div>
+                                                    <div class="input-group-append">
+                                                        <button class="btn btn-secondary" id="passwordEye" type="button"><i class="fa fa-eye fa-eye-slash"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6 form-group m-form__group pt-0">
+                                                <label class="form-control-label">* @Localizer.Email:</label>
+                                                <input type="email" asp-for="AccountInfo.User.Email" class="form-control m-input" placeholder="@Localizer.Email">
+                                            </div>
+                                            <div class="col-lg-6 form-group m-form__group pt-0">
+                                                <label class="form-control-label">* @Localizer.PasswordConfirmation</label>
+                                                <input type="text" asp-for="AccountInfo.User.ConfirmPassword" class="form-control m-input" placeholder="@Localizer.PasswordConfirmation">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="m-separator m-separator--dashed m-separator--lg m-1"></div>
+                                    <div class="m-form__section">
+                                        <div class="m-form__heading">
+                                            <h3 class="m-form__heading-title">
+                                                @Localizer.UserRoles
+                                                <i data-toggle="m-tooltip" data-width="auto" class="m-form__heading-help-icon flaticon-info" title="" data-original-title="@Localizer.InThisSectionTypeInfoAboutRolesInstitution"></i>
+                                            </h3>
+                                        </div>
+                                        <div class="row" data-select2-id="340">
+                                            <div class="col-lg-12 form-group m-form__group pt-0" data-select2-id="80">
+                                                <label class="form-control-label"> @Localizer.Roles</label>
+                                                <select asp-for="AccountInfo.Roles" asp-items="@SelectList.Roles(false)" class="form-control m-select2 select2-hidden-accessible" id="m_select2_3" multiple="" data-select2-id="m_select2_3" tabindex="-1" aria-hidden="true"></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--end: Form Wizard Step 3-->
+                        <!--begin: Form Wizard Step 4-->
+                        <div class="m-wizard__form-step" id="m_wizard_form_step_4">
+                            <div class="m-form__heading pb-0">
+                                <h3 class="m-form__heading-title">@Localizer.PersonalDetails</h3><hr />
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-6">
+                                    <div class="row">
+                                        <div class="col-lg-5">
+                                            <label class="form-control-label"> @Localizer.FirstName :</label><br />
+                                            <label class="form-control-label"> @Localizer.ParentName :</label><br />
+                                            <label class="form-control-label"> @Localizer.CountryOfBirth :</label><br />
+                                            <label class="form-control-label"> @Localizer.SocialSecurityNumber :</label><br />
+                                            <label class="form-control-label"> @Localizer.NationalIdNumber :</label><br />
+                                        </div>
+                                        <div class="col-lg-7">
+                                            <label class="form-control-label mb-1 w-100"> <input disabled class="border-0 bg-white" type="text" value="@Model.GeneralInfo.Person.FirstName" /></label><br />
+                                            <label class="form-control-label mb-1 w-100"> <input disabled class="border-0 bg-white" type="text" value="@Model.GeneralInfo.Person.ParentName" /></label><br />
+                                            <label class="form-control-label mb-1 w-100"><input id="GeneralInfo_Person_BirthCountryIdLabel" disabled class="border-0 bg-white" type="text" value="" /> </label><br />
+                                            <label class="form-control-label mb-1 w-100"> <input disabled class="border-0 bg-white" type="text" value="@Model.GeneralInfo.Person.SocialSecurityNumber" /></label><br />
+                                            <label class="form-control-label mb-1 w-100"> <input disabled class="border-0 bg-white" type="text" value="@Model.GeneralInfo.Person.NationalIDNumber" /></label><br />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6">
+                                    <div class="row">
+                                        <div class="col-lg-5">
+                                            <label class="form-control-label"> @Localizer.Surname :</label><br />
+                                            <label class="form-control-label"> @Localizer.DateOfBirth :</label><br />
+                                            <label class="form-control-label"> @Localizer.CityOfBirth :</label><br />
+                                            <label class="form-control-label"> @Localizer.Gender :</label><br />
+                                        </div>
+                                        <div class="col-lg-7">
+                                            <label class="form-control-label mb-1"> <input disabled class="border-0 bg-white" type="text" value="@Model.GeneralInfo.Person.LastName" /></label><br />
+                                            @if (Model.GeneralInfo.Person.DateOfBirth.HasValue)
+                                            {
+                                                <label class="form-control-label mb-1 w-100"> <input disabled class="border-0 bg-white" type="text" value="@Model.GeneralInfo.Person.DateOfBirth.Value.ToString(Localizer.DateFormat)" /></label><br />
+                                            }
+                                            else
+                                            {
+                                                <label class="form-control-label mb-1 w-100"> <input disabled class="border-0 bg-white" type="text" value="" /></label><br />
+                                            }
+                                            <label class="form-control-label mb-1 w-100"> <input id="GeneralInfo_Person_BirthCityIdLabel" disabled class="border-0 bg-white" type="text" value="" /></label><br />
+                                            <label class="form-control-label mb-1 w-100"> <input disabled class="border-0 bg-white" type="text" value="@Model.GeneralInfo.Person.Gender" /></label><br />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="m-form__heading pt-4 pb-0">
+                                <h3 class="m-form__heading-title">@Localizer.ContactDetails</h3><hr />
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-6">
+                                    <div class="row">
+                                        <div class="col-lg-5">
+                                            <label class="form-control-label"> @Localizer.Country :</label><br />
+                                            <label class="form-control-label"> @Localizer.City :</label><br />
+                                            <label class="form-control-label"> @Localizer.Address :</label><br />
+                                            <label class="form-control-label"> @Localizer.Residence :</label><br />
+                                            <label class="form-control-label"> @Localizer.NumberOfPhone :</label><br />
+                                            <label class="form-control-label"> @Localizer.PrimaryEmail :</label><br />
+                                        </div>
+                                        <div class="col-lg-7">
+                                            <label class="form-control-label mb-2 w-100"><input id="GeneralInfo_Person_CountryIdLabel" disabled class="w-100 border-0 bg-white" type="text" value="" /> </label><br />
+                                            <label class="form-control-label mb-1 w-100"><input id="GeneralInfo_Person_CityIdLabel" disabled class="w-100 border-0 bg-white" type="text" value="" /> </label><br />
+                                            <label class="form-control-label mb-1 w-100"> <input disabled class="border-0 bg-white w-100" type="text" value="@Model.GeneralInfo.Person.Address" /></label><br />
+                                            <label class="form-control-label mb-1 w-100"> <input id="GeneralInfo_Person_ResidenceIdLabel" disabled class="w-100 border-0 bg-white" type="text" value="" /> </label><br />
+                                            <label class="form-control-label mb-1 w-100"> <input disabled class="border-0 bg-white w-100" type="text" value="@Model.GeneralInfo.PersonPhone.Contact" /> </label><br />
+                                            <label class="form-control-label mb-1 w-100"> <input disabled class="border-0 bg-white w-100" type="text" value="@Model.GeneralInfo.PersonPrimaryEmail.Contact" /></label><br />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6">
+                                    <div class="row">
+                                        <div class="col-lg-5">
+                                            <label class="form-control-label"> @Localizer.Region :</label><br />
+                                            <label class="form-control-label"> @Localizer.Place :</label><br />
+                                            <label class="form-control-label"> @Localizer.Citizenship :</label><br />
+                                            <label class="form-control-label"> @Localizer.ResidenceAddress :</label><br />
+                                            <label class="form-control-label"> @Localizer.NumberOfMobile :</label><br />
+                                            <label class="form-control-label"> @Localizer.SecondaryEmail :</label><br />
+                                        </div>
+                                        <div class="col-lg-7">
+                                            <label class="form-control-label mb-2 w-100"> <input id="GeneralInfo_Person_RegionIdLabel" disabled class="border-0 bg-white w-100" type="text" value="" /></label><br />
+                                            <label class="form-control-label mb-1 w-100"> <input disabled class="border-0 bg-white w-100" type="text" value="@Model.GeneralInfo.Person.Place" /></label><br />
+                                            <label class="form-control-label mb-1 w-100"> <input id="GeneralInfo_ Person_CitizenshipIdLabel" disabled class="w-100 border-0 bg-white" type="text" value="" /> </label><br />
+                                            <label class="form-control-label mb-1 w-100"> <input disabled class="border-0 bg-white w-100" type="text" value="@Model.GeneralInfo.Person.ResidenceAddress" /></label><br />
+                                            <label class="form-control-label mb-1 w-100"> <input disabled class="border-0 bg-white w-100" type="text" value="@Model.GeneralInfo.PersonMobile.Contact" /></label><br />
+                                            <label class="form-control-label mb-1 w-100"> <input disabled class="border-0 bg-white w-100" type="text" value="@Model.GeneralInfo.PersonSecondaryEmail.Contact" /></label><br />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="m-form__heading pt-4 pb-0">
+                                <h3 class="m-form__heading-title">@Localizer.StatusDetails</h3><hr />
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-6">
+                                    <div class="row">
+                                        <div class="col-lg-5">
+                                            <label class="form-control-label"> @Localizer.MaritalStatus :</label><br />
+                                            <label class="form-control-label"> @Localizer.AcademicDegree :</label><br />
+                                        </div>
+                                        <div class="col-lg-7">
+                                            <label class="form-control-label w-100"><input id="StatusInfo_PersonDetail_MartialStatusIdLabel" disabled class="border-0 bg-white w-100" type="text" value="" /> </label><br />
+                                            <label class="form-control-label w-100"><input id="StatusInfo_PersonDetail_AcademicDegreeIdLabel" disabled class="border-0 bg-white w-100" type="text" value="" /> </label><br />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6">
+                                    <div class="row">
+                                        <div class="col-lg-5">
+                                            <label class="form-control-label"> @Localizer.EmploymentStatus :</label><br />
+                                            <label class="form-control-label"> @Localizer.AcademicTitle :</label><br />
+                                        </div>
+                                        <div class="col-lg-7">
+                                            <label class="form-control-label w-100"><input id="StatusInfo_PersonDetail_EmploymentStatusIdLabel" disabled class="border-0 bg-white w-100" type="text" value="" /> </label><br />
+                                            <label class="form-control-label w-100"><input id="StatusInfo_PersonDetail_AcademicTitleIdLabel" disabled class="border-0 bg-white w-100" type="text" value="" /> </label><br />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="m-form__heading pt-4 pb-0">
+                                <h3 class="m-form__heading-title">@Localizer.AccessDetails</h3><hr />
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-6">
+                                    <div class="row">
+                                        <div class="col-lg-5">
+                                            <label class="form-control-label"> @Localizer.Username :</label><br />
+                                            <label class="form-control-label"> @Localizer.Email :</label><br />
+                                        </div>
+                                        <div class="col-lg-7">
+                                            <label class="form-control-label w-100"> @Model.AccountInfo.User.Username</label><br />
+                                            <label class="form-control-label w-100"> @Model.AccountInfo.User.Email</label><br />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6">
+                                    <div class="row">
+                                        <div class="col-lg-5">
+                                            <label class="form-control-label"> @Localizer.Password :</label><br />
+                                        </div>
+                                        <div class="col-lg-7">
+                                            <div class="input-group">
+                                                <input id="User_Password4Step" disabled class="border-0 bg-white" type="text" value="@Model.AccountInfo.User.Password" />
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-secondary btn-sm border-0" id="passwordEye4Step" type="button"><i class="fa fa-eye fa-eye-slash"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="m-form__heading pt-4 pb-0">
+                                <h3 class="m-form__heading-title">@Localizer.UserRoles</h3><hr />
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-6">
+                                    <div class="row">
+                                        <div class="col-lg-5">
+                                            <label class="form-control-label"> @Localizer.Roles :</label><br />
+                                        </div>
+                                        <div class="col-lg-7">
+                                            <label class="form-control-label" id="RolesLabel">
+                                                @string.Join(", ", Model.AccountInfo.Roles)
+                                            </label><br />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--end: Form Wizard Step 4-->
+                    </div>
+                    <!--end: Form Body -->
+                    <!--begin: Form Actions -->
+                    <div class="m-portlet__foot m-portlet__foot--fit m--margin-top-40">
+                        <div class="m-form__actions">
+                            <div class="row">
+                                <div class="col-lg-2"></div>
+                                <div class="col-lg-4 m--align-left">
+                                    <a href="#" class="btn btn-secondary m-btn m-btn--custom m-btn--icon" data-wizard-action="prev">
+                                        <span>
+                                            <i class="la la-arrow-left"></i>&nbsp;&nbsp;
+                                            <span>@Localizer.Previous</span>
+                                        </span>
+                                    </a>
+                                </div>
+                                <div class="col-lg-4 m--align-right">
+                                    <a href="#" class="btn btn-primary m-btn m-btn--custom m-btn--icon" data-wizard-action="submit">
+                                        <span>
+                                            <i class="la la-check"></i>&nbsp;&nbsp;
+                                            <span>@Localizer.Save</span>
+                                        </span>
+                                    </a>
+                                    <a href="#" class="btn btn-success m-btn m-btn--custom m-btn--icon" data-wizard-action="next">
+                                        <span>
+                                            <span>@Localizer.Save &amp; @Localizer.Continue</span>&nbsp;&nbsp;
+                                            <i class="la la-arrow-right"></i>
+                                        </span>
+                                    </a>
+                                </div>
+                                <div class="col-lg-2"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="number" asp-for="CurrentStep" hidden />
+                    <!--end: Form Actions -->
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    //RANGE VALIDATION SET AFTER INPUT
+    function SetPositionSelectpickerValidation() {
+        for (var i = 0; i < $("select").length; i++) {
+            $($("select")[i]).siblings(".form-control-feedback").insertAfter($($("select")[i]).siblings("button"));
+        }
+    };
+    $(".m_selectpicker").on("change", function () {
+        SetPositionSelectpickerValidation();
+    });
+    //TRIGGER RADIO CLICK
+    $(".dm--custom-radio-click").on("click", function () {
+        $(this).find("input").click();
+    })
+    //GET TEXT DATA FOR CONFIRMATION STEP
+    $.each($(".m_selectpicker"), function () {
+        if ($(this).val() != 0) {
+            $('#' + $(this).attr("id") + 'Label').val($('#' + $(this).attr("id") + ' :selected').text());
+        }
+    })
+    var roles = $("#m_select2_3 :selected");
+    var rolesArray = []
+    $.each(roles, function () {
+        rolesArray.push($(this).text());
+    })
+    $("#RolesLabel").text(rolesArray.join(", "));
+
+    // FILOVANJE COUNTRY-REGION-CITY
+    function MembersAdd__FillRegions() {
+        var countryId = $("#GeneralInfo_Person_CountryId").val();
+
+        $("#GeneralInfo_Person_RegionId").html("");
+        $("#GeneralInfo_Person_RegionId").append($("<option selected></option>").val("0").html("@Localizer.SelectRegion"));
+
+        if (countryId != 0) {
+            $.ajax({
+                url: "@Url.Action("GetRegionsSelectListByCountryId", "Regions", new { area = "Administration" })",
+                type: "GET",
+                dataType: "JSON",
+                data: { countryId: countryId },
+                success: function (data) {
+                    $("#GeneralInfo_Person_RegionId").selectpicker("destroy");
+                    $.each(data, function (i, element) {
+                        $("#GeneralInfo_Person_RegionId").append($('<option></option>').val(element.value).html(element.text));
+                    });
+                    $("#GeneralInfo_Person_RegionId").selectpicker();
+                    $("#GeneralInfo_Person_RegionId").valid();
+                    SetPositionSelectpickerValidation();
+                    $("#GeneralInfo_Person_RegionId").siblings("button").removeClass("disabled");
+
+                }
+            });
+        }
+        else {
+            $("#GeneralInfo_Person_RegionId").selectpicker("destroy");
+            $("#GeneralInfo_Person_RegionId").selectpicker();
+            $("#GeneralInfo_Person_RegionId").valid();
+            SetPositionSelectpickerValidation();
+            $("#GeneralInfo_Person_RegionId").siblings("button").addClass("disabled");
+        }
+    }
+
+    function MembersAdd__FillCitiesByRegion() {
+        var regionId = $("#GeneralInfo_Person_RegionId").val();
+
+        $("#GeneralInfo_Person_CityId").html("");
+        $("#GeneralInfo_Person_CityId").append($("<option selected></option>").val("0").html("@Localizer.SelectCity"));
+
+        if (regionId != 0) {
+            $.ajax({
+                url: "@Url.Action("GetCitiesSelectListByRegionId", "Cities", new { area = "Administration" })",
+                type: "GET",
+                dataType: "JSON",
+                data: { regionId: regionId },
+                success: function (data) {
+                    $("#GeneralInfo_Person_CityId").selectpicker("destroy");
+                    $.each(data, function (i, element) {
+                        $("#GeneralInfo_Person_CityId").append($('<option></option>').val(element.value).html(element.text));
+                    });
+                    $("#GeneralInfo_Person_CityId").selectpicker();
+                    $("#GeneralInfo_Person_CityId").valid();
+                    SetPositionSelectpickerValidation();
+                }
+            });
+        }
+        else {
+            MembersAdd__FillCities();
+            $("#GeneralInfo_Person_CityId").valid();
+            SetPositionSelectpickerValidation();
+        }
+    }
+    function MembersAdd__FillCities() {
+        var countryId = $("#GeneralInfo_Person_CountryId").val();
+        $("#GeneralInfo_Person_CityId").html("");
+        $("#GeneralInfo_Person_CityId").append($("<option selected></option>").val("0").html("@Localizer.SelectCity"));
+        if (countryId != 0) {
+            $.ajax({
+                url: "@Url.Action("GetCitiesByCountryId", "Cities", new { area = "Administration" })",
+                type: "GET",
+                dataType: "JSON",
+                data: { countryId: countryId },
+                success: function (data) {
+                    $("#GeneralInfo_Person_CityId").selectpicker("destroy");
+                    $.each(data, function (i, element) {
+                        $("#GeneralInfo_Person_CityId").append($('<option></option>').val(element.value).html(element.text));
+                    });
+                    $("#GeneralInfo_Person_CityId").selectpicker();
+                    $("#GeneralInfo_Person_CityId").valid();
+                    SetPositionSelectpickerValidation();
+                    $("#GeneralInfo_Person_CityId").siblings("button").removeClass("disabled");
+                }
+            });
+        }
+        else {
+            $("#GeneralInfo_Person_CityId").selectpicker("destroy");
+            $("#GeneralInfo_Person_CityId").selectpicker();
+            $("#GeneralInfo_Person_CityId").valid();
+            SetPositionSelectpickerValidation();
+            $("#GeneralInfo_Person_CityId").siblings("button").addClass("disabled");
+        }
+    }
+    function MembersAdd_FillBirthCities() {
+        var countryId = $("#GeneralInfo_Person_BirthCountryId").val();
+        $("#GeneralInfo_Person_BirthCityId").html("");
+        $("#GeneralInfo_Person_BirthCityId").append($("<option selected></option>").val("0").html("@Localizer.SelectCity"));
+        if (countryId != 0) {
+            $.ajax({
+                url: "@Url.Action("GetCitiesByCountryId", "Cities", new { area = "Administration" })",
+                type: "GET",
+                dataType: "JSON",
+                data: { countryId: countryId },
+                success: function (data) {
+                    $("#GeneralInfo_Person_BirthCityId").selectpicker("destroy");
+                    $.each(data, function (i, element) {
+                        $("#GeneralInfo_Person_BirthCityId").append($('<option></option>').val(element.value).html(element.text));
+                    });
+                    $("#GeneralInfo_Person_BirthCityId").selectpicker();
+                    $("#GeneralInfo_Person_BirthCityId").valid();
+                    SetPositionSelectpickerValidation();
+                    $("#GeneralInfo_Person_BirthCityId").siblings("button").removeClass("disabled");
+                }
+            });
+        }
+        else {
+            $("#GeneralInfo_Person_BirthCityId").selectpicker("destroy");
+            $("#GeneralInfo_Person_BirthCityId").selectpicker();
+            $("#GeneralInfo_Person_BirthCityId").valid();
+            SetPositionSelectpickerValidation();
+            $("#GeneralInfo_Person_BirthCityId").siblings("button").addClass("disabled");
+        }
+    }
+
+
+    //SET CURRENT STEP FOR CONFIRMATION
+    @if (Model.CurrentStep == 4)
+    {
+        @:$("#CurrentStep").val("4");
+    }
+
+    //LOAD PASSWORD
+    $("#AccountInfo_User_Password").attr("type", "password");
+    $("#AccountInfo_User_ConfirmPassword").attr("type", "password");
+    $("#User_Password4Step").attr("type", "password");
+
+
+    // WIZARD CONSTRUCTOR
+    var WizardDemo = function () {
+        $("#m_wizard");
+        var e,
+            r,
+            i = $("myForm");
+        return {
+            init: function () {
+                var n;
+                $("#m_wizard"),
+                    i = $("#myForm"),
+                    (r = new mWizard("m_wizard", {
+                    //ON LOAD SET GO TO CONFIRMATION OR ON FIRST STEP
+                    @if (Model.CurrentStep != 4)
+                    {
+                        @:startStep: 1
+                    }
+                    else
+                    {
+                        @:startStep: 4
+                    }
+                    }
+                    )).on("beforeNext", function (r) {
+                    !0 !== e.form() && r.stop();
+                    //RANGE VALIDATION SET AFTER INPUT
+                    SetPositionSelectpickerValidation();
+                    $("#genderM").siblings(".form-control-feedback").insertAfter($("#maleGenderDiv"));
+                    //IF 1 STEP GENERATE USERNAME FROM NAME AND SURNAME
+                    if (r.currentStep == 1) {
+                        var firstname = $("#GeneralInfo_Person_FirstName").val();
+                        var lastname = $("#GeneralInfo_Person_LastName").val();
+                        if (firstname == "" || lastname == "") {
+                            e.form();
+                            r.stop();
+                        }
+                        else {
+                            $.ajax({
+                                dataType: "JSON",
+                                method: "GET",
+                                url: "@Url.Action("GenerateUsername", "Members", new { area = "Organizations" })",
+                                data: { firstname: firstname, lastname: lastname },
+                                cache: false,
+                                success: function (data) {
+                                    $("#AccountInfo_User_Username").val(data.username);
+                                }
+                            });
+                        }
+                    }
+                    //ON 3. STEP - VALIDATE AND STOP WIZARD, IF VALID THEN SUBMIT
+                    else if (r.currentStep == 3) {
+                        if (e.form()){
+                            r.stop(),
+                             $("#myForm")[0].submit()
+                        }
+                    }
+
+                    }
+                    ),
+                    r.on("change", function (e) {
+                    $("#CurrentStep").val(r.currentStep),
+                        mUtil.scrollTop()
+                    }
+                    ),
+
+                    e = i.validate({
+                        ignore: ":hidden", rules: {
+                            "GeneralInfo.Person.FirstName": {
+                                required: 1
+                            }
+                            , "GeneralInfo.Person.LastName": {
+                                required: 1
+                            }
+                            , "GeneralInfo.Person.ParentName": {
+                                required: 1
+                            }
+                            , "GeneralInfo.Person.DateOfBirth": {
+                                required: 1
+                            }
+                            , "GeneralInfo.Person.CountryId": {
+                                required:1
+                            }
+                            , "GeneralInfo.Person.CityId": {
+                                range:[1,100000]
+                            }
+                            , "GeneralInfo.Person.Gender": {
+                                required: 1
+                            }
+                            , "GeneralInfo.PersonPhone.Contact": {
+                                required: 1,
+                                regex:"^0[23456789]{1}[0-9]{7,8}$"
+                            }
+                            , "GeneralInfo.PersonPrimaryEmail.Contact": {
+                                required: 1,
+                                email: !0
+                            }
+                            , "StatusInfo.PersonDetail.AcademicDegreeId": {
+                                required:1
+                            }
+                            , "AccountInfo.User.Password": {
+                                required: 1,
+                                regex: "(?=.*[0-9])(?=.*[a-zA-Z]).",
+                                minlength:6
+                            }
+                            , "AccountInfo.User.Username": {
+                                required:1
+                            }
+                            , "AccountInfo.User.ConfirmPassword": {
+                                equalTo: "#AccountInfo_User_Password"
+                            }
+                            , "AccountInfo.User.Email": {
+                                required: 1,
+                                email: 1
+                            }
+                            , "AccountInfo.Roles": {
+                                required: 1
+                            }
+
+                        }
+                        , messages: {
+                            "account_communication[]": {
+                                required: "You must select at least one communication option"
+                            }
+                            , accept: {
+                                required: "You must accept the Terms and Conditions agreement!"
+                            }
+                            , "GeneralInfo.Person.FirstName": {
+                                required: "@Localizer.ErrorMessageFirstNameReq"
+                            }
+                            , "GeneralInfo.Person.LastName": {
+                                required: "@Localizer.ErrorMessageLastNameReq"
+                            }
+                            , "GeneralInfo.Person.ParentName": {
+                                required: "@Localizer.ErrorMessageParentNameReq"
+                            }
+                            , "GeneralInfo.Person.DateOfBirth": {
+                                required: "@Localizer.ErrorMessageDateOfBirthReq"
+                            }
+                            , "GeneralInfo.Person.CountryId": {
+                                required: "@Localizer.ErrorMessageCountryReq"
+                            }
+                            , "GeneralInfo.Person.CityId": {
+                                range: "@Localizer.ErrorMessageCityReq"
+                            }
+                            , "GeneralInfo.Person.Gender": {
+                                required: "@Localizer.ErrorMessageGenderReq"
+                            }
+                            , "GeneralInfo.PersonPhone.Contact": {
+                                required: "@Localizer.ErrorMessageNumberOfMobileReq",
+                                regex:"@Localizer.ErrorMessagePhoneFormat"
+                            }
+                            , "GeneralInfo.PersonPrimaryEmail.Contact": {
+                                required: "@Localizer.ErrorMessagePrimaryEmailReq"
+                            }
+                            , "StatusInfo.PersonDetail.AcademicDegreeId": {
+                                required: "@Localizer.ErrorMessageAcademicDegreeReq"
+                            }
+                            , "AccountInfo.User.Username": {
+                                required: "@Localizer.ErrorMessageUsernameReq"
+                            }
+                            , "AccountInfo.User.Password": {
+                                required: "@Localizer.ErrorMessagePasswordReq",
+                                regex: "@Localizer.ErrorMessagePasswordReqContainLettersAndNumbers",
+                                minlength:"@Localizer.ErrorMessagePasswordLen6"
+                            }
+                            , "AccountInfo.User.Email": {
+                                required: "@Localizer.ErrorMessageEmailReq"
+                            }
+                            , "AccountInfo.User.ConfirmPassword": {
+                                equalTo: "@Localizer.PasswordsDoNotMatch"
+                            }
+                            , "AccountInfo.Roles": {
+                                required: "@Localizer.SelectRoles"
+                            }
+                        }
+                        , invalidHandler: function (e, r) {
+                            mUtil.scrollTop()
+                        }
+                        , submitHandler: function (e) { }
+                    }
+                    )
+                    ,
+                    //SUBMIT ON CONFIRMATION AND SAVE TO DATABASE
+                    (n = i.find('[data-wizard-action="submit"]')).on("click", function (r) {
+                        $("#myForm")[0].submit()
+
+                        //r.preventdefault()
+                        //,
+                        //e.form() && (mapp.progress(n),
+                        //$("#myForm")[0].submit()
+                        //)
+                    }
+                    )
+            }
+        }
+    }();
+    $(document).ready(function () {
+        $(".m_selectpicker").selectpicker().change(function () {
+            if ($(this).val != 0)
+                $(this).valid();
+        });
+
+        //set primary email to user acc email
+        $("#GeneralInfo_PersonPrimaryEmail_Contact").on("blur", function () {
+            $("#AccountInfo_User_Email").val($("#GeneralInfo_PersonPrimaryEmail_Contact").val());
+        });
+
+        //show hide password input
+        $("#passwordEye").on("click", function () {
+            $(this).children("i").toggleClass("fa-eye-slash");
+
+            if ($("#passwordEye").parents().find("#AccountInfo_User_Password").attr("type") == "password") {
+                $("#passwordEye").parents().find("#AccountInfo_User_Password").attr("type", "text");
+            }
+            else {
+                $("#passwordEye").parents().find("#AccountInfo_User_Password").attr("type", "password");
+            }
+        });
+        $("#passwordEye4Step").on("click", function () {
+            $(this).children("i").toggleClass("fa-eye-slash");
+
+            if ($("#passwordEye4Step").parents().find("#User_Password4Step").attr("type") == "password") {
+                $("#passwordEye4Step").parents().find("#User_Password4Step").attr("type", "text");
+            }
+            else {
+                $("#passwordEye4Step").parents().find("#User_Password4Step").attr("type", "password");
+            }
+        });
+
+        //generate password
+        $("#passwordGenerator").on("click", function () {
+            var randomstring = Math.random().toString(36).slice(-8);
+            $("#AccountInfo_User_Password").val(randomstring);
+            $("#AccountInfo_User_ConfirmPassword").val(randomstring);
+            $("#passwordEye").parents().find("#AccountInfo_User_Password").attr("type", "text");
+            $("#passwordEye").children("i").removeClass("fa-eye-slash");
+        });
+
+
+        WizardDemo.init()
+        $('#m_summernote_2').summernote();
+        var Select2 = {
+            init: function () {
+                $("#m_select2_3, #m_select2_3_validate").select2({
+                    placeholder: "@Localizer.SelectRoles"
+                })
+            }
+        }
+        Select2.init();
+        $(".select2-container, .select2-search, .select2-search__field").css("width", "100%");
+        $("#m_select2_3").on("change", function () {
+            if ($(this).val() != undefined)
+                $(this).valid();
+        })
+
+        jQuery.validator.addMethod(
+            "regex",
+            function (value, element, regexp) {
+                var re = new RegExp(regexp);
+
+                return  re.test(value);
+            },
+            "Please check your input."
+        );
+        //DISABLE EMPTY SELECTPICKERS
+        $("#GeneralInfo_Person_BirthCityId").siblings("button").addClass("disabled");
+        $("#GeneralInfo_Person_RegionId").siblings("button").addClass("disabled");
+        $("#GeneralInfo_Person_CityId").siblings("button").addClass("disabled");
+    });
+</script>

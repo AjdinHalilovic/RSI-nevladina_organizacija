@@ -30,7 +30,7 @@ namespace nevladinaOrg.Web.Helpers.SelectListHelper
             var cities = new List<SelectListItem>();
 
             if (includeEmpty)
-                cities.Add(new SelectListItem { Value = string.Empty, Text = _localizer.SelectCity });
+                cities.Add(new SelectListItem { Value = 0.ToString(), Text = _localizer.SelectCity });
 
             cities.AddRange(list.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Name }));
 
@@ -43,7 +43,7 @@ namespace nevladinaOrg.Web.Helpers.SelectListHelper
             var cities = new List<SelectListItem>();
 
             if (includeEmpty)
-                cities.Add(new SelectListItem { Value = string.Empty, Text = _localizer.SelectCity });
+                cities.Add(new SelectListItem { Value = 0.ToString(), Text = _localizer.SelectCity });
 
             cities.AddRange(list.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Name }));
 
@@ -55,7 +55,7 @@ namespace nevladinaOrg.Web.Helpers.SelectListHelper
             var cities = new List<SelectListItem>();
 
             if (includeEmpty)
-                cities.Add(new SelectListItem { Value = string.Empty, Text = _localizer.SelectCity });
+                cities.Add(new SelectListItem { Value = 0.ToString(), Text = _localizer.SelectCity });
 
             if (countryId.HasValue)
             {
@@ -70,7 +70,7 @@ namespace nevladinaOrg.Web.Helpers.SelectListHelper
             var cities = new List<SelectListItem>();
 
             if (includeEmpty)
-                cities.Add(new SelectListItem { Value = string.Empty, Text = _localizer.SelectCity });
+                cities.Add(new SelectListItem { Value = 0.ToString(), Text = _localizer.SelectCity });
 
             if (countryId.HasValue)
             {
@@ -88,7 +88,7 @@ namespace nevladinaOrg.Web.Helpers.SelectListHelper
             var cities = new List<SelectListItem>();
 
             if (includeEmpty)
-                cities.Add(new SelectListItem { Value = string.Empty, Text = _localizer.SelectCity });
+                cities.Add(new SelectListItem { Value = 0.ToString(), Text = _localizer.SelectCity });
 
             cities.AddRange(list.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Name }));
 
@@ -106,7 +106,7 @@ namespace nevladinaOrg.Web.Helpers.SelectListHelper
             var countries = new List<SelectListItem>();
 
             if (includeEmpty)
-                countries.Add(new SelectListItem { Value = string.Empty, Text = _localizer.SelectCountry });
+                countries.Add(new SelectListItem { Value = 0.ToString(), Text = _localizer.SelectCountry });
 
             countries.AddRange(list.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Name }));
 
@@ -119,7 +119,7 @@ namespace nevladinaOrg.Web.Helpers.SelectListHelper
             var countries = new List<SelectListItem>();
 
             if (includeEmpty)
-                countries.Add(new SelectListItem { Value = string.Empty, Text = _localizer.SelectCountry });
+                countries.Add(new SelectListItem { Value = 0.ToString(), Text = _localizer.SelectCountry });
 
             countries.AddRange(list.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Name }));
 
@@ -136,7 +136,7 @@ namespace nevladinaOrg.Web.Helpers.SelectListHelper
             var regions = new List<SelectListItem>();
 
             if (includeEmpty)
-                regions.Add(new SelectListItem { Value = string.Empty, Text = _localizer.SelectRegion });
+                regions.Add(new SelectListItem { Value = 0.ToString(), Text = _localizer.SelectRegion });
 
             regions.AddRange(list.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Name }));
 
@@ -148,7 +148,7 @@ namespace nevladinaOrg.Web.Helpers.SelectListHelper
             var regions = new List<SelectListItem>();
 
             if (includeEmpty)
-                regions.Add(new SelectListItem { Value = string.Empty, Text = _localizer.SelectRegion });
+                regions.Add(new SelectListItem { Value = 0.ToString(), Text = _localizer.SelectRegion });
 
             if (countryId.HasValue)
             {
@@ -169,11 +169,131 @@ namespace nevladinaOrg.Web.Helpers.SelectListHelper
             var regions = new List<SelectListItem>();
 
             if (includeEmpty)
-                regions.Add(new SelectListItem { Value = string.Empty, Text = _localizer.SelectCitizenship });
+                regions.Add(new SelectListItem { Value = 0.ToString(), Text = _localizer.SelectCitizenship });
 
             regions.AddRange(list.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Name }));
 
             return regions;
+        }
+
+        #endregion
+
+        #region LicenseTypes
+
+        public List<SelectListItem> LicenseTypes(bool includeEmpty = true)
+        {
+            List<LicenseType> list = _dataUnitOfWork.BaseUow.LicenseTypesRepository.GetAll().ToList();
+
+            var regions = new List<SelectListItem>();
+
+            if (includeEmpty)
+                regions.Add(new SelectListItem { Value = 0.ToString(), Text = _localizer.SelectLicenceType });
+
+            regions.AddRange(list.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Name }));
+
+            return regions;
+        }
+
+        #endregion
+
+        #region Sponsors
+
+        public List<SelectListItem> Sponsors(bool includeEmpty = true)
+        {
+            List<Sponsor> list = _dataUnitOfWork.BaseUow.SponsorsRepository.GetAll().ToList();
+
+            var sponsors = new List<SelectListItem>();
+
+            if (includeEmpty)
+                sponsors.Add(new SelectListItem { Value = 0.ToString(), Text = _localizer.SelectSponsor });
+
+            sponsors.AddRange(list.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Name }));
+
+            return sponsors;
+        }
+        public List<SelectListItem> SponsorTypes(bool includeEmpty = true)
+        {
+            List<SponsorType> list = _dataUnitOfWork.BaseUow.SponsorTypesRepository.GetAll().ToList();
+
+            var sponsorTypes = new List<SelectListItem>();
+
+            if (includeEmpty)
+                sponsorTypes.Add(new SelectListItem { Value = 0.ToString(), Text = _localizer.SelectSponsorType });
+
+            sponsorTypes.AddRange(list.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Name }));
+
+            return sponsorTypes;
+        }
+
+        #endregion
+
+        #region Events
+
+        public List<SelectListItem> EventItemTypes(bool includeEmpty = true)
+        {
+            List<EventItemType> list = _dataUnitOfWork.BaseUow.EventItemTypesRepository.GetAll().ToList();
+
+            var eventItemTypes = new List<SelectListItem>();
+
+            if (includeEmpty)
+                eventItemTypes.Add(new SelectListItem { Value = 0.ToString(), Text = _localizer.SelectEventItemTypes });
+
+            eventItemTypes.AddRange(list.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Name }));
+
+            return eventItemTypes;
+        }
+        public List<SelectListItem> Lecturers(bool includeEmpty = true)
+        {
+            List<Lecturer> list = _dataUnitOfWork.BaseUow.LecturersRepository.GetAll().ToList();
+
+            var lecturers = new List<SelectListItem>();
+
+            if (includeEmpty)
+                lecturers.Add(new SelectListItem { Value = 0.ToString(), Text = _localizer.SelectEventItemTypes });
+
+            lecturers.AddRange(list.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.FirstName + ' ' + x.LastName }));
+
+            return lecturers;
+        }
+
+
+
+        #endregion
+
+
+        #region Users
+
+        public List<SelectListItem> Persons(bool includeEmpty = true)
+        {
+            List<Person> list = _dataUnitOfWork.BaseUow.PersonsRepository.GetAll().ToList();
+
+            var persons = new List<SelectListItem>();
+
+            if (includeEmpty)
+                persons.Add(new SelectListItem { Value = 0.ToString(), Text = _localizer.SelectPatient });
+
+            persons.AddRange(list.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.FirstName + " " + x.LastName }));
+
+            return persons;
+        }
+
+
+        #endregion
+
+        #region MartialStatuses
+
+        public List<SelectListItem> MartialStatuses(bool includeEmpty = false)
+        {
+            List<MaritalStatus> list = _dataUnitOfWork.BaseUow.MartialStatusesRepository.GetAll().ToList();
+
+            var maritalStatus = new List<SelectListItem>();
+
+            if (includeEmpty)
+                maritalStatus.Add(new SelectListItem { Value = 0.ToString(), Text = _localizer.SelectMartialStatus });
+
+            maritalStatus.AddRange(list.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Name }));
+
+            return maritalStatus;
         }
 
         #endregion
@@ -187,7 +307,7 @@ namespace nevladinaOrg.Web.Helpers.SelectListHelper
             var academicDegrees = new List<SelectListItem>();
 
             if (includeEmpty)
-                academicDegrees.Add(new SelectListItem { Value = string.Empty, Text = _localizer.SelectAcademicDegree });
+                academicDegrees.Add(new SelectListItem { Value = 0.ToString(), Text = _localizer.SelectAcademicDegree });
 
             academicDegrees.AddRange(list.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Name }));
 
@@ -205,7 +325,7 @@ namespace nevladinaOrg.Web.Helpers.SelectListHelper
             var academicTitles = new List<SelectListItem>();
 
             if (includeEmpty)
-                academicTitles.Add(new SelectListItem { Value = string.Empty, Text = _localizer.SelectAcademicTitle });
+                academicTitles.Add(new SelectListItem { Value = 0.ToString(), Text = _localizer.SelectAcademicTitle });
 
             academicTitles.AddRange(list.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Name }));
 
@@ -222,7 +342,7 @@ namespace nevladinaOrg.Web.Helpers.SelectListHelper
             var roles = new List<SelectListItem>();
 
             if (includeEmpty)
-                roles.Add(new SelectListItem { Value = string.Empty, Text = _localizer.SelectRoles });
+                roles.Add(new SelectListItem { Value = 0.ToString(), Text = _localizer.SelectRoles });
 
             roles.AddRange(list.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Name }));
 
@@ -232,6 +352,23 @@ namespace nevladinaOrg.Web.Helpers.SelectListHelper
         #endregion
 
 
+        #region EmployementStatuses
+
+        public List<SelectListItem> EmployementStatuses(bool includeEmpty = false)
+        {
+            List<EmployeeStatus> list = _dataUnitOfWork.BaseUow.EmployeeStatusesRepository.GetAll().ToList();
+
+            var employementStatuses = new List<SelectListItem>();
+
+            if (includeEmpty)
+                employementStatuses.Add(new SelectListItem { Value = 0.ToString(), Text = _localizer.SelectEmployementStatus });
+
+            employementStatuses.AddRange(list.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Name }));
+
+            return employementStatuses;
+        }
+
+        #endregion
 
     }
 }

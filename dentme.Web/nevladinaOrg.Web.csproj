@@ -52,6 +52,24 @@
     <Compile Include="Areas\Administration\ViewModels\RegionViewModel.cs" />
     <Compile Include="Areas\Administration\ViewModels\RegistrationViewModel.cs" />
     <Compile Include="Areas\Administration\ViewModels\SponsorViewModel.cs" />
+    <Compile Include="Areas\Institutions\Controllers\StaffController.cs" />
+    <Compile Include="Areas\Institutions\ViewModels\StaffAccountInfoViewModel.cs" />
+    <Compile Include="Areas\Institutions\ViewModels\StaffGeneralInfoViewModel.cs" />
+    <Compile Include="Areas\Institutions\ViewModels\StaffStatusInfoViewModel.cs" />
+    <Compile Include="Areas\Institutions\ViewModels\StaffViewModel.cs" />
+    <Compile Include="Areas\Organizations\Controllers\MembersController.cs" />
+    <Compile Include="Areas\Organizations\ViewModels\AccountInfoViewModel.cs" />
+    <Compile Include="Areas\Organizations\ViewModels\GeneralInfoViewModel.cs" />
+    <Compile Include="Areas\Organizations\ViewModels\LicenseAddViewModel.cs" />
+    <Compile Include="Areas\Organizations\ViewModels\LicensePeriodViewModel.cs" />
+    <Compile Include="Areas\Organizations\ViewModels\MemberLicenseViewModel.cs" />
+    <Compile Include="Areas\Organizations\ViewModels\MemberViewModel.cs" />
+    <Compile Include="Areas\Organizations\ViewModels\PersonContactViewModel.cs" />
+    <Compile Include="Areas\Organizations\ViewModels\PersonDetailsViewModel.cs" />
+    <Compile Include="Areas\Organizations\ViewModels\PersonPhotoViewModel.cs" />
+    <Compile Include="Areas\Organizations\ViewModels\PersonViewModel.cs" />
+    <Compile Include="Areas\Organizations\ViewModels\StatusInfoViewModel.cs" />
+    <Compile Include="Areas\Organizations\ViewModels\UserViewModel.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -129,7 +147,31 @@
     <None Include="Areas\Administration\Views\SystemSettings\General.cshtml" />
     <None Include="Areas\Administration\Views\SystemSettings\Regional.cshtml" />
     <None Include="Areas\Administration\Views\_ViewImports.cshtml" />
+    <None Include="Areas\Institutions\Views\Staff\Index.cshtml" />
+    <None Include="Areas\Institutions\Views\Staff\Preview.cshtml" />
+    <None Include="Areas\Institutions\Views\Staff\_Add.cshtml" />
+    <None Include="Areas\Institutions\Views\Staff\_EditProfileImage.cshtml" />
+    <None Include="Areas\Institutions\Views\Staff\_Events.cshtml" />
+    <None Include="Areas\Institutions\Views\Staff\_LicenseIndex.cshtml" />
+    <None Include="Areas\Institutions\Views\Staff\_ProfileAccountInfo.cshtml" />
+    <None Include="Areas\Institutions\Views\Staff\_ProfileGeneralInfo.cshtml" />
+    <None Include="Areas\Institutions\Views\Staff\_ProfileStatusInfo.cshtml" />
     <None Include="Areas\Institutions\Views\_ViewImports.cshtml" />
+    <None Include="Areas\Organizations\Views\Members\Index.cshtml" />
+    <None Include="Areas\Organizations\Views\Members\Preview.cshtml" />
+    <None Include="Areas\Organizations\Views\Members\Worksheet.cshtml" />
+    <None Include="Areas\Organizations\Views\Members\_Add.cshtml" />
+    <None Include="Areas\Organizations\Views\Members\_AddLicense.cshtml" />
+    <None Include="Areas\Organizations\Views\Members\_AddLicensePeriod.cshtml" />
+    <None Include="Areas\Organizations\Views\Members\_ConfirmationStep.cshtml" />
+    <None Include="Areas\Organizations\Views\Members\_EditLicensePeriod.cshtml" />
+    <None Include="Areas\Organizations\Views\Members\_EditProfileImage.cshtml" />
+    <None Include="Areas\Organizations\Views\Members\_Events.cshtml" />
+    <None Include="Areas\Organizations\Views\Members\_LicenseIndex.cshtml" />
+    <None Include="Areas\Organizations\Views\Members\_Preview.cshtml" />
+    <None Include="Areas\Organizations\Views\Members\_ProfileAccountInfo.cshtml" />
+    <None Include="Areas\Organizations\Views\Members\_ProfileGeneralInfo.cshtml" />
+    <None Include="Areas\Organizations\Views\Members\_ProfileStatusInfo.cshtml" />
     <None Include="Areas\Organizations\Views\_ViewImports.cshtml" />
     <None Include="wwwroot\app\media\img\files\css.svg" />
     <None Include="wwwroot\app\media\img\files\csv.svg" />
@@ -284,13 +326,6 @@
     <Content Update="wwwroot\demo\default\media\img\logo\favicon.ico">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Areas\Institutions\Controllers\" />
-    <Folder Include="Areas\Institutions\ViewModels\" />
-    <Folder Include="Areas\Organizations\Controllers\" />
-    <Folder Include="Areas\Organizations\ViewModels\" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1development_1json__JSONSchema="" /></VisualStudio></ProjectExtensions>

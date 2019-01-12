@@ -114,7 +114,7 @@ namespace nevladinaOrg.Web.Helpers
                 bih = bosnia.Id;
                 cro = croatia.Id;
             }
-            
+
             if (!context.InstitutionTypes.Any())
             {
                 var state = new InstitutionType
@@ -193,7 +193,7 @@ namespace nevladinaOrg.Web.Helpers
                 context.SaveChanges();
             }
 
-            
+
             if (!context.Citizenships.Any())
             {
                 var citizenchip_BIH = new Citizenship
@@ -208,7 +208,7 @@ namespace nevladinaOrg.Web.Helpers
                 context.SaveChanges();
             }
 
-            
+
             if (!context.OrganizationTypes.Any())
             {
                 var bussinessEntity = new OrganizationType() { Name = "Business entity" };
@@ -265,7 +265,7 @@ namespace nevladinaOrg.Web.Helpers
                     Address = "Address",
                     Active = true,
                     IsDeleted = false,
-                    InstitutionId=opstinaVg
+                    InstitutionId = opstinaVg
                 };
                 var organization1 = new Organization()
                 {
@@ -277,7 +277,7 @@ namespace nevladinaOrg.Web.Helpers
                     Address = "Address",
                     Active = true,
                     IsDeleted = false,
-                    InstitutionId=opstinaHz
+                    InstitutionId = opstinaHz
                 };
                 var organization2 = new Organization()
                 {
@@ -289,7 +289,7 @@ namespace nevladinaOrg.Web.Helpers
                     Address = "Address",
                     Active = true,
                     IsDeleted = false,
-                    InstitutionId=opstinaVg
+                    InstitutionId = opstinaVg
                 };
                 context.Organizations.AddRange(organization, organization1, organization2);
                 context.SaveChanges();
@@ -470,123 +470,154 @@ namespace nevladinaOrg.Web.Helpers
                     Id = ajdinVgZebeOrganizationInstitutionUser.Id,
                     Note = "Član opštine"
                 };
-
                 context.Members.Add(ajdinVGMember);
                 context.SaveChanges();
 
+                var license = new MemberLicense
+                {
+                    Active = true,
+                    CreatedDate = DateTime.Now,
+                    LicenceNumber = "XYC-225",
+                    MemberId = ajdinVGMember.Id,
+                    Permanent = false
+                };
+                context.MemberLicenses.Add(license);
+                context.SaveChanges();
 
+                var licenseType = new LicenseType
+                {
+                    Name = "Prolongation"
+                };
+                var licenseType2 = new LicenseType
+                {
+                    Name = "Ban"
+                };
+                context.LicenseTypes.AddRange(licenseType, licenseType2);
+                context.SaveChanges();
 
-                if (!context.Functionalities.Any())
+                var licensePeriod = new LicensePeriod
                 {
-                    var functionality1 = new Core.Entities.Base.Functionality
-                    {
-                        Name = "Role - Index",
-                        ControllerName = "Roles",
-                        FunctionNumber = 1,
-                        IsDeleted = false
-                    };
-                    var functionality2 = new Core.Entities.Base.Functionality
-                    {
-                        Name = "Role - Add",
-                        ControllerName = "Roles",
-                        FunctionNumber = 2,
-                        IsDeleted = false
-                    };
-                    var functionality3 = new Core.Entities.Base.Functionality
-                    {
-                        Name = "Role - Edit",
-                        ControllerName = "Roles",
-                        FunctionNumber = 3,
-                        IsDeleted = false
-                    };
-                    var functionality4 = new Core.Entities.Base.Functionality
-                    {
-                        Name = "Role - Delete",
-                        ControllerName = "Roles",
-                        FunctionNumber = 4,
-                        IsDeleted = false
-                    };
-                    context.Functionalities.AddRange(functionality1, functionality2, functionality3, functionality4);
-                    context.SaveChanges();
-                }
-                if (!context.Roles.Any())
-                {
-                    var admin = new Core.Entities.Base.Role
-                    {
-                        InstitutionId = 1,
-                        Name = "Administrator",
-                        Active = true
-                    };
-                    var def = new Core.Entities.Base.Role
-                    {
-                        InstitutionId = 1,
-                        Name = "Demo default role",
-                        Active = true
-                    };
-                    context.Roles.AddRange(admin, def);
-                    context.SaveChanges();
-                }
-                if (!context.RoleFunctionalities.Any())
-                {
-                    var adminRoleFunct1 = new Core.Entities.Base.RoleFunctionality
-                    {
-                        RoleId = 1,
-                        FunctionalityId = 1,
-                        AssignmentDate = DateTime.Now,
-                        ModifiedDate = DateTime.Now,
-                        IsDeleted = false
-                    };
-                    var adminRoleFunct2 = new Core.Entities.Base.RoleFunctionality
-                    {
-                        RoleId = 1,
-                        FunctionalityId = 2,
-                        AssignmentDate = DateTime.Now,
-                        ModifiedDate = DateTime.Now,
-                        IsDeleted = false
-                    };
-                    var adminRoleFunct3 = new Core.Entities.Base.RoleFunctionality
-                    {
-                        RoleId = 1,
-                        FunctionalityId = 3,
-                        AssignmentDate = DateTime.Now,
-                        ModifiedDate = DateTime.Now,
-                        IsDeleted = false
-                    };
-                    var adminRoleFunct4 = new Core.Entities.Base.RoleFunctionality
-                    {
-                        RoleId = 1,
-                        FunctionalityId = 4,
-                        AssignmentDate = DateTime.Now,
-                        ModifiedDate = DateTime.Now,
-                        IsDeleted = false
-                    };
-                    var defRoleFunct = new Core.Entities.Base.RoleFunctionality
-                    {
-                        RoleId = 2,
-                        FunctionalityId = 1,
-                        AssignmentDate = DateTime.Now,
-                        ModifiedDate = DateTime.Now,
-                        IsDeleted = false
-                    };
-                    context.RoleFunctionalities.AddRange(adminRoleFunct1, adminRoleFunct2, adminRoleFunct3, adminRoleFunct4, defRoleFunct);
-                    context.SaveChanges();
-                }
-                if (!context.UserRoles.Any())
-                {
-                    var userAdmin = new Core.Entities.Base.UserRole
-                    {
-                        InstitutionUserId = 1,
-                        RoleId = 2,
-                    };
-                    var userDefault = new Core.Entities.Base.UserRole
-                    {
-                        InstitutionUserId = 2,
-                        RoleId = 1
-                    };
-                    context.UserRoles.AddRange(userAdmin, userDefault);
-                    context.SaveChanges();
-                }
+                    Active = true,
+                    CreatedDate = DateTime.Now,
+                    EndDate = DateTime.Now.AddDays(160),
+                    LicenseTypeId = 1,
+                    MemberLicenseId = license.Id
+                };
+                context.LicensePeriods.Add(licensePeriod);
+                context.SaveChanges();
             }
+
+            if (!context.Functionalities.Any())
+            {
+                var functionality1 = new Core.Entities.Base.Functionality
+                {
+                    Name = "Role - Index",
+                    ControllerName = "Roles",
+                    FunctionNumber = 1,
+                    IsDeleted = false
+                };
+                var functionality2 = new Core.Entities.Base.Functionality
+                {
+                    Name = "Role - Add",
+                    ControllerName = "Roles",
+                    FunctionNumber = 2,
+                    IsDeleted = false
+                };
+                var functionality3 = new Core.Entities.Base.Functionality
+                {
+                    Name = "Role - Edit",
+                    ControllerName = "Roles",
+                    FunctionNumber = 3,
+                    IsDeleted = false
+                };
+                var functionality4 = new Core.Entities.Base.Functionality
+                {
+                    Name = "Role - Delete",
+                    ControllerName = "Roles",
+                    FunctionNumber = 4,
+                    IsDeleted = false
+                };
+                context.Functionalities.AddRange(functionality1, functionality2, functionality3, functionality4);
+                context.SaveChanges();
+            }
+            if (!context.Roles.Any())
+            {
+                var admin = new Core.Entities.Base.Role
+                {
+                    InstitutionId = 1,
+                    Name = "Administrator",
+                    Active = true
+                };
+                var def = new Core.Entities.Base.Role
+                {
+                    InstitutionId = 1,
+                    Name = "Demo default role",
+                    Active = true
+                };
+                context.Roles.AddRange(admin, def);
+                context.SaveChanges();
+            }
+            if (!context.RoleFunctionalities.Any())
+            {
+                var adminRoleFunct1 = new Core.Entities.Base.RoleFunctionality
+                {
+                    RoleId = 1,
+                    FunctionalityId = 1,
+                    AssignmentDate = DateTime.Now,
+                    ModifiedDate = DateTime.Now,
+                    IsDeleted = false
+                };
+                var adminRoleFunct2 = new Core.Entities.Base.RoleFunctionality
+                {
+                    RoleId = 1,
+                    FunctionalityId = 2,
+                    AssignmentDate = DateTime.Now,
+                    ModifiedDate = DateTime.Now,
+                    IsDeleted = false
+                };
+                var adminRoleFunct3 = new Core.Entities.Base.RoleFunctionality
+                {
+                    RoleId = 1,
+                    FunctionalityId = 3,
+                    AssignmentDate = DateTime.Now,
+                    ModifiedDate = DateTime.Now,
+                    IsDeleted = false
+                };
+                var adminRoleFunct4 = new Core.Entities.Base.RoleFunctionality
+                {
+                    RoleId = 1,
+                    FunctionalityId = 4,
+                    AssignmentDate = DateTime.Now,
+                    ModifiedDate = DateTime.Now,
+                    IsDeleted = false
+                };
+                var defRoleFunct = new Core.Entities.Base.RoleFunctionality
+                {
+                    RoleId = 2,
+                    FunctionalityId = 1,
+                    AssignmentDate = DateTime.Now,
+                    ModifiedDate = DateTime.Now,
+                    IsDeleted = false
+                };
+                context.RoleFunctionalities.AddRange(adminRoleFunct1, adminRoleFunct2, adminRoleFunct3, adminRoleFunct4, defRoleFunct);
+                context.SaveChanges();
+            }
+            if (!context.UserRoles.Any())
+            {
+                var userAdmin = new Core.Entities.Base.UserRole
+                {
+                    InstitutionUserId = 1,
+                    RoleId = 2,
+                };
+                var userDefault = new Core.Entities.Base.UserRole
+                {
+                    InstitutionUserId = 2,
+                    RoleId = 1
+                };
+                context.UserRoles.AddRange(userAdmin, userDefault);
+                context.SaveChanges();
+            }
+
         }
     }
 }

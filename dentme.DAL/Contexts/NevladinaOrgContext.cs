@@ -53,7 +53,10 @@ namespace DAL.Contexts
         public virtual DbSet<LectureLecturer> LectureLecturers{ get; set; }
         public virtual DbSet<Payment> Payments{ get; set; }
         public virtual DbSet<Sponsor> Sponsors{ get; set; }
-        public virtual DbSet<SponsorType> SponsorTypes{ get; set; }
+        public virtual DbSet<LicensePeriod> LicensePeriods{ get; set; }
+        public virtual DbSet<LicenseType> LicenseTypes { get; set; }
+        public virtual DbSet<MemberEmployement> MemberEmployements { get; set; }
+        public virtual DbSet<MemberLicense> MemberLicenses { get; set; }
 
         #endregion
 

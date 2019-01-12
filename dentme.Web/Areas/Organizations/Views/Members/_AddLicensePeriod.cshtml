@@ -1,0 +1,83 @@
+﻿@model LicensePeriodViewModel
+
+@inject Localizer Localizer
+@inject ISelectListHelper SelectList
+
+@{
+    Layout = "~/Views/Shared/_ModalLayout.cshtml";
+}
+
+<div class="modal-header">
+    <h5 class="modal-title">@Localizer.AddLicensePeriod</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>
+<form asp-antiforgery="true" data-ajax-url="@Url.Action("AddLicensePeriod", "Members", new { area = "Organizations" })" data-ajax="true" data-ajax-method="post" data-ajax-success="hideModal" data-ajax-update="#update-modal">
+    <input asp-for="MemberLicenseId" hidden />
+    <div class="modal-body">
+
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="m-alert m-alert--icon m-alert--outline alert alert-danger alert-dismissible animated fadeIn" role="alert">
+                <div class="m-alert__icon">
+                    <i class="la la-warning"></i>
+                </div>
+                <div class="m-alert__text">
+                    @Html.ValidationSummary()
+                </div>
+                <div class="m-alert__close">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        }
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group m-form__group row">
+                    <div class="col-lg-12">
+                        <label class="form-control-label">* @Localizer.CreatedDate</label>
+                        <input type="text" class="date-picker form-control m-input" readonly="" placeholder="@Localizer.SelectDate" id="m_datepicker_2_1" name="CreatedDate" value="@Model.CreatedDate.Value.ToString(Localizer.DateFormat)">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group m-form__group row">
+                    <div class="col-lg-12">
+                        <label class="form-control-label"> @Localizer.EndEvent</label>
+                        <input type="text" class="date-picker form-control m-input" asp-for="EndDate" readonly="" placeholder="@Localizer.SelectDate" id="m_datepicker_2_1">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group m-form__group row">
+            <div class="col-lg-12">
+                <label class="form-control-label"> @Localizer.TypeOfLicense</label>
+                <select class="form-control m-bootstrap-select m_selectpicker" asp-for="LicenseTypeId" asp-items="@SelectList.LicenseTypes(true)"></select>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="modal-footer">
+        <div class="form-actions right">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">@Localizer.Close</button>
+            <button type="submit" class="btn btn-primary">@Localizer.Save</button>
+        </div>
+    </div>
+</form>
+
+@section scripts {
+    <script type="text/javascript">
+
+        function hideModal(data) {
+            if (data.success) {
+                $("#m_license_index__datatable").mDatatable().destroy();
+                LicensesDraw();
+                closeModal();
+
+                $("#m_js__notification").text(data.notification.value);
+                NotificationHandler(data.notification.value);
+
+            }
+        }
+    </script>
+}

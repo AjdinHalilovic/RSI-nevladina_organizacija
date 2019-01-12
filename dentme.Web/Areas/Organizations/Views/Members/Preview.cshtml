@@ -1,0 +1,530 @@
+﻿@model MemberViewModel
+@inject ISelectListHelper SelectList
+@inject Localizer Localizer
+
+@{
+    ViewData["Title"] = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="" id="profileContent">
+    <div class="row">
+        <div class="col-xl-3 col-lg-4">
+            <div class="m-portlet m-portlet--full-height">
+                <div class="m-portlet__body">
+                    <div class="m-card-profile">
+                        <div class="m-card-profile__title m--hide">
+                            @Localizer.Profile
+                        </div>
+                        <div class="m-card-profile__pic">
+                            <div class="m-card-profile__pic-wrapper">
+                                @if (Model.PersonPhotoBase64 != null)
+                                {
+                                    <img id="profileImage" class="" src="@Model.PersonPhotoBase64" alt="" style="cursor:pointer;min-height: 130px;">
+                                }
+                                else
+                                {
+                                    <img id="profileImage" class="" src="~/app/media/img/users/default_user_profile.png" alt="" style="cursor:pointer;min-height: 130px;">
+                                }
+                                <input id="croppie-file" class="mb-5" type="file" accept="image/*" hidden capture/>
+                            </div>
+                        </div>
+                        <div class="m-card-profile__details">
+                            <span class="m-card-profile__name">@Model.Person.FirstName @Model.Person.LastName</span>
+                            <a href="mailto:@Model.User.Email" class="m-card-profile__email m-link">@Model.User.Email</a>
+                        </div>
+                    </div>
+                    <div class="m-tabs" data-tabs="true" data-tabs-contents="#m_sections">
+                        <ul class="m-nav m-nav--hover-bg m-portlet-fit--sides m-nav--active-bg m-nav--active-bg-padding-lg" id="m_nav" role="tablist">
+                            <li class="m-nav__separator m-nav__separator--fit"></li>
+                            <li class="m-nav__section m--hide">
+                                <span class="m-nav__section-text">Section</span>
+                            </li>
+                            <li class="m-nav__item">
+                                <a class="m-nav__link m-tabs__item m-tabs__item--active" data-tab-target="#subtab_1" href="#">
+                                    <i class="m-nav__link-icon flaticon-profile-1"></i>
+                                    <span class="m-nav__link-title">
+                                        <span class="m-nav__link-wrap">
+                                            <span class="m-nav__link-text">@Localizer.Profile</span>
+                                        </span>
+                                    </span>
+                                </a>
+                            </li>
+                            @*<li class="m-nav__item">
+                                <a class="m-nav__link m-tabs__item" data-tab-target="#subtab_2" href="#">
+                                    <i class="m-nav__link-icon flaticon-share"></i>
+                                    <span class="m-nav__link-text">Employments</span>
+                                </a>
+                            </li>*@
+                            @if (Model.Member)
+                            {
+                                <li class="m-nav__item">
+                                    <a class="m-nav__link m-tabs__item" data-tab-target="#subtab_3" href="#">
+                                        <i class="m-nav__link-icon flaticon-chat-1"></i>
+                                        <span class="m-nav__link-text">@Localizer.Licenses</span>
+                                    </a>
+                                </li>
+                            }
+                            @*<li class="m-nav__item">
+                                <a class="m-nav__link m-tabs__item" data-tab-target="#subtab_4" href="#">
+                                    <i class="m-nav__link-icon flaticon-graphic-2"></i>
+                                    <span class="m-nav__link-text">Scientific & Academic Degrees</span>
+                                </a>
+                            </li>*@
+                            @if (Model.Member)
+                            {
+                                <li class="m-nav__item">
+                                    <a class="m-nav__link m-tabs__item" data-tab-target="#subtab_5" href="#">
+                                        <i class="m-nav__link-icon flaticon-chat-1"></i>
+                                        <span class="m-nav__link-text">@Localizer.Events</span>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    <div class="m-portlet__body-separator"></div>
+                    <div class="m-widget1 m-widget1--paddingless">
+                        <div class="m-widget1__item">
+                            <div class="row m-row--no-padding align-items-center">
+                                <div class="col">
+                                    <h3 class="m-widget1__title">Points</h3>
+                                    <span class="m-widget1__desc">Medical points for current year</span>
+                                </div>
+                                <div class="col m--align-right">
+                                    <span class="m-widget1__number m--font-brand">95</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="m-widget1__item">
+                            <div class="row m-row--no-padding align-items-center">
+                                <div class="col">
+                                    <h3 class="m-widget1__title">Visited events</h3>
+                                    <span class="m-widget1__desc">Total visited events</span>
+                                </div>
+                                <div class="col m--align-right">
+                                    <span class="m-widget1__number m--font-danger">14</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-9 col-lg-8">
+            <div class="m-portlet m-portlet--full-height m-portlet--tabs  ">
+                <div class="m-tabs-content" id="m_sections">
+                    <div class="m-tabs-content__item m-tabs-content__item--active" id="subtab_1">
+                        <div class="m-portlet__head">
+                            <div class="m-portlet__head-tools">
+                                <ul class="nav nav-tabs m-tabs m-tabs-line   m-tabs-line--left m-tabs-line--primary" role="tablist">
+                                    <li class="nav-item m-tabs__item">
+                                        <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_user_profile_tab_1" role="tab">
+                                            <i class="flaticon-share m--hide"></i>
+                                            @Localizer.GeneralInfo
+                                        </a>
+                                    </li>
+                                    <li class="nav-item m-tabs__item">
+                                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_2" role="tab">
+                                            @Localizer.StatusInfo
+                                        </a>
+                                    </li>
+                                    <li class="nav-item m-tabs__item">
+                                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_3" role="tab">
+                                            @Localizer.AccountSetup
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                            <div class="m-portlet__head-tools">
+                                <ul class="m-portlet__nav">
+                                    <a href="@Url.Action("Index", "Members", new { area = "Organizations" })" class="btn btn-brand m-btn--icon m-btn--wide">
+                                        <span>
+                                            <i class="la la-arrow-left"></i>
+                                            <span>@Localizer.Close</span>
+                                        </span>
+                                    </a>
+                                </ul>
+                            </div>
+                        </div>  @*header tabs*@
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="m_user_profile_tab_1">
+                                <div id="general-info">
+                                    @{ await Html.RenderPartialAsync("../Members/_ProfileGeneralInfo", Model.GeneralInfo); }
+                                </div>
+                            </div>
+                            <div class="tab-pane " id="m_user_profile_tab_2">
+                                <div id="status-info">
+                                    @{ await Html.RenderPartialAsync("../Members/_ProfileStatusInfo", Model.StatusInfo); }
+                                </div>
+                            </div>
+                            <div class="tab-pane " id="m_user_profile_tab_3">
+                                <div id="account-info">
+                                    @{ await Html.RenderPartialAsync("../Members/_ProfileAccountInfo", Model.AccountInfo); }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-tabs-content__item" id="subtab_2">
+                        <div class="m-portlet__head">
+                            <div class="m-portlet__head-tools">
+                                <ul class="nav nav-tabs m-tabs m-tabs-line   m-tabs-line--left m-tabs-line--primary" role="tablist">
+                                    <li class="nav-item m-tabs__item">
+                                        <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_user_profile_tab_2_1" role="tab">
+                                            <i class="flaticon-share m--hide"></i>
+                                            Employments
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="m-portlet__head-tools">
+                                <ul class="m-portlet__nav">
+                                    <li class="m-portlet__nav-item m-portlet__nav-item--last">
+                                        <div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push" m-dropdown-toggle="hover" aria-expanded="true">
+                                            <a href="#" class="m-portlet__nav-link btn btn-lg btn-secondary  m-btn m-btn--icon m-btn--icon-only m-btn--pill  m-dropdown__toggle">
+                                                <i class="la la-gear"></i>
+                                            </a>
+                                            <div class="m-dropdown__wrapper">
+                                                <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
+                                                <div class="m-dropdown__inner">
+                                                    <div class="m-dropdown__body">
+                                                        <div class="m-dropdown__content">
+                                                            <ul class="m-nav">
+                                                                <li class="m-nav__section m-nav__section--first">
+                                                                    <span class="m-nav__section-text">Quick Actions</span>
+                                                                </li>
+                                                                <li class="m-nav__item">
+                                                                    <a href="" class="m-nav__link">
+                                                                        <i class="m-nav__link-icon flaticon-share"></i>
+                                                                        <span class="m-nav__link-text">Create Post</span>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="m-nav__item">
+                                                                    <a href="" class="m-nav__link">
+                                                                        <i class="m-nav__link-icon flaticon-chat-1"></i>
+                                                                        <span class="m-nav__link-text">Send Messages</span>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="m-nav__item">
+                                                                    <a href="" class="m-nav__link">
+                                                                        <i class="m-nav__link-icon flaticon-multimedia-2"></i>
+                                                                        <span class="m-nav__link-text">Upload File</span>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="m-nav__section">
+                                                                    <span class="m-nav__section-text">Useful Links</span>
+                                                                </li>
+                                                                <li class="m-nav__item">
+                                                                    <a href="" class="m-nav__link">
+                                                                        <i class="m-nav__link-icon flaticon-info"></i>
+                                                                        <span class="m-nav__link-text">FAQ</span>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="m-nav__item">
+                                                                    <a href="" class="m-nav__link">
+                                                                        <i class="m-nav__link-icon flaticon-lifebuoy"></i>
+                                                                        <span class="m-nav__link-text">Support</span>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="m-nav__separator m-nav__separator--fit m--hide">
+                                                                </li>
+                                                                <li class="m-nav__item m--hide">
+                                                                    <a href="#" class="btn btn-outline-danger m-btn m-btn--pill m-btn--wide btn-sm">Submit</a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="m_user_profile_tab_2_1">
+                                <form class="m-form m-form--fit m-form--label-align-right">
+                                    <div class="m-portlet__body">
+                                        <div class="row pl-4 pr-4">
+                                            <div class="col-xl-12 row pl-4 pt-3">
+                                                <span class="col-lg-2 text-center">2009 - 2014 </span>
+                                                <span class="col-lg-8">
+                                                    <span class="font-weight-bold">Senior Assistant</span><span>- Introduction to Programming, Programming 1,Programming 2</span>
+                                                </span>
+                                                <span class="col-lg-2" style="overflow: visible; position: relative; width: 70px;">
+                                                    <a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="Edit"><i class="la la-edit"></i></a><a data-id="3" data-behavior="delete" href="/administration/events/delete/3" class="m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill" title="Delete"><i class="la la-trash"></i></a>
+                                                </span>
+                                            </div>
+                                            <div class="col-xl-12 row pl-4 pt-3">
+                                                <span class="col-lg-2 text-center">2014 - today </span>
+                                                <span class="col-lg-8">
+                                                    <span class="font-weight-bold">Profesor</span>
+                                                    <span>
+                                                        - Introduction to Programming, Programming 1,
+                                                        Programming 2, Principles of Software Development, Artificial Intelligence
+                                                    </span>
+                                                </span>
+                                                <span class="col-lg-2" style="overflow: visible; position: relative; width: 70px;">
+                                                    <a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="Edit"><i class="la la-edit"></i></a><a data-id="3" data-behavior="delete" href="/administration/events/delete/3" class="m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill" title="Delete"><i class="la la-trash"></i></a>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="m-portlet__foot m-portlet__foot--fit">
+                                        <div class="m-form__actions">
+                                            <div class="row">
+                                                <div class="col-2">
+                                                </div>
+                                                <div class="col-7">
+                                                    <button type="reset" class="btn btn-accent m-btn m-btn--air m-btn--custom">Save changes</button>&nbsp;&nbsp;
+                                                    <button type="reset" class="btn btn-secondary m-btn m-btn--air m-btn--custom">Cancel</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    @if (Model.Member)
+                    {
+                        <div class="m-tabs-content__item" id="subtab_3">
+                            <div class="m-portlet__head">
+                                <div class="m-portlet__head-tools">
+                                    <ul class="nav nav-tabs m-tabs m-tabs-line   m-tabs-line--left m-tabs-line--primary" role="tablist">
+                                        <li class="nav-item m-tabs__item">
+                                            <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_user_profile_tab_3_1" role="tab">
+                                                <i class="flaticon-share m--hide"></i>
+                                                @Localizer.LicenseDetails
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="m-portlet__head-tools">
+                                    <ul class="m-portlet__nav">
+                                        <li class="m-portlet__nav-item m-portlet__nav-item--last">
+                                            @if (Model.License != null)
+                                            {
+                                                @if (!Model.License.Permanent && Model.License.Active)
+                                                {
+                                                    <a id="prolongLicenseBtn" href="@Url.Action("AddLicensePeriod", "Members", new { area = "Organizations" })/?option=@((int)Enumerations.SaveAndOptions.SaveAndClose)&licenseId=@Model.License.Id" class="btn btn-secondary m-btn--icon m-btn--wide modal-link mr-2">
+                                                        <span>
+                                                            <i class="la la-clock-o"></i>
+                                                            <span>@Localizer.ProlongActiveLicense</span>
+                                                        </span>
+                                                    </a>
+                                                }
+                                            }
+                                            <a href="@Url.Action("AddLicense", "Members", new { area = "Organizations" })/?option=@((int)Enumerations.SaveAndOptions.SaveAndClose)&MemberId=@Model.License.MemberId" class="btn btn-secondary m-btn--icon m-btn--wide modal-link-lg">
+                                                <span>
+                                                    <i class="la la-plus"></i>
+                                                    <span>@Localizer.AddLicense</span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="m_user_profile_tab_3_1">
+                                    <form class="m-form m-form--fit m-form--label-align-right">
+                                        <div class="m-portlet__body pt-0">
+                                            <div class="row">
+                                                <div class="col-xl-12">
+                                                    <div class="m-form__section m-form__section--first">
+                                                        @{ await Html.RenderPartialAsync("../Members/_LicenseIndex", Model.License); }
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <div class="m-tabs-content__item" id="subtab_4">
+                        <div class="m-portlet__head">
+                            <div class="m-portlet__head-tools">
+                                <ul class="nav nav-tabs m-tabs m-tabs-line   m-tabs-line--left m-tabs-line--primary" role="tablist">
+                                    <li class="nav-item m-tabs__item">
+                                        <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_user_profile_tab_4_1" role="tab">
+                                            <i class="flaticon-share m--hide"></i>
+                                            Academic & Scientific degrees
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="m-portlet__head-tools">
+                                <ul class="m-portlet__nav">
+                                    <li class="m-portlet__nav-item m-portlet__nav-item--last">
+                                        <div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push" m-dropdown-toggle="hover" aria-expanded="true">
+                                            <a href="#" class="m-portlet__nav-link btn btn-lg btn-secondary  m-btn m-btn--icon m-btn--icon-only m-btn--pill  m-dropdown__toggle">
+                                                <i class="la la-gear"></i>
+                                            </a>
+                                            <div class="m-dropdown__wrapper">
+                                                <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
+                                                <div class="m-dropdown__inner">
+                                                    <div class="m-dropdown__body">
+                                                        <div class="m-dropdown__content">
+                                                            <ul class="m-nav">
+                                                                <li class="m-nav__section m-nav__section--first">
+                                                                    <span class="m-nav__section-text">Quick Actions</span>
+                                                                </li>
+                                                                <li class="m-nav__item">
+                                                                    <a href="" class="m-nav__link">
+                                                                        <i class="m-nav__link-icon flaticon-share"></i>
+                                                                        <span class="m-nav__link-text">Create Post</span>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="m-nav__item">
+                                                                    <a href="" class="m-nav__link">
+                                                                        <i class="m-nav__link-icon flaticon-chat-1"></i>
+                                                                        <span class="m-nav__link-text">Send Messages</span>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="m-nav__item">
+                                                                    <a href="" class="m-nav__link">
+                                                                        <i class="m-nav__link-icon flaticon-multimedia-2"></i>
+                                                                        <span class="m-nav__link-text">Upload File</span>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="m-nav__section">
+                                                                    <span class="m-nav__section-text">Useful Links</span>
+                                                                </li>
+                                                                <li class="m-nav__item">
+                                                                    <a href="" class="m-nav__link">
+                                                                        <i class="m-nav__link-icon flaticon-info"></i>
+                                                                        <span class="m-nav__link-text">FAQ</span>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="m-nav__item">
+                                                                    <a href="" class="m-nav__link">
+                                                                        <i class="m-nav__link-icon flaticon-lifebuoy"></i>
+                                                                        <span class="m-nav__link-text">Support</span>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="m-nav__separator m-nav__separator--fit m--hide">
+                                                                </li>
+                                                                <li class="m-nav__item m--hide">
+                                                                    <a href="#" class="btn btn-outline-danger m-btn m-btn--pill m-btn--wide btn-sm">Submit</a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="m_user_profile_tab_4_1">
+                                <form class="m-form m-form--fit m-form--label-align-right">
+                                    <div class="m-portlet__body">
+                                        <div class="row">
+                                            <div class="col-xl-12">
+                                                <div class="m-form__section m-form__section--first">
+                                                    <div class="m-form__heading">
+                                                        <h3 class="m-form__heading-title">Heading</h3>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="m-portlet__foot m-portlet__foot--fit">
+                                        <div class="m-form__actions">
+                                            <div class="row">
+                                                <div class="col-2">
+                                                </div>
+                                                <div class="col-7">
+                                                    <button type="reset" class="btn btn-accent m-btn m-btn--air m-btn--custom">Save changes</button>&nbsp;&nbsp;
+                                                    <button type="reset" class="btn btn-secondary m-btn m-btn--air m-btn--custom">Cancel</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    @if (Model.Member)
+                    {
+                        <div class="m-tabs-content__item" id="subtab_5">
+                            <div class="m-portlet__head">
+                                <div class="m-portlet__head-tools">
+                                    <ul class="nav nav-tabs m-tabs m-tabs-line   m-tabs-line--left m-tabs-line--primary" role="tablist">
+                                        <li class="nav-item m-tabs__item">
+                                            <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_user_profile_tab_3_1" role="tab">
+                                                <i class="flaticon-share m--hide"></i>
+                                                @Localizer.Events
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="m_user_profile_tab_3_1">
+                                    <form class="m-form m-form--fit m-form--label-align-right">
+                                        <div class="m-portlet__body pt-0">
+                                            <div class="row">
+                                                <div class="col-xl-12">
+                                                    <div class="m-form__section m-form__section--first">
+                                                        @{ await Html.RenderPartialAsync("../Members/_Events", Model.GeneralInfo.Person); }
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<a hidden id="croppie-modal" href="@Url.Action("EditProfileImage", "Members", new { area = "Organizations" })/?personId=@Model.Person.Id" class="btn btn-brand m-btn--icon m-btn--wide modal-link">
+    <span>
+        <i class="la la-plus"></i>
+        <span>@Localizer.AddEvent</span>
+    </span>
+</a>
+<script>
+    function showNotification(data) {
+        $(window).scrollTop(0);
+        //if (data.success) {
+            NotificationHandler(data.notification.value);
+        //}
+    }
+
+    $("#profileImage").click(function (e) {
+        $("#croppie-file").click();
+        $("#croppie-modal").click();
+    });
+
+    jQuery(document).ready(function () {
+        $('#m_summernote_2').summernote();
+        $(".m_selectpicker").selectpicker();
+
+        $('.m-tabs__item').on('click', function (e) {
+            $(document).ready(function () {
+                $(".m-tabs-content__item--active .m_datatable").mDatatable("redraw");
+            });
+        });
+        var Select2 = {
+            init: function () {
+                $("#m_select2_3, #m_select2_3_validate").select2({
+                    placeholder: "@Localizer.SelectRoles"
+                })
+            }
+        }
+        Select2.init();
+        $(".select2-container, .select2-search, .select2-search__field").css("width", "100%");
+    });
+</script>

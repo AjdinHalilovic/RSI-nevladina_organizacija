@@ -1,0 +1,132 @@
+﻿@model PersonViewModel
+@inject Localizer Localizer
+@{
+    Layout = null;
+}
+
+<div class="m-portlet m-portlet--responsive-mobile">
+    <div class="m-portlet__body pt-0">
+        <!--begin: Search Form -->
+        <div class="m-form m-form--label-align-right  m--margin-bottom-30">
+            <div class="row align-items-center">
+                @*<div class="col-xl-8"></div>*@
+                <div class="col-xl-12 order-1 order-xl-2 m--align-right pt-3">
+                    <div class="m-input-icon m-input-icon--left">
+                        <input type="text" class="form-control m-icon" placeholder="@Localizer.SearchDots" id="m_memberEvents_index_generalSearch">
+                        <span class="m-input-icon__icon m-input-icon__icon--left">
+                            <span>
+                                <i class="la la-search"></i>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--end: Search Form -->
+        <!--begin: Datatable -->
+        <div class="m_datatable" id="m_memberEvents_index__datatable"></div>
+        <!--end: Datatable -->
+    </div>
+</div>
+
+<script>
+    function ProfileEvenetsDraw() {
+        //WITH SELECTION ----------------
+        const jedan = true; // varijable za metronic datatable true i false umjesto 1 i 0
+        const nula = false;
+        var DatatableDataLocal, DatatableDatasource, DatatableOptions;
+        $.ajax({
+            url: "@Url.Action("JsonIndexEvents", "Staff", new { area = "Institutions" })/?PersonId=@Model.Id",
+            type: "GET",
+            success: function (data) {
+                DatatableDatasource = JSON.parse(data);
+                var DatatableDataLocal = function () {
+                    var DatatableOptions = {
+                        data: {
+                            type: "local",
+                            source: DatatableDatasource,
+                            pageSize: 10
+                        },
+                        layout: {
+                            theme: "default",
+                            class: "",
+                            scroll: !nula,
+                            height: 550,
+                            footer: !jedan
+                        },
+                        pagination: !nula,
+                        columns: [{
+                            field: "@nameof(Core.Entities.Base.DTO.EventDTO.Id)",
+                            title: "#",
+                            sortable: !jedan,
+                            width: 35,
+                            textAlign: "center",
+                            selector: {
+                                class: "m-checkbox--solid m-checkbox--brand disabled"
+                            }
+                        }, {
+                            field: "Name",
+                            title: "@Localizer.Name",
+                            filterable: !nula,
+                            template: function (DatatableDatasource, DatatableOptions) {
+                                return '<a id="preview" href="@Url.Action("Preview", "Events", new { area = "Administration" })/' + DatatableDatasource.Id + '" class="p-0 m-portlet__nav-link btn m-btn">' + DatatableDatasource.Name + '</a>'
+                            }
+                        }, {
+                            field: "Duration",
+                            title: "@Localizer.Duration",
+                            width: 140,
+                            filterable: !jedan,
+                            template: function (DatatableDatasource, DatatableOptions) {
+                                return DatatableDatasource.DateFrom + " - " + DatatableDatasource.DateTo;
+                            }
+                        }, {
+                            field: "Location",
+                            title: "@Localizer.Place",
+                            filterable: !jedan,
+                            template: function (DatatableDatasource, DatatableOptions) {
+                                return DatatableDatasource.Place + ', ' + DatatableDatasource.City + ', ' + DatatableDatasource.Country;
+                            }
+                        }],
+                        translate: {
+                            records: {
+                                processing: '@Localizer.LoadingDots',
+                                noRecords: '@Localizer.NoRecordsFound'
+                            },
+                            toolbar: {
+                                pagination: {
+                                    items: {
+                                        default: {
+                                            first: '@Localizer.First',
+                                            prev: '@Localizer.Previous',
+                                            next: '@Localizer.Next',
+                                            last: '@Localizer.Last',
+                                            more: '@Localizer.MorePages',
+                                            input: '@Localizer.PageNumber',
+                                            select: '@Localizer.SelectPageSize'
+                                        },
+                                        info: '@Localizer.DisplayingNumberOfRecords'
+                                    }
+                                }
+                            }
+                        }
+                    };
+                    return {
+                        init: function () {
+                            ! function () {
+                                DatatableOptions.search = {
+                                    input: $("#m_memberEvents_index__generalSearch")
+                                };
+                                var e = $("#m_memberEvents_index__datatable").mDatatable(DatatableOptions);
+                                
+                            }()
+                        }
+                    }
+                }();
+                jQuery(document).ready(function () {
+                    DatatableDataLocal.init()
+                });
+            }
+        });
+    };
+    ProfileEvenetsDraw();
+</script>
