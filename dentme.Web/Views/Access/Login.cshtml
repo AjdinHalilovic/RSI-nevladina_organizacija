@@ -42,8 +42,11 @@
 
     <!--RTL version:<link href="../../../assets/demo/default/base/style.bundle.rtl.css" rel="stylesheet" type="text/css" />-->
     <!--end::Base Styles -->
-    <link rel="shortcut icon" type="image/png" href="~/favicon-32x32.png" sizes="32x32" />
-    <link rel="shortcut icon" type="image/png" href="~/favicon-16x16.png" sizes="16x16" />
+    @*<link rel="shortcut icon" type="image/png" href="~/favicon-32x32.png" sizes="32x32" />
+    <link rel="shortcut icon" type="image/png" href="~/favicon-16x16.png" sizes="16x16" />*@
+
+    <link rel="shortcut icon" type="image/png" href="~/app/media/img/logos/logo-without-name.png" sizes="32x32" />
+    <link rel="shortcut icon" type="image/png" href="~/app/media/img/logos/logo-without-name.png" sizes="16x16" />
 </head>
 
 <!-- end::Head -->
@@ -58,7 +61,7 @@
                         <div class="m-login__content">
                             <div class="m-login__logo">
                                 <a href="#">
-                                    <img src="~/app/media/img/logos/nevladinaOrg-icon.png">
+                                    <img style="max-height:100px;" src="~/app/media/img/logos/organizer-logo-png-transparent.png">
                                 </a>
                             </div>
                             <div class="m-login__title">
@@ -68,7 +71,7 @@
                                 @Localizer.LoginDescription
                             </div>
                             <div class="m-login__form-action">
-                                <button type="button" id="m_login_signup" class="btn btn-outline-success m-btn--pill">@Localizer.GetAnAccount</button>
+                                <button type="button" id="m_login_signup" class="btn btn-outline-brand m-btn--pill">@Localizer.GetAnAccount</button>
                             </div>
                         </div>
                     </div>
@@ -110,7 +113,7 @@
                                 </div>
                             </div>
                             <div class="m-login__form-action">
-                                <button type="submit" class="btn btn-success m-btn m-btn--pill m-btn--custom m-btn--air">@Localizer.Login</button>
+                                <button type="submit" class="btn btn-brand m-btn m-btn--pill m-btn--custom m-btn--air">@Localizer.Login</button>
                             </div>
                         </form>
                     </div>
@@ -141,8 +144,8 @@
                                 <span class="m-form__help"></span>
                             </div>
                             <div class="m-login__form-action">
-                                <button id="m_login_signup_submit" class="btn btn-success m-btn m-btn--pill m-btn--custom m-btn--air">@Localizer.SignUp</button>
-                                <button id="m_login_signup_cancel" class="btn btn-outline-success m-btn m-btn--pill m-btn--custom">@Localizer.Cancel</button>
+                                <button id="m_login_signup_submit" class="btn btn-brand m-btn m-btn--pill m-btn--custom m-btn--air">@Localizer.SignUp</button>
+                                <button id="m_login_signup_cancel" class="btn btn-outline-brand m-btn m-btn--pill m-btn--custom">@Localizer.Cancel</button>
                             </div>
                         </form>
                     </div>
