@@ -15,5 +15,6 @@ namespace nevladinaOrg.Web.ViewModels
 
         // ROLE && FUKCIONALNOSTI ???
         public IEnumerable<Functionality> Functionalities { get; set; }
+        public IEnumerable<Role> Roles { get; set; }
     }
 }

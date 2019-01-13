@@ -21,20 +21,31 @@ namespace nevladinaOrg.Web.Helpers
         }
     }
 
+    public class WebRoles : TypeFilterAttribute
+    {
+        public WebRoles(params Enumerations.WebRoles[] roles) : base(typeof(AsyncActionFilter))
+        {
+            Arguments = new object[]
+            {
+                roles
+            };
+        }
+    }
+
     public class AsyncActionFilter : IAsyncActionFilter
     {
-        private Enumerations.Functionalities[] Functionalities { get; }
+        private Enumerations.WebRoles[] Roles { get; }
 
-        public AsyncActionFilter(Enumerations.Functionalities[] functionalities)
+        public AsyncActionFilter(Enumerations.WebRoles[] roles)
         {
-            Functionalities = functionalities;
+            Roles = roles;
         }
 
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
             var loggedUser = context.HttpContext.GetLoggedUserData();
 
-            if (loggedUser?.Functionalities == null)
+            if (loggedUser?.Roles == null)
             {
                 context.Result = new RedirectToActionResult("Login", "Access", new { area = string.Empty, redirectTo = context.HttpContext.Request.Path });
                 return;
@@ -45,7 +56,7 @@ namespace nevladinaOrg.Web.Helpers
                 //return;
             }
 
-            if (Functionalities.Length == 0)
+            if (Roles.Length == 0)
                 await next();
 
             string controller;
@@ -54,13 +65,10 @@ namespace nevladinaOrg.Web.Helpers
             else
                 controller = context.RouteData.Values["controller"]?.ToString();
 
-            if (loggedUser.Functionalities.Any(i => string.Equals(i.ControllerName, controller, StringComparison.OrdinalIgnoreCase)))
+            if (Roles.Any(role => loggedUser.Roles.Any(i => i.Code <= (int)role)))
             {
-                if (Functionalities.Any(functionality => loggedUser.Functionalities.Any(i => i.FunctionNumber == (int)functionality)))
-                {
-                    await next();
-                    return;
-                }
+                await next();
+                return;
             }
 
             context.Result = new RedirectToActionResult("Index", "Error", new { id = 401 });

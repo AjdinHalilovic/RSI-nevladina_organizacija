@@ -29,7 +29,7 @@ using Authorization = nevladinaOrg.Web.Helpers.Authorization;
 namespace nevladinaOrg.Web.Areas.Institutions.Controllers
 {
     [Area(MagicStrings.AreaNames.Institutions)]
-    [Authorization]
+    [WebRoles(Enumerations.WebRoles.InstitutionAdministrator)]
     public class StaffController : BaseController
     {
         #region Properties
@@ -502,8 +502,8 @@ namespace nevladinaOrg.Web.Areas.Institutions.Controllers
                         _dataUnitOfWork.BaseUow.UsersRepository.Update(user);
                         _dataUnitOfWork.BaseUow.UsersRepository.SaveChanges();
 
-                        var existingRoles = _dataUnitOfWork.BaseUow.UserRolesRepository.GetByInstitutionUserId(model.InstitutionUserId);
-                        var newRoles = model.Roles.Select(x => int.Parse(x));
+                        var existingRoles = _dataUnitOfWork.BaseUow.UserRolesRepository.GetByInstitutionUserId(model.InstitutionUserId).ToList();
+                        var newRoles = model.Roles.Select(x => int.Parse(x)).ToList();
                         foreach (var rola in existingRoles)
                         {
                             if (!newRoles.Contains(rola.Id))
@@ -519,6 +519,7 @@ namespace nevladinaOrg.Web.Areas.Institutions.Controllers
                                 var userRola = new UserRole
                                 {
                                     InstitutionUserId = model.InstitutionUserId,
+                                    OrganizationInstitutionUserId=model.OrganizationInstitutionUserId,
                                     RoleId = rola
                                 };
                                 _dataUnitOfWork.BaseUow.UserRolesRepository.Add(userRola);
@@ -787,9 +788,10 @@ namespace nevladinaOrg.Web.Areas.Institutions.Controllers
             };
             model.AccountInfo = new StaffAccountInfoViewModel
             {
-                Roles = _dataUnitOfWork.BaseUow.UserRolesRepository.GetByInstitutionUserId(institutionUser.Id).Select(x => x.RoleId.ToString()).ToList(),
+                Roles = _dataUnitOfWork.BaseUow.UserRolesRepository.GetByInstitutionUserId(institutionUser.Id).Select(x => x.RoleId.ToString()).ToList() ,
                 User = _dataUnitOfWork.BaseUow.UsersRepository.GetById(Id),
-                InstitutionUserId = institutionUser.Id
+                InstitutionUserId = institutionUser.Id,
+                OrganizationInstitutionUserId=organizationInstitutitonUser?.Id
             };
             return PartialView(MagicStrings.ViewNames.Preview, model);
         }

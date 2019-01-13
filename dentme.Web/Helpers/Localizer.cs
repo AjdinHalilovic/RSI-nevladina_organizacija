@@ -662,6 +662,8 @@ namespace nevladinaOrg.Web.Helpers
         public string Members => _localizer[nameof(Members)];
         public string AssignToAllMembers => _localizer[nameof(AssignToAllMembers)];
         public string AssignToCertainMembers => _localizer[nameof(AssignToCertainMembers)];
+        public string YouAreUnauthorized => _localizer[nameof(YouAreUnauthorized)];
+        public string RecentEvents => _localizer[nameof(RecentEvents)];
         #endregion
 
         #region Fields and constructor

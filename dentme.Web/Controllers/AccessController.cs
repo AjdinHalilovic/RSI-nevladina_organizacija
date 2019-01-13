@@ -84,11 +84,19 @@ namespace nevladinaOrg.Web.Controllers
             else
                 functionalities = _dataUnitOfWork.BaseUow.FunctionalitiesRepository.GetByInstitutionUserId(userAccount.InstitutionUserId);
 
+
+            IEnumerable<Role> roles = null;
+            if (userAccount.OrganizationInstitutionUserId.HasValue)
+                roles = _dataUnitOfWork.BaseUow.RolesRepository.GetByOrganizationInstitutionUserId(userAccount.OrganizationInstitutionUserId.Value);
+            else
+                roles = _dataUnitOfWork.BaseUow.RolesRepository.GetByInstitutionUserId(userAccount.InstitutionUserId);
+
             var loggedUserViewModel = new LoggedUserDataViewModel
             {
                 User = userAccount,
                 PersonUser = personUser,
-                Functionalities = functionalities
+                Functionalities = functionalities,
+                Roles=roles
             };
 
             if (loggedUserViewModel.User.OrganizationInstitutionUserId.HasValue)

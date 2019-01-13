@@ -8,6 +8,25 @@ namespace nevladinaOrg.Web.Constants
             Administrator = 1
         }
 
+        public enum RoleLevels
+        {
+            System = 1,
+            Institution,
+            Organization
+        }
+        public enum WebRoles
+        {
+            SuperAdministrator = 1,
+            Administrator,
+
+            InstitutionAdministrator,
+            InstitutionStaff,
+
+            OrganizationAdministrator,
+            OrganizationManagement,
+            OrganizationMember,
+        }
+
         public enum Functionalities
         {
             Index = 1,

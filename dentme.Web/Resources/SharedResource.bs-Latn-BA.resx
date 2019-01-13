@@ -2004,4 +2004,10 @@
   <data name="Members" xml:space="preserve">
     <value>Članovi</value>
   </data>
+  <data name="YouAreUnauthorized" xml:space="preserve">
+    <value>Nemate pravo pristupa</value>
+  </data>
+  <data name="RecentEvents" xml:space="preserve">
+    <value>Prethodni događaji</value>
+  </data>
 </root>

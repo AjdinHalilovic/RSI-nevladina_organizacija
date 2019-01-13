@@ -114,6 +114,12 @@ namespace nevladinaOrg.Web.Helpers
             else
                 functionalities = await dataUnitOfWork.BaseUow.FunctionalitiesRepository.GetByInstitutionUserIdAsync(user.InstitutionUserId);
 
+            IEnumerable<Role> roles = null;
+            if (user.OrganizationInstitutionUserId.HasValue)
+                roles = dataUnitOfWork.BaseUow.RolesRepository.GetByOrganizationInstitutionUserId(user.OrganizationInstitutionUserId.Value);
+            else
+                roles = dataUnitOfWork.BaseUow.RolesRepository.GetByInstitutionUserId(user.InstitutionUserId);
+
             /* UKLJUCITI OVO KASNIJE !!! */
 
             //if (functionalities == null)
@@ -123,7 +129,8 @@ namespace nevladinaOrg.Web.Helpers
             {
                 User = user,
                 PersonUser = dataUnitOfWork.BaseUow.PersonUsersDTORepository.GetById(user.UserId),
-                Functionalities = functionalities
+                Functionalities = functionalities,
+                Roles=roles
             };
 
             loggedUserIds = new LoggedUserIdsViewModel

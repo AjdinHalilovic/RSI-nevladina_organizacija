@@ -1132,7 +1132,7 @@
     <value>Patient name</value>
   </data>
   <data name="SelectYourLanguage" xml:space="preserve">
-    <value>s</value>
+    <value>Select language</value>
   </data>
   <data name="Time" xml:space="preserve">
     <value>Time</value>
@@ -1994,5 +1994,11 @@
   </data>
   <data name="Members" xml:space="preserve">
     <value>Members</value>
+  </data>
+  <data name="YouAreUnauthorized" xml:space="preserve">
+    <value>You are unauthorized</value>
+  </data>
+  <data name="RecentEvents" xml:space="preserve">
+    <value>Recent events</value>
   </data>
 </root>

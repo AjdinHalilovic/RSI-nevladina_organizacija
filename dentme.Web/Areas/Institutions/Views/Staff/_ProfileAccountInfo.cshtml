@@ -6,6 +6,7 @@
 <form asp-antiforgery="true" class="m-form m-form--fit m-form--label-align-right" data-ajax-url="@Url.Action("EditAccountInfo", "Staff", new { area = "Institutions" })" data-ajax="true" data-ajax-method="post" data-ajax-success="showNotification" data-ajax-update="#account-info">
     <input hidden asp-for="User.Id" />
     <input hidden asp-for="InstitutionUserId" />
+    <input hidden asp-for="OrganizationInstitutionUserId" />
     <input hidden asp-for="User.Password" value="none" />
     <input hidden name="User.CreatedDate" value="@Model.User.CreatedDate.ToString(Localizer.DateFormat)" />
     <div class="m-portlet__body">

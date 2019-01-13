@@ -159,7 +159,6 @@
     <None Include="Areas\Institutions\Views\_ViewImports.cshtml" />
     <None Include="Areas\Organizations\Views\Members\Index.cshtml" />
     <None Include="Areas\Organizations\Views\Members\Preview.cshtml" />
-    <None Include="Areas\Organizations\Views\Members\Worksheet.cshtml" />
     <None Include="Areas\Organizations\Views\Members\_Add.cshtml" />
     <None Include="Areas\Organizations\Views\Members\_AddLicense.cshtml" />
     <None Include="Areas\Organizations\Views\Members\_AddLicensePeriod.cshtml" />

@@ -1,6 +1,7 @@
 ﻿using Core.Entities.Base;
 using DAL.Contexts;
 using Microsoft.Extensions.DependencyInjection;
+using nevladinaOrg.Web.Constants;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -542,19 +543,57 @@ namespace nevladinaOrg.Web.Helpers
             }
             if (!context.Roles.Any())
             {
+                var sadmin = new Core.Entities.Base.Role
+                {
+                    Name = "Super Administrator",
+                    Code = (int)Enumerations.WebRoles.SuperAdministrator,
+                    RoleLevel = (int)Enumerations.RoleLevels.System,
+                    Active = true
+                };
                 var admin = new Core.Entities.Base.Role
                 {
-                    InstitutionId = 1,
                     Name = "Administrator",
+                    Code = (int)Enumerations.WebRoles.Administrator,
+                    RoleLevel = (int)Enumerations.RoleLevels.System,
                     Active = true
                 };
-                var def = new Core.Entities.Base.Role
+                var institutionAdmin = new Core.Entities.Base.Role
                 {
-                    InstitutionId = 1,
-                    Name = "Demo default role",
+                    Name = "Institution Administrator",
+                    Code = (int)Enumerations.WebRoles.InstitutionAdministrator,
+                    RoleLevel = (int)Enumerations.RoleLevels.Institution,
                     Active = true
                 };
-                context.Roles.AddRange(admin, def);
+                var institutionStaff = new Core.Entities.Base.Role
+                {
+                    Name = "Institution Staff",
+                    Code = (int)Enumerations.WebRoles.InstitutionStaff,
+                    RoleLevel = (int)Enumerations.RoleLevels.Institution,
+                    Active = true
+                };
+                var organizationAdministrator = new Core.Entities.Base.Role
+                {
+                    Name = "Organization Administrator",
+                    Code = (int)Enumerations.WebRoles.OrganizationAdministrator,
+                    RoleLevel = (int)Enumerations.RoleLevels.Organization,
+                    Active = true
+                };
+                var organizationManagement = new Core.Entities.Base.Role
+                {
+                    Name = "Organization Management",
+                    Code = (int)Enumerations.WebRoles.OrganizationManagement,
+                    RoleLevel = (int)Enumerations.RoleLevels.Organization,
+                    Active = true
+                };
+                var organizationMember = new Core.Entities.Base.Role
+                {
+                    Name = "Organization Member",
+                    Code = (int)Enumerations.WebRoles.OrganizationMember,
+                    RoleLevel = (int)Enumerations.RoleLevels.Organization,
+                    Active = true
+                };
+                
+                context.Roles.AddRange(sadmin, admin, institutionAdmin, institutionStaff, organizationAdministrator, organizationManagement, organizationMember);
                 context.SaveChanges();
             }
             if (!context.RoleFunctionalities.Any())
@@ -607,6 +646,7 @@ namespace nevladinaOrg.Web.Helpers
                 var userAdmin = new Core.Entities.Base.UserRole
                 {
                     InstitutionUserId = 1,
+                    OrganizationInstitutionUserId=1,
                     RoleId = 2,
                 };
                 var userDefault = new Core.Entities.Base.UserRole

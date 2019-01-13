@@ -2,7 +2,7 @@
 @inject Localizer Localizer
 
 @{
-    ViewData["Title"] = Localizer.InstitutionStaff;
+    ViewData["Title"] = Localizer.Members;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="m-portlet m-portlet--responsive-mobile">
@@ -22,12 +22,7 @@
                 </div>
             </div>
             <div class="m-portlet__head-tools">
-                <a href="@Url.Action("Worksheet", "Members", new { area = "Organizations" })/?option=@((int)Enumerations.SaveAndOptions.SaveAndClose)" class="mr-3 btn btn-brand m-btn--icon m-btn--wide">
-                    <span>
-                        <i class="la la-plus"></i>
-                        <span>Doctor worksheet</span>
-                    </span>
-                </a>
+                
                 <div class="btn-group dropleft">
                     <a href="@Url.Action("Add", "Members", new { area = "Organizations" })" class="btn btn-brand m-btn--icon m-btn--wide">
                         <span>

@@ -27,7 +27,7 @@ using Newtonsoft.Json;
 namespace nevladinaOrg.Web.Areas.Organizations.Controllers
 {
     [Area(MagicStrings.AreaNames.Organizations)]
-    [Authorization]
+    [WebRoles(Enumerations.WebRoles.OrganizationAdministrator)]
     public class MembersController : BaseController
     {
         #region Properties
@@ -591,6 +591,7 @@ namespace nevladinaOrg.Web.Areas.Organizations.Controllers
                                 var userRola = new UserRole
                                 {
                                     InstitutionUserId = model.InstitutionUserId,
+                                    OrganizationInstitutionUserId=model.OrganizationInstitutionUserId,
                                     RoleId = rola
                                 };
                                 _dataUnitOfWork.BaseUow.UserRolesRepository.Add(userRola);
@@ -741,7 +742,7 @@ namespace nevladinaOrg.Web.Areas.Organizations.Controllers
 
             model.GeneralInfo = new GeneralInfoViewModel { Person = model.Person, PersonMobile = model.PersonMobile, PersonPhone = model.PersonPhone, PersonPrimaryEmail = model.PersonPrimaryEmail, PersonSecondaryEmail = model.PersonSecondaryEmail };
             model.StatusInfo = new StatusInfoViewModel { Employer = model.Employer, Member = model.Member, PersonDetail = model.PersonDetail, InstitutionId = institutionUser.InstitutionId };
-            model.AccountInfo = new AccountInfoViewModel { Roles = model.Roles, User = model.User, InstitutionUserId = institutionUser.Id };
+            model.AccountInfo = new AccountInfoViewModel { Roles = model.Roles, User = model.User, InstitutionUserId = institutionUser.Id,OrganizationInstitutionUserId=organizationInstitutionUser?.Id };
             return PartialView(MagicStrings.ViewNames.Preview, model);
         }
         #endregion
@@ -1032,16 +1033,6 @@ namespace nevladinaOrg.Web.Areas.Organizations.Controllers
         }
         #endregion
 
-
-        #region Worksheet
-
-        public IActionResult Worksheet(int Id)
-        {
-            return PartialView("Worksheet");
-        }
-
-        #endregion
-
         #region License
         public JsonResult JsonIndexLicense(int MemberId)
         {
@@ -1327,7 +1318,6 @@ namespace nevladinaOrg.Web.Areas.Organizations.Controllers
 
 
         #endregion
-
 
         #region Helpers
         public IActionResult GenerateUsername(string firstname, string lastname)

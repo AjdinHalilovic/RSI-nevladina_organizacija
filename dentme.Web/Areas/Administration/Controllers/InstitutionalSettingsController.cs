@@ -4,13 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using nevladinaOrg.Web.Helpers;
 using Microsoft.AspNetCore.Mvc;
+using nevladinaOrg.Web.Constants;
 
 namespace nevladinaOrg.Web.Areas.Administration.Controllers
 {
+    [Area(MagicStrings.AreaNames.Administration)]
+    [WebRoles(Enumerations.WebRoles.SuperAdministrator)]
     public class InstitutionalSettingsController : Controller
     {
-        [Area(MagicStrings.AreaNames.Administration)]
-        [Authorization]
         public IActionResult General()
         {
             return View();
