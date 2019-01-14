@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <UserSecretsId>962deb8e-4afe-465c-9160-f798bdbe0ce8</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -89,8 +90,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\dentme.Core\Core.csproj" />
-    <ProjectReference Include="..\dentme.DAL\DAL.csproj" />
+    <ProjectReference Include="..\nevladinaOrg.Core\Core.csproj" />
+    <ProjectReference Include="..\nevladinaOrg.DAL\DAL.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -30,19 +30,6 @@
                             <span>@Localizer.AddEvent</span>
                         </span>
                     </a>
-                    <button type="button" class="btn btn-outline-brand dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                    <div class="dropdown-menu" x-placement="left-start">
-                        <a class="dropdown-item modal-link-lg" href="@Url.Action("Add", "Events", new { area = "Administration" })/?option=@((int)Enumerations.SaveAndOptions.SaveAndNew)">
-                            <i class="la la-plus"></i> @Localizer.SaveAndNew
-                        </a>
-                        <a class="dropdown-item modal-link-lg" href="@Url.Action("Add", "Events", new { area = "Administration" })/?option=@((int)Enumerations.SaveAndOptions.SaveAndDuplicate)">
-                            <i class="la la-copy"></i> @Localizer.SaveAndDuplicate
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item modal-link-lg" href="@Url.Action("Add", "Events", new { area = "Administration" })/?option=@((int)Enumerations.SaveAndOptions.SaveAndClose)">
-                            <i class="la la-undo"></i> @Localizer.SaveAndClose
-                        </a>
-                    </div>
                 </div>
             </div>
         </div>
@@ -51,8 +38,7 @@
         <!--begin: Search Form -->
         <div class="m-form m-form--label-align-right m--margin-top-10 m--margin-bottom-30">
             <div class="row align-items-center">
-                <div class="col-xl-8"></div>
-                <div class="col-xl-4 order-1 order-xl-2 m--align-right">
+                <div class="col-xl-12 order-1 order-xl-2 m--align-right">
                     <div class="m-input-icon m-input-icon--left">
                         <input type="text" class="form-control m-icon" placeholder="@Localizer.SearchDots" id="m_events_index_generalSearch">
                         <span class="m-input-icon__icon m-input-icon__icon--left">

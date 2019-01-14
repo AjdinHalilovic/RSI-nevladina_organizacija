@@ -41,7 +41,6 @@ namespace nevladinaOrg.Web.Constants
         public const string RequestVerificationTokenHeader = "X-XSRF-TOKEN";
         public const string SharedResourceFileName = "SharedResource";
         public const string MainDatabaseConnectionString = "nevladinaOrgDatabase";
-        public const string AuthDatabaseConnectionString = "nevladinaOrgAuthDatabase";
         public const string ResourcesPath = "Resources";
         public const string ErrorsPath = "/error/{0}";
 
@@ -54,6 +53,5 @@ namespace nevladinaOrg.Web.Constants
 		public const int DefaultInstitutionId = 1;
         public const int DefaultPageSize = 10;
 
-        public const int DefaultAppointmentDuration = 15;
     }
 }

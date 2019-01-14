@@ -2010,4 +2010,10 @@
   <data name="RecentEvents" xml:space="preserve">
     <value>Prethodni događaji</value>
   </data>
+  <data name="AddMember" xml:space="preserve">
+    <value>Dodaj člana</value>
+  </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>Dobrodošli</value>
+  </data>
 </root>

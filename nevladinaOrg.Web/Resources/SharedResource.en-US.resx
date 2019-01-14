@@ -2001,4 +2001,10 @@
   <data name="RecentEvents" xml:space="preserve">
     <value>Recent events</value>
   </data>
+  <data name="AddMember" xml:space="preserve">
+    <value>Add member</value>
+  </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>Welcome </value>
+  </data>
 </root>

@@ -17,7 +17,7 @@
                         <i class="flaticon-users"></i>
                     </span>
                     <h3 class="m-portlet__head-text">
-                        @Localizer.InstitutionStaff
+                        @Localizer.Members
                     </h3>
                 </div>
             </div>
@@ -27,7 +27,7 @@
                     <a href="@Url.Action("Add", "Members", new { area = "Organizations" })" class="btn btn-brand m-btn--icon m-btn--wide">
                         <span>
                             <i class="la la-plus"></i>
-                            <span>@Localizer.AddStaff</span>
+                            <span>@Localizer.AddMember</span>
                         </span>
                     </a>
                 </div>
@@ -38,7 +38,6 @@
         <!--begin: Search Form -->
         <div class="m-form m-form--label-align-right m--margin-top-10 m--margin-bottom-30">
             <div class="row align-items-center">
-                @*<div class="col-xl-8"></div>*@
                 <div class="col-xl-12 order-1 order-xl-2 m--align-right">
                     <div class="m-input-icon m-input-icon--left">
                         <input type="text" class="form-control m-icon" placeholder="@Localizer.SearchDots" id="m_institutionStaff_index_generalSearch">
