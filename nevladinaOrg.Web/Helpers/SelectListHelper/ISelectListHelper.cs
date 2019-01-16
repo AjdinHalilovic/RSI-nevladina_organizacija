@@ -26,5 +26,7 @@ namespace nevladinaOrg.Web.Helpers.SelectListHelper
         List<SelectListItem> CitiesBase(bool includeEmpty = false);
         List<SelectListItem> CitiesBaseByCountryID(int? countryId, bool includeEmpty = false);
         List<SelectListItem> EmployementStatuses(bool includeEmpty = false);
+        List<SelectListItem> AnnouncementTypes(bool includeEmpty = true);
+        List<SelectListItem> Organizations(bool includeEmpty = true);
     }
 }

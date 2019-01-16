@@ -22,6 +22,22 @@ namespace nevladinaOrg.Web.Helpers.SelectListHelper
             _localizer = localizer;
         }
 
+        #region Announcements
+        public List<SelectListItem> AnnouncementTypes(bool includeEmpty = true)
+        {
+            List<AnnouncementType> list = _dataUnitOfWork.BaseUow.AnnouncementTypesRepository.GetAll().ToList();
+
+            var announcementTypes = new List<SelectListItem>();
+
+            if (includeEmpty)
+                announcementTypes.Add(new SelectListItem { Value = string.Empty, Text = _localizer.SelectAnnouncementTypes });
+
+            announcementTypes.AddRange(list.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Name }));
+
+            return announcementTypes;
+        }
+        #endregion
+
         #region Cities
         public List<SelectListItem> Cities(bool includeEmpty = false)
         {
@@ -349,6 +365,36 @@ namespace nevladinaOrg.Web.Helpers.SelectListHelper
             return roles;
         }
 
+        #endregion
+
+        #region Organizations
+        public List<SelectListItem> Organizations(bool includeEmpty = true)
+        {
+            List<Organization> list = _dataUnitOfWork.BaseUow.OrganizationRepository.GetAll().ToList();
+
+            var organizations = new List<SelectListItem>();
+
+            if (includeEmpty)
+                organizations.Add(new SelectListItem { Value = string.Empty, Text = _localizer.ChooseOrganization });
+
+            organizations.AddRange(list.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Name }));
+
+            return organizations;
+        }
+
+        public List<SelectListItem> OrganizationTypes(bool includeEmpty = true)
+        {
+            List<OrganizationType> list = _dataUnitOfWork.BaseUow.OrganizationTypesRepository.GetAll().ToList();
+
+            var organizationTypes = new List<SelectListItem>();
+
+            if (includeEmpty)
+                organizationTypes.Add(new SelectListItem { Value = string.Empty, Text = _localizer.ChooseOrganizationType });
+
+            organizationTypes.AddRange(list.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Name }));
+
+            return organizationTypes;
+        }
         #endregion
 
 
