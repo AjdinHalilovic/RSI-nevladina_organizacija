@@ -26,8 +26,6 @@ namespace nevladinaOrg.Web.Controllers
                                 IStringLocalizerFactory stringLocalizerFactory) : base(breadcrumb, stringLocalizerFactory)
         {
             _dataUnitOfWork = dataUnitOfWork;
-
-
             _culture = culture;
         }
 
@@ -54,11 +52,7 @@ namespace nevladinaOrg.Web.Controllers
                 return View(model);
             }
             var baseUser = _dataUnitOfWork.BaseUow.UsersRepository.GetById(user.Id);
-            if (baseUser.IsDeleted) //korigovati, provjeriti u base -- korigovano(Ajdin)
-            {
-                ModelState.AddModelError(string.Empty, Localizer.YourAccountIsNotActive);
-                return View(model);
-            }
+            
 
             var userAccounts = _dataUnitOfWork.BaseUow.UsersDTORepository.GetByUserId(user.Id).ToList();
             var userAccount = userAccounts.FirstOrDefault();

@@ -2007,4 +2007,7 @@
   <data name="Welcome" xml:space="preserve">
     <value>Welcome </value>
   </data>
+  <data name="CurrentCalendarLang" xml:space="preserve">
+    <value>en</value>
+  </data>
 </root>

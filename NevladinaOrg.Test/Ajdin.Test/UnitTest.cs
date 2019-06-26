@@ -22,8 +22,6 @@ namespace NevladinaOrg.Test
             Mock<Breadcrumb> BreadCrumb = new Mock<Breadcrumb>();
             Mock<IStringLocalizerFactory> LocalizerFactory = new Mock<IStringLocalizerFactory>();
             Mock<IHostingEnvironment> hosting = new Mock<IHostingEnvironment>();
-
-            EventsController eventsController = new EventsController(_dataUnitOfWork, hosting);
         }
     }
 }

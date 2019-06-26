@@ -238,16 +238,7 @@ namespace nevladinaOrg.Web.Areas.Organizations.Controllers
                             _dataUnitOfWork.BaseUow.PersonContactsRepository.Add(model.PersonMobile);
                         }
 
-                        var files = HttpContext.Request.Form.Files;
-                        var photo = new PersonPhoto();
-                        if (files.Count > 0)
-                        {
-                            if (files[0].Length > 0)
-                            {
-                                photo.PersonId = person.Id;
-                                photo.Photo = _imageHelper.Save(files[0]);
-                            }
-                        }
+                        
                         _dataUnitOfWork.BaseUow.PersonContactsRepository.SaveChanges();
 
 

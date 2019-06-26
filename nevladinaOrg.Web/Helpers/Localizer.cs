@@ -666,6 +666,7 @@ namespace nevladinaOrg.Web.Helpers
         public string RecentEvents => _localizer[nameof(RecentEvents)];
         public string AddMember => _localizer[nameof(AddMember)];
         public string Welcome => _localizer[nameof(Welcome)];
+        public string CurrentCalendarLang => _localizer[nameof(CurrentCalendarLang)];
         #endregion
 
         #region Fields and constructor

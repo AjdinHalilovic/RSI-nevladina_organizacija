@@ -2016,4 +2016,7 @@
   <data name="Welcome" xml:space="preserve">
     <value>Dobrodošli</value>
   </data>
+  <data name="CurrentCalendarLang" xml:space="preserve">
+    <value>bs</value>
+  </data>
 </root>

@@ -24,9 +24,9 @@ namespace nevladinaOrg.Web.Areas.Organizations.ViewModels
             {
                 Id = model.Id,
                 AcademicDegreeId=model.AcademicDegreeId,
-                AcademicTitleId=model.AcademicTitleId,
-                EmploymentStatusId=model.EmploymentStatusId,
-                MartialStatusId=model.MartialStatusId
+                AcademicTitleId=model.AcademicTitleId==0?null:model.AcademicTitleId,
+                EmploymentStatusId=model.EmploymentStatusId==0?null:model.EmploymentStatusId,
+                MartialStatusId=model.MartialStatusId==0?null:model.MartialStatusId
             };
 
             return personDetail;
