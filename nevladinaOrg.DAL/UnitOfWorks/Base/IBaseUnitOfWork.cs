@@ -24,9 +24,7 @@ namespace DAL
         ISponsorsDTORepository SponsorsDTORepository{ get; }
         IPersonsDTORepository PersonsDTORepository{ get; }
         IOrganizationInstitutionUsersDTORepository OrganizationInstitutionUsersDTORepository{ get; }
-
-
-        #endregion
+        IOrganizationsDTORepository OrganizationsDTORepository { get; }
 
         #region Entities
         IFunctionalitiesRepository FunctionalitiesRepository { get; }
@@ -69,8 +67,16 @@ namespace DAL
         IPersonDetailsRepository PersonDetailsRepository{ get; }
         IPersonPhotosRepository PersonPhotosRepository{ get; }
         IUserRolesRepository UserRolesRepository{ get; }
+        IAnnouncementsRepository AnnouncementsRepository { get; }
+        IAnnouncementTypesRepository AnnouncementTypesRepository { get; }
+        IAnnouncementOrganizationsRepository AnnouncementOrganizationsRepository { get; }
+        IAnnouncementPhotosRepository AnnouncementPhotosRepository { get; }
+        IAnnouncementDocumentsRepository AnnouncementDocumentsRepository { get; }
+        IAnnouncementUsersRepository AnnouncementUsersRepository { get; }
+        IOrganizationRepository OrganizationRepository { get; }
+        IOrganizationTypesRepository OrganizationTypesRepository { get; }
 
-
+        #endregion
         #endregion
         #endregion
     }

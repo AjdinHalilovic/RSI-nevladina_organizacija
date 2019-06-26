@@ -1,0 +1,247 @@
+﻿@model InstitutionViewModel
+
+@inject Localizer Localizer
+@inject ISelectListHelper SelectList
+@{
+    Layout = "~/Views/Shared/_ModalLayout.cshtml";
+}
+
+<div class="modal-header">
+    <h5 class="modal-title">@Localizer.AddInstitution</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>
+<form asp-antiforgery="true" enctype="multipart/form-data" data-ajax-url="@Url.Action("Add", "Institutions", new { area = "Administration" })" data-ajax="true" data-ajax-method="post" data-ajax-success="hideModal" data-ajax-update="#update-modal-lg">
+    <div class="modal-body">
+
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="m-alert m-alert--icon m-alert--outline alert alert-danger alert-dismissible animated fadeIn" role="alert">
+                <div class="m-alert__icon">
+                    <i class="la la-warning"></i>
+                </div>
+                <div class="m-alert__text">
+                    @Html.ValidationSummary()
+                </div>
+                <div class="m-alert__close">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        }
+        <div class="form-group m-form__group row">
+            <div class="col-lg-12">
+                <label class="form-control-label">* @Localizer.Name</label>
+                <input type="text" asp-for="Name" class="form-control m-input" placeholder="@Localizer.Name">
+            </div>
+        </div>
+        <div class="row">
+            <!--Begin left side -->
+            <div class="col-lg-6">
+                <div class="form-group m-form__group row">
+                    <div class="col-lg-12">
+                        <label for="m_cities_add__countryId" class="form-control-label">* @Localizer.InstitutionType</label>
+                        <div class="dropdown bootstrap-select form-control m-bootstrap-select m_">
+                            <select id="" asp-for="InstitutionTypeId" class="form-control m-bootstrap-select m_selectpicker" asp-items="SelectList.InstitutionTypes(true)"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <div class="col-lg-12">
+                        <label for="m_cities_add__countryId" class="form-control-label">* @Localizer.Country</label>
+                        <div class="dropdown bootstrap-select form-control m-bootstrap-select m_">
+                            <select id="m_institutions_add__countryId" asp-for="CountryId" class="form-control m-bootstrap-select m_selectpicker" asp-items="SelectList.Countries(true)" onchange="InstitutionsAdd__FillCities()" onload="InstitutionsAdd__FillCities()"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <div class="col-lg-12">
+                        <label class="form-control-label">* @Localizer.Address</label>
+                        <input type="text" asp-for="Address" class="form-control m-input" placeholder="@Localizer.Address">
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <div class="col-lg-12">
+                        <label class="form-control-label">* @Localizer.Email</label>
+                        <input type="text" asp-for="ContactEmail" class="form-control m-input" placeholder="@Localizer.Email">
+                    </div>
+                </div>
+
+            </div>
+            <!--End left  side -->
+            <!--Begin right  side -->
+            <div class="col-lg-6">
+                <div class="form-group m-form__group row">
+                    <div class="col-lg-12">
+                        <label for="m_cities_add__countryId" class="form-control-label"> @Localizer.ParentInstitution</label>
+                        <div class="dropdown bootstrap-select form-control m-bootstrap-select m_">
+                            <select id="" asp-for="ParentId" class="form-control m-bootstrap-select m_selectpicker" asp-items="SelectList.Institutions(true)"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <div class="col-lg-12">
+                        <label for="m_cities_add__regionId" class="form-control-label">@Localizer.City</label>
+                        <div class="dropdown bootstrap-select form-control m-bootstrap-select m_">
+                            <select id="m_institutions_add__cityId" asp-for="CityId" asp-items="SelectList.CitiesByCountryID(Model.CountryId,true)" class="form-control m-bootstrap-select m_selectpicker"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <div class="col-lg-12">
+                        <label class="form-control-label">* @Localizer.ContactPhone</label>
+                        <input type="text" asp-for="ContactPhone" class="form-control m-input" placeholder="@Localizer.ContactPhone">
+                    </div>
+                </div>
+
+                <div class="form-group m-form__group row">
+                    <div class="col-lg-12">
+                        <label class="form-control-label"> @Localizer.WebsiteURL</label>
+                        <input type="text" asp-for="WebsiteURL" class="form-control m-input" placeholder="@Localizer.WebsiteURL">
+                    </div>
+                </div>
+                @*<div class="form-group m-form__group row">
+                        <div class="col-lg-12">
+                            <label class="form-control-label"> @Localizer.SocialURL</label>
+                            <input type="text" asp-for="SocialURL" class="form-control m-input" placeholder="@Localizer.SocialURL">
+                        </div>
+                    </div>*@
+            </div>
+            <!--End right side-->
+            <div class="col-lg-12">
+                @*<div class="form-group m-form__group row">
+                    <div class="col-lg-12">
+                        <label for="announcFiles" class="form-control-label"> @Localizer.Files</label>
+                        <div class="m-dropzone dropzone mb-4 border-info" id="announcFiles">
+                            <div class="fallback">
+                                <input name="files" type="file" multiple />
+                                <input type="submit" value="Upload" />
+                            </div>
+                            <div class="m-dropzone__msg dz-message needsclick">
+                                <h6 class="m-dropzone__msg-title">@Localizer.DropzoneMsgTitle</h6>
+                                <span class="m-dropzone__msg-desc">@Localizer.DropzoneMsgDesc</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+                <div class="form-group m-form__group row">
+                    <div class="col-lg-12">
+                        <label class="form-control-label">* @Localizer.AdditionalInfo</label>
+                        <textarea class="summernote" asp-for="AdditionalInformation" id="m_summernote_2" style="display: none;" rows="3"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="modal-footer justify-content-between">
+        <label class="m-checkbox m-1">
+            <input type="checkbox" asp-for="Active"> Active
+            <span></span>
+        </label>
+        <div class="form-actions right">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">@Localizer.Close</button>
+            <button type="submit" class="btn btn-primary">@Localizer.Save</button>
+        </div>
+    </div>
+</form>
+
+@section scripts {
+    <script src="~/demo/default/custom/crud/forms/widgets/dropzone.js" type="text/javascript"></script>
+    <script src="~/demo/default/custom/crud/forms/widgets/summernote.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+
+        function InstitutionsAdd__FillCities() {
+                var countryId = $("#m_institutions_add__countryId").val();
+
+                $("#m_institutions_add__cityId").html("");
+                $("#m_institutions_add__cityId").append($("<option selected></option>").val("0").html("@Localizer.SelectCity"));
+
+                if (countryId != 0) {
+                    $.ajax({
+                        url: "@Url.Action("GetCitiesByCountryId", "Cities", new { area = "Administration" })",
+                        type: "GET",
+                        dataType: "JSON",
+                        data: { countryId: countryId },
+                        success: function (data) {
+                            $("#m_institutions_add__cityId").selectpicker("destroy");
+                            $.each(data, function (i, element) {
+                                $("#m_institutions_add__cityId").append($('<option></option>').val(element.value).html(element.text));
+                            });
+                            $("#m_institutions_add__cityId").selectpicker();
+                        }
+                    });
+                }
+            }
+
+        function hideModal(data) {
+            if (data.success) {
+                $("#m_institutions_index__datatable").mDatatable().destroy();
+                InstitutionsDraw();
+                closeModal();
+
+                $("#m_js__notification").text(data.notification.value);
+                NotificationHandler(data.notification.value);
+            } else {
+                $("#m_cities_add__countryId").trigger("change");
+            }
+        }
+        $(document).ready(function () {
+            $('#m_summernote_2').summernote();
+
+             @*Dropzone.autoDiscover = false;
+            var DropzoneDemo = function () {
+                //== Private functions
+                var demos = function () {
+                    var myDropzone = new Dropzone("#announcFiles", {
+                        url: '@Url.Action("Upload", "Institutions", new { area = "Administration" })',
+                        method: 'POST',
+                        autoProcessQueue: true,
+                        uploadMultiple: true,
+                        paramName: 'files',
+                        parallelUploads: 20,
+                        maxFiles: 20,
+                        maxFilesize: 5,
+                        acceptedFiles: "image/*",
+                        addRemoveLinks: true,
+                        removedfile: function (file) {
+                            $.ajax({
+                                url: "@Url.Action("RemoveFile", "Institutions", new { area = "Administration" })/?institutionId=@Model.Id&fileName=" + file.name,
+                                dataType: "JSON",
+                                method: "GET",
+                                success: function (data) {
+                                    console.log(JSON.parse(data.value).Type == 1);
+                                    if (JSON.parse(data.value).Type == 1) {
+                                        console.log("EHEHHE");
+                                        for (var i = 0; i < $(".dz-filename span").length; i++) {
+                                            if ($($(".dz-filename span")[i]).html() == file.name) {
+                                                $($(".dz-preview")[i]).remove();
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    NotificationHandler(data.value);
+                                }
+                            });
+                        }
+                    });
+                    @foreach (var item in Model.InstitutionImages)
+                        {
+                            @:var mockFile = { name: "@item.Name", size: @item.Size, accepted:true };
+                            @:myDropzone.options.addedfile.call(myDropzone, mockFile);
+                            @:myDropzone.options.thumbnail.call(myDropzone, mockFile, "\\uploads\\dropzone-temp-thumb\\@item.Name");
+                            @:myDropzone.options.complete.call(myDropzone, mockFile);
+                        }
+                }
+                return {
+                    // public functions
+                    init: function () {
+                        demos();
+                    }
+                };
+            }();
+            DropzoneDemo.init();*@
+        })
+    </script>
+}

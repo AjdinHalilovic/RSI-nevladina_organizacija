@@ -1,0 +1,336 @@
+﻿@model AnnouncementOrganizationsViewModel
+
+@inject ISelectListHelper SelectList
+@inject Localizer Localizer
+@{
+    Layout = "~/Views/Shared/_ModalLayout.cshtml";
+}
+
+<div class="modal-header">
+    <h5 class="modal-title">@Localizer.AddAnnouncement</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>
+<form asp-antiforgery="true" enctype="multipart/form-data" data-ajax-url="@Url.Action("Add", "Announcements", new { area = "Administration" })" data-ajax="true" data-ajax-method="post" data-ajax-success="hideModal" data-ajax-update="#update-modal-lg">
+    <div class="modal-body pb-0">
+        <input hidden asp-for="SaveAndOptions" />
+        <input hidden asp-for="Announcement.Id" />
+        <input hidden asp-for="Announcement.UserId" />
+        <input hidden asp-for="AnnouncementDocuments" />
+        <input hidden asp-for="AnnouncementPhotos" />
+        @*<input hidden asp-for="Announcement.CreatedDate" />
+        <input hidden asp-for="Announcement.ModifiedDate" /> Model binder ne moze da odradi parse*@
+
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="m-alert m-alert--icon m-alert--outline alert alert-danger alert-dismissible animated fadeIn" role="alert">
+                <div class="m-alert__icon">
+                    <i class="la la-warning"></i>
+                </div>
+                <div class="m-alert__text">
+                    @Html.ValidationSummary()
+                </div>
+                <div class="m-alert__close">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        }
+        <div class="form-group m-form__group row">
+            <div class="col-lg-12">
+                <label class="form-control-label">* @Localizer.Title</label>
+                <input type="text" asp-for="Announcement.Title" class="form-control m-input" placeholder="@Localizer.Title">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group m-form__group row">
+                    <div class="col-lg-12">
+                        <label class="form-control-label">* @Localizer.AnnouncementType</label>
+                        <div class="dropdown bootstrap-select form-control m-bootstrap-select m_">
+                            <select class="form-control m-bootstrap-select m_selectpicker" asp-for="Announcement.AnnouncementTypeId" asp-items="@SelectList.AnnouncementTypes(true)"></select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group m-form__group row">
+                    <div class="col-lg-12">
+                        <label class="form-control-label"> @Localizer.Subtitle</label>
+                        <input type="text" asp-for="Announcement.Subtitle" class="form-control m-input" placeholder="@Localizer.Subtitle">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group m-form__group row">
+            <div class="col-lg-12">
+                <label class="form-control-label">* @Localizer.Content</label>
+                <textarea class="summernote" asp-for="Announcement.Content" id="m_summernote_2" style="display: none;"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group m-form__group row">
+            <div class="col-lg-12 pb-2">
+                <label class="form-control-label">* @Localizer.WhoWillSeeAnnouncement:</label>
+            </div>
+            <div class="row col-lg-12 pb-3 pr-0">
+                <div class="col-lg-6 text-center">
+                    <a href="#" class="btn btn-secondary btn-sm col-lg-12 dm--custom-radio-click">
+                        <label class="m-radio m-radio--air m-radio--state-success m-0">
+                            <input type="radio" class="sendArea" asp-for="SendArea" value="Organizations"> @Localizer.Organizations
+                            <span></span>
+                        </label>
+                    </a>
+                </div>
+                <div class="col-lg-6 pr-0 text-center">
+                    <a href="#" class="btn btn-secondary btn-sm col-lg-12 dm--custom-radio-click">
+                        <label class="m-radio m-radio--air m-radio--state-success m-0">
+                            <input type="radio" class="sendArea" asp-for="SendArea" value="Users"> @Localizer.User
+                            <span></span>
+                        </label>
+                    </a>
+                </div>
+            </div>
+            <div id="organizationArea" class="row col-lg-12 pr-0">
+                <div class="col-lg-12 pr-0">
+                    <div class="m-radio-list pb-2 row">
+                        <div class="col-lg-6">
+                            <label class="m-radio">
+                                <input type="radio" class="typeSend" asp-for="SendToOrganizations" value="forAllOrganization"> @Localizer.SendToAllOrganizations
+                                <span></span>
+                            </label>
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="m-radio">
+                                <input type="radio" class="typeSend" asp-for="SendToOrganizations" value="forCertainOrganization"> @Localizer.SendOnlyToCertainOrganizations
+                                <span></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div id="recipients" hidden class="col-lg-12 pr-0">
+                    <div class="form-group m-form__group row" data-select2-id="340">
+                        <div class="col-lg-12 col-md-12 col-sm-12" data-select2-id="80">
+                            <select asp-for="OrganizationIds" asp-items="@SelectList.Organizations(false)" class="form-control m-select2 select2-hidden-accessible" id="m_select2_3" multiple="" data-select2-id="m_select2_3" tabindex="-1" aria-hidden="true"></select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="usersArea" class="row col-lg-12 pr-0">
+                <div class="col-lg-12 pr-0">
+                    <div class="m-radio-list pb-2 row">
+                        <div class="col-lg-6">
+                            <label class="m-radio">
+                                <input type="radio" class="typeSendUsers" asp-for="SendToUsers" value="forAllUsers"> @Localizer.SendToAllUsers
+                                <span></span>
+                            </label>
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="m-radio">
+                                <input type="radio" class="typeSendUsers" asp-for="SendToUsers" value="forCertainUsers"> @Localizer.SendOnlyToCertainUsers
+                                <span></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div id="userRecipients" hidden class="col-lg-12 pr-0">
+                    <div class="form-group m-form__group row" data-select2-id="340">
+                        <div class="col-lg-12 col-md-12 col-sm-12" data-select2-id="80">
+                            <select asp-for="UserIds" asp-items="SelectList.Persons(false)" class="form-control m-select2 select2-hidden-accessible" id="m_select2_4" multiple="" data-select2-id="m_select2_4" tabindex="-1" aria-hidden="true"></select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-group m-form__group row">
+                    <div class="col-lg-12">
+                        <label for="announcFiles" class="form-control-label"> @Localizer.Files</label>
+                        <div class="m-dropzone dropzone mb-4 border-info" id="announcFiles">
+                            <div class="fallback">
+                                <input name="files" type="file" multiple />
+                                <input type="submit" value="Upload" />
+                            </div>
+                            <div class="m-dropzone__msg dz-message needsclick">
+                                <h6 class="m-dropzone__msg-title">@Localizer.DropzoneMsgTitle</h6>
+                                <span class="m-dropzone__msg-desc"> @Localizer.DropzoneMsgDesc</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="modal-footer justify-content-between">
+        <label class="m-checkbox m-1">
+            <input type="checkbox" asp-for="Announcement.Active"> @Localizer.Active
+            <span></span>
+        </label>
+        <div class="form-actions right">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">@Localizer.Close</button>
+            <button type="submit" class="btn btn-primary">@Localizer.Save</button>
+        </div>
+    </div>
+</form>
+@section scripts {
+    <script src="~/demo/default/custom/crud/forms/widgets/summernote.js" type="text/javascript"></script>
+    <script src="~/demo/default/custom/crud/forms/widgets/select2.js" type="text/javascript"></script>
+    <script src="~/demo/default/custom/crud/forms/widgets/dropzone.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        
+        function hideModal(data) {
+            if (data.success) {
+                $("#m_announcements_index_datatable").mDatatable().destroy();
+                AnnouncementsDraw();
+                closeModal();
+
+                NotificationHandler(data.notification.value);
+            }
+        }
+        $(document).ready(function () {
+            if ($(".typeSend:checked").val() == "forAllOrganization" && $(".sendArea:checked").val()=="Organizations") {
+                $("#m_select2_3").val("");
+                $("#m_select2_3").siblings(".select2").find(".select2-selection__choice").remove();
+            }
+            if ($(".typeSend:checked").val() == "forAllUsers" && $(".sendArea:checked").val() == "Users") {
+                $("#m_select2_4").val("");
+                $("#m_select2_4").siblings(".select2").find(".select2-selection__choice").remove();
+            }
+            function hideShowRecipients() {
+                var type = $(".typeSend:checked").val();
+                if (type == "forAllOrganization") {
+                    $('#recipients').attr('hidden', '');
+                }
+                else if (type == "forCertainOrganization") {
+                    $('#recipients').removeAttr('hidden');
+                }
+            }
+            function hideShowUserRecipients() {
+                var type = $(".typeSendUsers:checked").val();
+                if (type == "forAllUsers") {
+                    $('#userRecipients').attr('hidden', '');
+                }
+                else if (type == "forCertainUsers") {
+                    $('#userRecipients').removeAttr('hidden');
+                }
+            }
+            function hideShowSendArea() {
+                var type = $(".sendArea:checked").val();
+                if (type == "Users") {
+                    $('#organizationArea').attr('hidden', '');
+                    $('#usersArea').removeAttr('hidden');
+                }
+                else if (type == "Organizations") {
+                    $('#organizationArea').removeAttr('hidden');
+                    $('#usersArea').attr('hidden', '');
+                }
+                else {
+                    $('#organizationArea').attr('hidden', '');
+                    $('#usersArea').attr('hidden', '');
+                }
+            }
+
+            hideShowSendArea();
+            hideShowUserRecipients();
+            hideShowRecipients();
+            $(".typeSend").on("click", function () {
+                hideShowRecipients();
+            })
+            $(".typeSendUsers").on("click", function () {
+                hideShowUserRecipients();
+            })
+            $(".sendArea").on("change", function () {
+                hideShowSendArea();
+            })
+
+
+            $('#m_summernote_2').summernote();
+
+            var Select2 = {
+                init: function () {
+                    $("#m_select2_3, #m_select2_3_validate").select2({
+                        placeholder: "Select a who will see announcement"
+                    }),
+                   $("#m_select2_4, #m_select2_4_validate").select2({
+                       placeholder: "Select a who will see announcement"
+                   })
+                }
+            }
+            Select2.init();
+            $(".select2-container, .select2-search, .select2-search__field").css("width", "100%");
+            $("#m_select2_3").on("change", function () {
+                console.log($("#m_select2_3").val());
+            })
+            $("#sendToCheck").on("click", function () {
+                if ($('#recipients').is('[hidden]')) {
+                    $('#recipients').removeAttr('hidden');
+                } else {
+                    $('#recipients').attr('hidden', '');
+                }
+            })
+
+            Dropzone.autoDiscover = false;
+            var DropzoneDemo = function () {
+                //== Private functions
+                var demos = function () {
+                    var myDropzone = new Dropzone("#announcFiles", {
+                        url: '@Url.Action("Upload", "Announcements", new { area = "Administration" })',
+                        method: 'POST',
+                        autoProcessQueue: true,
+                        uploadMultiple: true,
+                        paramName: 'files',
+                        parallelUploads: 20,
+                        maxFiles: 20,
+                        maxFilesize: 5,
+                        acceptedFiles: "image/*,.xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf",
+                        addRemoveLinks: true,
+                        removedfile: function (file) {
+                            $.ajax({
+                                url: "@Url.Action("RemoveFile", "Announcements", new { area = "Administration" })/?announcementId=@Model.Announcement.Id&fileName=" + file.name,
+                                dataType: "JSON",
+                                method: "GET",
+                                success: function (data) {
+                                    console.log(JSON.parse(data.value).Type == 1);
+                                    if (JSON.parse(data.value).Type == 1) {
+                                        console.log("EHEHHE");
+                                        for (var i = 0; i < $(".dz-filename span").length; i++) {
+                                            if ($($(".dz-filename span")[i]).html() == file.name) {
+                                                $($(".dz-preview")[i]).remove();
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    NotificationHandler(data.value);
+                                }
+                            });
+                        }
+                    });
+                    @foreach (var item in Model.AnnouncementPhotos)
+                        {
+                            @:var mockFile = { name: "@item.Name", size: @item.Size, accepted:true };
+                            @:myDropzone.options.addedfile.call(myDropzone, mockFile);
+                            @:myDropzone.options.thumbnail.call(myDropzone, mockFile, "\\uploads\\dropzone-temp-thumb\\@item.Name");
+                            @:myDropzone.options.complete.call(myDropzone, mockFile);
+                        }
+                    @foreach (var item in Model.AnnouncementDocuments)
+                        {
+                            @:var mockFile = { name: "@item.Name", size: @item.Size, accepted:true };
+                            @:myDropzone.options.addedfile.call(myDropzone, mockFile);
+                            @:myDropzone.options.complete.call(myDropzone, mockFile);
+                        }
+                }
+                return {
+                    // public functions
+                    init: function () {
+                        demos();
+                    }
+                };
+            }();
+            DropzoneDemo.init();
+        })
+    </script>
+}

@@ -56,6 +56,9 @@ namespace DAL
 
         private ILicenseDTORepository _licenseDTORepository;
         public ILicenseDTORepository LicenseDTORepository => _licenseDTORepository = _licenseDTORepository ?? new LicenseDTORepository(_NevladinaOrgContext);
+
+        private IOrganizationsDTORepository _organizationsDTORepository;
+        public IOrganizationsDTORepository OrganizationsDTORepository => _organizationsDTORepository = _organizationsDTORepository ?? new OrganizationDTORepository(_NevladinaOrgContext);
         #endregion
 
         #region Entities
@@ -179,6 +182,29 @@ namespace DAL
         private IEmployeeStatusesRepository _employeeStatusesRepository;
         public IEmployeeStatusesRepository EmployeeStatusesRepository => _employeeStatusesRepository = _employeeStatusesRepository ?? new EmployeeStatusesRepository(_NevladinaOrgContext);
 
+        private IAnnouncementsRepository _announcementsRepository;
+        public IAnnouncementsRepository AnnouncementsRepository => _announcementsRepository = _announcementsRepository ?? new AnnouncementsRepository(_NevladinaOrgContext);
+
+        private IAnnouncementTypesRepository _announcementTypesRepository;
+        public IAnnouncementTypesRepository AnnouncementTypesRepository => _announcementTypesRepository = _announcementTypesRepository ?? new AnnouncementTypesRepository(_NevladinaOrgContext);
+
+        private IAnnouncementOrganizationsRepository _announcementOrganizationsRepository;
+        public IAnnouncementOrganizationsRepository AnnouncementOrganizationsRepository => _announcementOrganizationsRepository = _announcementOrganizationsRepository ?? new AnnouncementOrganizationsRepository(_NevladinaOrgContext);
+
+        private IAnnouncementPhotosRepository _announcementPhotosRepository;
+        public IAnnouncementPhotosRepository AnnouncementPhotosRepository => _announcementPhotosRepository = _announcementPhotosRepository ?? new AnnouncementPhotosRepository(_NevladinaOrgContext);
+
+        private IAnnouncementDocumentsRepository _announcementDocumentsRepository;
+        public IAnnouncementDocumentsRepository AnnouncementDocumentsRepository => _announcementDocumentsRepository = _announcementDocumentsRepository ?? new AnnouncementDocumentsRepository(_NevladinaOrgContext);
+
+        private IAnnouncementUsersRepository _announcementUsersRepository;
+        public IAnnouncementUsersRepository AnnouncementUsersRepository => _announcementUsersRepository = _announcementUsersRepository ?? new AnnouncementUsersRepository(_NevladinaOrgContext);
+
+        private IOrganizationRepository _organizationRepository;
+        public IOrganizationRepository OrganizationRepository => _organizationRepository = _organizationRepository ?? new OrganizationRepository(_NevladinaOrgContext);
+
+        private IOrganizationTypesRepository _organizationTypesRepository;
+        public IOrganizationTypesRepository OrganizationTypesRepository => _organizationTypesRepository = _organizationTypesRepository ?? new OrganizationTypesRepository(_NevladinaOrgContext);
 
         #endregion
         #endregion

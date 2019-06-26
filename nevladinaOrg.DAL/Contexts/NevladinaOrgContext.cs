@@ -36,7 +36,12 @@ namespace DAL.Contexts
         public virtual DbSet<OrganizationType> OrganizationTypes{ get; set; }
         public virtual DbSet<Member> Members{ get; set; }
         public virtual DbSet<Nationality> Nationalities { get; set; }
-
+        public virtual DbSet<Announcement> Announcements { get; set; }
+        public virtual DbSet<AnnouncementDocument> AnnouncementDocuments { get; set; }
+        public virtual DbSet<AnnouncementOrganization> AnnouncementOrganizations { get; set; }
+        public virtual DbSet<AnnouncementPhoto> AnnouncementPhotos { get; set; }
+        public virtual DbSet<AnnouncementType> AnnouncementTypes { get; set; }
+        public virtual DbSet<AnnouncementUser> AnnouncementUsers { get; set; }
 
 
         public virtual DbSet<Event> Events { get; set; }

@@ -1,0 +1,65 @@
+﻿@model AnnouncementTypeViewModel
+
+@inject Localizer Localizer
+@inject ISelectListHelper SelectList
+
+@{
+    Layout = "~/Views/Shared/_ModalLayout.cshtml";
+}
+
+<div class="modal-header">
+    <h5 class="modal-title">@Localizer.AddAnnouncementTypes</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>
+<form asp-antiforgery="true" data-ajax-url="@Url.Action("Add", "AnnouncementTypes", new { area = "Administration" })" data-ajax="true" data-ajax-method="post" data-ajax-success="hideModal" data-ajax-update="#update-modal">
+    <div class="modal-body">
+        <input hidden asp-for="SaveAndOptions" />
+
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="m-alert m-alert--icon m-alert--outline alert alert-danger alert-dismissible animated fadeIn" role="alert">
+                <div class="m-alert__icon">
+                    <i class="la la-warning"></i>
+                </div>
+                <div class="m-alert__text">
+                    @Html.ValidationSummary()
+                </div>
+                <div class="m-alert__close">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        }
+
+        <div class="form-group m-form__group row">
+            <div class="col-lg-12">
+                <label class="form-control-label">* @Localizer.Name</label>
+                <input type="text" asp-for="Name" class="form-control m-input" placeholder="@Localizer.Name">
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="modal-footer">
+        <div class="form-actions right">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">@Localizer.Close</button>
+            <button type="submit" class="btn btn-primary">@Localizer.Save</button>
+        </div>
+    </div>
+</form>
+
+@section scripts {
+    <script type="text/javascript">
+
+        function hideModal(data) {
+            if (data.success) {
+                $("#m_announcementTypes_index__datatable").mDatatable().destroy();
+                AnnouncementTypesDraw();
+                closeModal();
+
+                $("#m_js__notification").text(data.notification.value);
+                NotificationHandler(data.notification.value);
+            }
+        }
+    </script>
+}
