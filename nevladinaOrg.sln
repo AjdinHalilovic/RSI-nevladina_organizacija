@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "nevladinaOrg.DAL\DAL
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "nevladinaOrg.Core\Core.csproj", "{56ED8DD6-9A3A-4189-8930-56CE48C65659}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NevladinaOrg.Test", "NevladinaOrg.Test\NevladinaOrg.Test.csproj", "{39069E2B-36E5-4F9A-9443-A0AC2D6BDB92}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{56ED8DD6-9A3A-4189-8930-56CE48C65659}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56ED8DD6-9A3A-4189-8930-56CE48C65659}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56ED8DD6-9A3A-4189-8930-56CE48C65659}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39069E2B-36E5-4F9A-9443-A0AC2D6BDB92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39069E2B-36E5-4F9A-9443-A0AC2D6BDB92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39069E2B-36E5-4F9A-9443-A0AC2D6BDB92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39069E2B-36E5-4F9A-9443-A0AC2D6BDB92}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

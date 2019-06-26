@@ -698,7 +698,7 @@ namespace nevladinaOrg.Web.Areas.Administration.Controllers
 
         #region Registrations
 
-  #region Index
+        #region Index
         public IActionResult Registrations(int id)
         {
             var registrationsModel = new RegistrationViewModel
