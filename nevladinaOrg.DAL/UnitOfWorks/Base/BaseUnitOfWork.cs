@@ -32,6 +32,8 @@ namespace DAL
         private IOrganizationInstitutionUsersDTORepository _organizationInstitutionUsersDTORepository;
         public IOrganizationInstitutionUsersDTORepository OrganizationInstitutionUsersDTORepository => _organizationInstitutionUsersDTORepository = _organizationInstitutionUsersDTORepository ?? new OrganizationInstitutionUsersDTORepository(_NevladinaOrgContext);
 
+        private IInstitutionsDTORepository _institutionsDTORepository;
+        public IInstitutionsDTORepository InstitutionsDTORepository => _institutionsDTORepository = _institutionsDTORepository ?? new InstitutionsDTORepository(_NevladinaOrgContext);
 
         private IPersonUsersDTORepository _personUsersDTORepository;
         public IPersonUsersDTORepository PersonUsersDTORepository => _personUsersDTORepository = _personUsersDTORepository ?? new PersonUsersDTORepository(_NevladinaOrgContext);
@@ -59,6 +61,7 @@ namespace DAL
 
         private IOrganizationsDTORepository _organizationsDTORepository;
         public IOrganizationsDTORepository OrganizationsDTORepository => _organizationsDTORepository = _organizationsDTORepository ?? new OrganizationDTORepository(_NevladinaOrgContext);
+
         #endregion
 
         #region Entities
@@ -70,6 +73,12 @@ namespace DAL
 
         private IOrganizationInstitutionUsersRepository _organizationInstitutionUsersRepository;
         public IOrganizationInstitutionUsersRepository OrganizationInstitutionUsersRepository => _organizationInstitutionUsersRepository = _organizationInstitutionUsersRepository ?? new OrganizationInstitutionUsersRepository(_NevladinaOrgContext);
+
+        private IInstitutionsRepository _institutionsRepository;
+        public IInstitutionsRepository InstitutionsRepository => _institutionsRepository = _institutionsRepository ?? new InstitutionsRepository(_NevladinaOrgContext);
+
+        private IInstitutionTypesRepository _institutionTypesRepository;
+        public IInstitutionTypesRepository InstitutionTypesRepository => _institutionTypesRepository = _institutionTypesRepository ?? new InstitutionTypesRepository(_NevladinaOrgContext);
 
         private IUsersRepository _usersRepository;
         public IUsersRepository UsersRepository => _usersRepository = _usersRepository ?? new UsersRepository(_NevladinaOrgContext);
@@ -107,7 +116,8 @@ namespace DAL
         private IRolesRepository _rolesRepository;
         public IRolesRepository RolesRepository => _rolesRepository = _rolesRepository ?? new RolesRepository(_NevladinaOrgContext);
 
-
+        private IRolesFunctionalitiesRepository _rolesFunctionalitiesRepository;
+        public IRolesFunctionalitiesRepository RolesFunctionalitiesRepository => _rolesFunctionalitiesRepository = _rolesFunctionalitiesRepository ?? new RolesFunctionalitiesRepository(_NevladinaOrgContext);
 
         private IEventsRepository _eventsRepository;
         public IEventsRepository EventsRepository => _eventsRepository = _eventsRepository ?? new EventsRepository(_NevladinaOrgContext);
@@ -205,6 +215,8 @@ namespace DAL
 
         private IOrganizationTypesRepository _organizationTypesRepository;
         public IOrganizationTypesRepository OrganizationTypesRepository => _organizationTypesRepository = _organizationTypesRepository ?? new OrganizationTypesRepository(_NevladinaOrgContext);
+
+
 
         #endregion
         #endregion

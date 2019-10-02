@@ -25,8 +25,12 @@ namespace DAL
         IPersonsDTORepository PersonsDTORepository{ get; }
         IOrganizationInstitutionUsersDTORepository OrganizationInstitutionUsersDTORepository{ get; }
         IOrganizationsDTORepository OrganizationsDTORepository { get; }
+        IInstitutionsDTORepository InstitutionsDTORepository { get; }
+
 
         #region Entities
+        IInstitutionsRepository InstitutionsRepository { get; }
+        IInstitutionTypesRepository InstitutionTypesRepository { get; }
         IFunctionalitiesRepository FunctionalitiesRepository { get; }
         IUsersRepository UsersRepository{ get; }
         IPersonsRepository PersonsRepository { get; }
@@ -43,7 +47,7 @@ namespace DAL
         IMartialStatusesRepository MartialStatusesRepository { get; }
         IContactTypesRepository ContactTypesRepository { get; }
         IRolesRepository RolesRepository { get; }
-
+        IRolesFunctionalitiesRepository RolesFunctionalitiesRepository { get; }
         IEventsRepository EventsRepository { get; }
         IEventDocumentsRepository EventDocumentsRepository{ get; }
         IEventImagesRepository EventImagesRepository{ get; }
