@@ -35,14 +35,11 @@
     <Compile Include="Areas\Administration\Controllers\CountriesController.cs" />
     <Compile Include="Areas\Administration\Controllers\EventsController.cs" />
     <Compile Include="Areas\Administration\Controllers\InstitutionalSettingsController.cs" />
-    <Compile Include="Areas\Administration\Controllers\InstitutionsController.cs" />
-    <Compile Include="Areas\Administration\Controllers\InstitutionTypesController.cs" />
     <Compile Include="Areas\Administration\Controllers\MaritalStatusesController.cs" />
     <Compile Include="Areas\Administration\Controllers\NationalitiesController.cs" />
     <Compile Include="Areas\Administration\Controllers\OrganizationsController.cs" />
     <Compile Include="Areas\Administration\Controllers\OrganizationTypesController.cs" />
     <Compile Include="Areas\Administration\Controllers\RegionsController.cs" />
-    <Compile Include="Areas\Administration\Controllers\RolesController.cs" />
     <Compile Include="Areas\Administration\Controllers\SystemSettingsController.cs" />
     <Compile Include="Areas\Administration\ViewModels\AcademicDegreeViewModel.cs" />
     <Compile Include="Areas\Administration\ViewModels\AcademicTitleViewModel.cs" />
@@ -67,8 +64,6 @@
     <Compile Include="Areas\Administration\ViewModels\PaymentViewModel.cs" />
     <Compile Include="Areas\Administration\ViewModels\RegionViewModel.cs" />
     <Compile Include="Areas\Administration\ViewModels\RegistrationViewModel.cs" />
-    <Compile Include="Areas\Administration\ViewModels\RoleFunctionalityViewModel.cs" />
-    <Compile Include="Areas\Administration\ViewModels\RoleViewModel.cs" />
     <Compile Include="Areas\Administration\ViewModels\SponsorViewModel.cs" />
     <Compile Include="Areas\Institutions\Controllers\StaffController.cs" />
     <Compile Include="Areas\Institutions\ViewModels\StaffAccountInfoViewModel.cs" />
@@ -95,7 +90,7 @@
     <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="7.9.0" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Tools" Version="1.1.0-preview4-final" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.4" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.5" PrivateAssets="All" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
@@ -181,9 +176,6 @@
     <None Include="Areas\Administration\Views\Regions\_Add.cshtml" />
     <None Include="Areas\Administration\Views\Regions\_Edit.cshtml" />
     <None Include="Areas\Administration\Views\Regions\_Index.cshtml" />
-    <None Include="Areas\Administration\Views\Roles\_Add.cshtml" />
-    <None Include="Areas\Administration\Views\Roles\_Edit.cshtml" />
-    <None Include="Areas\Administration\Views\Roles\_Index.cshtml" />
     <None Include="Areas\Administration\Views\SystemSettings\General.cshtml" />
     <None Include="Areas\Administration\Views\SystemSettings\Regional.cshtml" />
     <None Include="Areas\Administration\Views\_ViewImports.cshtml" />

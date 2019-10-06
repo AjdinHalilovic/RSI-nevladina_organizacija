@@ -28,8 +28,5 @@ namespace nevladinaOrg.Web.Helpers.SelectListHelper
         List<SelectListItem> EmployementStatuses(bool includeEmpty = false);
         List<SelectListItem> AnnouncementTypes(bool includeEmpty = true);
         List<SelectListItem> Organizations(bool includeEmpty = true);
-        List<SelectListItem> OrganizationTypes(bool includeEmpty = true);
-        List<SelectListItem> InstitutionTypes(bool includeEmpty = true);
-        List<SelectListItem> Institutions(bool includeEmpty = true);
     }
 }
