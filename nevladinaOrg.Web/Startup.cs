@@ -48,7 +48,8 @@ namespace nevladinaOrg.Web
         }
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDistributedMemoryCache();
+            services.
+                AddDistributedMemoryCache();
             services.AddSession();
 
             if (!_hostingEnvironment.IsDevelopment())

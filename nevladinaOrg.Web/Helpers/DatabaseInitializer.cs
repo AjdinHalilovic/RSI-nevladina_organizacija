@@ -541,7 +541,8 @@ namespace nevladinaOrg.Web.Helpers
                 context.Functionalities.AddRange(functionality1, functionality2, functionality3, functionality4);
                 context.SaveChanges();
             }
-            if (!context.Roles.Any())
+
+            /*if (!context.Roles.Any())
             {
                 var sadmin = new Core.Entities.Base.Role
                 {
@@ -594,6 +595,24 @@ namespace nevladinaOrg.Web.Helpers
                 };
                 
                 context.Roles.AddRange(sadmin, admin, institutionAdmin, institutionStaff, organizationAdministrator, organizationManagement, organizationMember);
+                context.SaveChanges();
+            }*/
+
+            if (!context.Roles.Any())
+            {
+                var admin = new Core.Entities.Base.Role
+                {
+                    InstitutionId = 1,
+                    Name = "Administrator",
+                    Active = true
+                };
+                var def = new Core.Entities.Base.Role
+                {
+                    InstitutionId = 1,
+                    Name = "Demo default role",
+                    Active = true
+                };
+                context.Roles.AddRange(admin, def);
                 context.SaveChanges();
             }
             if (!context.RoleFunctionalities.Any())
