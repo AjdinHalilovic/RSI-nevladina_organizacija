@@ -1,4 +1,9 @@
 ﻿@inject Localizer Localizer
+
+@{
+    var loggedUser = Context.GetLoggedUserData();
+
+}
 <!-- BEGIN: Left Aside -->
 <button class="m-aside-left-close  m-aside-left-close--skin-light " id="m_aside_left_close_btn">
     <i class="la la-close"></i>
@@ -17,7 +22,7 @@
                     </span>
                 </a>
             </li>
-            <li class="m-menu__item  m-menu__item" aria-haspopup="true">
+            <li class="m-menu__item  m-menu__item" aria-haspopup="true" is-visible="@(loggedUser.Roles.Select(x=>x.RoleLevel).Contains((int)Enumerations.RoleLevels.Institution) || loggedUser.Roles.Select(x=>x.RoleLevel).Contains((int)Enumerations.RoleLevels.System))">
                 <a href="@Url.Action("Index", "Staff", new { area = nameof(nevladinaOrg.Web.Areas.Institutions) })" class="m-menu__link ">
                     <i class="m-menu__link-icon la la-users"></i>
                     <span class="m-menu__link-title">
@@ -27,7 +32,7 @@
                     </span>
                 </a>
             </li>
-            <li class="m-menu__item  m-menu__item" aria-haspopup="true">
+            <li class="m-menu__item  m-menu__item" aria-haspopup="true" is-visible="@(loggedUser.Roles.Select(x=>x.RoleLevel).Contains((int)Enumerations.RoleLevels.Institution) || loggedUser.Roles.Select(x=>x.RoleLevel).Contains((int)Enumerations.RoleLevels.System))">
                 <a href="@Url.Action("Index", "Members", new { area = nameof(nevladinaOrg.Web.Areas.Organizations) })" class="m-menu__link ">
                     <i class="m-menu__link-icon la la-users"></i>
                     <span class="m-menu__link-title">
@@ -37,7 +42,7 @@
                     </span>
                 </a>
             </li>
-            <li class="m-menu__item  m-menu__item" aria-haspopup="true">
+            <li class="m-menu__item  m-menu__item" aria-haspopup="true" is-visible="@(loggedUser.Roles.Select(x=>x.RoleLevel).Contains((int)Enumerations.RoleLevels.Institution) || loggedUser.Roles.Select(x=>x.RoleLevel).Contains((int)Enumerations.RoleLevels.System))">
                 <a href="@Url.Action("Index", "Events", new { area = nameof(nevladinaOrg.Web.Areas.Administration) })" class="m-menu__link ">
                     <i class="m-menu__link-icon la la-building-o"></i>
                     <span class="m-menu__link-title">
@@ -51,7 +56,7 @@
                 <h4 class="m-menu__section-text">@Localizer.Settings</h4>
                 <i class="m-menu__section-icon flaticon-more-v2"></i>
             </li>
-            <li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true" m-menu-submenu-toggle="hover">
+            <li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true" m-menu-submenu-toggle="hover" is-visible="@loggedUser.Roles.Select(x=>x.RoleLevel).Contains((int)Enumerations.RoleLevels.System)">
                 <a href="javascript:;" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-layers"></i>
                     <span class="m-menu__link-text">@Localizer.System</span>
@@ -85,7 +90,7 @@
                 </div>
             </li>
 
-            <li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true" m-menu-submenu-toggle="hover">
+            <li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true" m-menu-submenu-toggle="hover" is-visible="@(loggedUser.Roles.Select(x=>x.RoleLevel).Contains((int)Enumerations.RoleLevels.Institution) || loggedUser.Roles.Select(x=>x.RoleLevel).Contains((int)Enumerations.RoleLevels.System))">
                 <a href="javascript:;" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-layers"></i>
                     <span class="m-menu__link-text">@Localizer.Institutions</span>

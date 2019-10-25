@@ -2,14 +2,11 @@
 using Core.Entities.Base;
 using Core.Entities.Base.DTO;
 using DAL;
-using DAL.Repositories.Base.IRepository;
-using DAL.Repositories.Base.IRepository.DTO;
 using nevladinaOrg.Web.Areas.Administration.ViewModels;
 using nevladinaOrg.Web.Constants;
 using nevladinaOrg.Web.Controllers;
 using nevladinaOrg.Web.Helpers;
 using nevladinaOrg.Web.Helpers.Breadcrumb;
-using nevladinaOrg.Web.Helpers.GoogleMapsHelper;
 using nevladinaOrg.Web.Helpers.ImageHelper;
 using nevladinaOrg.Web.Helpers.Logger;
 using Microsoft.AspNetCore.Hosting;
@@ -37,15 +34,13 @@ namespace nevladinaOrg.Web.Areas.Administration.Controllers
         private IHostingEnvironment _hostingEnvironment;
         private Localizer _localizer;
         private ILogger _logger;
-        private GoogleMapsApiHelper _googleMapsApi;
         private IImageHelper _imageHelper;
 
         #endregion
 
         public EventsController(IDataUnitOfWork dataUnitOfWork,
                                  IHostingEnvironment hostingEnvironment,
-                                Localizer localizer, ILogger logger,
-                                GoogleMapsApiHelper googleMapsApi, IImageHelper imageHelper,
+                                Localizer localizer, ILogger logger, IImageHelper imageHelper,
                                 IBreadcrumb breadcrumb, IStringLocalizerFactory stringLocalizerFactory)
         : base(breadcrumb, stringLocalizerFactory)
         {
@@ -54,7 +49,6 @@ namespace nevladinaOrg.Web.Areas.Administration.Controllers
             _hostingEnvironment = hostingEnvironment;
             _localizer = localizer;
             _logger = logger;
-            _googleMapsApi = googleMapsApi;
             _imageHelper = imageHelper;
         }
 
