@@ -416,5 +416,26 @@ namespace nevladinaOrg.Web.Helpers.SelectListHelper
 
         #endregion
 
+        #region Institutions
+        public List<SelectListItem> Institutions(bool includeEmpty = true)
+        {
+            List<Institution> list = _dataUnitOfWork.BaseUow.InstitutionsRepository.GetAll().ToList();
+            var institution = new List<SelectListItem>();
+            if (includeEmpty)
+                institution.Add(new SelectListItem { Value = string.Empty, Text = _localizer.ChooseInstitution });
+            institution.AddRange(list.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Name }));
+            return institution;
+        }
+        public List<SelectListItem> InstitutionTypes(bool includeEmpty = true)
+        {
+            List<InstitutionType> list = _dataUnitOfWork.BaseUow.InstitutionTypesRepository.GetAll().ToList();
+            var institutionTypes = new List<SelectListItem>();
+            if (includeEmpty)
+                institutionTypes.Add(new SelectListItem { Value = string.Empty, Text = _localizer.SelectInstitutionType });
+            institutionTypes.AddRange(list.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Name }));
+            return institutionTypes;
+        }
+        #endregion
+
     }
 }

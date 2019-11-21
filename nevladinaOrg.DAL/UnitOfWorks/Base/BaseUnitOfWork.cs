@@ -59,9 +59,19 @@ namespace DAL
 
         private IOrganizationsDTORepository _organizationsDTORepository;
         public IOrganizationsDTORepository OrganizationsDTORepository => _organizationsDTORepository = _organizationsDTORepository ?? new OrganizationDTORepository(_NevladinaOrgContext);
+
+        private IInstitutionsDTORepository _institutionsDTORepository;
+        public IInstitutionsDTORepository InstitutionsDTORepository => _institutionsDTORepository = _institutionsDTORepository ?? new InstitutionsDTORepository(_NevladinaOrgContext);
+
         #endregion
 
         #region Entities
+        private IInstitutionsRepository _institutionsRepository;
+        public IInstitutionsRepository InstitutionsRepository => _institutionsRepository = _institutionsRepository ?? new InstitutionsRepository(_NevladinaOrgContext);
+
+        private IInstitutionTypesRepository _institutionTypesRepository;
+        public IInstitutionTypesRepository InstitutionTypesRepository => _institutionTypesRepository = _institutionTypesRepository ?? new InstitutionTypesRepository(_NevladinaOrgContext);
+
         private IFunctionalitiesRepository _functionalitiesRepository;
         public IFunctionalitiesRepository FunctionalitiesRepository => _functionalitiesRepository = _functionalitiesRepository ?? new FunctionalitiesRepository(_NevladinaOrgContext);
 
@@ -106,6 +116,9 @@ namespace DAL
 
         private IRolesRepository _rolesRepository;
         public IRolesRepository RolesRepository => _rolesRepository = _rolesRepository ?? new RolesRepository(_NevladinaOrgContext);
+
+        private IRolesFunctionalitiesRepository _rolesFunctionalitiesRepository;
+        public IRolesFunctionalitiesRepository RolesFunctionalitiesRepository => _rolesFunctionalitiesRepository = _rolesFunctionalitiesRepository ?? new RolesFunctionalitiesRepository(_NevladinaOrgContext);
 
 
 

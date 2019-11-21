@@ -1,0 +1,205 @@
+﻿@model RoleFunctionalityViewModel
+@inject Localizer Localizer
+@{
+    Layout = "~/Views/Shared/_ModalLayout.cshtml";
+}
+<div class="modal-header">
+    <h5 class="modal-title">@Localizer.EditRole</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>
+<form asp-antiforgery="true" data-ajax-url="@Url.Action("Edit", "Roles", new { area = "Administration" })" data-ajax="true" data-ajax-method="post" data-ajax-success="hideModal" data-ajax-update="#update-modal-lg">
+    <div class="modal-body">
+        <input hidden asp-for="SaveAndOptions" />
+        <input hidden asp-for="Role.Id" />
+        <input hidden asp-for="FunctionalityIds" id="functionaliti_Ids" />
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="m-alert m-alert--icon m-alert--outline alert alert-danger alert-dismissible animated fadeIn" role="alert">
+                <div class="m-alert__icon">
+                    <i class="la la-warning"></i>
+                </div>
+                <div class="m-alert__text">
+                    @Html.ValidationSummary()
+                </div>
+                <div class="m-alert__close">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        }
+        <div class="form-group m-form__group row">
+            <div class="col-lg-12">
+                <label class="form-control-label">* @Localizer.Name</label>
+                <input type="text" asp-for="Role.Name" class="form-control m-input" placeholder="@Localizer.Name">
+            </div>
+        </div>
+        <div class="form-group m-form__group row">
+            <div class="col-lg-12">
+                <label class="form-control-label"> @Localizer.Desription</label>
+                <textarea asp-for="Role.Description" class="form-control m-input" rows="4" placeholder="@Localizer.Desription"></textarea>
+            </div>
+        </div>
+        <label class="m-checkbox">
+            <input type="checkbox" asp-for="Role.Active"> Active
+            <span></span>
+        </label>
+        <div class="form-group m-form__group row border-bottom pt-3 pb-3">
+            <div class="col-lg-12">
+                <h5 class="modal-title">@Localizer.Functionalities</h5>
+            </div>
+        </div>
+        @*--------Datatable functionalities--------*@
+        <div class="m-portlet__body">
+            <!--begin: Search Form -->
+            <div class="m-form m-form--label-align-right m--margin-top-10 m--margin-bottom-30">
+                <div class="row align-items-center">
+                    <div class="col-xl-8"></div>
+                    <div class="col-xl-4 order-1 order-xl-2 m--align-right">
+                        <div class="m-input-icon m-input-icon--left">
+                            <input type="text" class="form-control m-icon" placeholder="@Localizer.SearchDots" id="m_rolesFunctionalities_index__generalSearch">
+                            <span class="m-input-icon__icon m-input-icon__icon--left">
+                                <span>
+                                    <i class="la la-search"></i>
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end: Search Form -->
+            <!--begin: Datatable -->
+            <div class="m_datatable" id="m_rolesFunctionalities_index__datatable"></div>
+            <!--end: Datatable -->
+        </div>
+        @*-------End Datatable functionalities-----*@
+    </div>
+    <div class="clearfix"></div>
+    <div class="modal-footer">
+        <div class="form-actions right">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">@Localizer.Close</button>
+            <button type="submit" class="btn btn-primary">@Localizer.Edit</button>
+        </div>
+    </div>
+</form>
+@section scripts {
+    <script type="text/javascript">
+        function hideModal(data) {
+            if (data.success) {
+                $("#m_roles_index__datatable").mDatatable().destroy();
+                RolesDraw();
+                closeModal();
+                $("#m_js__notification").text(data.notification.value);
+                NotificationHandler(data.notification.value);
+            }
+        }
+        $(document).ready(function () {
+
+            //WITH SELECTION FUNCTIONALITIES ----------------
+            var DatatableDataLocal, DatatableDatasource, DatatableOptions;
+            $.ajax({
+                url: "@Url.Action("GetFunctionalities", "Roles", new { area = "Administration" })",
+                type: "GET",
+                success: function (data) {
+                    DatatableDatasource = JSON.parse(data);
+                    var DatatableDataLocal = function () {
+                        var DatatableOptions = {
+                            data: {
+                                type: "local",
+                                source: DatatableDatasource,
+                                pageSize: 10
+                            },
+                            layout: {
+                                theme: "default",
+                                class: "",
+                                scroll: !0,
+                                height: 550,
+                                footer: !1
+                            },
+                            sortable: !0,
+                            pagination: !0,
+                            columns: [{
+                                field: "@nameof(Core.Entities.Base.Functionality.Id)",
+                                title: "#",
+                                sortable: !1,
+                                width: 35,
+                                textAlign: "center",
+                                selector: {
+                                    class: "m-checkbox--solid m-checkbox--brand"
+                                }
+                            }, {
+                                field: "@nameof(Core.Entities.Base.Role.Name)",
+                                title: "@Localizer.Name",
+                                width: 250,
+                                filterable: !0
+                            },  {
+                                field: "@string.Empty",
+                                title: "@string.Empty",
+                                filterable: !1
+                            }, {
+                                field: "@string.Empty",
+                                title: "@string.Empty",
+                                filterable: !1
+                            }],
+                            translate: {
+                                records: {
+                                    processing: '@Localizer.LoadingDots',
+                                    noRecords: '@Localizer.NoRecordsFound'
+                                },
+                                toolbar: {
+                                    pagination: {
+                                        items: {
+                                            default: {
+                                                first: '@Localizer.First',
+                                                prev: '@Localizer.Previous',
+                                                next: '@Localizer.Next',
+                                                last: '@Localizer.Last',
+                                                more: '@Localizer.MorePages',
+                                                input: '@Localizer.PageNumber',
+                                                select: '@Localizer.SelectPageSize'
+                                            },
+                                            info: '@Localizer.DisplayingNumberOfRecords'
+                                        }
+                                    }
+                                }
+                            }
+                        };
+                        return {
+                            init: function () {
+                                ! function () {
+                                    DatatableOptions.search = {
+                                        input: $("#m_rolesFunctionalities_index__generalSearch")
+                                    };
+                                    var e = $("#m_rolesFunctionalities_index__datatable").mDatatable(DatatableOptions);
+                                    e.on("m-datatable--on-check m-datatable--on-uncheck m-datatable--on-layout-updated", function (t) {
+                                        var a = e.rows(".m-datatable__row--active").nodes().length;
+                                        $("#m_datatable_selected_number_rolesFunctionalities").html(a), a > 0 ? $("#m_datatable_group_action_rolesFunctionalities").collapse("show") : $("#m_datatable_group_action_rolesFunctionalities").collapse("hide");
+                                        a = 0;
+                                        var list = [];
+                                        for (var i = 0; i < e.rows(".m-datatable__row--active").nodes().length; i++) {
+                                            list.push((parseInt($(e.rows(".m-datatable__row--active").nodes()[i]).find("input[type=checkbox]").val())));
+                                        }
+                                        $("#functionaliti_Ids").val(list);
+                                        //console.log($("#functionaliti_Ids").val());
+                                    })
+                                    var functionalityIds = $("#functionaliti_Ids").val().split(",");
+                                    var vel = e.rows(".m-datatable__row").nodes().length;
+                                    for (var i = 0; i < vel; i++) {
+                                        for (var j = 0; j < functionalityIds.length-1; j++) {
+                                            if ($(e.rows(".m-datatable__row").nodes()[i]).find("input[type=checkbox]").val() == functionalityIds[j]) {
+                                                $(e.rows(".m-datatable__row").nodes()[i]).find("input[type=checkbox]").click();
+                                            }
+                                        }
+                                    }
+                                }()
+                            }
+                        }
+                    }();
+                    jQuery(document).ready(function () {
+                        DatatableDataLocal.init()
+                    });
+                }
+            })
+        })
+    </script>
+}
