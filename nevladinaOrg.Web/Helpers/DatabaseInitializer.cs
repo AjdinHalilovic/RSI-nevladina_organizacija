@@ -116,6 +116,29 @@ namespace nevladinaOrg.Web.Helpers
                 cro = croatia.Id;
             }
 
+            if (!context.EventItemTypes.Any())
+            {
+                var state = new EventItemType
+                {
+                    Name = "Predavanje"
+                };
+                var regional = new EventItemType
+                {
+                    Name = "Pauza"
+                };
+                var local = new EventItemType
+                {
+                    Name = "Ručak"
+                };
+                var local1 = new EventItemType
+                {
+                    Name = "Lab"
+                };
+
+                context.EventItemTypes.AddRange(state, regional, local, local1);
+                context.SaveChanges();
+            }
+
             if (!context.InstitutionTypes.Any())
             {
                 var state = new InstitutionType

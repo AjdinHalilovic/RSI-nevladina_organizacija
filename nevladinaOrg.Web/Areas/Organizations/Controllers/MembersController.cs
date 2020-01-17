@@ -227,19 +227,19 @@ namespace nevladinaOrg.Web.Areas.Organizations.Controllers
                         _dataUnitOfWork.BaseUow.PersonContactsRepository.Add(model.PersonPrimaryEmail);
                         _dataUnitOfWork.BaseUow.PersonContactsRepository.Add(model.PersonPhone);
 
-                        if (model.PersonSecondaryEmail.Contact != null)
-                        {
-                            model.PersonSecondaryEmail.PersonId = person.Id;
-                            _dataUnitOfWork.BaseUow.PersonContactsRepository.Add(model.PersonSecondaryEmail);
-                        }
-                        if (model.PersonMobile.Contact != null)
-                        {
-                            model.PersonMobile.PersonId = person.Id;
-                            _dataUnitOfWork.BaseUow.PersonContactsRepository.Add(model.PersonMobile);
-                        }
+                        //if (model.PersonSecondaryEmail.Contact != null)
+                        //{
+                        //    model.PersonSecondaryEmail.PersonId = person.Id;
+                        //    _dataUnitOfWork.BaseUow.PersonContactsRepository.Add(model.PersonSecondaryEmail);
+                        //}
+                        //if (model.PersonMobile.Contact != null)
+                        //{
+                        //    model.PersonMobile.PersonId = person.Id;
+                        //    _dataUnitOfWork.BaseUow.PersonContactsRepository.Add(model.PersonMobile);
+                        //}
 
                         
-                        _dataUnitOfWork.BaseUow.PersonContactsRepository.SaveChanges();
+                        //_dataUnitOfWork.BaseUow.PersonContactsRepository.SaveChanges();
 
 
                         var institutionUser = new InstitutionUser()
