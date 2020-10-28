@@ -1,0 +1,223 @@
+﻿
+@inject Localizer Localizer
+
+@{
+    ViewData["Title"] = Localizer.Members;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="m-portlet m-portlet--responsive-mobile">
+    <div class="m-portlet__head" style="">
+        <div class="m-portlet__head-progress">
+            <!-- here can place a progress bar-->
+        </div>
+        <div class="m-portlet__head-wrapper">
+            <div class="m-portlet__head-caption">
+                <div class="m-portlet__head-title">
+                    <span class="m-portlet__head-icon">
+                        <i class="flaticon-users"></i>
+                    </span>
+                    <h3 class="m-portlet__head-text">
+                        @Localizer.Members
+                    </h3>
+                </div>
+            </div>
+            <div class="m-portlet__head-tools">
+                
+                <div class="btn-group dropleft">
+                    <a href="@Url.Action("Add", "Members", new { area = "Organizations" })" class="btn btn-brand m-btn--icon m-btn--wide">
+                        <span>
+                            <i class="la la-plus"></i>
+                            <span>@Localizer.AddMember</span>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="m-portlet__body">
+        <!--begin: Search Form -->
+        <div class="m-form m-form--label-align-right m--margin-top-10 m--margin-bottom-30">
+            <div class="row align-items-center">
+                <div class="col-xl-12 order-1 order-xl-2 m--align-right">
+                    <div class="m-input-icon m-input-icon--left">
+                        <input type="text" class="form-control m-icon" placeholder="@Localizer.SearchDots" id="m_institutionStaff_index_generalSearch">
+                        <span class="m-input-icon__icon m-input-icon__icon--left">
+                            <span>
+                                <i class="la la-search"></i>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--end: Search Form -->
+        <!--begin: Selected Rows Group Action Form -->
+        <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30 collapse" id="m_datatable_group_action_institutionStaff" style="">
+            <div class="row align-items-center">
+                <div class="col-xl-12">
+                    <div class="m-form__group m-form__group--inline">
+                        <div class="m-form__label m-form__label-no-wrap">
+                            <label class="m--font-bold m--font-danger-">
+                                @Localizer.Selected
+                                <span id="m_datatable_selected_number_institutionStaff"></span> @Localizer.records:
+                            </label>
+                        </div>
+                        <div class="m-form__control">
+                            <div class="btn-toolbar">
+                                &nbsp;&nbsp;&nbsp;
+                                <button class="btn btn-sm btn-danger" type="button" id="m_datatable_delete_all_institutionStaff">@Localizer.DeleteAll</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--end: Selected Rows Group Action Form -->
+        <!--begin: Datatable -->
+        <div class="m_datatable" id="m_institutionStaff_index_datatable"></div>
+        <!--end: Datatable -->
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        //WITH SELECTION ----------------
+        const jedan = true; // varijable za metronic datatable true i false umjesto 1 i 0
+        const nula = false;
+        var DatatableDataLocal, DatatableDatasource, DatatableOptions;
+        $.ajax({
+            url: "@Url.Action("JsonIndex", "Members", new { area = "Organizations" })",
+            type: "GET",
+            success: function (data) {
+                DatatableDatasource = JSON.parse(data);
+                var DatatableDataLocal = function () {
+                    var DatatableOptions = {
+                        data: {
+                            type: "local",
+                            source: DatatableDatasource,
+                            pageSize: 10
+                        },
+                        layout: {
+                            theme: "default",
+                            class: "",
+                            scroll: !nula,
+                            height: 550,
+                            footer: !jedan
+                        },
+                        pagination: !nula,
+                        columns: [{
+                            field: "@nameof(Core.Entities.Base.DTO.PersonDTO.InstitutionUserId)",
+                            title: "#",
+                            sortable: !jedan,
+                            width: 35,
+                            textAlign: "center",
+                            selector: {
+                                class: "m-checkbox--solid m-checkbox--brand"
+                            }
+                        }, {
+                            field: "@nameof(Core.Entities.Base.DTO.PersonDTO.FirstAndLastName)",
+                                title: "@Localizer.User",
+                                width:190,
+                                sortable: !nula,
+                                filterable: !nula,
+                                template: function (DatatableDatasource) {
+                                    return '<a  href="/organizations/members/profile/?OrganizationInstitutionUserId=' + DatatableDatasource.OrganizationInstitutionUserId +'" class="p-0 m-portlet__nav-link btn m-btn" >' + DatatableDatasource.FirstAndLastName + '</a>';
+                                }
+                        },{
+                            field: "@nameof(Core.Entities.Base.DTO.PersonDTO.DateOfBirthString)",
+                                title: "@Localizer.DateOfBirth",
+                                sortable: !jedan,
+                                filterable: !jedan,
+                                template: function (DatatableDatasource) {
+                                    return DatatableDatasource.DateOfBirthString + " (" + DatatableDatasource.Age+")";
+                                }
+                        },{
+                            field: "@nameof(Core.Entities.Base.DTO.PersonDTO.City)",
+                                title: "@Localizer.City",
+                                sortable: !jedan,
+                                filterable: !jedan
+                        },{
+                            field: "@nameof(Core.Entities.Base.DTO.PersonDTO.Email)",
+                                title: "@Localizer.Email",
+                                sortable: !jedan,
+                                width:200,
+                                filterable: !jedan
+                         },{
+                            field: "@nameof(Core.Entities.Base.DTO.PersonDTO.Phone)",
+                                title: "@Localizer.NumberOfPhone",
+                                sortable: !jedan,
+                                filterable: !jedan
+                        },{
+                            field: "Actions",
+                            title: "@Localizer.Action",
+                            textAlign: "center",
+                            width: 70,
+                            sortable: !jedan,
+                            overflow: "visible",
+                                template: function (DatatableDatasource, DatatableOptions) {
+                                    return '<a href="@Url.Action("Profile", "Members", new { area = "Organizations" })/?OrganizationInstitutionUserId=' + DatatableDatasource.OrganizationInstitutionUserId + '" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="@Localizer.Edit">\t\t\t\t\t\t\t<i class="la la-edit"></i>\t\t\t\t\t\t</a>\t\t\t\t\t\t<a data-id="' + DatatableDatasource.OrganizationInstitutionUserId + '" data-behavior="delete" href="@Url.Action("Delete", "Members", new { area = "Organizations" })/?OrganizationInstitutionUserId=' + DatatableDatasource.OrganizationInstitutionUserId +'" class="m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill" data-ajax-success="hideModal" title="@Localizer.Delete">\t\t\t\t\t\t\t<i class="la la-trash"></i>\t\t\t\t\t\t</a>'
+                            }
+                        }],
+                        translate: {
+                            records: {
+                                processing: '@Localizer.LoadingDots',
+                                noRecords: '@Localizer.NoRecordsFound'
+                            },
+                            toolbar: {
+                                pagination: {
+                                    items: {
+                                        default: {
+                                            first: '@Localizer.First',
+                                            prev: '@Localizer.Previous',
+                                            next: '@Localizer.Next',
+                                            last: '@Localizer.Last',
+                                            more: '@Localizer.MorePages',
+                                            input: '@Localizer.PageNumber',
+                                            select: '@Localizer.SelectPageSize'
+                                        },
+                                        info: '@Localizer.DisplayingNumberOfRecords'
+                                    }
+                                }
+                            }
+                        }
+                    };
+                    return {
+                        init: function () {
+                            ! function () {
+                                DatatableOptions.search = {
+                                    input: $("#m_institutionStaff_index_generalSearch")
+                                };
+                                var e = $("#m_institutionStaff_index_datatable").mDatatable(DatatableOptions);
+                                e.on("m-datatable--on-check m-datatable--on-uncheck m-datatable--on-layout-updated", function (t) {
+                                    var a = e.rows(".m-datatable__row--active").nodes().length;
+                                    $("#m_datatable_selected_number_institutionStaff").html(a), a > 0 ? $("#m_datatable_group_action_institutionStaff").collapse("show") : $("#m_datatable_group_action_institutionStaff").collapse("hide");
+                                    a = 0;
+                                })
+                                $("#m_datatable_delete_all_institutionStaff").on('click', function () {
+                                    var list = [];
+                                    for (var i = 0; i < e.rows(".m-datatable__row--active").nodes().length; i++) {
+                                        list.push((parseInt($(e.rows(".m-datatable__row--active").nodes()[i]).find("input[type=checkbox]").val())));
+                                    }
+                                    $.ajax({
+                                        url: "@Url.Action("DeleteAll", "Members", new { area = "Organizations" })",
+                                        type: "GET",
+                                        data: { list: list },
+                                        traditional:true,
+                                        success: function (data) {
+                                            NotificationHandler(data.value);
+                                            e.rows(".m-datatable__row--active").nodes().html("");
+                                            $("#m_datatable_group_action_institutionStaff").collapse("hide");
+                                        }
+                                    })
+                                })
+                            }()
+                        }
+                    }
+                }();
+                jQuery(document).ready(function () {
+                    DatatableDataLocal.init()
+                });
+            }
+        })
+    })
+</script>

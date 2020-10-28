@@ -1,0 +1,103 @@
+﻿@model DashboardViewModel
+@{
+    ViewData["Title"] = "Home Page";
+    var loggedUser = Context.GetLoggedUserData();
+}
+@inject Localizer Localizer
+
+<h2 class="text-center">
+    @Localizer.Welcome, @loggedUser.PersonUser.FirstAndLastName!<br /><br />
+</h2>
+<div class="row">
+    <div class="col-xl-7 col-lg-12">
+        <!--Begin::Portlet-->
+        <div class="m-portlet m-portlet--full-height ">
+            <div class="m-portlet__head">
+                <div class="m-portlet__head-caption">
+                    <div class="m-portlet__head-title">
+                        <h3 class="m-portlet__head-text">
+                            @Localizer.RecentEvents
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="m-portlet__body">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="m_widget2_tab1_content">
+                        <!--Begin::Timeline 3 -->
+                        <div class="m-timeline-3">
+                            <div class="m-timeline-3__items">
+                                @foreach (var item in Model.Events)
+                                {
+
+                                    <div class="m-timeline-3__item m-timeline-3__item--brand">
+                                        <span class="m-timeline-3__item-time pt-2">
+                                            <span style="padding-left:20px;">
+                                                @(DateTime.ParseExact(item.DateFrom, new string[] { "MM/dd/yyyy", "d.M.yyyy.", "dd.MM.yyyy" }, System.Globalization.CultureInfo.InvariantCulture).Day).@(DateTime.ParseExact(item.DateFrom, new string[] { "MM/dd/yyyy", "d.M.yyyy.", "dd.MM.yyyy" }, System.Globalization.CultureInfo.InvariantCulture).Month)
+                                            </span>
+                                        </span>
+                                        <div class="m-timeline-3__item-desc">
+                                            <span class="m-timeline-3__item-text">
+                                                <a id="preview" href="@Url.Action("Preview", "Events", new { area = "Administration" })/@item.Id" class="p-0 m-portlet__nav-link btn m-btn">@item.Name</a>
+                                            </span><br>
+                                            <span class="m-timeline-3__item-user-name">
+                                                <a href="https://www.google.com/maps/place/@item.Place" target="_blank" class="m-link m-link--metal m-timeline-3__item-link">
+                                                    @item.Place, @item.City, @item.Country
+                                                </a>
+                                            </span>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <!--End::Timeline 3 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End::Portlet-->
+    </div>
+    <div class="col-xl-5 col-lg-12">
+        <!--Begin::Portlet-->
+        <div class="m-portlet m-portlet--full-height ">
+            <div class="m-portlet__head">
+                <div class="m-portlet__head-caption">
+                    <div class="m-portlet__head-title">
+                        <h3 class="m-portlet__head-text">
+                            Recent Announcements
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="m-portlet__body">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="m_widget2_tab1_content">
+                        <!--Begin::Timeline 3 -->
+                        <div class="m-timeline-3">
+                            <div class="m-timeline-3__items">
+                                <div class="m-timeline-3__item m-timeline-3__item--brand">
+                                    <span class="m-timeline-3__item-time">11:00</span>
+                                    <div class="m-timeline-3__item-desc">
+                                        <span class="m-timeline-3__item-text">
+                                            Lorem ipsum dolor sit amit eiusmdd tempor
+                                        </span><br>
+                                        <span class="m-timeline-3__item-user-name">
+                                            <a href="#" class="m-link m-link--metal m-timeline-3__item-link">
+                                                By James
+                                            </a>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--End::Timeline 3 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End::Portlet-->
+    </div>
+</div>
+<script>
+    $(function () { NotificationHandler(); });
+</script>

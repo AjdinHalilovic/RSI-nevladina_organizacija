@@ -1,0 +1,325 @@
+﻿@model StaffGeneralInfoViewModel
+
+@inject Localizer Localizer
+@inject ISelectListHelper SelectList
+
+
+<form asp-antiforgery="true" class="m-form m-form--fit m-form--label-align-right" data-ajax-url="@Url.Action("EditGeneralInfo", "Staff", new { area = "Institutions" })" data-ajax="true" data-ajax-method="post" data-ajax-success="showNotification" data-ajax-update="#general-info">
+    <input hidden asp-for="Person.Id" />
+    <input hidden asp-for="PersonPhone.Id" />
+    <input hidden asp-for="PersonPhone.PersonId" />
+    <input hidden asp-for="PersonPhone.ContactTypeId" />
+    <input hidden asp-for="PersonPrimaryEmail.Id" />
+    <input hidden asp-for="PersonPrimaryEmail.PersonId" />
+    <input hidden asp-for="PersonPrimaryEmail.ContactTypeId" />
+    @if (Model.PersonMobile != null)
+    {
+        <input hidden asp-for="PersonMobile.Id" />
+        <input hidden asp-for="PersonMobile.PersonId" />
+        <input hidden asp-for="PersonMobile.ContactTypeId" />
+    }
+    @if (Model.PersonSecondaryEmail != null)
+    {
+        <input hidden asp-for="PersonSecondaryEmail.Id" />
+        <input hidden asp-for="PersonSecondaryEmail.PersonId" />
+        <input hidden asp-for="PersonSecondaryEmail.ContactTypeId" />
+    }
+    <div class="m-portlet__body">
+        @if (ViewData["SuccessStaffEditGeneralInfo"] != null)
+        {
+            if ((bool)ViewData["SuccessStaffEditGeneralInfo"])
+            {
+                <div class="m-alert m-alert--icon m-alert--outline alert alert-success alert-dismissible animated fadeIn mr-4 ml-4" role="alert">
+                    <div class="m-alert__icon">
+                        <i class="la la-check"></i>
+                    </div>
+                    <div class="m-alert__text">
+                        @Localizer.GeneralInfo @Localizer.Saved.ToLower()
+                    </div>
+                    <div class="m-alert__close">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+            }
+        }
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="m-alert m-alert--icon m-alert--outline alert alert-danger alert-dismissible animated fadeIn mr-4 ml-4" role="alert">
+                <div class="m-alert__icon">
+                    <i class="la la-warning"></i>
+                </div>
+                <div class="m-alert__text">
+                    @Html.ValidationSummary()
+                </div>
+                <div class="m-alert__close">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        }
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="m-form__section m-form__section--first">
+                    <div class="m-form__heading">
+                        <h3 class="m-form__heading-title">@Localizer.PersonalDetails</h3>
+                    </div>
+                    <div class="row col-lg-12">
+                        <div class="form-group m-form__group col-lg-6 pt-0">
+                            <label class="form-control-label">* @Localizer.FirstName</label>
+                            <input type="text" asp-for="Person.FirstName" class="form-control m-input" placeholder="@Localizer.FirstName">
+                        </div>
+                        <div class="form-group m-form__group col-lg-6 pt-0">
+                            <label class="form-control-label">* @Localizer.Surname</label>
+                            <input type="text" asp-for="Person.LastName" class="form-control m-input" placeholder="@Localizer.Surname">
+                        </div>
+                    </div>
+                    <div class="row col-lg-12">
+                        <div class="form-group m-form__group col-lg-6 pt-0">
+                            <label class="form-control-label">* @Localizer.ParentName</label>
+                            <input type="text" asp-for="Person.ParentName" class="form-control m-input" placeholder="@Localizer.ParentName">
+                        </div>
+                        <div class="form-group m-form__group col-lg-6 pt-0">
+                            <label class="form-control-label">* @Localizer.DateOfBirth</label>
+                            <input type="text" class="date-picker form-control m-input" readonly="" placeholder="@Localizer.SelectDate" data-val="true" data-val-required="@Localizer.ErrorMessageDateOfBirthReq" id="Person_DateOfBirth" name="Person.DateOfBirth" value="@Model.Person.DateOfBirth.Value.ToString(Localizer.DateFormat)">
+                        </div>
+                    </div>
+                    <div class="row col-lg-12">
+                        <div class="form-group m-form__group col-lg-6 pt-0">
+                            <label class="form-control-label"> @Localizer.CountryOfBirth</label>
+                            <select class="form-control m-bootstrap-select m_selectpicker" asp-for="Person.BirthCountryId" asp-items="@SelectList.Countries(true)" onload="MembersAdd_FillBirthCities()" onchange="MembersAdd_FillBirthCities()"></select>
+                        </div>
+                        <div class="form-group m-form__group col-lg-6 pt-0">
+                            <label class="form-control-label"> @Localizer.CityOfBirth </label>
+                            <select class="form-control m-bootstrap-select m_selectpicker" asp-for="Person.BirthCityId" asp-items="@SelectList.CitiesByCountryID(Model.Person.BirthCountryId,true)"></select>
+                        </div>
+                    </div>
+                    <div class="row col-lg-12">
+                        <div class="form-group m-form__group col-lg-6 pt-0">
+                            <label class="form-control-label"> @Localizer.SocialSecurityNumber</label>
+                            <input type="text" asp-for="Person.SocialSecurityNumber" class="form-control m-input" placeholder="@Localizer.SocialSecurityNumber">
+                        </div>
+                        <div class="form-group m-form__group col-lg-6 pt-0">
+                            <label class="form-control-label"> @Localizer.NationalIdNumber</label>
+                            <input type="text" asp-for="Person.NationalIDNumber" class="form-control m-input" placeholder="@Localizer.NationalIdNumber">
+                        </div>
+                    </div>
+                    <div class="row col-lg-12">
+                        <div class="form-group m-form__group col-lg-12 pt-0 pb-0">
+                            <label class="form-control-label">* @Localizer.Gender:</label>
+                        </div>
+                        <div class="form-group m-form__group col-lg-6 pt-0">
+                            <div class="text-center">
+                                <a class="btn btn-secondary btn-sm col-lg-12 dm--custom-radio-click">
+                                    <label class="m-radio m-radio--air m-radio--state-success m-0">
+                                        <input type="radio" id="genderM" asp-for="Person.Gender" value="M"> @Localizer.Male
+                                        <span></span>
+                                    </label>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="form-group m-form__group col-lg-6 pt-0">
+                            <div class="text-center">
+                                <a class="btn btn-secondary btn-sm col-lg-12 dm--custom-radio-click">
+                                    <label class="m-radio m-radio--air m-radio--state-success m-0">
+                                        <input type="radio" id="genderF" asp-for="Person.Gender" value="F"> @Localizer.Female
+                                        <span></span>
+                                    </label>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="m-separator m-separator--dashed m-separator--lg m-1"></div>
+                <div class="m-form__section">
+                    <div class="m-form__heading">
+                        <h3 class="m-form__heading-title">
+                            @Localizer.ContactDetails
+                        </h3>
+                    </div>
+
+                    <div class="row col-lg-12">
+                        <div class="col-lg-6 form-group m-form__group pt-0">
+                            <label class="form-control-label">* @Localizer.Country</label>
+                            <select class="form-control m-bootstrap-select m_selectpicker" asp-for="Person.CountryId" asp-items="@SelectList.Countries(true)" onchange="MembersAdd__FillRegions(); MembersAdd__FillCities()" onload="MembersAdd__FillRegions(); MembersAdd__FillCities()"></select>
+                        </div>
+                        <div class="col-lg-6 form-group m-form__group pt-0">
+                            <label class="form-control-label">* @Localizer.Region</label>
+                            <select class="form-control m-bootstrap-select m_selectpicker" asp-for="Person.RegionId" asp-items="@SelectList.RegionsByCountryID(Model.Person.RegionId,true)" onchange="MembersAdd__FillCitiesByRegion()" onload="MembersAdd__FillCitiesByRegion()"></select>
+                        </div>
+                    </div>
+                    <div class="row col-lg-12">
+                        <div class="col-lg-6 form-group m-form__group pt-0">
+                            <label class="form-control-label"> @Localizer.City</label>
+                            <select class="form-control m-bootstrap-select m_selectpicker" asp-for="Person.CityId" asp-items="@SelectList.CitiesByCountryID(Model.Person.CountryId,true)"></select>
+                        </div>
+                        <div class="col-lg-6 form-group m-form__group pt-0">
+                            <label class="form-control-label"> @Localizer.Place</label>
+                            <input type="text" asp-for="Person.Place" class="form-control m-input" placeholder="@Localizer.Place">
+                        </div>
+                    </div>
+                    <div class="row col-lg-12">
+                        <div class="col-lg-6 form-group m-form__group pt-0">
+                            <label class="form-control-label"> @Localizer.Address</label>
+                            <input type="text" asp-for="Person.Address" class="form-control m-input" placeholder="@Localizer.Address">
+                        </div>
+                        <div class="col-lg-6 form-group m-form__group pt-0">
+                            <label class="form-control-label"> @Localizer.Citizenship</label>
+                            <select class="form-control m-bootstrap-select m_selectpicker" asp-for="Person.CitizenshipId" asp-items="@SelectList.Citizenships(true)"></select>
+                        </div>
+                    </div>
+                    <div class="row col-lg-12">
+                        <div class="col-lg-6 form-group m-form__group pt-0">
+                            <label class="form-control-label"> @Localizer.Residence</label>
+                            <select class="form-control m-bootstrap-select m_selectpicker" asp-for="Person.ResidenceId" asp-items="@SelectList.Cities(true)"></select>
+                        </div>
+                        <div class="col-lg-6 form-group m-form__group pt-0">
+                            <label class="form-control-label"> @Localizer.ResidenceAddress</label>
+                            <input type="text" asp-for="Person.ResidenceAddress" class="form-control m-input" placeholder="@Localizer.ResidenceAddress">
+                        </div>
+                    </div>
+                    <div class="row col-lg-12">
+                        <div class="col-lg-6 form-group m-form__group pt-0">
+                            <label class="form-control-label">* @Localizer.NumberOfPhone</label>
+                            <input type="text" asp-for="PersonPhone.Contact" class="form-control m-input" placeholder="@Localizer.NumberOfPhone">
+                        </div>
+                        <div class="col-lg-6 form-group m-form__group pt-0">
+                            <label class="form-control-label"> @Localizer.NumberOfMobile</label>
+                            <input type="text" asp-for="PersonMobile.Contact" class="form-control m-input" placeholder="@Localizer.NumberOfMobile">
+                        </div>
+                    </div>
+                    <div class="row col-lg-12">
+                        <div class="col-lg-6 form-group m-form__group pt-0">
+                            <label class="form-control-label">* @Localizer.PrimaryEmail</label>
+                            <input type="text" asp-for="PersonPrimaryEmail.Contact" class="form-control m-input" placeholder="@Localizer.PrimaryEmail">
+                        </div>
+                        <div class="col-lg-6 form-group m-form__group pt-0">
+                            <label class="form-control-label"> @Localizer.SecondaryEmail</label>
+                            <input type="text" asp-for="PersonSecondaryEmail.Contact" class="form-control m-input" placeholder="@Localizer.SecondaryEmail">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="m-portlet__foot m-portlet__foot--fit">
+        <div class="m-form__actions">
+            <div class="row col-lg-12">
+                <div class="col-sm-6 form-group m-form__group pt-0 text-right">
+                    <button type="submit" class="btn btn-accent m-btn m-btn--air m-btn--custom">@Localizer.SaveChanges</button>&nbsp;&nbsp;
+                </div>
+                <div class="col-sm-6 form-group m-form__group pt-0 text-left">
+                    <button type="reset" class="btn btn-secondary m-btn m-btn--air m-btn--custom">@Localizer.Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<script src="~/demo/default/custom/crud/forms/widgets/bootstrap-select.js" type="text/javascript"></script>
+<script>
+    $(".dm--custom-radio-click").on("click", function () {
+        $(this).find("input").click();
+    });
+
+     // FILOVANJE COUNTRY-REGION-CITY
+    function MembersAdd__FillRegions() {
+        var countryId = $("#Person_CountryId").val();
+
+        $("#Person_RegionId").html("");
+        $("#Person_RegionId").append($("<option selected></option>").val("0").html("@Localizer.SelectRegion"));
+
+        if (countryId != 0) {
+            $.ajax({
+                url: "@Url.Action("GetRegionsSelectListByCountryId", "Regions", new { area = "Administration" })",
+                type: "GET",
+                dataType: "JSON",
+                data: { countryId: countryId },
+                success: function (data) {
+                    $("#Person_RegionId").selectpicker("destroy");
+                    $.each(data, function (i, element) {
+                        $("#Person_RegionId").append($('<option></option>').val(element.value).html(element.text));
+                    });
+                    $("#Person_RegionId").selectpicker();
+                }
+            });
+        }
+        else {
+            $("#Person_RegionId").selectpicker("destroy");
+            $("#Person_RegionId").selectpicker();
+        }
+    }
+
+    function MembersAdd__FillCitiesByRegion() {
+        var regionId = $("#Person_RegionId").val();
+
+        $("#Person_CityId").html("");
+        $("#Person_CityId").append($("<option selected></option>").val("0").html("@Localizer.SelectCity"));
+
+        if (regionId != 0) {
+            $.ajax({
+                url: "@Url.Action("GetCitiesSelectListByRegionId", "Cities", new { area = "Administration" })",
+                type: "GET",
+                dataType: "JSON",
+                data: { regionId: regionId },
+                success: function (data) {
+                    $("#Person_CityId").selectpicker("destroy");
+                    $.each(data, function (i, element) {
+                        $("#Person_CityId").append($('<option></option>').val(element.value).html(element.text));
+                    });
+                    $("#Person_CityId").selectpicker();
+                }
+            });
+        }
+        else {
+            MembersAdd__FillCities();
+        }
+    }
+    function MembersAdd__FillCities() {
+        var countryId = $("#Person_CountryId").val();
+        $("#Person_CityId").html("");
+        $("#Person_CityId").append($("<option selected></option>").val("0").html("@Localizer.SelectCity"));
+        if (countryId != 0) {
+            $.ajax({
+                url: "@Url.Action("GetCitiesByCountryId", "Cities", new { area = "Administration" })",
+                type: "GET",
+                dataType: "JSON",
+                data: { countryId: countryId },
+                success: function (data) {
+                    $("#Person_CityId").selectpicker("destroy");
+                    $.each(data, function (i, element) {
+                        $("#Person_CityId").append($('<option></option>').val(element.value).html(element.text));
+                    });
+                    $("#Person_CityId").selectpicker();
+                }
+            });
+        }
+        else {
+            $("#Person_CityId").selectpicker("destroy");
+            $("#Person_CityId").selectpicker();
+        }
+    }
+    function MembersAdd_FillBirthCities() {
+        var countryId = $("#Person_BirthCountryId").val();
+        $("#Person_BirthCityId").html("");
+        $("#Person_BirthCityId").append($("<option selected></option>").val("0").html("@Localizer.SelectCity"));
+        if (countryId != 0) {
+            $.ajax({
+                url: "@Url.Action("GetCitiesByCountryId", "Cities", new { area = "Administration" })",
+                type: "GET",
+                dataType: "JSON",
+                data: { countryId: countryId },
+                success: function (data) {
+                    $("#Person_BirthCityId").selectpicker("destroy");
+                    $.each(data, function (i, element) {
+                        $("#Person_BirthCityId").append($('<option></option>').val(element.value).html(element.text));
+                    });
+                    $("#Person_BirthCityId").selectpicker();
+                }
+            });
+        }
+        else {
+            $("#Person_BirthCityId").selectpicker("destroy");
+            $("#Person_BirthCityId").selectpicker();
+        }
+    }
+</script>

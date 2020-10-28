@@ -1,0 +1,185 @@
+﻿@model nevladinaOrg.Web.ViewModels.Access.LoginViewModel
+
+@inject Localizer Localizer
+
+@{
+    ViewData.Title(Localizer.Login);
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- begin::Head -->
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData.Title()</title>
+    <meta name="description" content="Latest updates and statistic charts">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+
+    <!--begin::Web font -->
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
+    <script>
+        WebFont.load({
+            google: {
+                "families": ["Poppins:300,400,500,600,700", "Roboto:300,400,500,600,700"]
+            },
+            active: function () {
+                sessionStorage.fonts = true;
+            }
+        });
+    </script>
+
+    <!--end::Web font -->
+    <!--begin::Base Styles -->
+    <link href="~/vendors/base/vendors.bundle.css" rel="stylesheet" type="text/css" />
+
+    <!--begin::Base Styles -->
+    <link href="~/app/css/custom.css" rel="stylesheet" type="text/css" />
+
+    <!--RTL version:<link href="../../../assets/vendors/base/vendors.bundle.rtl.css" rel="stylesheet" type="text/css" />-->
+    <link href="~/demo/default/base/style.bundle.css" rel="stylesheet" type="text/css" />
+
+    <!--RTL version:<link href="../../../assets/demo/default/base/style.bundle.rtl.css" rel="stylesheet" type="text/css" />-->
+    <!--end::Base Styles -->
+    @*<link rel="shortcut icon" type="image/png" href="~/favicon-32x32.png" sizes="32x32" />
+    <link rel="shortcut icon" type="image/png" href="~/favicon-16x16.png" sizes="16x16" />*@
+
+    <link rel="shortcut icon" type="image/png" href="~/app/media/img/logos/logo-without-name.png" sizes="32x32" />
+    <link rel="shortcut icon" type="image/png" href="~/app/media/img/logos/logo-without-name.png" sizes="16x16" />
+</head>
+
+<!-- end::Head -->
+<!-- begin::Body -->
+<body class="m--skin- m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
+    <!-- begin:: Page -->
+    <div class="m-grid m-grid--hor m-grid--root m-page">
+        <div class="m-login m-login--signin  m-login--5" id="m_login" style="background-image: url(/app/media/img//bg/bg-3.jpg);">
+            <div class="m-login__wrapper-1 m-portlet-full-height">
+                <div class="m-login__wrapper-1-1">
+                    <div class="m-login__contanier">
+                        <div class="m-login__content">
+                            <div class="m-login__logo">
+                                <a href="#">
+                                    <img style="max-height:100px;" src="~/app/media/img/logos/organizer-logo-png-transparent.png">
+                                </a>
+                            </div>
+                            <div class="m-login__title">
+                                <h3>@Localizer.LoginTitle</h3>
+                            </div>
+                            <div class="m-login__desc">
+                                @Localizer.LoginDescription
+                            </div>
+                            <div class="m-login__form-action">
+                                <button type="button" id="m_login_signup" class="btn btn-outline-brand m-btn--pill">@Localizer.GetAnAccount</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-login__border">
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="m-login__wrapper-2 m-portlet-full-height">
+                <div class="m-login__contanier">
+                    <div class="m-login__signin">
+                        <div class="m-login__head">
+                            <h3 class="m-login__title">@Localizer.SignIn</h3>
+                        </div>
+                        <form asp-controller="Access" asp-action="Login" method="post" class="m-login__form m-form">
+                            @if (!ViewData.ModelState.IsValid)
+                            {
+                                <div class="m-alert m-alert--outline alert alert-danger alert-dismissible animated fadeIn" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>			
+                                    <span>@Html.ValidationSummary()</span>
+                                </div>
+                            }
+
+                            <div class="form-group m-form__group">
+                                <input asp-for="Username" class="form-control m-input m--padding-left-15" type="text" autocomplete="off" placeholder="@Localizer.Username" />
+                            </div>
+                            <div class="form-group m-form__group">
+                                <input asp-for="Password" class="form-control m-input m-login__form-input--last m--padding-left-15" type="password" autocomplete="off" placeholder="@Localizer.Password" />
+                            </div>
+                            <div class="row m-login__form-sub">
+                                <div class="col m--align-left">
+                                    <label class="m-checkbox m-checkbox--focus">
+                                        <input type="checkbox" name="remember"> @Localizer.RememberMe
+                                        <span></span>
+                                    </label>
+                                </div>
+                                <div class="col m--align-right">
+                                    <a href="javascript:;" id="m_login_forget_password" class="m-link--success">@Localizer.ForgotPassword</a>
+                                </div>
+                            </div>
+                            <div class="m-login__form-action">
+                                <button type="submit" class="btn btn-brand m-btn m-btn--pill m-btn--custom m-btn--air">@Localizer.Login</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="m-login__signup">
+                        <div class="m-login__head">
+                            <h3 class="m-login__title">@Localizer.SignUp</h3>
+                            <div class="m-login__desc">@Localizer.SignUpShortInfo:</div>
+                        </div>
+                        <form class="m-login__form m-form" action="">
+                            <div class="form-group m-form__group">
+                                <input class="form-control m-input" type="text" placeholder="Fullname" name="fullname">
+                            </div>
+                            <div class="form-group m-form__group">
+                                <input class="form-control m-input" type="text" placeholder="Email" name="email" autocomplete="off">
+                            </div>
+                            <div class="form-group m-form__group">
+                                <input class="form-control m-input" type="password" placeholder="Password" name="password">
+                            </div>
+                            <div class="form-group m-form__group">
+                                <input class="form-control m-input m-login__form-input--last" type="password" placeholder="Confirm Password" name="rpassword">
+                            </div>
+                            <div class="m-login__form-sub">
+                                <label class="m-checkbox m-checkbox--focus">
+                                    <input type="checkbox" name="agree"> I Agree the
+                                    <a href="#" class="m-link m-link--success">terms and conditions</a>.
+                                    <span></span>
+                                </label>
+                                <span class="m-form__help"></span>
+                            </div>
+                            <div class="m-login__form-action">
+                                <button id="m_login_signup_submit" class="btn btn-brand m-btn m-btn--pill m-btn--custom m-btn--air">@Localizer.SignUp</button>
+                                <button id="m_login_signup_cancel" class="btn btn-outline-brand m-btn m-btn--pill m-btn--custom">@Localizer.Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="m-login__forget-password">
+                        <div class="m-login__head">
+                            <h3 class="m-login__title">@Localizer.ForgotPassword</h3>
+                            <div class="m-login__desc">@Localizer.ForgotPasswordShortInfo</div>
+                        </div>
+                        <form asp-controller="" asp-action="" class="m-login__form m-form" method="post">
+                            <div class="form-group m-form__group">
+                                <input asp-for="Username" class="form-control m-input" type="text" autocomplete="off" placeholder="@Localizer.Email" />
+                            </div>
+                            <div class="m-login__form-action">
+                                <button type="submit" class="btn btn-success m-btn m-btn--pill m-btn--custom m-btn--air">@Localizer.Submit</button>
+                                <button id="m_login_forget_password_cancel" class="btn btn-outline-success m-btn m-btn--pill m-btn--custom ">@Localizer.Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- end:: Page -->
+    <!--begin::Base Scripts -->
+    <script src="~/vendors/base/vendors.bundle.js" type="text/javascript"></script>
+    <script src="~/demo/default/base/scripts.bundle.js" type="text/javascript"></script>
+
+    <!--end::Base Scripts -->
+    <!--begin::Page Snippets -->
+    <script src="~/snippets/custom/pages/user/login.js" type="text/javascript"></script>
+
+    <!--end::Page Snippets -->
+</body>
+
+<!-- end::Body -->
+</html>

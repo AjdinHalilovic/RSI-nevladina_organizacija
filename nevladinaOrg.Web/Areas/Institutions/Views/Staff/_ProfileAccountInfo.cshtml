@@ -1,0 +1,144 @@
+﻿@model StaffAccountInfoViewModel
+
+@inject Localizer Localizer
+@inject ISelectListHelper SelectList
+
+<form asp-antiforgery="true" class="m-form m-form--fit m-form--label-align-right" data-ajax-url="@Url.Action("EditAccountInfo", "Staff", new { area = "Institutions" })" data-ajax="true" data-ajax-method="post" data-ajax-success="showNotification" data-ajax-update="#account-info">
+    <input hidden asp-for="User.Id" />
+    <input hidden asp-for="InstitutionUserId" />
+    <input hidden asp-for="OrganizationInstitutionUserId" />
+    <input hidden asp-for="User.Password" value="none" />
+    <input hidden name="User.CreatedDate" value="@Model.User.CreatedDate.ToString(Localizer.DateFormat)" />
+    <div class="m-portlet__body">
+        @if (ViewData["SuccessStaffEditAccountInfo"] != null)
+        {
+            if ((bool)ViewData["SuccessStaffEditAccountInfo"])
+            {
+                <div class="m-alert m-alert--icon m-alert--outline alert alert-success alert-dismissible animated fadeIn mr-4 ml-4" role="alert">
+                    <div class="m-alert__icon">
+                        <i class="la la-check"></i>
+                    </div>
+                    <div class="m-alert__text">
+                        @Localizer.AccessDetails @Localizer.Saved.ToLower()
+                    </div>
+                    <div class="m-alert__close">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+            }
+        }
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="m-alert m-alert--icon m-alert--outline alert alert-danger alert-dismissible animated fadeIn mr-4 ml-4" role="alert">
+                <div class="m-alert__icon">
+                    <i class="la la-warning"></i>
+                </div>
+                <div class="m-alert__text">
+                    @Html.ValidationSummary()
+                </div>
+                <div class="m-alert__close">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        }
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="m-form__section m-form__section--first">
+                    <div class="m-form__heading">
+                        <h3 class="m-form__heading-title">@Localizer.AccessDetails</h3>
+                    </div>
+                    <div class="row col-lg-12">
+                        <div class="col-lg-6 form-group m-form__group pt-0">
+                            <label class="form-control-label">* @Localizer.Username</label>
+                            <input type="text" asp-for="User.Username" class="form-control m-input" placeholder="@Localizer.Username">
+                        </div>
+                        <div class="col-lg-6 form-group m-form__group pt-0">
+                            <label class="form-control-label">* @Localizer.Password</label>
+                            <div class="input-group">
+                                <input type="text" asp-for="User.EditPassword" class="form-control m-input" placeholder="@Localizer.Password">
+                                <div class="input-group-append">
+                                    <button class="btn btn-secondary" id="passwordGeneratorEditProfile" type="button"><i data-toggle="m-tooltip" data-width="auto" class="m-form__heading-help-icon fa flaticon-refresh" title="" data-original-title="@Localizer.GeneratePassword"></i></button>
+                                </div>
+                                <div class="input-group-append">
+                                    <button class="btn btn-secondary" id="passwordEyeEditProfile" type="button"><i class="fa fa-eye fa-eye-slash"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row col-lg-12">
+                        <div class="col-lg-6 form-group m-form__group pt-0">
+                            <label class="form-control-label">* @Localizer.Email:</label>
+                            <input type="email" asp-for="User.Email" class="form-control m-input" placeholder="@Localizer.Email">
+                        </div>
+                        <div class="col-lg-6 form-group m-form__group pt-0">
+                            <label class="form-control-label">* @Localizer.PasswordConfirmation</label>
+                            <input type="text" asp-for="User.ConfirmPassword" class="form-control m-input" placeholder="@Localizer.PasswordConfirmation">
+                        </div>
+                    </div>
+                </div>
+                <div class="m-separator m-separator--dashed m-separator--lg m-1"></div>
+                <div class="m-form__section">
+                    <div class="m-form__heading">
+                        <h3 class="m-form__heading-title">
+                            @Localizer.UserRoles
+                            @*<i data-toggle="m-tooltip" data-width="auto" class="m-form__heading-help-icon flaticon-info" title="" data-original-title="@Localizer.InThisSectionTypeYourContactInfo"></i>*@
+                        </h3>
+                    </div>
+                    <div class="row col-lg-12" data-select2-id="340">
+                        <div class="col-lg-12 form-group m-form__group pt-0" data-select2-id="80">
+                            <label class="form-control-label"> @Localizer.Roles</label>
+                            <select asp-for="Roles" asp-items="@SelectList.Roles(false)" class="form-control m-select2 select2-hidden-accessible" id="m_select2_3" multiple="" data-select2-id="m_select2_3" tabindex="-1" aria-hidden="true"></select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="m-portlet__foot m-portlet__foot--fit">
+        <div class="m-form__actions">
+            <div class="row col-lg-12">
+                <div class="col-sm-6 form-group m-form__group pt-0 text-right">
+                    <button type="submit" class="btn btn-accent m-btn m-btn--air m-btn--custom">@Localizer.SaveChanges</button>&nbsp;&nbsp;
+                </div>
+                <div class="col-sm-6 form-group m-form__group pt-0 text-left">
+                    <button type="reset" class="btn btn-secondary m-btn m-btn--air m-btn--custom">@Localizer.Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+    $("#User_ConfirmPassword").attr("type", "password");
+    $("#User_EditPassword").attr("type", "password");
+
+    //HIDE SHOW PASSWORD
+    $("#passwordEyeEditProfile").on("click", function () {
+        $(this).children("i").toggleClass("fa-eye-slash");
+
+        if ($("#passwordEyeEditProfile").parents().find("#User_EditPassword").attr("type") == "password") {
+            $("#passwordEyeEditProfile").parents().find("#User_EditPassword").attr("type", "text");
+        }
+        else {
+            $("#passwordEyeEditProfile").parents().find("#User_EditPassword").attr("type", "password");
+        }
+    });
+
+    //GENERATE PASSWORD
+    $("#passwordGeneratorEditProfile").on("click", function () {
+        var randomstring = Math.random().toString(36).slice(-8);
+        $("#User_EditPassword").val(randomstring);
+        $("#User_ConfirmPassword").val(randomstring);
+        $("#passwordEyeEditProfile").parents().find("#User_EditPassword").attr("type", "text");
+        $("#passwordEyeEditProfile").children("i").removeClass("fa-eye-slash");
+    });
+
+    var Select2 = {
+            init: function () {
+                $("#m_select2_3, #m_select2_3_validate").select2({
+                    placeholder: "@Localizer.SelectRoles"
+                })
+            }
+        }
+        Select2.init();
+        $(".select2-container, .select2-search, .select2-search__field").css("width", "100%");
+</script>

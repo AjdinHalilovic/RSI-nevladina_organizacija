@@ -1,0 +1,2013 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ApplicationName" xml:space="preserve">
+    <value>nevladinaOrg</value>
+  </data>
+  <data name="ForgotPassword" xml:space="preserve">
+    <value>Forgot password?</value>
+  </data>
+  <data name="HomePage" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="IncorrectUsernameOrPassword" xml:space="preserve">
+    <value>Incorrect username and/or password.</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="LogOutSuccess" xml:space="preserve">
+    <value>You have successfully logged out.</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Remember me</value>
+  </data>
+  <data name="SignIn" xml:space="preserve">
+    <value>Sign in</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="YourAccountIsNotActive" xml:space="preserve">
+    <value>Your account is not active.</value>
+  </data>
+  <data name="PasswordIsRequired" xml:space="preserve">
+    <value>Password is required.</value>
+  </data>
+  <data name="UsernameIsRequired" xml:space="preserve">
+    <value>Username is required.</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+  <data name="ForgotPasswordShortInfo" xml:space="preserve">
+    <value>Enter your e-mail address to reset your password:</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="GetAnAccount" xml:space="preserve">
+    <value>Get an account</value>
+  </data>
+  <data name="LoginDescription" xml:space="preserve">
+    <value>Fast growing community of dedicated people</value>
+  </data>
+  <data name="LoginTitle" xml:space="preserve">
+    <value>JOIN OUR GREAT COMMUNITY GET FREE ACCOUNT</value>
+  </data>
+  <data name="SignUp" xml:space="preserve">
+    <value>Sign Up</value>
+  </data>
+  <data name="SignUpShortInfo" xml:space="preserve">
+    <value>Enter your details to create your account:</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="AddCountry" xml:space="preserve">
+    <value>Add country</value>
+  </data>
+  <data name="Cities" xml:space="preserve">
+    <value>Cities</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="Counties" xml:space="preserve">
+    <value>Countries</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="EditCountry" xml:space="preserve">
+    <value>Edit country</value>
+  </data>
+  <data name="NameOfCountry" xml:space="preserve">
+    <value>Name of country</value>
+  </data>
+  <data name="NewCountry" xml:space="preserve">
+    <value>New country</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Citizenship" xml:space="preserve">
+    <value>Citizenship</value>
+  </data>
+  <data name="Nationalitiy" xml:space="preserve">
+    <value>Nationalitiy</value>
+  </data>
+  <data name="AddCitizenship" xml:space="preserve">
+    <value>Add citizenship</value>
+  </data>
+  <data name="AddNationality" xml:space="preserve">
+    <value>Add nationality</value>
+  </data>
+  <data name="EditCitizenship" xml:space="preserve">
+    <value>Edit citizenship</value>
+  </data>
+  <data name="EditNationality" xml:space="preserve">
+    <value>Edit nationality</value>
+  </data>
+  <data name="NameOfCitizenship" xml:space="preserve">
+    <value>Name of citizenship</value>
+  </data>
+  <data name="NameOfNationality" xml:space="preserve">
+    <value>Name of nationality</value>
+  </data>
+  <data name="NewCitizenship" xml:space="preserve">
+    <value>New citizenship</value>
+  </data>
+  <data name="NewNationality" xml:space="preserve">
+    <value>New nationality</value>
+  </data>
+  <data name="NewCity" xml:space="preserve">
+    <value>Add new city</value>
+  </data>
+  <data name="ChooseCountry" xml:space="preserve">
+    <value>Choose Country</value>
+  </data>
+  <data name="ErrAddRegion" xml:space="preserve">
+    <value>Region already exsists or there was an error</value>
+  </data>
+  <data name="SuccessAddRegion" xml:space="preserve">
+    <value>Successfully added new region</value>
+  </data>
+  <data name="ErrUpdateRegion" xml:space="preserve">
+    <value>Region could not be updated</value>
+  </data>
+  <data name="SuccessUpdateRegion" xml:space="preserve">
+    <value>Region is updated successfully</value>
+  </data>
+  <data name="Action" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="AddNewRegion" xml:space="preserve">
+    <value>Add new region</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="EditRegion" xml:space="preserve">
+    <value>Edit region</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="NewRegion" xml:space="preserve">
+    <value>New region</value>
+  </data>
+  <data name="RegionID" xml:space="preserve">
+    <value>Region ID</value>
+  </data>
+  <data name="Regions" xml:space="preserve">
+    <value>Regions</value>
+  </data>
+  <data name="SaveChanges" xml:space="preserve">
+    <value>Save changes</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="Region" xml:space="preserve">
+    <value>Region</value>
+  </data>
+  <data name="PostalCode" xml:space="preserve">
+    <value>Postal code</value>
+  </data>
+  <data name="GeneralSettings" xml:space="preserve">
+    <value>General settings</value>
+  </data>
+  <data name="RegionalSettings" xml:space="preserve">
+    <value>Regional settings</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="DisplayingNumberOfRecords" xml:space="preserve">
+    <value>Displaying {{start}} - {{end}} of {{total}} records</value>
+  </data>
+  <data name="First" xml:space="preserve">
+    <value>First</value>
+  </data>
+  <data name="Last" xml:space="preserve">
+    <value>Last</value>
+  </data>
+  <data name="LoadingDots" xml:space="preserve">
+    <value>Loading...</value>
+  </data>
+  <data name="MorePages" xml:space="preserve">
+    <value>More pages</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="NoRecordsFound" xml:space="preserve">
+    <value>No records found.</value>
+  </data>
+  <data name="PageNumber" xml:space="preserve">
+    <value>Page number</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>Previous</value>
+  </data>
+  <data name="SelectPageSize" xml:space="preserve">
+    <value>Select page size</value>
+  </data>
+  <data name="SelectCity" xml:space="preserve">
+    <value>Select city</value>
+  </data>
+  <data name="SelectCountry" xml:space="preserve">
+    <value>Select country</value>
+  </data>
+  <data name="SelectRegion" xml:space="preserve">
+    <value>Select region</value>
+  </data>
+  <data name="AddCity" xml:space="preserve">
+    <value>Add city</value>
+  </data>
+  <data name="SaveAndClose" xml:space="preserve">
+    <value>Save &amp; Close</value>
+  </data>
+  <data name="SaveAndDuplicate" xml:space="preserve">
+    <value>Save &amp; Duplicate</value>
+  </data>
+  <data name="SaveAndNew" xml:space="preserve">
+    <value>Save &amp; New</value>
+  </data>
+  <data name="SearchDots" xml:space="preserve">
+    <value>Search...</value>
+  </data>
+  <data name="SuccessfullySavedAndRecordName" xml:space="preserve">
+    <value>'{0}' is &lt;strong&gt;successfully saved&lt;/strong&gt;.</value>
+  </data>
+  <data name="RecordAlreadyExists" xml:space="preserve">
+    <value>Record already exists.</value>
+  </data>
+  <data name="AddInstitutionType" xml:space="preserve">
+    <value>Add institution type</value>
+  </data>
+  <data name="EditInstitutionType" xml:space="preserve">
+    <value>Edit institution type</value>
+  </data>
+  <data name="InstitutionType" xml:space="preserve">
+    <value>Institution type</value>
+  </data>
+  <data name="InstitutionTypes" xml:space="preserve">
+    <value>Institution types</value>
+  </data>
+  <data name="NameOfInstitutionType" xml:space="preserve">
+    <value>Name of institution type</value>
+  </data>
+  <data name="NewInstitutionType" xml:space="preserve">
+    <value>New institution type</value>
+  </data>
+  <data name="ErrorMessageCountryReq" xml:space="preserve">
+    <value>Country is required.</value>
+  </data>
+  <data name="ErrorMessageNameLen100" xml:space="preserve">
+    <value>Maximum name length is 100 characters.</value>
+  </data>
+  <data name="ErrorMessageNameReq" xml:space="preserve">
+    <value>Name is required.</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="Saved" xml:space="preserve">
+    <value>Saved!</value>
+  </data>
+  <data name="AddOrganizationType" xml:space="preserve">
+    <value>Add organization type</value>
+  </data>
+  <data name="NameOfOrganizationType" xml:space="preserve">
+    <value>Name of organization type</value>
+  </data>
+  <data name="NewOrganizationType" xml:space="preserve">
+    <value>New organization type</value>
+  </data>
+  <data name="OrganizationTypeId" xml:space="preserve">
+    <value>Organization type ID</value>
+  </data>
+  <data name="OrganizationTypes" xml:space="preserve">
+    <value>Organization types</value>
+  </data>
+  <data name="AcademicDegrees" xml:space="preserve">
+    <value>Academic degrees</value>
+  </data>
+  <data name="AcademicTitles" xml:space="preserve">
+    <value>Academic titles</value>
+  </data>
+  <data name="AddAcademicDegree" xml:space="preserve">
+    <value>Add academic degree</value>
+  </data>
+  <data name="AddAcademicTitle" xml:space="preserve">
+    <value>Add academic title</value>
+  </data>
+  <data name="EditAcademicDegree" xml:space="preserve">
+    <value>Edit academic degree</value>
+  </data>
+  <data name="EditAcademicTitle" xml:space="preserve">
+    <value>Edit academic title</value>
+  </data>
+  <data name="NewAcademicDegree" xml:space="preserve">
+    <value>New academic degree</value>
+  </data>
+  <data name="NewAcademicTitle" xml:space="preserve">
+    <value>New academic title</value>
+  </data>
+  <data name="AddOrganization" xml:space="preserve">
+    <value>Add organization</value>
+  </data>
+  <data name="ChooseCity" xml:space="preserve">
+    <value>Choose city</value>
+  </data>
+  <data name="ChooseInstitution" xml:space="preserve">
+    <value>Choose institution</value>
+  </data>
+  <data name="ChooseOrganization" xml:space="preserve">
+    <value>Choose organization</value>
+  </data>
+  <data name="ChooseOrganizationType" xml:space="preserve">
+    <value>Choose organization type</value>
+  </data>
+  <data name="ChooseRegion" xml:space="preserve">
+    <value>Choose region</value>
+  </data>
+  <data name="Institution" xml:space="preserve">
+    <value>Institution</value>
+  </data>
+  <data name="NameOfOrganization" xml:space="preserve">
+    <value>Name of organization</value>
+  </data>
+  <data name="Organizations" xml:space="preserve">
+    <value>Organizations</value>
+  </data>
+  <data name="ParentOrganization" xml:space="preserve">
+    <value>Parent organization</value>
+  </data>
+  <data name="Place" xml:space="preserve">
+    <value>Place</value>
+  </data>
+  <data name="AdditionalInformation" xml:space="preserve">
+    <value>Additional information</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="NewOrganization" xml:space="preserve">
+    <value>New organization</value>
+  </data>
+  <data name="SelectInstitutionType" xml:space="preserve">
+    <value>Select institution type</value>
+  </data>
+  <data name="SuccessfullyRemovedName" xml:space="preserve">
+    <value>'{0}' is &lt;strong&gt;successfully removed&lt;/strong&gt;.</value>
+  </data>
+  <data name="Nationalities" xml:space="preserve">
+    <value>Nationalities</value>
+  </data>
+  <data name="Citizenships" xml:space="preserve">
+    <value>Citizenships</value>
+  </data>
+  <data name="ErrorMessageAddressLen100" xml:space="preserve">
+    <value>Maximum address length is 100 characters.</value>
+  </data>
+  <data name="ErrorMessageAddressReq" xml:space="preserve">
+    <value>Address is requried.</value>
+  </data>
+  <data name="ErrorMessageCityReq" xml:space="preserve">
+    <value>City is requried.</value>
+  </data>
+  <data name="ErrorMessageContactPhoneLen20" xml:space="preserve">
+    <value>Maximum contact phone length is 20 characters.</value>
+  </data>
+  <data name="ErrorMessageContactPhoneReq" xml:space="preserve">
+    <value>Contact phone is requried.</value>
+  </data>
+  <data name="ErrorMessageEmailLen20" xml:space="preserve">
+    <value>Maximum email length is 20 characters.</value>
+  </data>
+  <data name="ErrorMessageEmailReq" xml:space="preserve">
+    <value>Email is requried.</value>
+  </data>
+  <data name="ErrorMessageIntitutionTypeReq" xml:space="preserve">
+    <value>Institution type is requried.</value>
+  </data>
+  <data name="Institutions" xml:space="preserve">
+    <value>Institutions</value>
+  </data>
+  <data name="AddInstitution" xml:space="preserve">
+    <value>Add institution</value>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="AdditionalInfo" xml:space="preserve">
+    <value>Additional information</value>
+  </data>
+  <data name="ContactPhone" xml:space="preserve">
+    <value>Contact phone</value>
+  </data>
+  <data name="ParentInstitution" xml:space="preserve">
+    <value>Parent institution</value>
+  </data>
+  <data name="SocialURL" xml:space="preserve">
+    <value>Social URL</value>
+  </data>
+  <data name="WebsiteURL" xml:space="preserve">
+    <value>Website URL</value>
+  </data>
+  <data name="EditInstitution" xml:space="preserve">
+    <value>Edit institution</value>
+  </data>
+  <data name="AddRegion" xml:space="preserve">
+    <value>Add region</value>
+  </data>
+  <data name="AcademicDegree" xml:space="preserve">
+    <value>Academic degree</value>
+  </data>
+  <data name="AddAcademicDegrees" xml:space="preserve">
+    <value>Add academic degrees</value>
+  </data>
+  <data name="EditOrganizationType" xml:space="preserve">
+    <value>Edit organization type</value>
+  </data>
+  <data name="AddAcademicTitles" xml:space="preserve">
+    <value>Add academic titles</value>
+  </data>
+  <data name="AddOrganizations" xml:space="preserve">
+    <value>Add organization</value>
+  </data>
+  <data name="Reload" xml:space="preserve">
+    <value>Reload</value>
+  </data>
+  <data name="AddBloodType" xml:space="preserve">
+    <value>Add blood type</value>
+  </data>
+  <data name="BloodType" xml:space="preserve">
+    <value>Blood type</value>
+  </data>
+  <data name="BloodTypes" xml:space="preserve">
+    <value>Blood types</value>
+  </data>
+  <data name="EditBloodType" xml:space="preserve">
+    <value>Edit blood type</value>
+  </data>
+  <data name="ErrorMessageRhReq" xml:space="preserve">
+    <value>Rh is requried.</value>
+  </data>
+  <data name="Rh" xml:space="preserve">
+    <value>Rh</value>
+  </data>
+  <data name="Removed" xml:space="preserve">
+    <value>Removed</value>
+  </data>
+  <data name="NotSuccessfullyRemovedName" xml:space="preserve">
+    <value>'{0}' is not &lt;strong&gt;successfully removed&lt;/strong&gt;.</value>
+  </data>
+  <data name="ActivityCode" xml:space="preserve">
+    <value>Activity code</value>
+  </data>
+  <data name="AddTaxpayer" xml:space="preserve">
+    <value>Add taxpayer</value>
+  </data>
+  <data name="EditTaxpayer" xml:space="preserve">
+    <value>Edit taxpayer</value>
+  </data>
+  <data name="ErrorMessageActivityCodeLen100" xml:space="preserve">
+    <value>Maximum activity code length is 100 characters.</value>
+  </data>
+  <data name="ErrorMessageActivityCodeReq" xml:space="preserve">
+    <value>Activity code is requried.</value>
+  </data>
+  <data name="ErrorMessageRegistrationNumberLen100" xml:space="preserve">
+    <value>Maximum registration number length is 100 characters.</value>
+  </data>
+  <data name="ErrorMessageRegistrationNumberReq" xml:space="preserve">
+    <value>Registration number is requried.</value>
+  </data>
+  <data name="RegistrationNumber" xml:space="preserve">
+    <value>Registration number</value>
+  </data>
+  <data name="Taxpayer" xml:space="preserve">
+    <value>Taxpayer</value>
+  </data>
+  <data name="Taxpayers" xml:space="preserve">
+    <value>Taxpayers</value>
+  </data>
+  <data name="AnErrorOccurredFriendly" xml:space="preserve">
+    <value>Sorry, something went wrong. We're working on getting this fixed as soon as we can.</value>
+  </data>
+  <data name="ErrorFriendly" xml:space="preserve">
+    <value>Error ! :(</value>
+  </data>
+  <data name="AreYouSure" xml:space="preserve">
+    <value>Are you sure?</value>
+  </data>
+  <data name="NoCancel" xml:space="preserve">
+    <value>No, cancel.</value>
+  </data>
+  <data name="ThisRecordWillBeDeleted" xml:space="preserve">
+    <value>This record will be deleted.</value>
+  </data>
+  <data name="YesDeleteIt" xml:space="preserve">
+    <value>Yes, delete it.</value>
+  </data>
+  <data name="DeleteAll" xml:space="preserve">
+    <value>Delete all</value>
+  </data>
+  <data name="Roles" xml:space="preserve">
+    <value>Roles</value>
+  </data>
+  <data name="ErrorMessageActiveReq" xml:space="preserve">
+    <value>Active is requried.</value>
+  </data>
+  <data name="ErrorMessageControllerNameLen100" xml:space="preserve">
+    <value>Maximum controller name is 100 characters.</value>
+  </data>
+  <data name="ErrorMessageControllerNameReq" xml:space="preserve">
+    <value>Controller name is requried.</value>
+  </data>
+  <data name="ErrorMessageFunctionNumberRange1_100" xml:space="preserve">
+    <value>Function number must be in range 1 to 100.</value>
+  </data>
+  <data name="ErrorMessageFunctionNumberReq" xml:space="preserve">
+    <value>Function number is requried.</value>
+  </data>
+  <data name="Desription" xml:space="preserve">
+    <value>Desription</value>
+  </data>
+  <data name="AddRole" xml:space="preserve">
+    <value>Add role</value>
+  </data>
+  <data name="Functionalities" xml:space="preserve">
+    <value>Functionalities</value>
+  </data>
+  <data name="EditRole" xml:space="preserve">
+    <value>Edit role</value>
+  </data>
+  <data name="ErrorMessageIconPathReq" xml:space="preserve">
+    <value>Icon path is requried.</value>
+  </data>
+  <data name="ErrorMessageShortNameLen5" xml:space="preserve">
+    <value>Maximum short name length is 5 characters.</value>
+  </data>
+  <data name="ErrorMessageShortNameReq" xml:space="preserve">
+    <value>Short name is requried.</value>
+  </data>
+  <data name="AddLanguage" xml:space="preserve">
+    <value>Add language</value>
+  </data>
+  <data name="EditLanguage" xml:space="preserve">
+    <value>Edit language</value>
+  </data>
+  <data name="Icon" xml:space="preserve">
+    <value>Icon</value>
+  </data>
+  <data name="Languages" xml:space="preserve">
+    <value>Languages</value>
+  </data>
+  <data name="ShortName" xml:space="preserve">
+    <value>Short name</value>
+  </data>
+  <data name="MaritalStatus" xml:space="preserve">
+    <value>Marital status</value>
+  </data>
+  <data name="AddMaritalStatus" xml:space="preserve">
+    <value>Add marital status</value>
+  </data>
+  <data name="EditMaritalStatus" xml:space="preserve">
+    <value>Edit marital status</value>
+  </data>
+  <data name="MaritalStatuses" xml:space="preserve">
+    <value>Marital statuses</value>
+  </data>
+  <data name="AddContactType" xml:space="preserve">
+    <value>Add contact type</value>
+  </data>
+  <data name="AddContactTypes" xml:space="preserve">
+    <value>Add contact types</value>
+  </data>
+  <data name="ContactType" xml:space="preserve">
+    <value>Contact type</value>
+  </data>
+  <data name="ContactTypes" xml:space="preserve">
+    <value>Contact types</value>
+  </data>
+  <data name="EditContactType" xml:space="preserve">
+    <value>Edit contact type</value>
+  </data>
+  <data name="ErrorMessageOrganizationTypeReq" xml:space="preserve">
+    <value>Organization type is required</value>
+  </data>
+  <data name="AnnouncementType" xml:space="preserve">
+    <value>Announcement type</value>
+  </data>
+  <data name="AddAnnouncementType" xml:space="preserve">
+    <value>Add announcement type</value>
+  </data>
+  <data name="AddAnnouncementTypes" xml:space="preserve">
+    <value>Add announcement types</value>
+  </data>
+  <data name="EditAnnouncementTypes" xml:space="preserve">
+    <value>Edit announcement types</value>
+  </data>
+  <data name="ErrorMessageTypeReq" xml:space="preserve">
+    <value>Type is required</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="AddTreatment" xml:space="preserve">
+    <value>Add treatment</value>
+  </data>
+  <data name="EditTreatment" xml:space="preserve">
+    <value>Edit treatment</value>
+  </data>
+  <data name="EditTreatments" xml:space="preserve">
+    <value>Edit treatments</value>
+  </data>
+  <data name="Treatment" xml:space="preserve">
+    <value>Treatment</value>
+  </data>
+  <data name="Treatments" xml:space="preserve">
+    <value>Treatments</value>
+  </data>
+  <data name="AddAppointmentStatus" xml:space="preserve">
+    <value>Add appointment status</value>
+  </data>
+  <data name="AddBugType" xml:space="preserve">
+    <value>Add bug type</value>
+  </data>
+  <data name="AppointmentStatuses" xml:space="preserve">
+    <value>Appointment statuses</value>
+  </data>
+  <data name="BugTypes" xml:space="preserve">
+    <value>Bug types</value>
+  </data>
+  <data name="EditAppointmentStatus" xml:space="preserve">
+    <value>Edit appointment status</value>
+  </data>
+  <data name="EditBugType" xml:space="preserve">
+    <value>Edit bug type</value>
+  </data>
+  <data name="BugReports" xml:space="preserve">
+    <value>Bug reports</value>
+  </data>
+  <data name="FeatureRecommendations" xml:space="preserve">
+    <value>Feature recommendations</value>
+  </data>
+  <data name="Issues" xml:space="preserve">
+    <value>Issues</value>
+  </data>
+  <data name="Bugs" xml:space="preserve">
+    <value>Bugs</value>
+  </data>
+  <data name="ErrorMessageDescriptionReq" xml:space="preserve">
+    <value>Description is required</value>
+  </data>
+  <data name="ErrorMessageImageReq" xml:space="preserve">
+    <value>Image is required</value>
+  </data>
+  <data name="ErrorMessageTitleLen100" xml:space="preserve">
+    <value>Length of title should be less then 100</value>
+  </data>
+  <data name="ErrorMessageTitleReq" xml:space="preserve">
+    <value>Title is requried.</value>
+  </data>
+  <data name="Bug" xml:space="preserve">
+    <value>Bug</value>
+  </data>
+  <data name="EnterDescription" xml:space="preserve">
+    <value>Enter description</value>
+  </data>
+  <data name="GetNotifiedEmail" xml:space="preserve">
+    <value>Get notified via email when the bug is resolved</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="EditBug" xml:space="preserve">
+    <value>Edit bug</value>
+  </data>
+  <data name="BugStatus" xml:space="preserve">
+    <value>Bug status</value>
+  </data>
+  <data name="BugType" xml:space="preserve">
+    <value>Bug type</value>
+  </data>
+  <data name="SelectBugStatus" xml:space="preserve">
+    <value>Select bug status</value>
+  </data>
+  <data name="SelectBugType" xml:space="preserve">
+    <value>Select bug type</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="DateTimeCreated" xml:space="preserve">
+    <value>Date created</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="Features" xml:space="preserve">
+    <value>Features</value>
+  </data>
+  <data name="SelectStatus" xml:space="preserve">
+    <value>Select status</value>
+  </data>
+  <data name="Pending" xml:space="preserve">
+    <value>Pending</value>
+  </data>
+  <data name="UploadTypeFileNotSupported" xml:space="preserve">
+    <value>'{0}' type file is not supported.</value>
+  </data>
+  <data name="AddAnnouncement" xml:space="preserve">
+    <value>Add announcement</value>
+  </data>
+  <data name="Announcements" xml:space="preserve">
+    <value>Announcements</value>
+  </data>
+  <data name="Content" xml:space="preserve">
+    <value>Content</value>
+  </data>
+  <data name="Documents" xml:space="preserve">
+    <value>Documents</value>
+  </data>
+  <data name="ErrorMessageAnnouncementTypeReq" xml:space="preserve">
+    <value>Announcement type is requried.</value>
+  </data>
+  <data name="ErrorMessageContentReq" xml:space="preserve">
+    <value>Content is requried.</value>
+  </data>
+  <data name="ErrorMessageSubtitleLen80" xml:space="preserve">
+    <value>Maximum length subtitle is 80 characters.</value>
+  </data>
+  <data name="ErrorMessageTitleLen80" xml:space="preserve">
+    <value>Maximum length title is 80 characters.</value>
+  </data>
+  <data name="Images" xml:space="preserve">
+    <value>Images</value>
+  </data>
+  <data name="Posted" xml:space="preserve">
+    <value>Posted</value>
+  </data>
+  <data name="SelectAnnouncementTypes" xml:space="preserve">
+    <value>Select announcement type</value>
+  </data>
+  <data name="Subtitle" xml:space="preserve">
+    <value>Subtitle</value>
+  </data>
+  <data name="WhoWillSeeAnnouncement" xml:space="preserve">
+    <value>Who will see announcement?</value>
+  </data>
+  <data name="EditAnnouncement" xml:space="preserve">
+    <value>Edit announcement</value>
+  </data>
+  <data name="Files" xml:space="preserve">
+    <value>Files</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="DownloadAll" xml:space="preserve">
+    <value>Download all</value>
+  </data>
+  <data name="DropzoneMsgDesc" xml:space="preserve">
+    <value>Only image and documents are allowed for upload</value>
+  </data>
+  <data name="DropzoneMsgTitle" xml:space="preserve">
+    <value>Drop files here or click to upload.</value>
+  </data>
+  <data name="ErrorMessageCheckSendToReq" xml:space="preserve">
+    <value>Select who will see announcement.</value>
+  </data>
+  <data name="SendOnlyToCertainOrganizations" xml:space="preserve">
+    <value>Send only to certain organizations.</value>
+  </data>
+  <data name="SendToAllOrganizations" xml:space="preserve">
+    <value>Send to all organizations.</value>
+  </data>
+  <data name="NotFoundAnyInstitutionAsRecipient" xml:space="preserve">
+    <value>Not found any institution as recipient.</value>
+  </data>
+  <data name="Events" xml:space="preserve">
+    <value>Events</value>
+  </data>
+  <data name="ErrorMessageFunctionalityReq" xml:space="preserve">
+    <value>Role must have minimum 1 functionality.</value>
+  </data>
+  <data name="AddEvent" xml:space="preserve">
+    <value>Add event</value>
+  </data>
+  <data name="PaymentsRegistrations" xml:space="preserve">
+    <value>Payments / registrations</value>
+  </data>
+  <data name="Duration" xml:space="preserve">
+    <value>Duration</value>
+  </data>
+  <data name="EventItems" xml:space="preserve">
+    <value>Event items</value>
+  </data>
+  <data name="Registrations" xml:space="preserve">
+    <value>Registrations</value>
+  </data>
+  <data name="Sponsors" xml:space="preserve">
+    <value>Sponsors</value>
+  </data>
+  <data name="Surname" xml:space="preserve">
+    <value>Surname</value>
+  </data>
+  <data name="DateOfRegistration" xml:space="preserve">
+    <value>Date of registration</value>
+  </data>
+  <data name="Paid" xml:space="preserve">
+    <value>Paid</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="EndEvent" xml:space="preserve">
+    <value>End event</value>
+  </data>
+  <data name="ErrorMessageEndDateReq" xml:space="preserve">
+    <value>End date is required.</value>
+  </data>
+  <data name="ErrorMessagePlaceLen100" xml:space="preserve">
+    <value>Maximum place length is 100 characters.</value>
+  </data>
+  <data name="ErrorMessagePlaceReq" xml:space="preserve">
+    <value>Place is required.</value>
+  </data>
+  <data name="ErrorMessageStartDateReq" xml:space="preserve">
+    <value>Start date is required.</value>
+  </data>
+  <data name="StartEvent" xml:space="preserve">
+    <value>Start event</value>
+  </data>
+  <data name="EditEvent" xml:space="preserve">
+    <value>Edit event</value>
+  </data>
+  <data name="Registration" xml:space="preserve">
+    <value>Registration</value>
+  </data>
+  <data name="Amount" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="ErrorMessageAmountReq" xml:space="preserve">
+    <value>Amount is required.</value>
+  </data>
+  <data name="SuccessfullyConfirmedRegistration" xml:space="preserve">
+    <value>Registration for '{0}' is successfully confirmed.</value>
+  </data>
+  <data name="SelectSponsor" xml:space="preserve">
+    <value>Select sponsor</value>
+  </data>
+  <data name="SelectSponsorType" xml:space="preserve">
+    <value>Select sponsor type</value>
+  </data>
+  <data name="SponsorType" xml:space="preserve">
+    <value>Sponsor type</value>
+  </data>
+  <data name="AddSponsor" xml:space="preserve">
+    <value>Add sponsor</value>
+  </data>
+  <data name="ErrorMessageNewSponsorReq" xml:space="preserve">
+    <value>Select new or exists sponsor.</value>
+  </data>
+  <data name="ErrormessageSponsorReq" xml:space="preserve">
+    <value>Sponsor is required.</value>
+  </data>
+  <data name="ErrorMessageSponsorTypeReq" xml:space="preserve">
+    <value>Sponsor type is required.</value>
+  </data>
+  <data name="ErrorMessageWebUrlReq" xml:space="preserve">
+    <value>Website URL is required.</value>
+  </data>
+  <data name="Sponsor" xml:space="preserve">
+    <value>Sponsor</value>
+  </data>
+  <data name="EditSponsor" xml:space="preserve">
+    <value>Edit sponsor</value>
+  </data>
+  <data name="AddNewSponsor" xml:space="preserve">
+    <value>Add new sponsor</value>
+  </data>
+  <data name="SelectAnExistingSponsor" xml:space="preserve">
+    <value>Select an existing sponsor</value>
+  </data>
+  <data name="ErrorMessageStartTimeReq" xml:space="preserve">
+    <value>Start time is required.</value>
+  </data>
+  <data name="AddEventItem" xml:space="preserve">
+    <value>Add event item</value>
+  </data>
+  <data name="ConfereneRoom" xml:space="preserve">
+    <value>Conference room</value>
+  </data>
+  <data name="EventItemType" xml:space="preserve">
+    <value>Event item type</value>
+  </data>
+  <data name="StartEndTime" xml:space="preserve">
+    <value>Start / End</value>
+  </data>
+  <data name="ErrorMessageEventItemTypeReq" xml:space="preserve">
+    <value>Event item type is required.</value>
+  </data>
+  <data name="SelectEventItemTypes" xml:space="preserve">
+    <value>Select event item types</value>
+  </data>
+  <data name="SelectLecturers" xml:space="preserve">
+    <value>Select lecturer-s</value>
+  </data>
+  <data name="StartTime" xml:space="preserve">
+    <value>Start time</value>
+  </data>
+  <data name="ErrorMessageAboutLectureReq" xml:space="preserve">
+    <value>About lecture is required.</value>
+  </data>
+  <data name="ErrorMessageDurationReq" xml:space="preserve">
+    <value>Duration is required.</value>
+  </data>
+  <data name="ErrorMessageLecturerReq" xml:space="preserve">
+    <value>Lecturer is required.</value>
+  </data>
+  <data name="Map" xml:space="preserve">
+    <value>Map</value>
+  </data>
+  <data name="EditEventItem" xml:space="preserve">
+    <value>Edit event item</value>
+  </data>
+  <data name="DateFormat" xml:space="preserve">
+    <value>MM/dd/yyyy</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="SuccessfullyAddedRegistration" xml:space="preserve">
+    <value>Registration for '{0}' is successfully added.</value>
+  </data>
+  <data name="RegistrationAlreadyExists" xml:space="preserve">
+    <value>Registration already exists.</value>
+  </data>
+  <data name="AddLectureAndLecturer" xml:space="preserve">
+    <value>Add lecture and lecturer</value>
+  </data>
+  <data name="Ends" xml:space="preserve">
+    <value>End</value>
+  </data>
+  <data name="Appointments" xml:space="preserve">
+    <value>Appointments</value>
+  </data>
+  <data name="AddAppointment" xml:space="preserve">
+    <value>Add appointment</value>
+  </data>
+  <data name="ErrorMessageSelectOrganizationAsRecipientMin1" xml:space="preserve">
+    <value>Select minimum one organization as recipient.</value>
+  </data>
+  <data name="EditOrganization" xml:space="preserve">
+    <value>Edit organization</value>
+  </data>
+  <data name="NotFoundAnyOrganizationAsRecipient" xml:space="preserve">
+    <value>Not found any organization as recipient</value>
+  </data>
+  <data name="ErrorMessageDateFromBeforeDateTo" xml:space="preserve">
+    <value>Start event should be before the end event.</value>
+  </data>
+  <data name="ErrorMessageStartTimeBetweenDateFromDateTo" xml:space="preserve">
+    <value>Start time should be between {0} and {1}.</value>
+  </data>
+  <data name="EventHasAlreadyBegun" xml:space="preserve">
+    <value>Event has already begun.</value>
+  </data>
+  <data name="AnnouncementTypes" xml:space="preserve">
+    <value>Announcement types</value>
+  </data>
+  <data name="records" xml:space="preserve">
+    <value>records</value>
+  </data>
+  <data name="Selected" xml:space="preserve">
+    <value>Selected</value>
+  </data>
+  <data name="PatientName" xml:space="preserve">
+    <value>Patient name</value>
+  </data>
+  <data name="SelectYourLanguage" xml:space="preserve">
+    <value>Select language</value>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="FilterAppointmentByDate" xml:space="preserve">
+    <value>Filter appointment by date</value>
+  </data>
+  <data name="DateTime" xml:space="preserve">
+    <value>Date and time</value>
+  </data>
+  <data name="EnterDurationInMinutes" xml:space="preserve">
+    <value>Please enter duration in minutes</value>
+  </data>
+  <data name="AllTreatments" xml:space="preserve">
+    <value>All treatments</value>
+  </data>
+  <data name="AddBug" xml:space="preserve">
+    <value>Add bug</value>
+  </data>
+  <data name="ErrorMessageConferenceRoomReq" xml:space="preserve">
+    <value>Conference room is required.</value>
+  </data>
+  <data name="Continue" xml:space="preserve">
+    <value>Continue</value>
+  </data>
+  <data name="ErrorMessageSelectUserAsRecipientMin1" xml:space="preserve">
+    <value>Select minimum one user as recipient.</value>
+  </data>
+  <data name="NotFoundAnyUsersAsRecipient" xml:space="preserve">
+    <value>Not found any users as recipient.</value>
+  </data>
+  <data name="SendOnlyToCertainUsers" xml:space="preserve">
+    <value>Send only to certain users</value>
+  </data>
+  <data name="SendToAllUsers" xml:space="preserve">
+    <value>Send to all users</value>
+  </data>
+  <data name="ErrorMessagePaymentForRegistrationExists" xml:space="preserve">
+    <value>Payment for selected registration already exists.</value>
+  </data>
+  <data name="And" xml:space="preserve">
+    <value>And</value>
+  </data>
+  <data name="SelectDate" xml:space="preserve">
+    <value>Select date</value>
+  </data>
+  <data name="NotSuccessfullyRemovedEvent" xml:space="preserve">
+    <value>Event &lt;strong&gt;is not successfully&lt;/strong&gt; removed because there are &lt;strong&gt;{0}&lt;/strong&gt; active payments.</value>
+  </data>
+  <data name="AddNewLecturer" xml:space="preserve">
+    <value>Add new lecturer</value>
+  </data>
+  <data name="SelectExistingLecturer" xml:space="preserve">
+    <value>Select an existing lecturer</value>
+  </data>
+  <data name="ErrorMessageSelectNewOrExistsLecturer" xml:space="preserve">
+    <value>Select exists lecturer or add new.</value>
+  </data>
+  <data name="ErrorMessageBugTypeReq" xml:space="preserve">
+    <value>Bug type is required.</value>
+  </data>
+  <data name="ReportedFrom" xml:space="preserve">
+    <value>Reported from: </value>
+  </data>
+  <data name="GetNotifiedEmailFeature" xml:space="preserve">
+    <value>Get notified via email when the feature is implemented.</value>
+  </data>
+  <data name="EditAppointment" xml:space="preserve">
+    <value>Edit appointment</value>
+  </data>
+  <data name="TimeFormat" xml:space="preserve">
+    <value>hh:mm</value>
+  </data>
+  <data name="Minutes" xml:space="preserve">
+    <value>Minutes</value>
+  </data>
+  <data name="RequiredField" xml:space="preserve">
+    <value>Required field</value>
+  </data>
+  <data name="TimeIsAlreadyBooked" xml:space="preserve">
+    <value>The time is already booked</value>
+  </data>
+  <data name="YouHaveAvailable" xml:space="preserve">
+    <value>You have available</value>
+  </data>
+  <data name="Allergies" xml:space="preserve">
+    <value>Allergies</value>
+  </data>
+  <data name="Diseases" xml:space="preserve">
+    <value>Diseases</value>
+  </data>
+  <data name="Medicines" xml:space="preserve">
+    <value>Medicines</value>
+  </data>
+  <data name="PlansAndTerapies" xml:space="preserve">
+    <value>Plans &amp; Terapies</value>
+  </data>
+  <data name="TreatmentHistory" xml:space="preserve">
+    <value>Treatment history</value>
+  </data>
+  <data name="Anamnesis" xml:space="preserve">
+    <value>Anamnesis</value>
+  </data>
+  <data name="Diagnosis" xml:space="preserve">
+    <value>Diagnosis</value>
+  </data>
+  <data name="Operations" xml:space="preserve">
+    <value>Operations</value>
+  </data>
+  <data name="EmergencyLowercased" xml:space="preserve">
+    <value>emergency</value>
+  </data>
+  <data name="RegularLowercased" xml:space="preserve">
+    <value>regular</value>
+  </data>
+  <data name="TotalLowercased" xml:space="preserve">
+    <value>total</value>
+  </data>
+  <data name="TreatmentsInNumbers" xml:space="preserve">
+    <value>Treatments in numbers</value>
+  </data>
+  <data name="Patients" xml:space="preserve">
+    <value>Patients</value>
+  </data>
+  <data name="AddressIsRequired" xml:space="preserve">
+    <value>Address is required.</value>
+  </data>
+  <data name="CityIsRequired" xml:space="preserve">
+    <value>City is required.</value>
+  </data>
+  <data name="CountryIsRequired" xml:space="preserve">
+    <value>Country is required.</value>
+  </data>
+  <data name="DateOfBirth" xml:space="preserve">
+    <value>Date of birth</value>
+  </data>
+  <data name="DateOfBirthIsRequired" xml:space="preserve">
+    <value>Date of birth is required.</value>
+  </data>
+  <data name="FirstNameIsRequired" xml:space="preserve">
+    <value>First name is required.</value>
+  </data>
+  <data name="Gender" xml:space="preserve">
+    <value>Gender</value>
+  </data>
+  <data name="GenderIsRequired" xml:space="preserve">
+    <value>Gender is required.</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Last name</value>
+  </data>
+  <data name="LastNameIsRequired" xml:space="preserve">
+    <value>Last name is required.</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="RegionIsRequired" xml:space="preserve">
+    <value>Region is required.</value>
+  </data>
+  <data name="Residence" xml:space="preserve">
+    <value>Residence</value>
+  </data>
+  <data name="ResidenceAddress" xml:space="preserve">
+    <value>Residence address</value>
+  </data>
+  <data name="Student" xml:space="preserve">
+    <value>Student</value>
+  </data>
+  <data name="AddPatient" xml:space="preserve">
+    <value>Add patient</value>
+  </data>
+  <data name="ChooseGender" xml:space="preserve">
+    <value>Choose gender</value>
+  </data>
+  <data name="ContactDetails" xml:space="preserve">
+    <value>Contact details</value>
+  </data>
+  <data name="Female" xml:space="preserve">
+    <value>Female</value>
+  </data>
+  <data name="FemaleShort" xml:space="preserve">
+    <value>F</value>
+  </data>
+  <data name="Male" xml:space="preserve">
+    <value>Male</value>
+  </data>
+  <data name="MaleShort" xml:space="preserve">
+    <value>M</value>
+  </data>
+  <data name="PatientAdd" xml:space="preserve">
+    <value>Patient add</value>
+  </data>
+  <data name="PatientAddError" xml:space="preserve">
+    <value>There was an error while trying to add patient.</value>
+  </data>
+  <data name="PatientAddSuccess" xml:space="preserve">
+    <value>Patient added successfully.</value>
+  </data>
+  <data name="PersonalDetails" xml:space="preserve">
+    <value>Personal details</value>
+  </data>
+  <data name="UserDetails" xml:space="preserve">
+    <value>User details</value>
+  </data>
+  <data name="AtLeastOneContactIsRequired" xml:space="preserve">
+    <value>At least one contact type is required.</value>
+  </data>
+  <data name="FullName" xml:space="preserve">
+    <value>Full name</value>
+  </data>
+  <data name="Years" xml:space="preserve">
+    <value>years</value>
+  </data>
+  <data name="SelectPatient" xml:space="preserve">
+    <value>Select patient</value>
+  </data>
+  <data name="AddSurvey" xml:space="preserve">
+    <value>Add survey</value>
+  </data>
+  <data name="ExpiredDate" xml:space="preserve">
+    <value>Expired date</value>
+  </data>
+  <data name="Surveys" xml:space="preserve">
+    <value>Surveys</value>
+  </data>
+  <data name="Questions" xml:space="preserve">
+    <value>Questions</value>
+  </data>
+  <data name="Activations" xml:space="preserve">
+    <value>Activations</value>
+  </data>
+  <data name="AddActivation" xml:space="preserve">
+    <value>Add activation</value>
+  </data>
+  <data name="AddAnswer" xml:space="preserve">
+    <value>Add answer</value>
+  </data>
+  <data name="AddExistingQuestions" xml:space="preserve">
+    <value>Add existing questions</value>
+  </data>
+  <data name="AddNewQuestion" xml:space="preserve">
+    <value>Add new question</value>
+  </data>
+  <data name="Answer" xml:space="preserve">
+    <value>Answer</value>
+  </data>
+  <data name="Answers" xml:space="preserve">
+    <value>Answers</value>
+  </data>
+  <data name="AssignToAllPatients" xml:space="preserve">
+    <value>Assign to all patients</value>
+  </data>
+  <data name="AssignToAllStaff" xml:space="preserve">
+    <value>Assign to all staff</value>
+  </data>
+  <data name="AssignToCertainPatients" xml:space="preserve">
+    <value>Assign to certain patients</value>
+  </data>
+  <data name="AssignToCertainStaff" xml:space="preserve">
+    <value>Assign to certain staff</value>
+  </data>
+  <data name="Editable" xml:space="preserve">
+    <value>Editable</value>
+  </data>
+  <data name="EditSurvey" xml:space="preserve">
+    <value>Edit survey</value>
+  </data>
+  <data name="ErrorMessageAnswerReq" xml:space="preserve">
+    <value>Answer is required.</value>
+  </data>
+  <data name="ErrorMessageAssignMinOnePatientToActivation" xml:space="preserve">
+    <value>Assign activation to at least one patient.</value>
+  </data>
+  <data name="ErrorMessageAssignMinOneStaffToActivation" xml:space="preserve">
+    <value>Assign activation to at least one staff member.</value>
+  </data>
+  <data name="ErrorMessageExpiredActivationReq" xml:space="preserve">
+    <value>Expired activation is required.</value>
+  </data>
+  <data name="ErrorMessageQuestionLen200" xml:space="preserve">
+    <value>Maximum question length is 200 characters.</value>
+  </data>
+  <data name="ErrorMessageQuestionReq" xml:space="preserve">
+    <value>Question is required.</value>
+  </data>
+  <data name="ErrorMessageQuestionTypeReq" xml:space="preserve">
+    <value>Question type is required.</value>
+  </data>
+  <data name="ErrorMessageSelectMin1QuestionGender" xml:space="preserve">
+    <value>Select minimum one gender.</value>
+  </data>
+  <data name="ErrorMessageSelectWhomAssignActivation" xml:space="preserve">
+    <value>Select whom you assign activation</value>
+  </data>
+  <data name="ErrorMessageStartActivationReq" xml:space="preserve">
+    <value>Start activation is required.</value>
+  </data>
+  <data name="ErrorMessageSurveyQuestionReq" xml:space="preserve">
+    <value>Survey must contain questions.</value>
+  </data>
+  <data name="EssayQuestionNote" xml:space="preserve">
+    <value>It is not possible to define the answers for the selected type of questions!</value>
+  </data>
+  <data name="ExpiredActivation" xml:space="preserve">
+    <value>Expired activation</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Question" xml:space="preserve">
+    <value>Question</value>
+  </data>
+  <data name="QuestionType" xml:space="preserve">
+    <value>Question type</value>
+  </data>
+  <data name="SelectExistingQuestionNote" xml:space="preserve">
+    <value>In this section you can select the already created questions, and assign them to the survey.</value>
+  </data>
+  <data name="SelectPerson" xml:space="preserve">
+    <value>Select person</value>
+  </data>
+  <data name="SelectQuestionType" xml:space="preserve">
+    <value>Select question type</value>
+  </data>
+  <data name="Staff" xml:space="preserve">
+    <value>Staff</value>
+  </data>
+  <data name="StartActivation" xml:space="preserve">
+    <value>Start activation</value>
+  </data>
+  <data name="WhomYouAssignActivation" xml:space="preserve">
+    <value>Whom you assign activation?</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="ActivationContainsActiveAnswers" xml:space="preserve">
+    <value>Activation containts active answers</value>
+  </data>
+  <data name="DateTimeFormat" xml:space="preserve">
+    <value>MM/dd/yyyy HH:mm</value>
+  </data>
+  <data name="DropHereYourProfileImage" xml:space="preserve">
+    <value>Drop here your profile image!</value>
+  </data>
+  <data name="DropzoneMsgDesc1" xml:space="preserve">
+    <value>Only images are allowed for upload.</value>
+  </data>
+  <data name="AccountSetup" xml:space="preserve">
+    <value>Account setup</value>
+  </data>
+  <data name="GeneralInfo" xml:space="preserve">
+    <value>General information</value>
+  </data>
+  <data name="StatusInfo" xml:space="preserve">
+    <value>Status information</value>
+  </data>
+  <data name="Confirmation" xml:space="preserve">
+    <value>Confirmation</value>
+  </data>
+  <data name="AreYouStudent" xml:space="preserve">
+    <value>Are you student?</value>
+  </data>
+  <data name="CityOfBirth" xml:space="preserve">
+    <value>City of birth</value>
+  </data>
+  <data name="CountryOfBirth" xml:space="preserve">
+    <value>Country of birth</value>
+  </data>
+  <data name="InThisSectionTypeYourContactInfo" xml:space="preserve">
+    <value>In this section type your contact information.</value>
+  </data>
+  <data name="NumberOfMobile" xml:space="preserve">
+    <value>Mobile number</value>
+  </data>
+  <data name="NumberOfPhone" xml:space="preserve">
+    <value>Phone number</value>
+  </data>
+  <data name="ParentName" xml:space="preserve">
+    <value>Parent name</value>
+  </data>
+  <data name="PrimaryEmail" xml:space="preserve">
+    <value>Primary e-mail address</value>
+  </data>
+  <data name="ProfileImage" xml:space="preserve">
+    <value>Profile image</value>
+  </data>
+  <data name="SecondaryEmail" xml:space="preserve">
+    <value>Secondary e-mail address</value>
+  </data>
+  <data name="SelectCitizenship" xml:space="preserve">
+    <value>Select citizenship</value>
+  </data>
+  <data name="SocialSecurityNumber" xml:space="preserve">
+    <value>Social security number</value>
+  </data>
+  <data name="AcademicTitle" xml:space="preserve">
+    <value>Academic title</value>
+  </data>
+  <data name="AccessDetails" xml:space="preserve">
+    <value>Access details</value>
+  </data>
+  <data name="CreatedDate" xml:space="preserve">
+    <value>Created date</value>
+  </data>
+  <data name="CultureName" xml:space="preserve">
+    <value>Culture name</value>
+  </data>
+  <data name="EmploymentStatus" xml:space="preserve">
+    <value>Employement status</value>
+  </data>
+  <data name="ErrorMessageAcademicDegreeReq" xml:space="preserve">
+    <value>Academic degree is required.</value>
+  </data>
+  <data name="ErrorMessageAcademicTitleReq" xml:space="preserve">
+    <value>Academic title is required.</value>
+  </data>
+  <data name="ErrorMessageDateOfBirthReq" xml:space="preserve">
+    <value>Date of birth is required.</value>
+  </data>
+  <data name="ErrorMessageEmploymentStatusReq" xml:space="preserve">
+    <value>Employment status is requried.</value>
+  </data>
+  <data name="ErrorMessageLastNameReq" xml:space="preserve">
+    <value>Last name is required.</value>
+  </data>
+  <data name="ErrorMessageMartialStatusReq" xml:space="preserve">
+    <value>Martial status is required.</value>
+  </data>
+  <data name="ErrorMessageNationalIDNumberMinLen13" xml:space="preserve">
+    <value>Minimum national ID number length is 13 characters.</value>
+  </data>
+  <data name="ErrorMessageNationalIDNumberReq" xml:space="preserve">
+    <value>National ID number is required.</value>
+  </data>
+  <data name="ErrorMessageNumberOfMobileReq" xml:space="preserve">
+    <value>Number of mobile is required.</value>
+  </data>
+  <data name="ErrorMessageParentNameReq" xml:space="preserve">
+    <value>Parent name is required.</value>
+  </data>
+  <data name="ErrorMessagePrimaryEmailReq" xml:space="preserve">
+    <value>Primary email address is required.</value>
+  </data>
+  <data name="ErrorMesssageSocialSecurityNumberReq" xml:space="preserve">
+    <value>Social security number is required.</value>
+  </data>
+  <data name="IsLicensePermanent" xml:space="preserve">
+    <value>Is license permanent?</value>
+  </data>
+  <data name="LicenseDetails" xml:space="preserve">
+    <value>License details</value>
+  </data>
+  <data name="LicenseNumber" xml:space="preserve">
+    <value>License number</value>
+  </data>
+  <data name="LicensePerPeriod" xml:space="preserve">
+    <value>License per period</value>
+  </data>
+  <data name="NewMember" xml:space="preserve">
+    <value>New member</value>
+  </data>
+  <data name="PasswordConfirmation" xml:space="preserve">
+    <value>Password confirmation</value>
+  </data>
+  <data name="PermanentLicense" xml:space="preserve">
+    <value>Permanent license</value>
+  </data>
+  <data name="SelectAcademicDegree" xml:space="preserve">
+    <value>Select academic degree</value>
+  </data>
+  <data name="SelectAcademicTitle" xml:space="preserve">
+    <value>Select academic title</value>
+  </data>
+  <data name="SelectEmployementStatus" xml:space="preserve">
+    <value>Select employement status</value>
+  </data>
+  <data name="SelectMartialStatus" xml:space="preserve">
+    <value>Select martial status</value>
+  </data>
+  <data name="SelectRoles" xml:space="preserve">
+    <value>Select roles</value>
+  </data>
+  <data name="SelectTypeOfLicense" xml:space="preserve">
+    <value>Select type of license</value>
+  </data>
+  <data name="StatusDetails" xml:space="preserve">
+    <value>Status details</value>
+  </data>
+  <data name="UserRoles" xml:space="preserve">
+    <value>User roles</value>
+  </data>
+  <data name="ErrorMessageGenderReq" xml:space="preserve">
+    <value>Gender is required.</value>
+  </data>
+  <data name="ErrorMessageUsernameReq" xml:space="preserve">
+    <value>Username is required.</value>
+  </data>
+  <data name="ErrorMessagePasswordReq" xml:space="preserve">
+    <value>Password is required.</value>
+  </data>
+  <data name="ErrorMessageFirstNameReq" xml:space="preserve">
+    <value>First name is required.</value>
+  </data>
+  <data name="ErrorMessageBirthCityReq" xml:space="preserve">
+    <value>Birth city is required.</value>
+  </data>
+  <data name="ErrorMessageBirthCountryReq" xml:space="preserve">
+    <value>Birth country is required.</value>
+  </data>
+  <data name="ErrorMessageCitizenshipReq" xml:space="preserve">
+    <value>Citizenship is required.</value>
+  </data>
+  <data name="ErrorMessageLicenseNumberReq" xml:space="preserve">
+    <value>License number is required.</value>
+  </data>
+  <data name="Doctor" xml:space="preserve">
+    <value>Doctor</value>
+  </data>
+  <data name="Employer" xml:space="preserve">
+    <value>Employer</value>
+  </data>
+  <data name="MedicialTehnician" xml:space="preserve">
+    <value>Medicial tehnician</value>
+  </data>
+  <data name="SelectMembershipType" xml:space="preserve">
+    <value>Select memebrship type/types</value>
+  </data>
+  <data name="GeneratePassword" xml:space="preserve">
+    <value>Generate password</value>
+  </data>
+  <data name="PasswordsDoNotMatch" xml:space="preserve">
+    <value>Passwords do not match.</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="AddStaff" xml:space="preserve">
+    <value>Add staff</value>
+  </data>
+  <data name="TypeOfLicense" xml:space="preserve">
+    <value>License type</value>
+  </data>
+  <data name="MemberOfChember" xml:space="preserve">
+    <value>Member of chember</value>
+  </data>
+  <data name="InThisSectionTypeYourLicenseInfo" xml:space="preserve">
+    <value>In this section type information about license.</value>
+  </data>
+  <data name="InThisSectionTypeInfoAboutRolesInstitution" xml:space="preserve">
+    <value>In this section type user roles at the institution level.</value>
+  </data>
+  <data name="ErrorMessagePasswordLen6" xml:space="preserve">
+    <value>Minimum password length is 6 characters.</value>
+  </data>
+  <data name="ErrorMessagePasswordReqContainLettersAndNumbers" xml:space="preserve">
+    <value>Password must contains letters and numbers.</value>
+  </data>
+  <data name="UsernameAlreadyExists" xml:space="preserve">
+    <value>Username already exists.</value>
+  </data>
+  <data name="AddLicense" xml:space="preserve">
+    <value>Add license</value>
+  </data>
+  <data name="ActiveLicenseNumber" xml:space="preserve">
+    <value>Active license number</value>
+  </data>
+  <data name="AddLicensePeriod" xml:space="preserve">
+    <value>Add license period</value>
+  </data>
+  <data name="Licenses" xml:space="preserve">
+    <value>Licenses</value>
+  </data>
+  <data name="ProlongActiveLicense" xml:space="preserve">
+    <value>Prolong active license</value>
+  </data>
+  <data name="ErrorMessageTypeOfLiceseReq" xml:space="preserve">
+    <value>Type of licese is required.</value>
+  </data>
+  <data name="License" xml:space="preserve">
+    <value>License</value>
+  </data>
+  <data name="Inactive" xml:space="preserve">
+    <value>Inactive</value>
+  </data>
+  <data name="Deactivate" xml:space="preserve">
+    <value>Deactivate</value>
+  </data>
+  <data name="SweetAlertDeactivatePermanentLicense" xml:space="preserve">
+    <value>User can have only one active license at the same time, and if you deactivate selected license, user will no longer have one.</value>
+  </data>
+  <data name="Deactivated" xml:space="preserve">
+    <value>Deactivated</value>
+  </data>
+  <data name="SuccessfullyDeactivated" xml:space="preserve">
+    <value>'{0}' is &lt;strong&gt;successfully deactivated&lt;/strong&gt;.</value>
+  </data>
+  <data name="ErrorMessageCreatedDateBeforeExpiredDate" xml:space="preserve">
+    <value>Created date should be before expired date.</value>
+  </data>
+  <data name="EditLicensePeriod" xml:space="preserve">
+    <value>Edit license period</value>
+  </data>
+  <data name="InstitutionStaff" xml:space="preserve">
+    <value>Institution staff</value>
+  </data>
+  <data name="OrganizationStaff" xml:space="preserve">
+    <value>Organization staff</value>
+  </data>
+  <data name="NewStaff" xml:space="preserve">
+    <value>New staff</value>
+  </data>
+  <data name="SuccessfullyChanged" xml:space="preserve">
+    <value>'{0}' is &lt;strong&gt;successfully changed&lt;/strong&gt;.</value>
+  </data>
+  <data name="ErrorMessagePhoneFormat" xml:space="preserve">
+    <value>Phone format: 0xxxXXXxxx(x)</value>
+  </data>
+  <data name="ActiveLicense" xml:space="preserve">
+    <value>Active license</value>
+  </data>
+  <data name="AddQuestion" xml:space="preserve">
+    <value>Add question</value>
+  </data>
+  <data name="EditQuestion" xml:space="preserve">
+    <value>Edit question</value>
+  </data>
+  <data name="ErrorMessageQuestionEditable" xml:space="preserve">
+    <value>Question can not be changed because there are users who have already answered this question.</value>
+  </data>
+  <data name="ErrorMessageQuestionErasable" xml:space="preserve">
+    <value>Question can not be deleted because there are users who have already answered this question.</value>
+  </data>
+  <data name="AddMaterials" xml:space="preserve">
+    <value>Add material</value>
+  </data>
+  <data name="AddMeasurementUnit" xml:space="preserve">
+    <value>Add measurement unit</value>
+  </data>
+  <data name="EditMeasurementUnit" xml:space="preserve">
+    <value>Edit measurement unit</value>
+  </data>
+  <data name="Materials" xml:space="preserve">
+    <value>Materials</value>
+  </data>
+  <data name="MeasurementUnit" xml:space="preserve">
+    <value>Measurement unit</value>
+  </data>
+  <data name="MeasurementUnits" xml:space="preserve">
+    <value>Measurement units</value>
+  </data>
+  <data name="SelectMeasurementUnit" xml:space="preserve">
+    <value>Select measurement unit</value>
+  </data>
+  <data name="AddDiscount" xml:space="preserve">
+    <value>Add discount</value>
+  </data>
+  <data name="AddPricelistItem" xml:space="preserve">
+    <value>Add pricelist item</value>
+  </data>
+  <data name="Discounts" xml:space="preserve">
+    <value>Discounts</value>
+  </data>
+  <data name="EditPricelistItem" xml:space="preserve">
+    <value>Edit pricelist item</value>
+  </data>
+  <data name="ErrorMessageGroupOrSingleDiscountReq" xml:space="preserve">
+    <value>Group discount or minimum one single discount is required.</value>
+  </data>
+  <data name="ErrorMessageMaterialReq" xml:space="preserve">
+    <value>Material is required.</value>
+  </data>
+  <data name="ErrorMessageOperationReq" xml:space="preserve">
+    <value>Operation is required.</value>
+  </data>
+  <data name="ErrorMessagePriceWithoutVATReq" xml:space="preserve">
+    <value>Price (without VAT) is required.</value>
+  </data>
+  <data name="GroupDiscount" xml:space="preserve">
+    <value>Group discount</value>
+  </data>
+  <data name="Material" xml:space="preserve">
+    <value>Material</value>
+  </data>
+  <data name="Operation" xml:space="preserve">
+    <value>Operation</value>
+  </data>
+  <data name="Pricelist" xml:space="preserve">
+    <value>Pricelist</value>
+  </data>
+  <data name="PricelistItems" xml:space="preserve">
+    <value>Pricelist items</value>
+  </data>
+  <data name="PriceWithoutVAT" xml:space="preserve">
+    <value>Price (without VAT)</value>
+  </data>
+  <data name="SelectMaterial" xml:space="preserve">
+    <value>Select material</value>
+  </data>
+  <data name="SelectOperation" xml:space="preserve">
+    <value>Select operation</value>
+  </data>
+  <data name="SelectPricelistItemsForDiscount" xml:space="preserve">
+    <value>In the table below you can define individual discounts for pricelist items. Only marked items will be saved and others ignored.</value>
+  </data>
+  <data name="StartDate" xml:space="preserve">
+    <value>Start date</value>
+  </data>
+  <data name="AddLicenceType" xml:space="preserve">
+    <value>Add licence type</value>
+  </data>
+  <data name="AddLicenceTypes" xml:space="preserve">
+    <value>Add licence type</value>
+  </data>
+  <data name="ChooseLicenceType" xml:space="preserve">
+    <value>Choose licence type</value>
+  </data>
+  <data name="EditLicenceType" xml:space="preserve">
+    <value>Edit licence type</value>
+  </data>
+  <data name="ErrorMessageLicenceTypeReq" xml:space="preserve">
+    <value>Licence type is required!</value>
+  </data>
+  <data name="LicenceType" xml:space="preserve">
+    <value>Licence type</value>
+  </data>
+  <data name="LicenceTypes" xml:space="preserve">
+    <value>Licence types</value>
+  </data>
+  <data name="NameOfLicenceType" xml:space="preserve">
+    <value>Name of licence type</value>
+  </data>
+  <data name="NewLicenceType" xml:space="preserve">
+    <value>New licence type</value>
+  </data>
+  <data name="SelectLicenceType" xml:space="preserve">
+    <value>Select licence type</value>
+  </data>
+  <data name="AddEmployeeStatus" xml:space="preserve">
+    <value>Add employee status</value>
+  </data>
+  <data name="ChooseEmployeeStatus" xml:space="preserve">
+    <value>Choose employee status</value>
+  </data>
+  <data name="DeleteEmployeeStatus" xml:space="preserve">
+    <value>Delete employee status</value>
+  </data>
+  <data name="EditEmployeeStatus" xml:space="preserve">
+    <value>Edit employee status</value>
+  </data>
+  <data name="SelectEmployeeStatus" xml:space="preserve">
+    <value>Select employee status</value>
+  </data>
+  <data name="AddOperation" xml:space="preserve">
+    <value>Add Operation</value>
+  </data>
+  <data name="AddOperations" xml:space="preserve">
+    <value>Add Operations</value>
+  </data>
+  <data name="DeleteOperation" xml:space="preserve">
+    <value>Delete Operation</value>
+  </data>
+  <data name="EditOperation" xml:space="preserve">
+    <value>Edit Operation</value>
+  </data>
+  <data name="AppointmentTypes" xml:space="preserve">
+    <value>Appointment types</value>
+  </data>
+  <data name="ToothStates" xml:space="preserve">
+    <value>Tooth states</value>
+  </data>
+  <data name="AboutPatient" xml:space="preserve">
+    <value>About patient</value>
+  </data>
+  <data name="BirthCity" xml:space="preserve">
+    <value>Birth city</value>
+  </data>
+  <data name="BirthCountry" xml:space="preserve">
+    <value>Birth country</value>
+  </data>
+  <data name="NationalIDNumber" xml:space="preserve">
+    <value>National ID number</value>
+  </data>
+  <data name="PasswordComplexityInfo" xml:space="preserve">
+    <value>The password must be at least 8 characters long and must contain at least one letter, one big letter, one special character and one number.</value>
+  </data>
+  <data name="PasswordConfirmationIsRequired" xml:space="preserve">
+    <value>Password confirmation is required.</value>
+  </data>
+  <data name="PasswordsDontMatch" xml:space="preserve">
+    <value>Passwords don't match.</value>
+  </data>
+  <data name="AddAllergy" xml:space="preserve">
+    <value>Add allergy</value>
+  </data>
+  <data name="AddDisease" xml:space="preserve">
+    <value>Add disease</value>
+  </data>
+  <data name="AddMedicine" xml:space="preserve">
+    <value>Add medicine</value>
+  </data>
+  <data name="Allergy" xml:space="preserve">
+    <value>Allergy</value>
+  </data>
+  <data name="AllergyAdd" xml:space="preserve">
+    <value>Allergy add</value>
+  </data>
+  <data name="AllergyIsRequired" xml:space="preserve">
+    <value>At least one allergy is required.</value>
+  </data>
+  <data name="Disease" xml:space="preserve">
+    <value>Disease</value>
+  </data>
+  <data name="DiseaseIsRequired" xml:space="preserve">
+    <value>At least one disease is required.</value>
+  </data>
+  <data name="Medicine" xml:space="preserve">
+    <value>Medicine</value>
+  </data>
+  <data name="MedicineAdd" xml:space="preserve">
+    <value>Medicine add</value>
+  </data>
+  <data name="MedicineIsRequired" xml:space="preserve">
+    <value>At least one medicine is required.</value>
+  </data>
+  <data name="SelectAllergy" xml:space="preserve">
+    <value>Select allergy</value>
+  </data>
+  <data name="SelectDisease" xml:space="preserve">
+    <value>Select disease</value>
+  </data>
+  <data name="SelectMedicine" xml:space="preserve">
+    <value>Select medicine</value>
+  </data>
+  <data name="DiseaseAdd" xml:space="preserve">
+    <value>Disease add</value>
+  </data>
+  <data name="ErrorMessageAlreadyExistsActiveDiscountInDate" xml:space="preserve">
+    <value>Already exists active discount for selected period.</value>
+  </data>
+  <data name="ErrorMessageCheckDiscountPricelistItemMin1" xml:space="preserve">
+    <value>Select minimum one pricelist item for discount.</value>
+  </data>
+  <data name="ErrorMessageEmailLen50" xml:space="preserve">
+    <value>Maximum email length is 50 characters.</value>
+  </data>
+  <data name="SelectTreatment" xml:space="preserve">
+    <value>Select treatment</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value>Select citizenship</value>
+  </data>
+  <data name="AssignToAllMembers" xml:space="preserve">
+    <value>Assign to all members</value>
+  </data>
+  <data name="AssignToCertainMembers" xml:space="preserve">
+    <value>Assign to certain members</value>
+  </data>
+  <data name="Members" xml:space="preserve">
+    <value>Members</value>
+  </data>
+  <data name="YouAreUnauthorized" xml:space="preserve">
+    <value>You are unauthorized</value>
+  </data>
+  <data name="RecentEvents" xml:space="preserve">
+    <value>Recent events</value>
+  </data>
+  <data name="AddMember" xml:space="preserve">
+    <value>Add member</value>
+  </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>Welcome </value>
+  </data>
+  <data name="CurrentCalendarLang" xml:space="preserve">
+    <value>en</value>
+  </data>
+</root>

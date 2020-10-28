@@ -1,0 +1,86 @@
+﻿@inject Localizer Localizer
+
+<script>
+            $("body").ready().one("focus", ".date-picker", function (e) {
+       e.preventDefault();
+       var BootstrapDatepicker = function () {
+           var t;
+           t = mUtil.isRTL() ? {
+               leftArrow: '<i class="la la-angle-right"></i>', rightArrow: '<i class="la la-angle-left"></i>'
+           }
+               : {
+                   leftArrow: '<i class="la la-angle-left"></i>', rightArrow: '<i class="la la-angle-right"></i>'
+               }
+               ;
+           return {
+               init: function () {
+                   $.fn.datepicker.dates['bs'] = {
+                       days: ["Nedjelja", "Ponedjeljak", "Utorak", "Srijeda", "Četvrtak", "Petak", "Subota"],
+                       daysShort: ["Ned", "Pon", "Uto", "Sri", "Čet", "Pet", "Sub"],
+                       daysMin: ["N", "Po", "U", "Sr", "Č", "Pe", "Su"],
+                       months: ["Januar", "Februar", "Mart", "April", "Maj", "Juni", "Juli", "August", "Septembar", "Oktobar", "Novembar", "Decembar"],
+                       monthsShort: ["Jan", "Feb", "Mar", "Apr", "Maj", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"],
+                       today: "Danas",
+                       weekStart: 1,
+                       autoclose: 1,
+                       format: "dd.mm.yyyy"
+                   };
+                   $(".date-picker").datepicker({
+                       rtl: mUtil.isRTL(), todayHighlight: !1, autoclose: 1, orientation: "bottom left", templates: t, format: "@Localizer.DateFormat.ToLower()",language:"@Localizer.CurrentCalendarLang"
+                   }
+                   )
+               }
+           }
+       }
+
+           ();
+       jQuery(document).ready(function () {
+           BootstrapDatepicker.init();
+       });
+   });
+   $("body").ready().one("focus", ".datetime-picker", function (e) {
+       e.preventDefault();
+       var DateTimePicker = {
+           init: function () {
+               $(".datetime-picker").datetimepicker({
+                   todayHighlight: !0,
+                   autoclose: 1,
+                   startView: 2,
+                   showMeridian: @(Localizer.TimeFormat=="hh:mm"?1:0),
+                   format: "@Localizer.DateFormat.ToLower() @(Localizer.TimeFormat=="hh:mm"?"HH":"hh"):ii@(Localizer.TimeFormat=="hh:mm"?" P":"")",
+                   language: "@Localizer.CurrentCalendarLang",
+                   forceParse: false,
+                   minuteStep: @Configuration.DefaultMinuteStep
+
+               });
+           }
+       }
+       DateTimePicker.init();
+    });
+
+    jQuery(document).ready(function () {
+
+       var t;
+       t = mUtil.isRTL() ? {
+           leftArrow: '<i class="la la-angle-right"></i>', rightArrow: '<i class="la la-angle-left"></i>'
+       }
+           : {
+               leftArrow: '<i class="la la-angle-left"></i>', rightArrow: '<i class="la la-angle-right"></i>'
+           }
+           ;
+       $.fn.datepicker.dates['bs'] = {
+           days: ["Nedjelja", "Ponedjeljak", "Utorak", "Srijeda", "Četvrtak", "Petak", "Subota"],
+           daysShort: ["Ned", "Pon", "Uto", "Sri", "Čet", "Pet", "Sub"],
+           daysMin: ["N", "Po", "U", "Sr", "Č", "Pe", "Su"],
+           months: ["Januar", "Februar", "Mart", "April", "Maj", "Juni", "Juli", "August", "Septembar", "Oktobar", "Novembar", "Decembar"],
+           monthsShort: ["Jan", "Feb", "Mar", "Apr", "Maj", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"],
+           today: "Danas",
+           weekStart: 1,
+           autoclose: true,
+           format: "dd.mm.yyyy"
+       };
+       $(".date-picker").datepicker({
+           rtl: mUtil.isRTL(), todayHighlight: !1, autoclose: 1, orientation: "bottom left", templates: t, format: "@Localizer.DateFormat.ToLower()", language: "@Localizer.CurrentCalendarLang"
+       })
+   });
+</script>

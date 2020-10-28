@@ -1,0 +1,298 @@
+﻿@model IEnumerable<Core.Entities.Base.Region>
+@inject Localizer  Localizer
+@inject dentme.Web.Helpers.SelectListHelper.ISelectListHelper SelectList
+@{
+    ViewData["Title"] = Localizer.Regions;
+}
+
+
+@*Modal for adding new regions*@
+<div class="modal fade" id="m_modal_1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">@Localizer.AddNewRegion</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form id="addRegion" action="Add" method="post">
+                <div class="modal-body">
+                    <input name="Name" type="text" class="form-control m-input m-input--square" id="regionName" placeholder="Enter region name">
+                    <br />
+                    @Html.DropDownList("countryID", SelectList.Countries(true), new { @name = "CountryID", @id = "countryID", @class = "form-control m-input m-input--square" })
+                </div>
+                <div class="modal-footer">
+                    <button id="btnAddRegionClose" type="button" class="btn btn-secondary" data-dismiss="modal">@Localizer.Close</button>
+                    <button id="btnAddRegion" type="submit" class="btn btn-primary">@Localizer.SaveChanges</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@*Modal for editing regions*@
+<div class="modal fade" id="m_modal_2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">@Localizer.EditRegion</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form id="editRegion" action="Edit" method="get">
+                <div class="modal-body">
+                    <input name="Name" type="hidden" class="form-control m-input m-input--square" id="regionIdEdit">
+                    <input name="Name" type="text" class="form-control m-input m-input--square" id="regionNameEdit" placeholder="Enter region name">
+                    <br />
+                    @Html.DropDownList("countryID", SelectList.Countries(true), new { @name = "CountryID", @id = "countryIDEdit", @class = "form-control m-input m-input--square" })
+                </div>
+                <div class="modal-footer">
+                    <button id="btnEditRegionClose"type="button" class="btn btn-secondary" data-dismiss="modal">@Localizer.Close</button>
+                    <button id="btnEditRegionSubmit" type="submit" class="btn btn-primary">@Localizer.SaveChanges</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="m-portlet m-portlet--mobile">
+    <div class="m-portlet__head">
+        <div class="m-portlet__head-caption">
+            <div class="m-portlet__head-title">
+                <h3 class="m-portlet__head-text">
+                    @Localizer.Regions
+                </h3>
+            </div>
+        </div>
+        <div class="m-portlet__head-tools">
+            <ul class="m-portlet__nav">
+                <li class="m-portlet__nav-item">
+                    <a href="#" data-toggle="modal" data-target="#m_modal_1" class="btn btn-accent m-btn m-btn--custom m-btn--pill m-btn--icon m-btn--air">
+                        <span>
+                            <i class="la la-plus"></i>
+                            <span>@Localizer.NewRegion</span>
+                        </span>
+                    </a>
+                </li>
+                <li class="m-portlet__nav-item"></li>
+                
+            </ul>
+        </div>
+    </div>
+    <div class="m-portlet__body">
+        <!--begin: Datatable -->
+        <div id="m_table_1_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-striped- table-bordered table-hover table-checkable dataTable no-footer dtr-inline collapsed" id="m_table_1"
+                           role="grid" aria-describedby="m_table_1_info" style="width: 1208px;">
+                        <thead id="regionTableHead">
+                            <tr role="row">
+                                <th class="sorting" tabindex="0" aria-controls="m_table_1" span="3" rowspan="1" colspan="3" style="width: 50.25px;" aria-sort="descending" aria-label="OrderID: activate to sort column ascending">@Localizer.RegionID</th>
+                                <th class="sorting" tabindex="0" aria-controls="m_table_1" span="3" rowspan="1" colspan="3" style="width: 68.25px;" aria-label="Country: activate to sort column ascending">@Localizer.Name</th>
+                                <th class="sorting" tabindex="0" aria-controls="m_table_1" span="3" rowspan="1" colspan="3" style="width: 83.25px;" aria-label="ShipCity: activate to sort column ascending">@Localizer.Country</th>
+                                <th class="sorting" tabindex="0" aria-controls="m_table_1" span="2" rowspan="1" colspan="2" style="width: 83.25px;" aria-label="ShipCity: activate to sort column ascending">@Localizer.Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="regionTableBody">
+                            @foreach (var region in Model)
+                            {
+                                <tr role="row" class="odd">
+                                    <td class="Id" colspan="3">@region.Id</td>
+                                    <td class="Name" colspan="3">@region.Name</td>
+                                    <td class="CountryName" colspan="3">@region.Country.Name</td>
+                                    <td colspan="3" class="actionBtns"><button data-toggle="modal" data-target="#m_modal_2" class="btn btn-success btn_editRegion"><i class="p-r-1 la la-edit"></i></button>    <button class="btn btn-danger btn_deleteRegion"><i class="flaticon-delete"></i></button></td>
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+@*<script src="@Url.Content("~/app/js/JSHelpers.js")"></script>
+<script src="@Url.Content("~/app/js/RegionAjaxRequests.js")"></script>*@
+<link href="@Url.Content("~/app/css/custom.css")" rel="stylesheet" />
+
+<script>
+    $(function () {
+        //For Adding new regions - IDs: addRegion, regionName, countryID
+        $("#addRegion").submit(function (e) {
+            e.preventDefault();
+            let regionName = $("#regionName").val();
+            let countryID = $("#countryID").val();
+            let data = {
+                Name: regionName,
+                CountryId: countryID
+            }
+            $.ajax(
+                {
+                    url: '@Url.Action("Add")',
+                    data: data,
+                    success: function (succData) {
+                        let errorMessage = generateMessageDiv(succData.message, !succData.success);
+                        $("#addRegion").prepend(errorMessage);
+                        GetAllRegions();
+                    },
+                    error: function (data) {
+                        console.log(data);
+                    }
+                });
+        });
+
+        $("#btnAddRegionClose").click(function () {
+            $("#addRegion .notification").remove();
+            $("#addRegion")[0].reset();
+        });
+
+        //For editing regions - IDs: editRegion, regionNameEdit, countryIDEdit
+        $("#editRegion").submit(function (e) {
+            e.preventDefault();
+            let regionIdEdit = $("#regionIdEdit").val();
+            let regionName = $("#regionNameEdit").val();
+            let countryID = $("#countryIDEdit").val();
+            let data = {
+                Id: regionIdEdit,
+                Name: regionName,
+                CountryId: countryID
+            }
+            $.ajax(
+                {
+                    url: '@Url.Action("Edit")',
+                    data: data,
+                    success: function (succData) {
+                        let errorMessage = generateMessageDiv(succData.message, !succData.success);
+                        $("#editRegion").prepend(errorMessage);
+                        GetAllRegions();
+                    },
+                    error: function (data) {
+                        console.log(data);
+                    }
+                });
+        });
+
+        $("#btnEditRegionClose").click(function () {
+            $("#editRegion .notification").remove();
+            $("#editRegion")[0].reset();
+        });
+
+
+        resetEvLisForEditDelete();
+    });
+
+    //setting click event listeners for edit buttons on every row of Region table
+    function resetEvLisForEditDelete() {
+
+        $(".btn_editRegion").each(function () {
+            $(this).click(function () {
+                let Id = $(this).parent().siblings(".Id")[0].innerHTML;
+                let Name = $(this).parent().siblings(".Name")[0].innerHTML;
+                let CountryName = $(this).parent().siblings(".CountryName")[0].innerHTML;
+
+                //Set current region name
+                $("#regionIdEdit").val(Id);
+                $("#regionNameEdit").val(Name);
+                //Mark current parent country as selected
+                let countryOptions = $("#countryIDEdit option");
+                countryOptions.each(function () { this.removeAttribute("selected"); });
+                for (let i = 0; i < countryOptions.length; i++) {
+                    if (countryOptions[i].innerHTML === CountryName) {
+                        countryOptions[i].setAttribute("selected", "selected");
+                        break;
+                    }
+                }
+            });
+        });
+
+        $(".btn_deleteRegion").each(function () {
+
+            $(this).click(function () {
+                let RegionId = parseInt($(this).parent().siblings(".Id")[0].innerHTML);
+                console.log(RegionId);
+
+                $.ajax(
+                    {
+                        url: 'Region/Delete',
+                        data: { RegionId: RegionId },
+                        success: function (succData) {
+                            GetAllRegions();
+                        },
+                        error: function (data) {
+                            console.log(data);
+                        }
+                    });
+            });
+        });
+    }
+
+    function GetAllRegions() {
+        $.ajax(
+            {
+                url: 'Region/GetAll',
+                success: function (succData) {
+                    RefreshDataTable(succData.regions);
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+    }
+
+    function RefreshDataTable(regions) {
+        //clear the table
+        document.getElementById("regionTableBody").innerHTML = "";
+
+        for (let i = 0; i < regions.length; i++) {
+            let row = document.createElement("tr");
+
+            let tdId = document.createElement("td");
+            let tdName = document.createElement("td");
+            let tdCountryName = document.createElement("td");
+            let tdActions = document.createElement("td");
+
+            tdId.classList.add("Id");
+            tdId.setAttribute("colspan", "3");
+            tdId.innerHTML = regions[i].id;
+            tdName.classList.add("Name");
+            tdName.setAttribute("colspan", "3");
+            tdName.innerHTML = regions[i].name;
+            tdCountryName.classList.add("CountryName");
+            tdCountryName.setAttribute("colspan", "3");
+            tdCountryName.innerHTML = regions[i].country.name;
+
+            tdActions.setAttribute("colspan", "3");
+            tdActions.classList.add("actionBtns");
+
+            let pre = document.createElement("pre");
+
+            let editi = document.createElement("i");
+            let editBtn = document.createElement("button");
+            editi.classList.add("p-r-1", "la", "la-edit");
+            editBtn.classList.add("btn", "btn-success", "btn_editRegion");
+            editBtn.appendChild(editi);
+            editBtn.setAttribute("data-toggle", "modal");
+            editBtn.setAttribute("data-target", "#m_modal_2");
+
+            let delete1i = document.createElement("i");
+            let delete1Btn = document.createElement("button");
+            delete1i.classList.add("flaticon-delete");
+            delete1Btn.classList.add("btn", "btn-danger", "btn_deleteRegion");
+            delete1Btn.appendChild(delete1i);
+
+            tdActions.appendChild(editBtn);
+            tdActions.appendChild(delete1Btn);
+
+            row.appendChild(tdId);
+            row.appendChild(tdName);
+            row.appendChild(tdCountryName);
+            row.appendChild(tdActions);
+
+            document.getElementById("regionTableBody").appendChild(row);
+        }
+        resetEvLisForEditDelete();
+    }
+</script>

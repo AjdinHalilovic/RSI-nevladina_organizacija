@@ -1,0 +1,258 @@
+﻿@model MemberLicenseViewModel
+@inject Localizer Localizer
+@{
+    Layout = null;
+}
+
+<div class="m-portlet m-portlet--responsive-mobile">
+    <div class="m-portlet__head" style="">
+        <div class="m-portlet__head-progress">
+            <!-- here can place a progress bar-->
+        </div>
+        <div class="m-portlet__head-wrapper pt-2 pb-2">
+            <div class="m-portlet__head-caption">
+                <div class="m-portlet__head-title">
+                    <h3 class="m-portlet__head-text pr-1">
+                        @if (!Model.Active)
+                        {
+                            @:<span class="localizerLicenceNumber">@Localizer.ActiveLicense</span> : <span class="licenceNumber pl-2">@Model.LicenceNumber</span>
+                        }
+                        else
+                        {
+                            @:<span class="localizerLicenceNumber">@Localizer.ActiveLicense</span> : <span class="licenceNumber pl-2">@Model.LicenceNumber</span>
+                        }
+                    </h3>
+                    <h3 class="m-portlet__head-text pr-4">
+                        @if (Model.Permanent)
+                        {
+                            <span class="typeOfLicense pl-2">(@Localizer.PermanentLicense.ToLower())</span>
+                        }
+                        else
+                        {
+                            <span class="typeOfLicense pl-2">(@Localizer.LicensePerPeriod.ToLower())</span>
+                        }
+                    </h3>
+                    <h3 class="m-portlet__head-text pr-4">
+                        <span id="inactiveLicence" class="text-danger">
+                            @if (!Model.Active)
+                            {
+                                @Localizer.Inactive.ToUpper()
+                            }
+                        </span>
+                    </h3>
+                </div>
+            </div>
+            <div class="m-portlet__head-tools">
+                <div class="btn-group dropleft">
+                        <a id="DeactivateLicense" hidden href="@Url.Action("DeactivateLicense", "Members", new { area = "Organizations" })/?option=@((int)Enumerations.SaveAndOptions.SaveAndClose)&Id=@Model.Id" class="btn btn-secondary m-btn--icon m-btn--wide mr-2">
+                            <span>
+                                <i class="la la-key"></i>
+                                <span>@Localizer.Deactivate</span>
+                            </span>
+                        </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="m-portlet__body pt-0">
+        <!--begin: Selected Rows Group Action Form -->
+        <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30 collapse" id="m_datatable_group_action_license" style="">
+            <div class="row align-items-center">
+                <div class="col-xl-12">
+                    <div class="m-form__group m-form__group--inline">
+                        <div class="m-form__label m-form__label-no-wrap">
+                            <label class="m--font-bold m--font-danger-">
+                                @Localizer.Selected
+                                <span id="m_datatable_selected_number_license"></span> @Localizer.records:
+                            </label>
+                        </div>
+                        <div class="m-form__control">
+                            <div class="btn-toolbar">
+                                &nbsp;&nbsp;&nbsp;
+                                <button class="btn btn-sm btn-danger" type="button" id="m_datatable_delete_all_license">@Localizer.DeleteAll</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--end: Selected Rows Group Action Form -->
+        <!--begin: Datatable -->
+        <div class="m_datatable" id="m_license_index__datatable"></div>
+        <!--end: Datatable -->
+    </div>
+</div>
+
+<script>
+    
+    @if (Model.Active)
+    {
+        @:$("#DeactivateLicense").removeAttr('hidden');
+    }
+    function LicensesDraw() {
+        //WITH SELECTION ----------------
+        const jedan = true; // varijable za metronic datatable true i false umjesto 1 i 0
+        const nula = false;
+        var DatatableDataLocal, DatatableDatasource, DatatableOptions;
+        $.ajax({
+            url: "@Url.Action("JsonIndexLicense", "Members", new { area = "Organizations" })/?MemberId=@Model.MemberId",
+            type: "GET",
+            success: function (data) {
+                DatatableDatasource = JSON.parse(data);
+                var DatatableDataLocal = function () {
+                    var DatatableOptions = {
+                        data: {
+                            type: "local",
+                            source: DatatableDatasource,
+                            pageSize: 10
+                        },
+                        layout: {
+                            theme: "default",
+                            class: "",
+                            scroll: !nula,
+                            height: 550,
+                            footer: !jedan
+                        },
+                        pagination: !nula,
+                        columns: [{
+                            field: "@nameof(Core.Entities.Base.DTO.LicenseDTO.LicensePeriodId)",
+                            title: "#",
+                            sortable: !jedan,
+                            width: 35,
+                            textAlign: "center",
+                            selector: {
+                                class: "m-checkbox--solid m-checkbox--brand"
+                            }
+                        }, {
+                            field: "@nameof(Core.Entities.Base.DTO.LicenseDTO.LicenseNumber)",
+                            title: "@Localizer.LicenseNumber",
+                            sortable: !nula,
+                            filterable: !nula
+                        }, {
+                            field: "@nameof(Core.Entities.Base.DTO.LicenseDTO.CreatedDate)",
+                            title: "@Localizer.CreatedDate",
+                            sortable: !jedan,
+                            filterable: !jedan
+                        }, {
+                            field: "@nameof(Core.Entities.Base.DTO.LicenseDTO.EndDate)",
+                            title: "@Localizer.ExpiredDate",
+                            sortable: !jedan,
+                            filterable: !jedan
+                        }, {
+                            field: "@nameof(Core.Entities.Base.DTO.LicenseDTO.LicenseType)",
+                            title: "@Localizer.TypeOfLicense",
+                            width: 90,
+                            sortable: !jedan,
+                            filterable: !jedan
+                        }, {
+                            field: "@nameof(Core.Entities.Base.DTO.LicenseDTO.Active)",
+                            title: "@Localizer.Active",
+                            textAlign: "center",
+                            sortable: !jedan,
+                            filterable: !jedan,
+                            template: function (DatatableDatasource) {
+                                if (DatatableDatasource.Active)
+                                    return '<label class="m-checkbox"><input type ="checkbox" checked="checked" disabled><span style="top:-3px;"></span></label >';
+                                else
+                                    return '<label class="m-checkbox"><input type ="checkbox" disabled><span style="top:-3px;"></span></label >';
+                            }
+                        }, {
+                            field: "Actions",
+                            title: "@Localizer.Action",
+                            textAlign: "center",
+                            width: 70,
+                            sortable: !jedan,
+                            overflow: "visible",
+                            template: function (DatatableDatasource, DatatableOptions) {
+                                return '<a href="@Url.Action("EditLicensePeriod", "Members", new { area = "Organizations" })/' + DatatableDatasource.LicensePeriodId + '" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill modal-link" title="@Localizer.Edit">\t\t\t\t\t\t\t<i class="la la-edit"></i>\t\t\t\t\t\t</a>\t\t\t\t\t\t<a data-id="' + DatatableDatasource.LicensePeriodId + '" data-behavior="delete" href="@Url.Action("DeleteLicensePeriod", "Members", new { area = "Organizations" })/' + DatatableDatasource.LicensePeriodId + '" class="m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill" data-ajax-success="hideModal" title="@Localizer.Delete">\t\t\t\t\t\t\t<i class="la la-trash"></i>\t\t\t\t\t\t</a>'
+                            }
+                        }],
+                        translate: {
+                            records: {
+                                processing: '@Localizer.LoadingDots',
+                                noRecords: '@Localizer.NoRecordsFound'
+                            },
+                            toolbar: {
+                                pagination: {
+                                    items: {
+                                        default: {
+                                            first: '@Localizer.First',
+                                            prev: '@Localizer.Previous',
+                                            next: '@Localizer.Next',
+                                            last: '@Localizer.Last',
+                                            more: '@Localizer.MorePages',
+                                            input: '@Localizer.PageNumber',
+                                            select: '@Localizer.SelectPageSize'
+                                        },
+                                        info: '@Localizer.DisplayingNumberOfRecords'
+                                    }
+                                }
+                            }
+                        }
+                    };
+                    return {
+                        init: function () {
+                            ! function () {
+                                DatatableOptions.search = {
+                                    input: $("#m_license_index__generalSearch")
+                                };
+                                var e = $("#m_license_index__datatable").mDatatable(DatatableOptions);
+                                e.on("m-datatable--on-check m-datatable--on-uncheck m-datatable--on-layout-updated", function (t) {
+                                    var a = e.rows(".m-datatable__row--active").nodes().length;
+                                    $("#m_datatable_selected_number_license").html(a), a > 0 ? $("#m_datatable_group_action_license").collapse("show") : $("#m_datatable_group_action_license").collapse("hide");
+                                    a = 0;
+                                })
+                                $("#m_datatable_delete_all_license").on('click', function () {
+                                    var list = [];
+                                    for (var i = 0; i < e.rows(".m-datatable__row--active").nodes().length; i++) {
+                                        list.push((parseInt($(e.rows(".m-datatable__row--active").nodes()[i]).find("input[type=checkbox]").val())));
+                                    }
+                                    $.ajax({
+                                        url: "@Url.Action("DeleteAllLicensePeriod", "Members", new { area = "Institutions" })",
+                                        type: "GET",
+                                        data: { list: list },
+                                        traditional: true,
+                                        success: function (data) {
+                                            NotificationHandler(data.value);
+                                            e.rows(".m-datatable__row--active").nodes().html("");
+                                            $("#m_datatable_group_action_license").collapse("hide");
+                                        }
+                                    })
+                                })
+                            }()
+                        }
+                    }
+                }();
+                jQuery(document).ready(function () {
+                    DatatableDataLocal.init()
+                });
+            }
+        });
+    };
+    LicensesDraw();
+
+    function hideModal(data) {
+            if (data.success) {
+                $("#m_license_index__datatable").mDatatable().destroy();
+                LicensesDraw();
+
+
+                $("#inactiveLicence").remove();
+                $(".licenceNumber").text(data.licenseNumber);
+                if (data.perPeriod) {
+                    $(".typeOfLicense").text("@Localizer.LicensePerPeriod");
+                }
+                else {
+                    $(".typeOfLicense").text("@Localizer.PermanentLicense");
+                }
+                $("#DeactivateLicense").removeAttr('hidden');
+                $("#prolongLicenseBtn").remove('hidden');
+                $("#DeactivateLicense").attr('href', '/institutions/members/deactivatelicense/?option=0&Id='+data.licenseId+'');
+
+                closeModal();
+                $("#m_js__notification").text(data.notification.value);
+                NotificationHandler(data.notification.value);
+
+            }
+        }
+</script>

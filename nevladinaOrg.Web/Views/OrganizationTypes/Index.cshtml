@@ -1,0 +1,89 @@
+﻿@model IEnumerable<Core.Entities.Base.OrganizationType>
+@inject Localizer  Localizer
+@{
+    ViewData["Title"] = Localizer.OrganizationTypes;
+}
+
+<div class="m-portlet m-portlet--mobile">
+    <div class="m-portlet__head">
+        <div class="m-portlet__head-caption">
+            <div class="m-portlet__head-title">
+                <h3 class="m-portlet__head-text">
+                    @Localizer.OrganizationTypes
+                </h3>
+            </div>
+        </div>
+        <div class="m-portlet__head-tools">
+            <ul class="m-portlet__nav">
+                <li class="m-portlet__nav-item">
+                    <a href="@Url.Action("Add", "OrganizationType")" data-toggle="modal" data-target="#m_modal_1" class="btn btn-accent m-btn m-btn--custom m-btn--pill m-btn--icon m-btn--air">
+                        <span>
+                            <i class="la la-plus"></i>
+                            <span>@Localizer.AddOrganizationType</span>
+                        </span>
+                    </a>
+                </li>
+                <li class="m-portlet__nav-item"></li>
+            </ul>
+        </div>
+    </div>
+    <div class="m-portlet__body">
+        <!--begin: Datatable -->
+        <div id="m_table_1_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-striped- table-bordered table-hover table-checkable dataTable no-footer dtr-inline collapsed" id="m_table_1"
+                           role="grid" aria-describedby="m_table_1_info" style="width: 1208px;">
+                        <thead id="regionTableHead">
+                            <tr role="row">
+                                <th class="sorting" tabindex="0" aria-controls="m_table_1" span="3" rowspan="1" colspan="3" style="width: 50.25px;" aria-sort="descending" aria-label="OrderID: activate to sort column ascending">@Localizer.OrganizationTypeId</th>
+                                <th class="sorting" tabindex="0" aria-controls="m_table_1" span="3" rowspan="1" colspan="3" style="width: 68.25px;" aria-label="Country: activate to sort column ascending">@Localizer.Name</th>
+                                <th class="sorting" tabindex="0" aria-controls="m_table_1" span="2" rowspan="1" colspan="2" style="width: 83.25px;" aria-label="ShipCity: activate to sort column ascending">@Localizer.Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="academicDegreesTableBody">
+                            @foreach (var organizationType in Model)
+                            {
+                                <tr role="row" class="odd">
+                                    <td class="Id" colspan="3">@organizationType.Id</td>
+                                    <td class="Name" colspan="3">@organizationType.Name</td>
+                                    <td colspan="3" class="actionBtns"><button onclick="Edit(this)" data-toggle="modal" data-target="#m_modal_2" class="btn btn-success btn_editRegion"><i class="p-r-1 la la-edit"></i></button>    <button onclick="Delete(this)" class="btn btn-danger btn_deleteRegion"><i class="flaticon-delete"></i></button></td>
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    function Edit(btn){
+        let Id = $(btn).parent().siblings(".Id")[0].innerHTML;
+        let Name = $(btn).parent().siblings(".Name")[0].innerHTML;
+        $("#organizationTypeNameIdID").val(Id);
+        $("#organizationTypeNameID").val(Name);
+    }
+    function Delete(btn) {
+        let Id = $(btn).parent().siblings(".Id")[0].innerHTML;
+        $.ajax(
+            {
+                url: 'OrganizationTypes/Delete',
+                data: { Id: Id },
+                success: function (succData) {
+                    console.log(succData);
+                    $(btn).parent().parent().html("");
+                },
+                error: function (data) {
+                    console.log(succData);
+                }
+            });
+    }
+</script>
+
+@Html.Partial("_Add")
+@Html.Partial("_Edit")

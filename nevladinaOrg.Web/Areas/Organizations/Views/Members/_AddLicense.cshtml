@@ -1,0 +1,133 @@
+﻿@model LicenseAddViewModel
+
+@inject Localizer Localizer
+@inject ISelectListHelper SelectList
+
+@{
+    Layout = "~/Views/Shared/_ModalLayout.cshtml";
+}
+
+<div class="modal-header">
+    <h5 class="modal-title">@Localizer.AddLicense</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>
+<form asp-antiforgery="true" data-ajax-url="@Url.Action("AddLicense", "Members", new { area = "Organizations" })" data-ajax="true" data-ajax-method="post" data-ajax-success="hideModal" data-ajax-update="#update-modal-lg">
+    <input asp-for="License.MemberId" hidden />
+    <div class="modal-body">
+
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="m-alert m-alert--icon m-alert--outline alert alert-danger alert-dismissible animated fadeIn" role="alert">
+                <div class="m-alert__icon">
+                    <i class="la la-warning"></i>
+                </div>
+                <div class="m-alert__text">
+                    @Html.ValidationSummary()
+                </div>
+                <div class="m-alert__close">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        }
+        <div class="form-group m-form__group row">
+            <div class="col-lg-12">
+                <label class="form-control-label">* @Localizer.LicenseNumber</label>
+                <input type="text" asp-for="License.LicenceNumber" class="form-control m-input" placeholder="@Localizer.LicenseNumber">
+            </div>
+        </div>
+        <div class="form-group m-form__group row">
+            <div class="col-lg-12 pb-2">
+                <label class="form-control-label">* @Localizer.SelectTypeOfLicense:</label>
+            </div>
+            <div class="row col-lg-12 pb-3 pr-0">
+                <div class="col-lg-6 text-center">
+                    <a class="btn btn-secondary btn-sm col-lg-12 dm--custom-radio-click">
+                        <label class="m-radio m-radio--air m-radio--state-success m-0">
+                            <input type="radio" class="licenceType" id="licenseTypePeriod1" asp-for="LicenceTypePeriod" value="permanent"> @Localizer.PermanentLicense
+                            <span></span>
+                        </label>
+                    </a>
+                </div>
+                <div class="col-lg-6 pr-0 text-center">
+                    <a class="btn btn-secondary btn-sm col-lg-12 dm--custom-radio-click">
+                        <label class="m-radio m-radio--air m-radio--state-success m-0">
+                            <input type="radio" class="licenceType" id="licenseTypePeriod2" asp-for="LicenceTypePeriod" value="perPeriod"> @Localizer.LicensePerPeriod
+                            <span></span>
+                        </label>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="licenseOnPeriod">
+            <div class="form-group m-form__group row">
+                <div class="col-lg-12">
+                    <label class="form-control-label"> @Localizer.TypeOfLicense</label>
+                    <select class="form-control m-bootstrap-select m_selectpicker" asp-for="LicensePeriod.LicenseTypeId" asp-items="@SelectList.LicenseTypes(true)"></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 form-group m-form__group pt-0">
+                    <label class="form-control-label">* @Localizer.CreatedDate</label>
+                    <input type="text" asp-for="LicensePeriod.CreatedDate" class="date-picker form-control m-input" readonly="" placeholder="@Localizer.SelectDate">
+                </div>
+                <div class="col-lg-6 form-group m-form__group pt-0">
+                    <label class="form-control-label">* @Localizer.ExpiredDate</label>
+                    <input type="text" asp-for="LicensePeriod.EndDate" class="date-picker form-control m-input" readonly="" placeholder="@Localizer.SelectDate">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="modal-footer">
+        <div class="form-actions right">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">@Localizer.Close</button>
+            <button type="submit" class="btn btn-primary">@Localizer.Save</button>
+        </div>
+    </div>
+</form>
+
+@section scripts {
+    <script type="text/javascript">
+        @*function hideModal(data) {
+            if (data.success) {
+                $("#m_license_index__datatable").mDatatable().destroy();
+                LicensesDraw();
+
+
+                $("#inactiveLicence").remove();
+                $(".licenceNumber").text(data.licenseNumber);
+                if (data.perPeriod) {
+                    $(".typeOfLicense").text("@Localizer.LicensePerPeriod");
+                }
+                else {
+                    $(".typeOfLicense").text("@Localizer.PermanentLicense");
+                }
+                $("#DeactivateLicense").removeAttr('hidden');
+                $("#prolongLicenseBtn").remove('hidden');
+                $("#DeactivateLicense").attr('href', '/institutions/members/deactivatelicense/?option=0&Id='+data.licenseId+'');
+
+                closeModal();
+                $("#m_js__notification").text(data.notification.value);
+                NotificationHandler(data.notification.value);
+
+            }
+        }*@
+
+        //HIDE SHOW SECTIONS FOR LICENSES
+        function HideShowLicenseTypeSection() {
+            var type = $(".licenceType:checked").val();
+            if (type == "perPeriod") {
+                $('#licenseOnPeriod').slideDown();
+            }
+            else {
+                $('#licenseOnPeriod').slideUp();
+            }
+        }
+        HideShowLicenseTypeSection();
+        $(".licenceType").on("change", function () {
+            HideShowLicenseTypeSection();
+        })
+    </script>
+}

@@ -1,0 +1,228 @@
+﻿
+
+@inject ISelectListHelper SelectList
+@inject Localizer Localizer
+@{
+    ViewData["Title"] = Localizer.Events;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="m-portlet m-portlet--responsive-mobile">
+    <div class="m-portlet__head" style="">
+        <div class="m-portlet__head-progress">
+            <!-- here can place a progress bar-->
+        </div>
+        <div class="m-portlet__head-wrapper">
+            <div class="m-portlet__head-caption">
+                <div class="m-portlet__head-title">
+                    <span class="m-portlet__head-icon">
+                        <i class="la la-building-o"></i>
+                    </span>
+                    <h3 class="m-portlet__head-text">
+                        @Localizer.Events
+                    </h3>
+                </div>
+            </div>
+            <div class="m-portlet__head-tools">
+                <div class="btn-group dropleft">
+                    <a href="@Url.Action("Add", "Events", new { area = "Administration" })/?option=@((int)Enumerations.SaveAndOptions.SaveAndClose)" class="btn btn-brand m-btn--icon m-btn--wide modal-link-lg">
+                        <span>
+                            <i class="la la-plus"></i>
+                            <span>@Localizer.AddEvent</span>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="m-portlet__body">
+        <!--begin: Search Form -->
+        <div class="m-form m-form--label-align-right m--margin-top-10 m--margin-bottom-30">
+            <div class="row align-items-center">
+                <div class="col-xl-12 order-1 order-xl-2 m--align-right">
+                    <div class="m-input-icon m-input-icon--left">
+                        <input type="text" class="form-control m-icon" placeholder="@Localizer.SearchDots" id="m_events_index_generalSearch">
+                        <span class="m-input-icon__icon m-input-icon__icon--left">
+                            <span>
+                                <i class="la la-search"></i>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--end: Search Form -->
+        <!--begin: Selected Rows Group Action Form -->
+        <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30 collapse" id="m_datatable_group_action_events" style="">
+            <div class="row align-items-center">
+                <div class="col-xl-12">
+                    <div class="m-form__group m-form__group--inline">
+                        <div class="m-form__label m-form__label-no-wrap">
+                            <label class="m--font-bold m--font-danger-">
+                                @Localizer.Selected
+                                <span id="m_datatable_selected_number_events"></span> @Localizer.records:
+                            </label>
+                        </div>
+                        <div class="m-form__control">
+                            <div class="btn-toolbar">
+                                &nbsp;&nbsp;&nbsp;
+                                <button class="btn btn-sm btn-danger" type="button" id="m_datatable_delete_all_events">@Localizer.DeleteAll</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--end: Selected Rows Group Action Form -->
+        <!--begin: Datatable -->
+        <div class="m_datatable " id="m_events_index_datatable"></div>
+        <!--end: Datatable -->
+    </div>
+</div>
+@*<div class="dropdown"><a href="#" class="btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" data-toggle="dropdown" aria-expanded="true"><i class="la la-ellipsis-h"></i></a><div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-220px, 33px, 0px);" x-out-of-boundaries=""><a class="dropdown-item" href="#"><i class="la la-edit"></i> @Localizer.Registrations</a><a class="dropdown-item" href="#"><i class="la la-leaf"></i> @Localizer.EventItems</a><a class="dropdown-item" href="#"><i class="la la-print"></i> @Localizer.Sponsors</a></div></div>*@
+<script>
+    function EventsDraw() {
+        //WITH SELECTION ----------------
+        const jedan = true; // varijable za metronic datatable true i false umjesto 1 i 0
+        const nula = false;
+        var DatatableDataLocal, DatatableDatasource, DatatableOptions;
+        $.ajax({
+            url: "@Url.Action("JsonIndex", "Events", new { area = nameof(nevladinaOrg.Web.Areas.Administration) })",
+            type: "GET",
+            success: function (data) {
+                DatatableDatasource = JSON.parse(data);
+                var DatatableDataLocal = function () {
+                    var DatatableOptions = {
+                        data: {
+                            type: "local",
+                            source: DatatableDatasource,
+                            pageSize: 10
+                        },
+                        layout: {
+                            theme: "default",
+                            class: "",
+                            scroll: !jedan,
+                            footer: !jedan
+                        },
+                        sortable: !jedan,
+                        pagination: !nula,
+                        columns: [{
+                            field: "@nameof(Core.Entities.Base.DTO.EventDTO.Id)",
+                            title: "#",
+                            sortable: !jedan,
+                            width: 35,
+                            textAlign: "center",
+                            selector: {
+                                class: "m-checkbox--solid m-checkbox--brand"
+                            }
+                        }, {
+                            field: "Name",
+                            title: "@Localizer.Name",
+                            filterable: !nula,
+                            template: function (DatatableDatasource, DatatableOptions) {
+                                return '<a id="preview" href="@Url.Action("Preview", "Events", new { area = "Administration" })/' + DatatableDatasource.Id + '" class="p-0 m-portlet__nav-link btn m-btn">' + DatatableDatasource.Name + '</a>'
+                            }
+                        }, {
+                            field: "@nameof(Core.Entities.Base.DTO.EventDTO.DateFrom)",
+                            title: "@Localizer.StartEvent",
+                            width: 130,
+                            filterable: !jedan
+                        }, {
+                            field: "@nameof(Core.Entities.Base.DTO.EventDTO.DateTo)",
+                            title: "@Localizer.EndEvent",
+                            width: 120,
+                            filterable: !jedan
+                        }, {
+                            field: "Location",
+                            title: "@Localizer.Place",
+                            filterable: !jedan,
+                            template: function (DatatableDatasource, DatatableOptions) {
+                                return DatatableDatasource.Place + ', ' + DatatableDatasource.City + ', ' + DatatableDatasource.Country;
+                            }
+                        }, {
+                            field: "Participants",
+                            title: "@Localizer.PaymentsRegistrations",
+                            filterable: !jedan,
+                            textAlign: "center",
+                            template: function (DatatableDatasource, DatatableOptions) {
+                                var pays = DatatableDatasource.NumberOfPayments;
+                                var regs = DatatableDatasource.NumberOfRegistrations;
+                                if (pays == 0) {
+                                    return '<div class="progress m-progress--lg"><div class="progress-bar progress-bar-striped  bg-danger" role="progressbar" style="width:0%" ><span class="font-weight-bold"></span></div></div>'
+                                }
+                                return '<div class="progress m-progress--lg"><div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" style="width:' + (pays / regs) * 100 + '%" ><span class="font-weight-bold">' + pays + ' / ' + regs + '</span></div></div>'
+                            }
+                        }, {
+                            field: "Actions",
+                            title: "@Localizer.Action",
+                            textAlign: "center",
+                            sortable: !jedan,
+                            overflow: "visible",
+                            template: function (DatatableDatasource, DatatableOptions) {
+                                return '<span style="overflow: visible; position: relative; width: 110px;"><div class="dropdown"><a href="#" class="btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" data-toggle="dropdown" aria-expanded="true"><i class="fa fa-angle-down"></i></a><div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-220px, 33px, 0px);" x-out-of-boundaries=""><a class="dropdown-item" href="@Url.Action("Registrations", "Events", new { area = "Administration" })/' + DatatableDatasource.Id + '"><i class="la la-edit"></i> @Localizer.Registrations</a><a class="dropdown-item" href="@Url.Action("EventItems", "Events", new { area = "Administration" })/' + DatatableDatasource.Id + '"><i class="la la-leaf"></i> @Localizer.EventItems</a><a class="dropdown-item" href="@Url.Action("Sponsors", "Events", new { area = "Administration" })/' + DatatableDatasource.Id + '"><i class="la la-print"></i> @Localizer.Sponsors</a></div></div><span style = "overflow: visible; position: relative; width: 70px;" > <a href="@Url.Action("Edit", "Events", new { area = "Administration" })/' + DatatableDatasource.Id + '" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill modal-link-lg" title="Edit">							<i class="la la-edit"></i>						</a>  <a data-id="' + DatatableDatasource.Id + '" data-behavior="delete" href="@Url.Action("Delete", "Events", new { area = "Administration" })/' + DatatableDatasource.Id + '" class="m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill" title="Delete">							<i class="la la-trash"></i>						</a></span ></span > ';
+                            }
+                        }],
+                        translate: {
+                            records: {
+                                processing: '@Localizer.LoadingDots',
+                                noRecords: '@Localizer.NoRecordsFound'
+                            },
+                            toolbar: {
+                                pagination: {
+                                    items: {
+                                        default: {
+                                            first: '@Localizer.First',
+                                            prev: '@Localizer.Previous',
+                                            next: '@Localizer.Next',
+                                            last: '@Localizer.Last',
+                                            more: '@Localizer.MorePages',
+                                            input: '@Localizer.PageNumber',
+                                            select: '@Localizer.SelectPageSize'
+                                        },
+                                        info: '@Localizer.DisplayingNumberOfRecords'
+                                    }
+                                }
+                            }
+                        }
+                    };
+                    return {
+                        init: function () {
+                            ! function () {
+                                DatatableOptions.search = {
+                                    input: $("#m_events_index_generalSearch")
+                                };
+                                var e = $("#m_events_index_datatable").mDatatable(DatatableOptions);
+                                e.on("m-datatable--on-check m-datatable--on-uncheck m-datatable--on-layout-updated", function (t) {
+                                    var a = e.rows(".m-datatable__row--active").nodes().length;
+                                    console.log(a);
+                                    $("#m_datatable_selected_number_events").html(a), a > 0 ? $("#m_datatable_group_action_events").collapse("show") : $("#m_datatable_group_action_events").collapse("hide");
+                                    a = 0;
+                                })
+                                $("#m_datatable_delete_all_events").on('click', function () {
+                                    var list = [];
+                                    for (var i = 0; i < e.rows(".m-datatable__row--active").nodes().length; i++) {
+                                        list.push((parseInt($(e.rows(".m-datatable__row--active").nodes()[i]).find("input[type=checkbox]").val())));
+                                    }
+                                    $.ajax({
+                                        url: "@Url.Action("DeleteAll", "Events", new { area = "Administration" })",
+                                        type: "GET",
+                                        data: { list: list },
+                                        traditional: true,
+                                        success: function (data) {
+                                            NotificationHandler(data.value);
+                                            e.rows(".m-datatable__row--active").nodes().html("");
+                                            $("#m_datatable_group_action_events").collapse("hide");
+                                        }
+                                    })
+                                })
+                            }()
+                        }
+                    }
+                }();
+                jQuery(document).ready(function () {
+                    DatatableDataLocal.init()
+                });
+            }
+        })
+    };
+    EventsDraw();
+</script>

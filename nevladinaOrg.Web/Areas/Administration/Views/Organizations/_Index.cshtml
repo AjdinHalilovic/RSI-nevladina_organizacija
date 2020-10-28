@@ -1,0 +1,279 @@
+﻿@inject Localizer Localizer
+@inject ISelectListHelper SelectList
+@{ Layout = null; }
+
+<div class="m-portlet m-portlet--responsive-mobile">
+    <div class="m-portlet__head" style="">
+        <div class="m-portlet__head-progress">
+            <!-- here can place a progress bar-->
+        </div>
+        <div class="m-portlet__head-wrapper">
+            <div class="m-portlet__head-caption">
+                <div class="m-portlet__head-title">
+                    <span class="m-portlet__head-icon">
+                        <i class="flaticon-placeholder-1"></i>
+                    </span>
+                    <h3 class="m-portlet__head-text">
+                        @Localizer.Organizations
+                    </h3>
+                </div>
+            </div>
+            <div class="m-portlet__head-tools">
+                <a href="@Url.Action("Add", "Organizations", new { area = "Administration" })" class="btn btn-brand m-btn--icon m-btn--wide modal-link-lg">
+                    <span>
+                        <i class="la la-plus"></i>
+                        <span>@Localizer.AddOrganization</span>
+                    </span>
+                </a>
+
+            </div>
+        </div>
+    </div>
+    <div class="m-portlet__body">
+        <!--begin: Search Form -->
+        <div class="m-form m-form--label-align-right m--margin-top-10 m--margin-bottom-30">
+            <div class="row align-items-center">
+                <div class="col-xl-8"></div>
+                <div class="col-xl-4 order-1 order-xl-2 m--align-right">
+                    <div class="m-input-icon m-input-icon--left">
+                        <input type="text" class="form-control m-icon" placeholder="@Localizer.SearchDots" id="m_organizations_index__generalSearch">
+                        <span class="m-input-icon__icon m-input-icon__icon--left">
+                            <span>
+                                <i class="la la-search"></i>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--end: Search Form -->
+        <!--begin: Selected Rows Group Action Form -->
+        <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30 collapse" id="m_datatable_group_action_organizations" style="">
+            <div class="row align-items-center">
+                <div class="col-xl-12">
+                    <div class="m-form__group m-form__group--inline">
+                        <div class="m-form__label m-form__label-no-wrap">
+                            <label class="m--font-bold m--font-danger-">
+                                @Localizer.Selected
+                                <span id="m_datatable_selected_number_organizations"></span> @Localizer.records:
+                            </label>
+                        </div>
+                        <div class="m-form__control">
+                            <div class="btn-toolbar">
+                                &nbsp;&nbsp;&nbsp;
+                                <button class="btn btn-sm btn-danger" type="button" id="m_datatable_delete_all_organizations">@Localizer.DeleteAll</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--end: Selected Rows Group Action Form -->
+        <!--begin: Datatable -->
+        <div class="m_datatable" id="m_organizations_index__datatable"></div>
+        <!--end: Datatable -->
+
+    </div>
+</div>
+
+<script>
+    function OrganizationsDraw() {
+        //WITH SELECTION ----------------
+        const jedan = true; // varijable za metronic datatable true i false umjesto 1 i 0
+        const nula = false;
+        var DatatableDataLocal, DatatableDatasource, DatatableOptions;
+        $.ajax({
+            url: "@Url.Action("GetOrganizations", "Organizations", new { area = "Administration" })",
+            type: "GET",
+            success: function (data) {
+                DatatableDataLocal = {
+                    init: function () {
+                        var e, a;
+                        var subTableInit = function (e) {
+                            $.ajax({
+                                url: "@Url.Action("GetOrganizationsByParentId", "Organizations", new { area = "Administration" })" + "?OrganizationParentId=" + e.data.Id,
+                                type: "GET",
+                                success: function (d) {
+                                    let subOrganizations = JSON.parse(d);
+                                $('<div/>').attr('id', 'child_data_local_' + e.data.RecordID).appendTo(e.detailCell)
+                                .mDatatable({
+                                    data: {
+                                        type: 'local',
+                                        source: subOrganizations,
+                                        pageSize: 10,
+                                    },
+                                    columns: [{
+                                        field: "@nameof(Core.Entities.Base.DTO.OrganizationDTO.Id)",
+                                        title: "#",
+                                        sortable: !1,
+                                        width: 35,
+                                        textAlign: "center",
+                                        selector: {
+                                            class: "m-checkbox--solid m-checkbox--brand"
+                                        }
+                                    }, {
+                                        field: "@nameof(Core.Entities.Base.DTO.OrganizationDTO.Parent)",
+                                        title: "@Localizer.ParentOrganization",
+                                        filterable: !0,
+                                        sortable: !0,
+                                    },
+                                    {
+                                        field: "@nameof(Core.Entities.Base.DTO.OrganizationDTO.Name)",
+                                        title: "@Localizer.Name",
+                                        filterable: !0,
+                                        sortable: !0,
+                                    },
+                                    {
+                                    field: "@nameof(Core.Entities.Base.DTO.OrganizationDTO.Address)",
+                                    title: "@Localizer.Address",
+                                    filterable: !nula,
+                                    sortable: !nula,
+                                template: function (DatatableDatasource) {
+                                    return DatatableDatasource.Address + ", " + DatatableDatasource.City + ", " + DatatableDatasource.Country;
+                                }
+                                },
+                                    {
+                                        field: "@nameof(Core.Entities.Base.DTO.OrganizationDTO.Active)",
+                                        title: "@Localizer.Active",
+                                        filterable: !0,
+                                        sortable: !0,
+                                        template: function (DatatableDatasource) {
+                                            if (DatatableDatasource.Active)
+                                                return '<label class="m-checkbox"><input type ="checkbox" checked="checked" disabled><span style="top:-3px;"></span></label >';
+                                            else
+                                                return '<label class="m-checkbox"><input type ="checkbox" disabled><span style="top:-3px;"></span></label >';
+                                        }
+                                    },
+                                    {
+                                        field: "Actions",
+                                        title: "@Localizer.Action",
+                                        textAlign: "center",
+                                        width: 70,
+                                        sortable: !1,
+                                        overflow: "visible",
+                                        template: function (e, a) {
+                                        return '<a href="@Url.Action("Edit", "Organizations", new { area = "Administration" })?OrganizationId=' + e.Id + '"class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill modal-link-lg" title="@Localizer.Edit">\t\t\t\t\t\t\t<i class="la la-edit"></i>\t\t\t\t\t\t</a>\t\t\t\t\t\t<a data-id="' + e.Id + '" data-behavior="delete" href="@Url.Action("Delete", "Organizations", new { area = "Administration" })/' + e.Id + '" class="m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill" title="@Localizer.Delete">\t\t\t\t\t\t\t<i class="la la-trash"></i>\t\t\t\t\t\t</a>'
+                                        }
+                                    }]
+                                }
+                                    //...
+                                    // define the columns
+                                );
+                                }
+                            });
+
+                        }
+                        e = JSON.parse(data), a = $("#m_organizations_index__datatable").mDatatable({
+                            data: {
+                                type: "local",
+                                source: e,
+                                pageSize: 10
+                            },
+                            layout: {
+                                theme: "default",
+                                class: "",
+                                scroll: !1,
+                                footer: !1
+                            },
+                            detail: {
+                                title: "load sub table",
+                                content: subTableInit
+                            },
+                            sortable: !1,
+                            filterable: !1,
+                            pagination: !0,
+                            search: {
+                                input: $("#m_organizations_index__generalSearch")
+                            },
+                            columns: [{
+                                field: "@nameof(Core.Entities.Base.DTO.OrganizationDTO.Id)",
+                                title: "#",
+                                sortable: !jedan,
+                                width: 35,
+                                textAlign: "center",
+                                selector: {
+                                    class: "m-checkbox--solid m-checkbox--brand"
+                                }
+                            }, {
+                                    field: "@nameof(Core.Entities.Base.DTO.OrganizationDTO.Name)",
+                                    title: "@Localizer.Name",
+                                    filterable: !nula,
+                                    sortable: !nula,
+                                },
+                                {
+                                    field: "@nameof(Core.Entities.Base.DTO.OrganizationDTO.Parent)",
+                                    title: "@Localizer.ParentOrganization",
+                                    filterable: !nula,
+                                    sortable: !nula,
+                                },
+                                {
+                                    field: "@nameof(Core.Entities.Base.DTO.OrganizationDTO.OrganizationType)",
+                                    title: "@Localizer.OrganizationType",
+                                    filterable: !nula,
+                                    sortable: !nula,
+                                },
+                                {
+                                    field: "@nameof(Core.Entities.Base.DTO.OrganizationDTO.Address)",
+                                    title: "@Localizer.Address",
+                                    filterable: !nula,
+                                    sortable: !nula,
+                                template: function (DatatableDatasource) {
+                                    return DatatableDatasource.Address + ", " + DatatableDatasource.City + ", " + DatatableDatasource.Country;
+                                }
+                                },
+                            
+                                {
+                                    field: "Active",
+                                    title: "@Localizer.Active",
+                                    filterable: !nula,
+                                    sortable: !nula,
+                                    textAlign: "center",
+                                    template: function (DatatableDatasource) {
+                                        if (DatatableDatasource.Active)
+                                            return '<label class="m-checkbox"><input type ="checkbox" checked="checked" disabled><span style="top:-3px;"></span></label >';
+                                        else
+                                            return '<label class="m-checkbox"><input type ="checkbox" disabled><span style="top:-3px;"></span></label >';
+                                    }
+                                },
+                                {
+                                field: "Actions",
+                                title: "@Localizer.Action",
+                                textAlign: "center",
+                                width: 70,
+                                    sortable: !jedan,
+                                overflow: "visible",
+                                    template: function (DatatableDatasource, DatatableOptions) {
+                                        return '<a href="@Url.Action("Edit", "Organizations", new { area = "Administration" })?OrganizationId=' + DatatableDatasource.Id + '"class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill modal-link-lg" title="@Localizer.Edit">\t\t\t\t\t\t\t<i class="la la-edit"></i>\t\t\t\t\t\t</a>\t\t\t\t\t\t<a data-id="' + DatatableDatasource.Id + '" data-behavior="delete" href="@Url.Action("Delete", "Organizations", new { area = "Administration" })/' + DatatableDatasource.Id + '" class="m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill" title="@Localizer.Delete">\t\t\t\t\t\t\t<i class="la la-trash"></i>\t\t\t\t\t\t</a>'
+                                }
+                            }],
+                            translate: {
+                                records: {
+                                    processing: '@Localizer.LoadingDots',
+                                    noRecords: '@Localizer.NoRecordsFound'
+                                },
+                                toolbar: {
+                                    pagination: {
+                                        items: {
+                                            default: {
+                                                first: '@Localizer.First',
+                                                prev: '@Localizer.Previous',
+                                                next: '@Localizer.Next',
+                                                last: '@Localizer.Last',
+                                                more: '@Localizer.MorePages',
+                                                input: '@Localizer.PageNumber',
+                                                select: '@Localizer.SelectPageSize'
+                                            },
+                                            info: '@Localizer.DisplayingNumberOfRecords'
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                    }
+                };
+                DatatableDataLocal.init();
+            }
+        })
+    };
+    OrganizationsDraw();
+</script>

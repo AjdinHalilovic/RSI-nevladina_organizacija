@@ -1,0 +1,188 @@
+﻿@inject Localizer Localizer
+@inject dentme.Web.Helpers.SelectListHelper.ISelectListHelper SelectList
+
+
+<div id="m_modal_1" class="modal fade row" tabindex="-1" role="dialog" aria-labelledby="modal" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog col-lg-12" role="document">
+        <div class="modal-content" id="divBasicModalUpdate">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">@Localizer.NewAcademicDegree</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form asp-controller="Organizations" asp-action="Add"
+                      data-ajax-begin="onBegin"
+                      data-ajax-complete="onComplete"
+                      data-ajax-failure="onFailed"
+                      data-ajax-success="onSuccess"
+                      data-ajax="true"
+                      data-ajax-method="POST">
+
+                    <div class="row">
+                        <div class="form-group col-lg-6 col-md-6">
+                            @*Name here*@
+                            <div class="form-group">
+                                <label for="recipient-name" class="form-control-label">@Localizer.NameOfOrganization</label>
+                                <input type="text" name="name" class="form-control" id="nameAdd" value="">
+                            </div>
+                            @*Parent organization dropdown here*@ @*Input to filter organizations (JS) here*@
+                            <div class="form-group">
+                                <label for="recipient-name" class="form-control-label">@Localizer.ParentOrganization</label>
+                                <input type="text" class="parentOrganizationID form-control" value="" placeholder="Filter by typing">
+                                @Html.DropDownList("parentOrganizationID", SelectList.Organizations(true), new { @name = "parentOrganizationID", @id = "parentOrganizationID", @class = "form-control m-input m-input--square", @onchange = "SetSelectLists(this.value, 'parent');" })
+                            </div>
+                            @*Institution dropdown here*@
+                            <div class="form-group">
+                                <label for="recipient-name" class="form-control-label">@Localizer.Institution</label>
+                                <input type="text" class="institutionID form-control" value="" placeholder="Filter by typing">
+                                @Html.DropDownList("institutionID", SelectList.Institutions(true), new { @name = "institutionID", @id = "institutionID", @class = "form-control m-input m-input--square" })
+                            </div>
+                            @*Organization type dropdown here*@
+                            <div class="form-group">
+                                <label for="recipient-name" class="form-control-label">@Localizer.OrganizationType</label>
+                                <input type="text" class="organizationTypeID form-control" value="" placeholder="Filter by typing">
+                                @Html.DropDownList("organizationTypeID", SelectList.OrganizationTypes(true), new { @name = "organizationTypeID", @id = "organizationTypeID", @class = "form-control m-input m-input--square" })
+                            </div>
+                            @*Logo file input here*@
+                            <div class="form-group">
+                                <label for="recipient-name" class="form-control-label">@Localizer.Logo</label>
+                                <input type="text" name="Logo" class="form-control" id="nameAdd" value="">
+                            </div>
+                            @*AdditionalInformation input text here*@
+                            <div class="form-group">
+                                <label for="recipient-name" class="form-control-label">@Localizer.AdditionalInformation</label>
+                                <input type="text" name="Logo" class="form-control" id="nameAdd" value="">
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-6 col-md-6">
+
+                            @*Country dropdown here*@
+                            <div class="form-group">
+                                <label for="recipient-name" class="form-control-label">@Localizer.Country</label>
+                                <input type="text" class="countryID form-control" value="" placeholder="Filter by typing">
+                                @Html.DropDownList("countryID", SelectList.Countries(true), new { @name = "CountryId", @id = "countryID", @class = "form-control m-input m-input--square" })
+                            </div>
+                            @*Region dropdown here*@
+                            <div class="form-group">
+                                <label for="recipient-name" class="form-control-label">@Localizer.Region</label>
+                                <input type="text" class="regionID form-control" value="" placeholder="Filter by typing">
+                                @Html.DropDownList("regionID", SelectList.Regions(true), new { @name = "RegionId", @id = "regionID", @class = "form-control m-input m-input--square" })
+                            </div>
+                            @*City dropdown here*@
+                            <div class="form-group">
+                                <label for="recipient-name" class="form-control-label">@Localizer.City</label>
+                                <input type="text" class="cityID form-control" value="" placeholder="Filter by typing">
+                                @Html.DropDownList("cityID", SelectList.Cities(true), new { @name = "CityId", @id = "cityID", @class = "form-control m-input m-input--square" })
+                            </div>
+                            @*Place input here*@
+                            <div class="form-group">
+                                <label for="recipient-name" class="form-control-label">@Localizer.Place</label>
+                                <input type="text" name="Place" class="form-control" id="nameAdd" value="">
+                            </div>
+                            @*Address input here*@
+                            <div class="form-group">
+                                <label for="recipient-name" class="form-control-label">@Localizer.Address</label>
+                                <input type="text" name="Address" class="form-control" id="nameAdd" value="">
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    
+
+
+                    <div class="modal-footer">
+                        <button id="close" type="button" class="btn btn-secondary" data-dismiss="modal">@Localizer.Close</button>
+                        <button id="save" type="submit" class="btn btn-primary">@Localizer.Save</button>
+                    </div>
+                </form>
+                </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    $("input").keydown(function (e) {
+        let text = this.value + e.key;
+        let selectID = this.classList[0];
+        let optValue = "";
+        $("#" + selectID + " option").hide();
+
+    console.log("here");
+        let options = $("#" + selectID + " option");
+        for (let i = 0; i < options.length; i++) {
+            optValue = options[i].innerHTML;
+            if (optValue.indexOf(text) !== -1)
+                $(options[i]).show();
+        }
+    });
+
+    $("input").blur(function () {
+        if ($(this).val() === "")
+            $("#" + this.classList[0] + " option").show();
+    });
+     $("select").on('change',function () {
+         const regionsGetAllUrl = '@Url.Action("GetAllByCountryId", "Regions")' + "?Id=" + $("#countryID").val();
+         const citiesGetAllUrl = '@Url.Action("GetByRegionId, Cities")';
+         if ($(this).attr("id") === "countryID") {
+            FillSelectList("regionID", regionsGetAllUrl, false);
+            $("#regionID option").each(function () {
+            console.log("here");
+                let url = citiesGetAllUrl + "?Id=" + $(this).val();
+                FillSelectList("cityID", url, true);
+            });
+        }
+        if ($(this).attr("id") === "regionID") {
+            FillSelectList("regionID", citiesGetAllUrl + "?Id=" + $(this).val(), false);
+        }
+    });
+    function FillSelectList(selectListId, url, shouldAppend) {
+
+        $.ajax(
+            {
+                url: url,
+                success: function (succData) {
+                    console.log(succData);
+                    let initialContent = shouldAppend ? $("#" + selectListId).html() : "";
+                    $("#" + selectListId).html(initialContent);
+                    for (let i = 0; i < succData.length; i++) {
+                        if (i === 0)
+                            $("#" + selectListId).append("<option selected>" + succData[i] + "<option>");
+                        else
+                            $("#" + selectListId).append("<option>" + succData[i] + "<option>");
+                    }
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+    }
+
+    @*function SetSelectListsa(parentName, parentValue) {
+        console.log("here");
+
+        let urlPath = "";
+        const regionsGetAllUrl = '@Url.Action("GetAll, Regions")' + "?Id=" + parentValue;
+        const citiesGetAllUrl = '@Url.Action("GetAll, Cities")';
+        switch (parentName) {
+            case "Country":
+         console.log("here");
+                FillSelectList("regionID", regionsGetAllUrl, false);
+                $("#regionID option").each(function () {
+                    let url = citiesUrl + "?Id=" + $(this).val();
+                    FillSelectList("cityID", url, true);
+                });
+                break;
+            case "Region":
+                FillSelectList("regionID", citiesGetAllUrl + "?Id=" + parentValue, false);
+                break;
+        }
+    }*@
+
+
+
+</script>

@@ -1,0 +1,30 @@
+﻿.validation-summary-errors ul {
+    margin-bottom: 0px !important;
+}
+
+.margin-right-10 {
+    margin-right: 10px;
+}
+
+#regionTableHead th:last-child{
+    text-align: center;
+}
+
+.actionBtns {
+    display: flex;
+    justify-content: center;
+}
+
+.actionBtns button:nth-child(1){
+    margin-right: 0.5em;
+}
+.border-radius-50{
+    border-radius:50%;
+}
+}
+
+.Buglist_a{
+    text-decoration: none !important;
+    color: inherit !important;
+    color: red !important;
+}

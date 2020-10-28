@@ -1,0 +1,375 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <UserSecretsId>962deb8e-4afe-465c-9160-f798bdbe0ce8</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Areas\**" />
+    <Compile Remove="Views\Organizations\**" />
+    <Compile Remove="Views\OrganizationTypes\**" />
+    <Compile Remove="Views\Regions\**" />
+    <Content Remove="Areas\**" />
+    <Content Remove="Views\Organizations\**" />
+    <Content Remove="Views\OrganizationTypes\**" />
+    <Content Remove="Views\Regions\**" />
+    <EmbeddedResource Remove="Areas\**" />
+    <EmbeddedResource Remove="Views\Organizations\**" />
+    <EmbeddedResource Remove="Views\OrganizationTypes\**" />
+    <EmbeddedResource Remove="Views\Regions\**" />
+    <None Remove="Areas\**" />
+    <None Remove="Views\Organizations\**" />
+    <None Remove="Views\OrganizationTypes\**" />
+    <None Remove="Views\Regions\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Areas\Administration\Controllers\AcademicDegreesController.cs" />
+    <Compile Include="Areas\Administration\Controllers\AcademicTitlesController.cs" />
+    <Compile Include="Areas\Administration\Controllers\AnnouncementsController.cs" />
+    <Compile Include="Areas\Administration\Controllers\AnnouncementTypesController.cs" />
+    <Compile Include="Areas\Administration\Controllers\CitiesController.cs" />
+    <Compile Include="Areas\Administration\Controllers\CitizenshipsController.cs" />
+    <Compile Include="Areas\Administration\Controllers\ContactTypesController.cs" />
+    <Compile Include="Areas\Administration\Controllers\CountriesController.cs" />
+    <Compile Include="Areas\Administration\Controllers\EventsController.cs" />
+    <Compile Include="Areas\Administration\Controllers\InstitutionalSettingsController.cs" />
+    <Compile Include="Areas\Administration\Controllers\InstitutionsController.cs" />
+    <Compile Include="Areas\Administration\Controllers\InstitutionTypesController.cs" />
+    <Compile Include="Areas\Administration\Controllers\MaritalStatusesController.cs" />
+    <Compile Include="Areas\Administration\Controllers\NationalitiesController.cs" />
+    <Compile Include="Areas\Administration\Controllers\OrganizationsController.cs" />
+    <Compile Include="Areas\Administration\Controllers\OrganizationTypesController.cs" />
+    <Compile Include="Areas\Administration\Controllers\RegionsController.cs" />
+    <Compile Include="Areas\Administration\Controllers\RolesController.cs" />
+    <Compile Include="Areas\Administration\Controllers\SystemSettingsController.cs" />
+    <Compile Include="Areas\Administration\ViewModels\AcademicDegreeViewModel.cs" />
+    <Compile Include="Areas\Administration\ViewModels\AcademicTitleViewModel.cs" />
+    <Compile Include="Areas\Administration\ViewModels\AnnouncementOrganizationsViewModel.cs" />
+    <Compile Include="Areas\Administration\ViewModels\AnnouncementPhotosViewModel.cs" />
+    <Compile Include="Areas\Administration\ViewModels\AnnouncementTypeViewModel.cs" />
+    <Compile Include="Areas\Administration\ViewModels\AnnouncementViewModel.cs" />
+    <Compile Include="Areas\Administration\ViewModels\CitizenshipViewModel.cs" />
+    <Compile Include="Areas\Administration\ViewModels\CityViewModel.cs" />
+    <Compile Include="Areas\Administration\ViewModels\ContactTypeViewModel.cs" />
+    <Compile Include="Areas\Administration\ViewModels\CountryViewModel.cs" />
+    <Compile Include="Areas\Administration\ViewModels\EventItemViewModel.cs" />
+    <Compile Include="Areas\Administration\ViewModels\EventPreviewViewModel.cs" />
+    <Compile Include="Areas\Administration\ViewModels\EventRegistrationViewModel.cs" />
+    <Compile Include="Areas\Administration\ViewModels\EventViewModel.cs" />
+    <Compile Include="Areas\Administration\ViewModels\InstitutionTypeViewModel.cs" />
+    <Compile Include="Areas\Administration\ViewModels\InstitutionViewModel.cs" />
+    <Compile Include="Areas\Administration\ViewModels\MaritalStatusViewModel.cs" />
+    <Compile Include="Areas\Administration\ViewModels\NationalityViewModel.cs" />
+    <Compile Include="Areas\Administration\ViewModels\OrganizationTypeViewModel.cs" />
+    <Compile Include="Areas\Administration\ViewModels\OrganizationViewModel.cs" />
+    <Compile Include="Areas\Administration\ViewModels\PaymentViewModel.cs" />
+    <Compile Include="Areas\Administration\ViewModels\RegionViewModel.cs" />
+    <Compile Include="Areas\Administration\ViewModels\RegistrationViewModel.cs" />
+    <Compile Include="Areas\Administration\ViewModels\RoleFunctionalityViewModel.cs" />
+    <Compile Include="Areas\Administration\ViewModels\RoleViewModel.cs" />
+    <Compile Include="Areas\Administration\ViewModels\SponsorViewModel.cs" />
+    <Compile Include="Areas\Institutions\Controllers\StaffController.cs" />
+    <Compile Include="Areas\Institutions\ViewModels\StaffAccountInfoViewModel.cs" />
+    <Compile Include="Areas\Institutions\ViewModels\StaffGeneralInfoViewModel.cs" />
+    <Compile Include="Areas\Institutions\ViewModels\StaffStatusInfoViewModel.cs" />
+    <Compile Include="Areas\Institutions\ViewModels\StaffViewModel.cs" />
+    <Compile Include="Areas\Organizations\Controllers\MembersController.cs" />
+    <Compile Include="Areas\Organizations\ViewModels\AccountInfoViewModel.cs" />
+    <Compile Include="Areas\Organizations\ViewModels\GeneralInfoViewModel.cs" />
+    <Compile Include="Areas\Organizations\ViewModels\LicenseAddViewModel.cs" />
+    <Compile Include="Areas\Organizations\ViewModels\LicensePeriodViewModel.cs" />
+    <Compile Include="Areas\Organizations\ViewModels\MemberLicenseViewModel.cs" />
+    <Compile Include="Areas\Organizations\ViewModels\MemberViewModel.cs" />
+    <Compile Include="Areas\Organizations\ViewModels\PersonContactViewModel.cs" />
+    <Compile Include="Areas\Organizations\ViewModels\PersonDetailsViewModel.cs" />
+    <Compile Include="Areas\Organizations\ViewModels\PersonPhotoViewModel.cs" />
+    <Compile Include="Areas\Organizations\ViewModels\PersonViewModel.cs" />
+    <Compile Include="Areas\Organizations\ViewModels\StatusInfoViewModel.cs" />
+    <Compile Include="Areas\Organizations\ViewModels\UserViewModel.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="dropzone" Version="4.2.0" />
+    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="7.9.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Tools" Version="1.1.0-preview4-final" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.4" />
+    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="2.1.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.10" PrivateAssets="All" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Vereyon.Web.FlashMessageCore" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\nevladinaOrg.Core\Core.csproj" />
+    <ProjectReference Include="..\nevladinaOrg.DAL\DAL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\SharedResource.bs-Latn-BA.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\SharedResource.en-US.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Areas\Administration\Views\AcademicDegrees\_Add.cshtml" />
+    <None Include="Areas\Administration\Views\AcademicDegrees\_Edit.cshtml" />
+    <None Include="Areas\Administration\Views\AcademicDegrees\_Index.cshtml" />
+    <None Include="Areas\Administration\Views\AcademicTitles\_Add.cshtml" />
+    <None Include="Areas\Administration\Views\AcademicTitles\_Edit.cshtml" />
+    <None Include="Areas\Administration\Views\AcademicTitles\_Index.cshtml" />
+    <None Include="Areas\Administration\Views\Announcements\Index.cshtml" />
+    <None Include="Areas\Administration\Views\Announcements\_Add.cshtml" />
+    <None Include="Areas\Administration\Views\Announcements\_Edit.cshtml" />
+    <None Include="Areas\Administration\Views\Announcements\_Preview.cshtml" />
+    <None Include="Areas\Administration\Views\AnnouncementTypes\_Add.cshtml" />
+    <None Include="Areas\Administration\Views\AnnouncementTypes\_Edit.cshtml" />
+    <None Include="Areas\Administration\Views\AnnouncementTypes\_Index.cshtml" />
+    <None Include="Areas\Administration\Views\Cities\_Add.cshtml" />
+    <None Include="Areas\Administration\Views\Cities\_Edit.cshtml" />
+    <None Include="Areas\Administration\Views\Cities\_Index.cshtml" />
+    <None Include="Areas\Administration\Views\Citizenships\_Add.cshtml" />
+    <None Include="Areas\Administration\Views\Citizenships\_Edit.cshtml" />
+    <None Include="Areas\Administration\Views\Citizenships\_Index.cshtml" />
+    <None Include="Areas\Administration\Views\ContactTypes\_Add.cshtml" />
+    <None Include="Areas\Administration\Views\ContactTypes\_Edit.cshtml" />
+    <None Include="Areas\Administration\Views\ContactTypes\_Index.cshtml" />
+    <None Include="Areas\Administration\Views\Countries\_Add.cshtml" />
+    <None Include="Areas\Administration\Views\Countries\_Edit.cshtml" />
+    <None Include="Areas\Administration\Views\Countries\_Index.cshtml" />
+    <None Include="Areas\Administration\Views\Events\EventItems.cshtml" />
+    <None Include="Areas\Administration\Views\Events\Index.cshtml" />
+    <None Include="Areas\Administration\Views\Events\Preview.cshtml" />
+    <None Include="Areas\Administration\Views\Events\Registrations.cshtml" />
+    <None Include="Areas\Administration\Views\Events\Sponsors.cshtml" />
+    <None Include="Areas\Administration\Views\Events\_Add.cshtml" />
+    <None Include="Areas\Administration\Views\Events\_AddEventItem.cshtml" />
+    <None Include="Areas\Administration\Views\Events\_AddSponsor.cshtml" />
+    <None Include="Areas\Administration\Views\Events\_Confirm.cshtml" />
+    <None Include="Areas\Administration\Views\Events\_Edit.cshtml" />
+    <None Include="Areas\Administration\Views\Events\_EditEventItem.cshtml" />
+    <None Include="Areas\Administration\Views\Events\_EditSponsor.cshtml" />
+    <None Include="Areas\Administration\Views\InstitutionalSettings\General.cshtml" />
+    <None Include="Areas\Administration\Views\InstitutionalSettings\Index.cshtml" />
+    <None Include="Areas\Administration\Views\Institutions\_Add.cshtml" />
+    <None Include="Areas\Administration\Views\Institutions\_Edit.cshtml" />
+    <None Include="Areas\Administration\Views\Institutions\_Index.cshtml" />
+    <None Include="Areas\Administration\Views\InstitutionTypes\_Add.cshtml" />
+    <None Include="Areas\Administration\Views\InstitutionTypes\_Edit.cshtml" />
+    <None Include="Areas\Administration\Views\InstitutionTypes\_Index.cshtml" />
+    <None Include="Areas\Administration\Views\MaritalStatuses\_Add.cshtml" />
+    <None Include="Areas\Administration\Views\MaritalStatuses\_Edit.cshtml" />
+    <None Include="Areas\Administration\Views\MaritalStatuses\_Index.cshtml" />
+    <None Include="Areas\Administration\Views\Nationalities\_Add.cshtml" />
+    <None Include="Areas\Administration\Views\Nationalities\_Edit.cshtml" />
+    <None Include="Areas\Administration\Views\Nationalities\_Index.cshtml" />
+    <None Include="Areas\Administration\Views\Organizations\_Add.cshtml" />
+    <None Include="Areas\Administration\Views\Organizations\_Edit.cshtml" />
+    <None Include="Areas\Administration\Views\Organizations\_Index.cshtml" />
+    <None Include="Areas\Administration\Views\OrganizationTypes\_Add.cshtml" />
+    <None Include="Areas\Administration\Views\OrganizationTypes\_Edit.cshtml" />
+    <None Include="Areas\Administration\Views\OrganizationTypes\_Index.cshtml" />
+    <None Include="Areas\Administration\Views\Regions\_Add.cshtml" />
+    <None Include="Areas\Administration\Views\Regions\_Edit.cshtml" />
+    <None Include="Areas\Administration\Views\Regions\_Index.cshtml" />
+    <None Include="Areas\Administration\Views\Roles\_Add.cshtml" />
+    <None Include="Areas\Administration\Views\Roles\_Edit.cshtml" />
+    <None Include="Areas\Administration\Views\Roles\_Index.cshtml" />
+    <None Include="Areas\Administration\Views\SystemSettings\General.cshtml" />
+    <None Include="Areas\Administration\Views\SystemSettings\Regional.cshtml" />
+    <None Include="Areas\Administration\Views\_ViewImports.cshtml" />
+    <None Include="Areas\Institutions\Views\Staff\Index.cshtml" />
+    <None Include="Areas\Institutions\Views\Staff\Preview.cshtml" />
+    <None Include="Areas\Institutions\Views\Staff\_Add.cshtml" />
+    <None Include="Areas\Institutions\Views\Staff\_EditProfileImage.cshtml" />
+    <None Include="Areas\Institutions\Views\Staff\_Events.cshtml" />
+    <None Include="Areas\Institutions\Views\Staff\_LicenseIndex.cshtml" />
+    <None Include="Areas\Institutions\Views\Staff\_ProfileAccountInfo.cshtml" />
+    <None Include="Areas\Institutions\Views\Staff\_ProfileGeneralInfo.cshtml" />
+    <None Include="Areas\Institutions\Views\Staff\_ProfileStatusInfo.cshtml" />
+    <None Include="Areas\Institutions\Views\_ViewImports.cshtml" />
+    <None Include="Areas\Organizations\Views\Members\Index.cshtml" />
+    <None Include="Areas\Organizations\Views\Members\Preview.cshtml" />
+    <None Include="Areas\Organizations\Views\Members\_Add.cshtml" />
+    <None Include="Areas\Organizations\Views\Members\_AddLicense.cshtml" />
+    <None Include="Areas\Organizations\Views\Members\_AddLicensePeriod.cshtml" />
+    <None Include="Areas\Organizations\Views\Members\_ConfirmationStep.cshtml" />
+    <None Include="Areas\Organizations\Views\Members\_EditLicensePeriod.cshtml" />
+    <None Include="Areas\Organizations\Views\Members\_EditProfileImage.cshtml" />
+    <None Include="Areas\Organizations\Views\Members\_Events.cshtml" />
+    <None Include="Areas\Organizations\Views\Members\_LicenseIndex.cshtml" />
+    <None Include="Areas\Organizations\Views\Members\_Preview.cshtml" />
+    <None Include="Areas\Organizations\Views\Members\_ProfileAccountInfo.cshtml" />
+    <None Include="Areas\Organizations\Views\Members\_ProfileGeneralInfo.cshtml" />
+    <None Include="Areas\Organizations\Views\Members\_ProfileStatusInfo.cshtml" />
+    <None Include="Areas\Organizations\Views\_ViewImports.cshtml" />
+    <None Include="wwwroot\app\media\img\files\css.svg" />
+    <None Include="wwwroot\app\media\img\files\csv.svg" />
+    <None Include="wwwroot\app\media\img\files\doc.svg" />
+    <None Include="wwwroot\app\media\img\files\html.svg" />
+    <None Include="wwwroot\app\media\img\files\javascript.svg" />
+    <None Include="wwwroot\app\media\img\files\jpg.svg" />
+    <None Include="wwwroot\app\media\img\files\mp4.svg" />
+    <None Include="wwwroot\app\media\img\files\pdf.svg" />
+    <None Include="wwwroot\app\media\img\files\ppt.svg" />
+    <None Include="wwwroot\app\media\img\files\txt.svg" />
+    <None Include="wwwroot\app\media\img\files\xls.svg" />
+    <None Include="wwwroot\app\media\img\files\xml.svg" />
+    <None Include="wwwroot\app\media\img\files\zip.svg" />
+    <None Include="wwwroot\app\media\img\flags\001-austria.svg" />
+    <None Include="wwwroot\app\media\img\flags\002-belgium.svg" />
+    <None Include="wwwroot\app\media\img\flags\003-switzerland.svg" />
+    <None Include="wwwroot\app\media\img\flags\004-indonesia.svg" />
+    <None Include="wwwroot\app\media\img\flags\005-portugal.svg" />
+    <None Include="wwwroot\app\media\img\flags\006-turkey.svg" />
+    <None Include="wwwroot\app\media\img\flags\007-malasya.svg" />
+    <None Include="wwwroot\app\media\img\flags\008-saudi-arabia.svg" />
+    <None Include="wwwroot\app\media\img\flags\009-australia.svg" />
+    <None Include="wwwroot\app\media\img\flags\010-india.svg" />
+    <None Include="wwwroot\app\media\img\flags\011-brazil.svg" />
+    <None Include="wwwroot\app\media\img\flags\012-uk.svg" />
+    <None Include="wwwroot\app\media\img\flags\013-russia.svg" />
+    <None Include="wwwroot\app\media\img\flags\014-japan.svg" />
+    <None Include="wwwroot\app\media\img\flags\015-china.svg" />
+    <None Include="wwwroot\app\media\img\flags\016-spain.svg" />
+    <None Include="wwwroot\app\media\img\flags\017-germany.svg" />
+    <None Include="wwwroot\app\media\img\flags\018-south-korea.svg" />
+    <None Include="wwwroot\app\media\img\flags\019-france.svg" />
+    <None Include="wwwroot\app\media\img\flags\020-flag.svg" />
+    <None Include="wwwroot\app\media\img\icons\exchange.svg" />
+    <None Include="wwwroot\app\media\img\icons\logout.svg" />
+    <None Include="wwwroot\app\media\img\icons\question.svg" />
+    <None Include="wwwroot\app\media\img\icons\warning.svg" />
+    <None Include="wwwroot\demo\default\base\scripts.bundle.js" />
+    <None Include="wwwroot\demo\default\custom\components\base\blockui.js" />
+    <None Include="wwwroot\demo\default\custom\components\base\bootstrap-notify.js" />
+    <None Include="wwwroot\demo\default\custom\components\base\dropdown.js" />
+    <None Include="wwwroot\demo\default\custom\components\base\scrollable.js" />
+    <None Include="wwwroot\demo\default\custom\components\base\sweetalert2.js" />
+    <None Include="wwwroot\demo\default\custom\components\base\toastr.js" />
+    <None Include="wwwroot\demo\default\custom\components\base\treeview.js" />
+    <None Include="wwwroot\demo\default\custom\components\calendar\background-events.js" />
+    <None Include="wwwroot\demo\default\custom\components\calendar\basic.js" />
+    <None Include="wwwroot\demo\default\custom\components\calendar\external-events.js" />
+    <None Include="wwwroot\demo\default\custom\components\calendar\google.js" />
+    <None Include="wwwroot\demo\default\custom\components\calendar\list-view.js" />
+    <None Include="wwwroot\demo\default\custom\components\charts\amcharts\charts.js" />
+    <None Include="wwwroot\demo\default\custom\components\charts\amcharts\maps.js" />
+    <None Include="wwwroot\demo\default\custom\components\charts\amcharts\stock-charts.js" />
+    <None Include="wwwroot\demo\default\custom\components\charts\flotcharts.js" />
+    <None Include="wwwroot\demo\default\custom\components\charts\google-charts.js" />
+    <None Include="wwwroot\demo\default\custom\components\charts\morris-charts.js" />
+    <None Include="wwwroot\demo\default\custom\components\maps\google-maps.js" />
+    <None Include="wwwroot\demo\default\custom\components\maps\jqvmap.js" />
+    <None Include="wwwroot\demo\default\custom\components\maps\jvectormap.js" />
+    <None Include="wwwroot\demo\default\custom\components\portlets\draggable.js" />
+    <None Include="wwwroot\demo\default\custom\components\portlets\tools.js" />
+    <None Include="wwwroot\demo\default\custom\components\utils\idle-timer.js" />
+    <None Include="wwwroot\demo\default\custom\components\utils\session-timeout.js" />
+    <None Include="wwwroot\demo\default\custom\crud\datatables\advanced\column-rendering.js" />
+    <None Include="wwwroot\demo\default\custom\crud\datatables\advanced\column-visibility.js" />
+    <None Include="wwwroot\demo\default\custom\crud\datatables\advanced\footer-callback.js" />
+    <None Include="wwwroot\demo\default\custom\crud\datatables\advanced\multiple-controls.js" />
+    <None Include="wwwroot\demo\default\custom\crud\datatables\advanced\row-callback.js" />
+    <None Include="wwwroot\demo\default\custom\crud\datatables\advanced\row-grouping.js" />
+    <None Include="wwwroot\demo\default\custom\crud\datatables\basic\basic.js" />
+    <None Include="wwwroot\demo\default\custom\crud\datatables\basic\headers.js" />
+    <None Include="wwwroot\demo\default\custom\crud\datatables\basic\paginations.js" />
+    <None Include="wwwroot\demo\default\custom\crud\datatables\basic\scrollable.js" />
+    <None Include="wwwroot\demo\default\custom\crud\datatables\data-sources\ajax-client-side.js" />
+    <None Include="wwwroot\demo\default\custom\crud\datatables\data-sources\ajax-server-side.js" />
+    <None Include="wwwroot\demo\default\custom\crud\datatables\data-sources\html.js" />
+    <None Include="wwwroot\demo\default\custom\crud\datatables\data-sources\javascript.js" />
+    <None Include="wwwroot\demo\default\custom\crud\datatables\extensions\buttons.js" />
+    <None Include="wwwroot\demo\default\custom\crud\datatables\extensions\colreorder.js" />
+    <None Include="wwwroot\demo\default\custom\crud\datatables\extensions\fixedcolumns.js" />
+    <None Include="wwwroot\demo\default\custom\crud\datatables\extensions\fixedheader.js" />
+    <None Include="wwwroot\demo\default\custom\crud\datatables\extensions\keytable.js" />
+    <None Include="wwwroot\demo\default\custom\crud\datatables\extensions\responsive.js" />
+    <None Include="wwwroot\demo\default\custom\crud\datatables\extensions\rowgroup.js" />
+    <None Include="wwwroot\demo\default\custom\crud\datatables\extensions\rowreorder.js" />
+    <None Include="wwwroot\demo\default\custom\crud\datatables\extensions\scroller.js" />
+    <None Include="wwwroot\demo\default\custom\crud\datatables\extensions\select.js" />
+    <None Include="wwwroot\demo\default\custom\crud\datatables\search-options\advanced-search.js" />
+    <None Include="wwwroot\demo\default\custom\crud\datatables\search-options\column-search.js" />
+    <None Include="wwwroot\demo\default\custom\crud\forms\validation\form-controls.js" />
+    <None Include="wwwroot\demo\default\custom\crud\forms\validation\form-widgets.js" />
+    <None Include="wwwroot\demo\default\custom\crud\forms\widgets\autosize.js" />
+    <None Include="wwwroot\demo\default\custom\crud\forms\widgets\bootstrap-datepicker.js" />
+    <None Include="wwwroot\demo\default\custom\crud\forms\widgets\bootstrap-daterangepicker.js" />
+    <None Include="wwwroot\demo\default\custom\crud\forms\widgets\bootstrap-datetimepicker.js" />
+    <None Include="wwwroot\demo\default\custom\crud\forms\widgets\bootstrap-markdown.js" />
+    <None Include="wwwroot\demo\default\custom\crud\forms\widgets\bootstrap-maxlength.js" />
+    <None Include="wwwroot\demo\default\custom\crud\forms\widgets\bootstrap-multipleselectsplitter.js" />
+    <None Include="wwwroot\demo\default\custom\crud\forms\widgets\bootstrap-select.js" />
+    <None Include="wwwroot\demo\default\custom\crud\forms\widgets\bootstrap-switch.js" />
+    <None Include="wwwroot\demo\default\custom\crud\forms\widgets\bootstrap-timepicker.js" />
+    <None Include="wwwroot\demo\default\custom\crud\forms\widgets\bootstrap-touchspin.js" />
+    <None Include="wwwroot\demo\default\custom\crud\forms\widgets\clipboard.js" />
+    <None Include="wwwroot\demo\default\custom\crud\forms\widgets\dropzone.js" />
+    <None Include="wwwroot\demo\default\custom\crud\forms\widgets\form-repeater.js" />
+    <None Include="wwwroot\demo\default\custom\crud\forms\widgets\google-recaptcha.js" />
+    <None Include="wwwroot\demo\default\custom\crud\forms\widgets\input-mask.js" />
+    <None Include="wwwroot\demo\default\custom\crud\forms\widgets\ion-range-slider.js" />
+    <None Include="wwwroot\demo\default\custom\crud\forms\widgets\nouislider.js" />
+    <None Include="wwwroot\demo\default\custom\crud\forms\widgets\select2.js" />
+    <None Include="wwwroot\demo\default\custom\crud\forms\widgets\summernote.js" />
+    <None Include="wwwroot\demo\default\custom\crud\forms\widgets\typeahead.js" />
+    <None Include="wwwroot\demo\default\custom\crud\metronic-datatable\api\events.js" />
+    <None Include="wwwroot\demo\default\custom\crud\metronic-datatable\api\methods.js" />
+    <None Include="wwwroot\demo\default\custom\crud\metronic-datatable\base\column-rendering.js" />
+    <None Include="wwwroot\demo\default\custom\crud\metronic-datatable\base\column-width.js" />
+    <None Include="wwwroot\demo\default\custom\crud\metronic-datatable\base\data-ajax.js" />
+    <None Include="wwwroot\demo\default\custom\crud\metronic-datatable\base\data-json.js" />
+    <None Include="wwwroot\demo\default\custom\crud\metronic-datatable\base\data-local.js" />
+    <None Include="wwwroot\demo\default\custom\crud\metronic-datatable\base\html-table.js" />
+    <None Include="wwwroot\demo\default\custom\crud\metronic-datatable\base\local-sort.js" />
+    <None Include="wwwroot\demo\default\custom\crud\metronic-datatable\base\record-selection.js" />
+    <None Include="wwwroot\demo\default\custom\crud\metronic-datatable\base\responsive-columns.js" />
+    <None Include="wwwroot\demo\default\custom\crud\metronic-datatable\base\row-details.js" />
+    <None Include="wwwroot\demo\default\custom\crud\metronic-datatable\base\translation.js" />
+    <None Include="wwwroot\demo\default\custom\crud\metronic-datatable\child\data-ajax.js" />
+    <None Include="wwwroot\demo\default\custom\crud\metronic-datatable\child\data-local.js" />
+    <None Include="wwwroot\demo\default\custom\crud\metronic-datatable\locked\both.js" />
+    <None Include="wwwroot\demo\default\custom\crud\metronic-datatable\locked\html-table.js" />
+    <None Include="wwwroot\demo\default\custom\crud\metronic-datatable\locked\left.js" />
+    <None Include="wwwroot\demo\default\custom\crud\metronic-datatable\locked\right.js" />
+    <None Include="wwwroot\demo\default\custom\crud\metronic-datatable\scrolling\both.js" />
+    <None Include="wwwroot\demo\default\custom\crud\metronic-datatable\scrolling\horizontal.js" />
+    <None Include="wwwroot\demo\default\custom\crud\metronic-datatable\scrolling\vertical.js" />
+    <None Include="wwwroot\demo\default\custom\crud\wizard\wizard.js" />
+    <None Include="wwwroot\demo\default\custom\header\actions.js" />
+    <None Include="wwwroot\demo\demo3\base\scripts.bundle.js" />
+    <None Include="wwwroot\snippets\apps\mail\mail.js" />
+    <None Include="wwwroot\snippets\custom\apps\mail\mail.js" />
+    <None Include="wwwroot\snippets\custom\pages\user\login.js" />
+    <None Include="wwwroot\snippets\custom\pages\user\login6.js" />
+    <None Include="wwwroot\vendors\custom\datatables\datatables.bundle.js" />
+    <None Include="wwwroot\vendors\custom\flot\flot.bundle.js" />
+    <None Include="wwwroot\vendors\custom\fullcalendar\fullcalendar.bundle.js" />
+    <None Include="wwwroot\vendors\custom\gmaps\gmaps.js" />
+    <None Include="wwwroot\vendors\custom\jquery-ui\jquery-ui.bundle.js" />
+    <None Include="wwwroot\vendors\custom\jqvmap\jqvmap.bundle.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\demo\default\media\img\logo\favicon.ico">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1development_1json__JSONSchema="" /></VisualStudio></ProjectExtensions>
+
+</Project>
